@@ -1,0 +1,46 @@
+ ------
+ Maven 2 Keytool Plugin
+ ------
+
+How to use
+
+ Brief examples on how to use the keytool:genkey goal.
+ 
+* How to configure keytool:genkey using pom.xml
+
+-------------------
+<project>
+  ...
+  <packaging>pom</packaging>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <executions>
+           <execution>
+              <goals>
+                 <goal>genkey</goal>
+              </goals>
+           </execution>
+        </executions>
+        <configuration>
+           <keystore>keystore</keystore>
+           <dname>cn=www.example.com, ou=None, L=Seattle, ST=Washington, o=ExampleOrg, c=US</dname>
+           <keypass>m2m2m2</keypass>
+           <storepass>m2m2m2</storepass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+-------------------
+
+* How to use keytool:genkey specifying parameters on the command line
+
+-------------------
+  m2 keytool:genkey -Dkeystore=/path/to/your/keystore -Dstorepass=yourstorepassword -Dalias=youralias
+-------------------
+
+  For full documentation, click {{{index.html}here}}.

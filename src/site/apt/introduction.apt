@@ -1,0 +1,10 @@
+ ------
+ Maven 2 Keytool Plugin
+ ------
+
+Maven 2 Keytool Plugin
+
+  This plugin provides the capability to manipulate keys and keystores with the goal "keytool:genkey".
+
+  To learn how to use the plugin, click {{{howto.html}here}}.
+
