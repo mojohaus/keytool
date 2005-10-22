@@ -40,7 +40,7 @@ How to use
 * How to use keytool:genkey specifying parameters on the command line
 
 -------------------
-  m2 keytool:genkey -Dkeystore=/path/to/your/keystore -Dstorepass=yourstorepassword -Dalias=youralias
+  mvn keytool:genkey -Dkeystore=/path/to/your/keystore -Dstorepass=yourstorepassword -Dalias=youralias
 -------------------
 
   For full documentation, click {{{index.html}here}}.
