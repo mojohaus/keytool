@@ -11,6 +11,8 @@
   <packaging>maven-plugin</packaging>
   <version>0.3-SNAPSHOT</version>
   <name>Maven Keytool Plugin</name>
+  <inceptionYear>2005</inceptionYear>
+  <url>http://mojo.codehaus.org/keytool-maven-plugin</url>
   <developers>
     <developer>
       <name>Jerome Lacoste</name>
