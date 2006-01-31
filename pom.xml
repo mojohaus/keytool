@@ -13,6 +13,13 @@
   <name>Maven Keytool Plugin</name>
   <inceptionYear>2005</inceptionYear>
   <url>http://mojo.codehaus.org/keytool-maven-plugin</url>
+  <licenses>
+    <license>
+      <name>Apache License 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <developers>
     <developer>
