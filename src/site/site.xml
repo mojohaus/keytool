@@ -1,4 +1,4 @@
-<project name="Maven JAR plugin">
+<project name="Maven Keytool plugin">
   <bannerLeft>
     <name>Maven Keytool plugin</name>
     <src>http://maven.apache.org/images/apache-maven-project.png</src>
