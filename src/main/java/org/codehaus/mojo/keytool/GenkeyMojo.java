@@ -17,7 +17,6 @@ package org.codehaus.mojo.keytool;
  */
 
 import org.apache.commons.lang.SystemUtils;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.StringUtils;
@@ -57,22 +56,8 @@ import java.util.StringTokenizer;
  * @see <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  */
 public class GenkeyMojo
-    extends AbstractMojo
+    extends AbstractKeyToolMojo
 {
-    /**
-     * Where to execute the keytool command.
-     *
-     * @parameter expression="${workingdir}" default-value="${basedir}"
-     * @required
-     */
-    private File workingDirectory;
-
-    /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @parameter expression="${keystore}"
-     */
-    private String keystore;
 
     /**
      * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
@@ -389,16 +374,6 @@ public class GenkeyMojo
         return CommandLineUtils.executeCommandLine( commandLine, inputStream, stream1, stream2 );
     }
 
-    public void setWorkingDir( File workingDir )
-    {
-        this.workingDirectory = workingDir;
-    }
-
-    public void setKeystore( String keystore )
-    {
-        this.keystore = keystore;
-    }
-
     public void setKeypass( String keypass )
     {
         this.keypass = keypass;
@@ -448,5 +423,4 @@ public class GenkeyMojo
     {
         this.verbose = verbose;
     }
-
 }

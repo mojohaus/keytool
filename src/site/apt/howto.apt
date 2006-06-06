@@ -4,7 +4,10 @@
 
 How to use
 
- Brief examples on how to use the keytool:genkey goal.
+ Brief examples on how to use the keytool:genkey and keytool:clean goals.
+ For full documentation, click {{{index.html}here}}.
+
+Genkey Goal
  
 * How to configure keytool:genkey using pom.xml
 
@@ -43,4 +46,41 @@ How to use
   mvn keytool:genkey -Dkeystore=/path/to/your/keystore -Dstorepass=yourstorepassword -Dalias=youralias
 -------------------
 
-  For full documentation, click {{{index.html}here}}.
+Clean goal
+
+ Brief examples on how to use the keytool:clean goal.
+ 
+* How to configure keytool:clean using pom.xml
+
+-------------------
+<project>
+  ...
+  <packaging>pom</packaging>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <executions>
+           <execution>
+              <phase>clean</phase>
+              <goals>
+                 <goal>clean</goal>
+              </goals>
+           </execution>
+        </executions>
+        <configuration>
+           <keystore>/path/to/your/keystore</keystore>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+-------------------
+
+* How to use keytool:genkey specifying parameters on the command line
+
+-------------------
+  mvn keytool:clean [-Dkeystore=...]
+-------------------
