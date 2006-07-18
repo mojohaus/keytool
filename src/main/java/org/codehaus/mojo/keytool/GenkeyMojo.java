@@ -48,7 +48,7 @@ import java.util.StringTokenizer;
  * </pre>
  *
  * @author <a href="jerome@coffeebreaks.org">Jerome Lacoste</a>
- * @version $Id: $
+ * @version $Id$
  * @goal genkey
  * @phase package
  * @requiresProject
