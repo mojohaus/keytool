@@ -16,8 +16,10 @@
     </links>
 
     <menu name="Maven Keytool Quickstart">
-      <item name="Introduction" href="introduction.html"/>
-      <item name="How to use" href="howto.html"/>
+      <item name="Introduction" href="index.html"/>
+      <item name="Goals" href="plugin-info.html"/>
+      <item name="Usage" href="usage.html"/>
+      <item name="FAQ" href="faq.html"/>
     </menu>
     ${reports}
   </body>

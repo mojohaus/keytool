@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<faqs id="FAQ" title="Frequently Asked Questions">
+
+  <part id="General">
+
+    <!--faq id="my_question">
+      <question>Can the Keytool to foor bat?</question>
+      <answer>
+        <p>
+          The plugin doesn't do foobar. 
+        </p>
+      </answer>
+
+    </faq-->
+  </part>
+
+</faqs>
+
