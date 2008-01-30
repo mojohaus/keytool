@@ -3,15 +3,15 @@
 
   <part id="General">
 
-    <!--faq id="my_question">
-      <question>Can the Keytool to foor bat?</question>
+    <faq id="dummy_question">
+      <question>Why this question ?</question>
       <answer>
         <p>
-          The plugin doesn't do foobar. 
+          To avoid an NPE in the FAQ site renderer...
         </p>
       </answer>
 
-    </faq-->
+    </faq>
   </part>
 
 </faqs>
