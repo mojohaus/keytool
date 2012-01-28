@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<faqs id="FAQ" title="Frequently Asked Questions">
+
+  <part id="General">
+
+    <faq id="sharing_keystores">
+      <question>Is there an easy way to share keystores accross multiple builds / users ?</question>
+      <answer>
+        <p>
+          Today there's no clear preferred solution to this problem. One should be able to specify a URL for the keystore, or one may want to hide the keystore behind a remote signing service (for security reasons). This last feature has an existing <a href="http://jira.codehaus.org/browse/MWEBSTART-18">pluggable implementation</a> available from the <a href="http://mojo.codehaus.org/webstart/webstart-maven-plugin/">webstart plugin</a>. 
+        </p>
+      </answer>
+
+    </faq>
+  </part>
+
+</faqs>
+

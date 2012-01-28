@@ -1,0 +1,170 @@
+ ------
+ Usage
+ ------
+
+Usage
+
+ Brief examples on how to use the <<<keytool:genkey>>>, <<<keytool:clean>>>, <<<keytool:export>>> and <<<keytool:import>>> goals.
+ For full documentation, click {{{index.html}here}}.
+
+* Genkey Goal
+
+** How to configure <<<keytool:genkey>>> using <<<pom.xml>>>
+
+-------------------
+<project>
+  ...
+  <packaging>pom</packaging>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <version>${project.version}>/version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>genkey</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <keystore>keystore</keystore>
+          <dname>cn=www.example.com, ou=None, L=Seattle, ST=Washington, o=ExampleOrg, c=US</dname>
+          <keypass>m2m2m2</keypass>
+          <storepass>m2m2m2</storepass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+-------------------
+
+** How to use <<<keytool:genkey>>> specifying parameters on the command line
+
+-------------------
+mvn keytool:genkey -Dkeystore=/path/to/your/keystore -Dstorepass=yourstorepassword -Dalias=youralias
+-------------------
+
+* Clean goal
+
+ Brief examples on how to use the <<<keytool:clean>>> goal.
+
+** How to configure <<<keytool:clean>>> using <<<pom.xml>>>
+
+-------------------
+<project>
+  ...
+  <packaging>pom</packaging>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <version>${project.version}>/version>
+        <executions>
+          <execution>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <keystore>/path/to/your/keystore</keystore>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+-------------------
+
+** How to use <<<keytool:clean>>> specifying parameters on the command line
+
+-------------------
+mvn keytool:clean [-Dkeystore=...]
+-------------------
+
+* Export Goal
+
+** How to configure <<<keytool:export>>> using <<<pom.xml>>>
+
+-------------------
+<project>
+  ...
+  <packaging>pom</packaging>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <version>${project.version}>/version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>export</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <alias>keyalias</alias>
+          <keystore>keystore</keystore>
+          <keypass>m2m2m2</keypass>
+          <storepass>m2m2m2</storepass>
+          <file>path_to_exported_certfile</file>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+-------------------
+
+** How to use <<<keytool:export>>> specifying parameters on the command line
+
+-------------------
+mvn keytool:export -Dkeystore=/path/to/your/keystore -Dstorepass=yourstorepassword -Dalias=youralias -Dfile=/path/to/your/certfile
+-------------------
+
+* Import Goal
+
+** How to configure <<<keytool:import>>> using <<<pom.xml>>>
+
+-------------------
+<project>
+  ...
+  <packaging>pom</packaging>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <version>${project.version}>/version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>import</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <alias>keyalias</alias>
+          <keystore>keystore</keystore>
+          <keypass>m2m2m2</keypass>
+          <storepass>m2m2m2</storepass>
+          <file>path_to_keystore_toimport</file>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+-------------------
+
+** How to use <<<keytool:import>>> specifying parameters on the command line
+
+-------------------
+mvn keytool:import -Dkeystore=/path/to/your/keystore -Dstorepass=yourstorepassword -Dalias=youralias -Dfile=/path/to/your/certfile
+-------------------
