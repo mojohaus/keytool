@@ -24,9 +24,9 @@ under the License.
     <menu ref="parent"/>
     <menu name="Overview">
       <item name="Introduction" href="index.html"/>
-      <item name="JavaDocs" href="apidocs/index.html"/>
-      <item name="Source Xref" href="xref/index.html"/>
-      <!--item name="FAQ" href="faq.html"/-->
+      <item name="keytool-api-1.5" href="../keytool-api-1.5"/>
+      <item name="keytool-api-1.6" href="../keytool-api-1.6"/>
+      <item name="keytool-api-1.7" href="../keytool-api-1.7"/>
     </menu>
 
     <menu ref="reports"/>

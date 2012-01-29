@@ -1,22 +1,19 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Copyright 2005-2012 The Codehaus
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License" );
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import org.codehaus.plexus.logging.Logger;
@@ -30,12 +27,15 @@ import java.io.File;
  *
  * @author tchemit <chemit@codelutin.com>
  * @version $Id: KeyToolCommandLineBuilder.java 15792 2012-01-28 21:06:10Z tchemit $
- * @since 1.0
+ * @since 1.1
  */
 public abstract class AbstractKeyToolCommandLineBuilder
     implements KeyToolCommandLineBuilder
 {
 
+    /**
+     * Builder logger.
+     */
     private Logger logger;
 
     /**
@@ -44,9 +44,7 @@ public abstract class AbstractKeyToolCommandLineBuilder
     private String keyToolFile;
 
     /**
-     * Sets the logger used by the builder.
-     *
-     * @param logger logger to use in this builder
+     * {@inheritDoc}
      */
     public final void setLogger( Logger logger )
     {
@@ -54,9 +52,7 @@ public abstract class AbstractKeyToolCommandLineBuilder
     }
 
     /**
-     * Sets the keytool executable location.
-     *
-     * @param keyToolFile keytool executable location to use in this builder
+     * {@inheritDoc}
      */
     public final void setKeyToolFile( String keyToolFile )
     {
@@ -64,9 +60,7 @@ public abstract class AbstractKeyToolCommandLineBuilder
     }
 
     /**
-     * Checks that builder is ready to produce commandline from incoming request.
-     * <p/>
-     * Says a logger is set and a keytool executable location is setted.
+     * {@inheritDoc}
      */
     public final void checkRequiredState()
     {
@@ -81,16 +75,36 @@ public abstract class AbstractKeyToolCommandLineBuilder
         }
     }
 
+    /**
+     * Get the builder logger.
+     *
+     * @return the builder logger
+     */
     protected final Logger getLogger()
     {
         return logger;
     }
 
+    /**
+     * Get the builder keytool program location.
+     *
+     * @return the builder keytool program location
+     */
     protected final String getKeyToolFile()
     {
         return keyToolFile;
     }
 
+    /**
+     * Fill the commandline client with keytool command, optional verbose option and common options from the given
+     * request.
+     *
+     * @param cli            the commandline client to prepare
+     * @param keytoolcommand keytool command option to pass to keytool programm
+     * @param request        the keytool request to consume
+     * @see KeyToolRequestWithKeyStoreParameters
+     * @see KeyToolRequestWithKeyStoreAndAliasParameters
+     */
     protected final void addKeytoolCommandAndDefaultoptions( Commandline cli, String keytoolcommand,
                                                              KeyToolRequest request )
     {

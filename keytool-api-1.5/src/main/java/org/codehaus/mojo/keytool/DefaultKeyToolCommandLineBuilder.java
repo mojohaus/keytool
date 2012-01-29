@@ -1,22 +1,19 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Copyright 2005-2012 The Codehaus
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License" );
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import org.codehaus.mojo.keytool.requests.KeyToolChangeAliasRequest;
@@ -37,17 +34,20 @@ import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest;
 import org.codehaus.plexus.util.cli.Commandline;
 
 /**
- * To build the command line for a given {@link org.codehaus.mojo.keytool.KeyToolRequest}.
+ * To build the command line for a given {@link KeyToolRequest}.
  *
  * @author tchemit <chemit@codelutin.com>
  * @version $Id$
  * @plexus.component role="org.codehaus.mojo.keytool.KeyToolCommandLineBuilder" role-hint="default"
- * @since 1.0
+ * @since 1.1
  */
 public class DefaultKeyToolCommandLineBuilder
     extends AbstractKeyToolCommandLineBuilder
 {
 
+    /**
+     * {@inheritDoc}
+     */
     public Commandline build( KeyToolRequest request )
         throws CommandLineConfigurationException
     {
@@ -132,7 +132,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool generate key request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolChangeAliasRequest request, Commandline cli )
@@ -145,7 +145,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool generate key request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolChangeKeyPasswordRequest request, Commandline cli )
@@ -158,7 +158,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool generate key request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolChangeStorePasswordRequest request, Commandline cli )
@@ -170,7 +170,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool generate key request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolDeleteRequest request, Commandline cli )
@@ -181,7 +181,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool export key request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolExportCertificateRequest request, Commandline cli )
@@ -194,7 +194,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool generate certificate request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolGenerateCertificateRequest request, Commandline cli )
@@ -214,7 +214,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool generate certificate request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolGenerateCertificateRequestRequest request, Commandline cli )
@@ -229,7 +229,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool generate key request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolGenerateKeyPairRequest request, Commandline cli )
@@ -249,7 +249,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool generate key request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolGenerateSecretKeyRequest request, Commandline cli )
@@ -263,7 +263,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool import request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolImportCertificateRequest request, Commandline cli )
@@ -278,7 +278,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool import request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolImportKeystoreRequest request, Commandline cli )
@@ -306,7 +306,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool import request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolListRequest request, Commandline cli )
@@ -318,7 +318,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool import request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolPrintCertificateRequest request, Commandline cli )
@@ -333,7 +333,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool import request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolPrintCertificateRequestRequest request, Commandline cli )
@@ -345,7 +345,7 @@ public class DefaultKeyToolCommandLineBuilder
     /**
      * Fill the commandline client for the given {@code request}.
      *
-     * @param request the keytool import request
+     * @param request the keytool request to consume
      * @param cli     the commandline client to prepare
      */
     protected void build( KeyToolPrintCRLFileRequest request, Commandline cli )

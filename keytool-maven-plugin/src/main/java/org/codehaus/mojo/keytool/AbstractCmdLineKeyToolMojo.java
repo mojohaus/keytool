@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Copyright 2005-2011 The Codehaus
+ * Copyright 2005-2012 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ public abstract class AbstractCmdLineKeyToolMojo
     /**
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${storepass}"
+     * @parameter expression="${storepass}" alias="storepass"
      */
     private String storepass;
 
@@ -52,9 +52,10 @@ public abstract class AbstractCmdLineKeyToolMojo
     private String alias;
 
     /**
-     * List of additional arguments to append to the jarsigner command line.
+     * List of additional arguments to append to the keytool command line.
      *
-     * @parameter expression="${jarsigner.arguments}"
+     * @parameter expression="${keytool.arguments}"
+     * @since 1.1
      */
     private String[] arguments;
 
@@ -67,7 +68,10 @@ public abstract class AbstractCmdLineKeyToolMojo
     private boolean verbose;
 
     /**
+     * Keytool component.
+     *
      * @component role="org.codehaus.mojo.keytool.KeyTool"
+     * @since 1.1
      */
     private KeyTool keyTool;
 

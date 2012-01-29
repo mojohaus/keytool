@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Copyright 2005-2011 The Codehaus
+ * Copyright 2005-2012 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public abstract class AbstractKeyToolMojo
     /**
      * Where to execute the keytool command.
      *
-     * @parameter expression="${workingdir}" default-value="${basedir}"
+     * @parameter expression="${keytool.workingdir}" default-value="${basedir}" alias="workingdir"
      * @required
      */
     private File workingDirectory;
