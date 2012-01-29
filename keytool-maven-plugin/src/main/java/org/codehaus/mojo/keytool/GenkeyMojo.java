@@ -16,9 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.codehaus.mojo.shared.keytool.KeyToolRequestWithKeyStoreAndAliasParameters;
-import org.codehaus.mojo.shared.keytool.KeyToolRequestWithKeyStoreParameters;
-import org.codehaus.mojo.shared.keytool.requests.KeyToolGenerateKeyPairRequest;
+import org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
 
@@ -36,7 +34,7 @@ import org.codehaus.plexus.util.cli.Commandline;
  * [-storetype &lt;storetype&gt;] [-providerName &lt;name&gt;]
  * [-providerClass &lt;provider_class_name&gt; [-providerArg &lt;arg&gt;]] ...
  * </pre>
- * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author <a href="jerome@coffeebreaks.org">Jerome Lacoste</a>
  * @version $Id$
@@ -49,42 +47,42 @@ public class GenkeyMojo
 {
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${keypass}"
      */
     private String keypass;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${keyalg}"
      */
     private String keyalg;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${keysize}"
      */
     private String keysize;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${sigalg}"
      */
     private String sigalg;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${validity}"
      */
     private String validity;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${dname}"
      */
@@ -110,7 +108,7 @@ public class GenkeyMojo
      */
     protected String getCommandlineInfo( final Commandline commandLine )
     {
-        String commandLineInfo = super.getCommandlineInfo( commandLine);
+        String commandLineInfo = super.getCommandlineInfo( commandLine );
 
         commandLineInfo = StringUtils.replace( commandLineInfo, this.keypass, "'*****'" );
 

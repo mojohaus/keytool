@@ -16,9 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.codehaus.mojo.shared.keytool.KeyToolRequestWithKeyStoreAndAliasParameters;
-import org.codehaus.mojo.shared.keytool.KeyToolUtil;
-import org.codehaus.mojo.shared.keytool.requests.KeyToolImportCertificateRequest;
+import org.codehaus.mojo.keytool.requests.KeyToolImportCertificateRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
 
@@ -39,7 +37,7 @@ import java.io.File;
  * [-keystore &lt;keystore&gt;]
  * </pre>
  * <p/>
- * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author <a>Juergen Mayrbaeurl</a>
  * @version 1.0
@@ -52,14 +50,14 @@ public class ImportMojo
 {
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${keypass}"
      */
     private String keypass;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${file}"
      */

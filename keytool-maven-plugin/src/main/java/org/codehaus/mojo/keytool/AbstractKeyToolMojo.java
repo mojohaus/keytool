@@ -42,7 +42,7 @@ public abstract class AbstractKeyToolMojo
     private File workingDirectory;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${keystore}"
      */

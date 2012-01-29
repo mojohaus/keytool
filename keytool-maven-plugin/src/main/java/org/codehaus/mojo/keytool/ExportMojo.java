@@ -16,9 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.codehaus.mojo.shared.keytool.KeyToolRequestWithKeyStoreAndAliasParameters;
-import org.codehaus.mojo.shared.keytool.KeyToolRequestWithKeyStoreParameters;
-import org.codehaus.mojo.shared.keytool.requests.KeyToolExportCertificateRequest;
+import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
 
 /**
  * Reads (from the keystore) the certificate associated with <code>alias</code>, and stores it in the file

@@ -17,7 +17,6 @@ package org.codehaus.mojo.keytool;
  */
 
 import org.apache.maven.plugin.MojoExecutionException;
-import org.codehaus.mojo.shared.keytool.*;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
 
@@ -32,21 +31,21 @@ public abstract class AbstractCmdLineKeyToolMojo
 {
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${storetype}"
      */
     private String storetype;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${storepass}"
      */
     private String storepass;
 
     /**
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${alias}"
      */
@@ -61,14 +60,14 @@ public abstract class AbstractCmdLineKeyToolMojo
 
     /**
      * Enable verbose.
-     * See <a href="http://java.sun.com/j2se/1.4.2/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${verbose}" default-value="false"
      */
     private boolean verbose;
 
     /**
-     * @component role="org.codehaus.mojo.shared.keytool.KeyTool"
+     * @component role="org.codehaus.mojo.keytool.KeyTool"
      */
     private KeyTool keyTool;
 
@@ -80,7 +79,9 @@ public abstract class AbstractCmdLineKeyToolMojo
      */
     protected abstract KeyToolRequestWithKeyStoreAndAliasParameters createRequest();
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public final void execute()
         throws MojoExecutionException
     {
@@ -99,7 +100,8 @@ public abstract class AbstractCmdLineKeyToolMojo
 
             request.setWorkingDirectory( getWorkingDir() );
 
-            if (StringUtils.isNotEmpty( keystoreFile )) {
+            if ( StringUtils.isNotEmpty( keystoreFile ) )
+            {
                 request.setKeystore( keystoreFile );
             }
             request.setStoretype( storetype );
