@@ -197,35 +197,6 @@
       </reporting>
     </profile>
 
-    <!--profile>
-      <id>api-1.5</id>
-      <activation>
-        <jdk>1.5</jdk>
-      </activation>
-      <modules>
-        <module>keytool-api-1.5</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>api-1.6</id>
-      <activation>
-        <jdk>1.6</jdk>
-      </activation>
-      <modules>
-        <module>keytool-api-1.6</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>api-1.7</id>
-      <activation>
-        <jdk>1.7</jdk>
-      </activation>
-      <modules>
-        <module>keytool-api-1.6</module>
-      </modules>
-    </profile-->
   </profiles>
 
 </project>

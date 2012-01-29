@@ -85,7 +85,27 @@
     <profile>
       <id>api-1.6</id>
       <activation>
-        <jdk>1.6</jdk>
+        <jdk>1.6</jdk>        
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <configuration>
+                <includes>
+                  <include>**/*RequestIT.java</include>
+                </includes>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+    <profile>
+      <id>api-1.7</id>
+      <activation>
+        <jdk>1.7</jdk>        
       </activation>
       <build>
         <pluginManagement>
