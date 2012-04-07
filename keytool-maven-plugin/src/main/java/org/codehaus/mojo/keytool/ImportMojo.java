@@ -71,6 +71,63 @@ public class ImportMojo
     private boolean useJREcacerts;
 
     /**
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${providername}"
+     * @since 1.2
+     */
+    private String providername;
+
+    /**
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${providerclass}"
+     * @since 1.2
+     */
+    private String providerclass;
+
+    /**
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${providerpath}"
+     * @since 1.2
+     */
+    private String providerpath;
+
+    /**
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${providerarg}"
+     * @since 1.2
+     */
+    private String providerarg;
+
+    /**
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${noprompt}"
+     * @since 1.2
+     */
+    private boolean noprompt;
+
+    /**
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${trustcacerts}"
+     * @since 1.2
+     */
+    private boolean trustcacerts;
+
+    /**
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${passwordProtected}"
+     * @since 1.2
+     */
+    private boolean passwordProtected;
+
+
+    /**
      * {@inheritDoc}
      */
     protected KeyToolRequestWithKeyStoreAndAliasParameters createRequest()
@@ -79,6 +136,13 @@ public class ImportMojo
         request.setNoprompt( true );
         request.setFile( file );
         request.setKeypass( keypass );
+        request.setProvidername( providername );
+        request.setProviderclass( providerclass );
+        request.setProviderpath( providerpath );
+        request.setProviderarg( providerarg );
+        request.setNoprompt( noprompt );
+        request.setTrustcacerts( trustcacerts );
+        request.setPasswordProtected( passwordProtected );
 
         if ( StringUtils.isEmpty( getKeystore() ) && useJREcacerts )
         {
@@ -125,4 +189,59 @@ public class ImportMojo
         this.keypass = keypass;
     }
 
+    /**
+     * @param providername the providername to set
+     */
+    public void setProvidername( String providername )
+    {
+        this.providername = providername;
+    }
+
+    /**
+     * @param providerclass the providerclass parameter to set in keytool request
+     */
+    public void setProviderclass( String providerclass )
+    {
+        this.providerclass = providerclass;
+    }
+
+    /**
+     * @param providerpath the providerpath parameter to set in keytool request
+     */
+    public void setProviderpath( String providerpath )
+    {
+        this.providerpath = providerpath;
+    }
+
+    /**
+     * @param providerarg the providerarg parameter to set in keytool request
+     */
+    public void setProviderarg( String providerarg )
+    {
+        this.providerarg = providerarg;
+    }
+
+    /**
+     * @param noprompt the noprompt parameter to set in keytool request
+     */
+    public void setNoprompt( boolean noprompt )
+    {
+        this.noprompt = noprompt;
+    }
+
+    /**
+     * @param trustcacerts the trustcacerts parameter to set in keytool request
+     */
+    public void setTrustcacerts( boolean trustcacerts )
+    {
+        this.trustcacerts = trustcacerts;
+    }
+
+    /**
+     * @param passwordProtected the passwordProtected parameter to set in keytool request
+     */
+    public void setPasswordProtected( boolean passwordProtected )
+    {
+        this.passwordProtected = passwordProtected;
+    }
 }
