@@ -5,7 +5,7 @@
 Usage
 
  Brief examples on how to use the <<<keytool:genkey>>>, <<<keytool:clean>>>, <<<keytool:export>>> and <<<keytool:import>>> goals.
- For full documentation, click {{{index.html}here}}.
+ For full documentation, click {{{./index.html}here}}.
 
 * Genkey Goal
 

@@ -8,14 +8,14 @@ Keytool Maven Plugin
 
 * Goals Overview
 
-  * {{{genkey-mojo.html}keytool:genkey}} generates a keystore.
+  * {{{./genkey-mojo.html}keytool:genkey}} generates a keystore.
 
-  * {{{clean-mojo.html}keytool:clean}} deletes a generated keystore file.
+  * {{{./clean-mojo.html}keytool:clean}} deletes a generated keystore file.
 
-  * {{{export-mojo.html}keytool:export}} reads a certificate from a keystore and stores it in a file.
+  * {{{./export-mojo.html}keytool:export}} reads a certificate from a keystore and stores it in a file.
 
-  * {{{import-mojo.html}keytool:import}} reads a certificate from a file and stores it in a keystore.
+  * {{{./import-mojo.html}keytool:import}} reads a certificate from a file and stores it in a keystore.
 
 * Usage
 
-  Instructions on how to use the Keytool Plugin can be found on the {{{usage.html}usage page}}.
+  Instructions on how to use the Keytool Plugin can be found on the {{{./usage.html}usage page}}.
