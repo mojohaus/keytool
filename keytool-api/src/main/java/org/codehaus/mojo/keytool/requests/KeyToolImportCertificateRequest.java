@@ -17,7 +17,7 @@ package org.codehaus.mojo.keytool.requests;
  */
 
 /**
- * Request to import a certifiacte using the KeyTool tool.
+ * Request to import a certificate using the KeyTool tool.
  *
  * @author tchemit <chemit@codelutin.com>
  * @since 1.1

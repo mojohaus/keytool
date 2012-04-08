@@ -69,32 +69,6 @@ public interface KeyToolRequestWithKeyStoreParameters
      */
     void setStorepass( String storepass );
 
-//    /**
-//     * Gets the value of the {@code alias} field.
-//     *
-//     * @return the value of the {@code alias} field.
-//     */
-//    String getAlias();
-//
-//    /**
-//     * Sets the new given value to the field {@code alias} of the request.
-//     *
-//     * @param alias the new value of the field {@code alias}.
-//     */
-//    void setAlias( String alias );
-
-//    /**
-//     * Gets the value of the {@code passwordProtected} field.
-//     *
-//     * @return the value of the {@code passwordProtected} field
-//     */
-//    boolean isPasswordProtected();
-//
-//    /**
-//     * @param passwordProtected value of the field {@code passwordProtected} to set
-//     */
-//    void setPasswordProtected( boolean passwordProtected );
-
     /**
      * Gets the value of the {@code providername} field.
      *

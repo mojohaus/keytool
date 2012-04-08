@@ -26,7 +26,7 @@ import java.io.File;
  * To build the command line for a given {@link org.codehaus.mojo.keytool.KeyToolRequest}.
  *
  * @author tchemit <chemit@codelutin.com>
- * @version $Id: KeyToolCommandLineBuilder.java 15792 2012-01-28 21:06:10Z tchemit $
+ * @version $Id$
  * @since 1.1
  */
 public abstract class AbstractKeyToolCommandLineBuilder

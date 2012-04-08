@@ -17,7 +17,7 @@ package org.codehaus.mojo.keytool.requests;
  */
 
 /**
- * Request to export a certifiacte using the KeyTool tool.
+ * Request to export a certificate using the KeyTool tool.
  *
  * @author tchemit <chemit@codelutin.com>
  * @since 1.1

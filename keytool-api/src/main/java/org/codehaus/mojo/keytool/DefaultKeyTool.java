@@ -91,7 +91,6 @@ public class DefaultKeyTool
     protected Commandline createCommandLine( KeyToolRequest request )
         throws KeyToolException
     {
-//        KeyToolCommandLineBuilder builder = new KeyToolCommandLineBuilder();
         builder.setLogger( getLogger() );
         builder.setKeyToolFile( keyToolFile );
         Commandline cli;
