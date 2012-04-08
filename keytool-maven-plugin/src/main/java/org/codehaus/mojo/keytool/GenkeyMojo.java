@@ -41,7 +41,9 @@ import org.codehaus.plexus.util.cli.Commandline;
  * @goal genkey
  * @phase package
  * @requiresProject
+ * @deprecated since 1.2, use now the {@code generateKeyPair} mojo instead.
  */
+@Deprecated
 public class GenkeyMojo
     extends AbstractCmdLineKeyToolMojo
 {

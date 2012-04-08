@@ -25,10 +25,19 @@ import java.io.File;
 /**
  * @author <a>Juergen Mayrbaeurl</a>
  * @version 1.0 2008-02-03
+ * @deprecated since 1.2, use now the {@link AbstractKeyToolRequestMojo} instead.
  */
+@Deprecated
 public abstract class AbstractCmdLineKeyToolMojo
     extends AbstractKeyToolMojo
 {
+
+    /**
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${keystore}"
+     */
+    private String keystore;
 
     /**
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
@@ -61,11 +70,20 @@ public abstract class AbstractCmdLineKeyToolMojo
 
     /**
      * Enable verbose.
+     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @parameter expression="${verbose}" default-value="false"
      */
     private boolean verbose;
+
+    /**
+     * Where to execute the keytool command.
+     *
+     * @parameter expression="${keytool.workingdir}" default-value="${basedir}" alias="workingdir"
+     * @required
+     */
+    private File workingDirectory;
 
     /**
      * Keytool component.
@@ -130,6 +148,78 @@ public abstract class AbstractCmdLineKeyToolMojo
     }
 
     /**
+     * @return Returns the keystore.
+     */
+    public final String getKeystore()
+    {
+        return this.keystore;
+    }
+
+    /**
+     * @param keystore The keystore to set.
+     */
+    public final void setKeystore( String keystore )
+    {
+        this.keystore = keystore;
+    }
+
+    /**
+     * @return Returns the workingDirectory.
+     */
+    public final File getWorkingDir()
+    {
+        return this.workingDirectory;
+    }
+
+    /**
+     * @param workingDir The workingDirectory to set.
+     */
+    public final void setWorkingDir( File workingDir )
+    {
+        this.workingDirectory = workingDir;
+    }
+
+    /**
+     * @param storetype the storetype to set
+     */
+    public void setStoretype( String storetype )
+    {
+        this.storetype = storetype;
+    }
+
+    /**
+     * @param storepass the storepass to set
+     */
+    public void setStorepass( String storepass )
+    {
+        this.storepass = storepass;
+    }
+
+    /**
+     * @param alias the alias to set
+     */
+    public void setAlias( String alias )
+    {
+        this.alias = alias;
+    }
+
+    /**
+     * @param arguments the arguments to set
+     */
+    public void setArguments( String[] arguments )
+    {
+        this.arguments = arguments;
+    }
+
+    /**
+     * @param keyTool keyTool to set
+     */
+    protected void setKeyTool( KeyTool keyTool )
+    {
+        this.keyTool = keyTool;
+    }
+
+    /**
      * Gets a string representation of a {@code Commandline}.
      * <p>This method creates the string representation by calling {@code commandLine.toString()} by default.</p>
      *
@@ -164,57 +254,8 @@ public abstract class AbstractCmdLineKeyToolMojo
 
         if ( resultCode != 0 )
         {
-            throw new MojoExecutionException(
-                getMessage( "failure", getCommandlineInfo( commandLine ), new Integer( resultCode ) ) );
+            throw new MojoExecutionException( getMessage( "failure", getCommandlineInfo( commandLine ), resultCode ) );
         }
-    }
-
-    /**
-     * @param storetype the storetype to set
-     */
-    public void setStoretype( String storetype )
-    {
-        this.storetype = storetype;
-    }
-
-    /**
-     * @param storepass the storepass to set
-     */
-    public void setStorepass( String storepass )
-    {
-        this.storepass = storepass;
-    }
-
-    /**
-     * @param alias the alias to set
-     */
-    public void setAlias( String alias )
-    {
-        this.alias = alias;
-    }
-
-    /**
-     * @param verbose the verbose to set
-     */
-    public void setVerbose( boolean verbose )
-    {
-        this.verbose = verbose;
-    }
-
-    /**
-     * @param arguments the arguments to set
-     */
-    public void setArguments( String[] arguments )
-    {
-        this.arguments = arguments;
-    }
-
-    /**
-     * @param keyTool keyTool to set
-     */
-    protected void setKeyTool( KeyTool keyTool )
-    {
-        this.keyTool = keyTool;
     }
 
     /**

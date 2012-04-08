@@ -38,7 +38,9 @@ import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
  * @goal export
  * @phase package
  * @requiresProject
+ * @deprecated since 1.2, use now the {@code exportCertificate} mojo.
  */
+@Deprecated
 public class ExportMojo
     extends AbstractCmdLineKeyToolMojo
 {
