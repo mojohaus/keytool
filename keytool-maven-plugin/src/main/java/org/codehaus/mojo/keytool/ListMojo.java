@@ -1,5 +1,21 @@
 package org.codehaus.mojo.keytool;
 
+/*
+ * Copyright 2005-2012 The Codehaus
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License" );
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
 
 /**
@@ -11,7 +27,6 @@ import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
  *
  * @author tchemit <chemit@codelutin.com>
  * @goal list
- * @phase package
  * @requiresProject
  * @since 1.2
  */
@@ -28,6 +43,9 @@ public class ListMojo
      */
     private boolean rfc;
 
+    /**
+     * Default contructor.
+     */
     public ListMojo()
     {
         super( KeyToolListRequest.class );
@@ -37,9 +55,9 @@ public class ListMojo
      * {@inheritDoc}
      */
     @Override
-    protected KeyToolListRequest prepareRequest()
+    protected KeyToolListRequest createKeytoolRequest()
     {
-        KeyToolListRequest request = super.prepareRequest();
+        KeyToolListRequest request = super.createKeytoolRequest();
 
         request.setRfc( this.rfc );
         return request;

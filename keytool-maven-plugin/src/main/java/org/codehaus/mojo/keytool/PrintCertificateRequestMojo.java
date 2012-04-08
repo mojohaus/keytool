@@ -1,11 +1,27 @@
 package org.codehaus.mojo.keytool;
 
+/*
+ * Copyright 2005-2012 The Codehaus
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License" );
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest;
 
 import java.io.File;
 
 /**
- * To print the content of a certificate request of a key store.
+ * To print the content of a certificate request.
  * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -printcertreq} command.
  * <p/>
@@ -13,7 +29,6 @@ import java.io.File;
  *
  * @author tchemit <chemit@codelutin.com>
  * @goal printCertificateRequest
- * @phase package
  * @requiresProject
  * @since 1.2
  */
@@ -31,6 +46,9 @@ public class PrintCertificateRequestMojo
      */
     private File file;
 
+    /**
+     * Default contructor.
+     */
     public PrintCertificateRequestMojo()
     {
         super( KeyToolPrintCertificateRequestRequest.class );
@@ -40,9 +58,9 @@ public class PrintCertificateRequestMojo
      * {@inheritDoc}
      */
     @Override
-    protected KeyToolPrintCertificateRequestRequest prepareRequest()
+    protected KeyToolPrintCertificateRequestRequest createKeytoolRequest()
     {
-        KeyToolPrintCertificateRequestRequest request = super.prepareRequest();
+        KeyToolPrintCertificateRequestRequest request = super.createKeytoolRequest();
 
         request.setFile( this.file );
         return request;

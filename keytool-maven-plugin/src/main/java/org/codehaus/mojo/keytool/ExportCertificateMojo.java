@@ -1,10 +1,25 @@
 package org.codehaus.mojo.keytool;
 
+/*
+ * Copyright 2005-2012 The Codehaus
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License" );
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
 
 /**
  * To export a certificate from a keystore.
- * <p/>
  * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -export} command.
  * <p/>
@@ -12,7 +27,6 @@ import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
  *
  * @author tchemit <chemit@codelutin.com>
  * @goal exportCertificate
- * @phase package
  * @requiresProject
  * @since 1.2
  */
@@ -40,6 +54,9 @@ public class ExportCertificateMojo
      */
     private String file;
 
+    /**
+     * Default contructor.
+     */
     public ExportCertificateMojo()
     {
         super( KeyToolExportCertificateRequest.class );
@@ -49,9 +66,9 @@ public class ExportCertificateMojo
      * {@inheritDoc}
      */
     @Override
-    protected KeyToolExportCertificateRequest prepareRequest()
+    protected KeyToolExportCertificateRequest createKeytoolRequest()
     {
-        KeyToolExportCertificateRequest request = super.prepareRequest();
+        KeyToolExportCertificateRequest request = super.createKeytoolRequest();
 
         request.setFile( this.file );
         request.setRfc( this.rfc );

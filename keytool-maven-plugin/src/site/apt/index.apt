@@ -4,17 +4,58 @@
 
 Keytool Maven Plugin
 
-  This plugin provides the capability to manipulate keys and keystores.
+  This plugin provides the capability to manipulate keys and keystores and acts as a wrapper of the keytool command.
 
 * Goals Overview
 
-  * {{{./genkey-mojo.html}keytool:genkey}} generates a keystore.
-
   * {{{./clean-mojo.html}keytool:clean}} deletes a generated keystore file.
 
-  * {{{./export-mojo.html}keytool:export}} reads a certificate from a keystore and stores it in a file.
+  * <<Since 1.2>> {{{./changeAlias-mojo.html}keytool:changeAlias}} changes an entry alias into a keystore.
 
-  * {{{./import-mojo.html}keytool:import}} reads a certificate from a file and stores it in a keystore.
+  * <<Since 1.2>> {{{./changeKeyPassword-mojo.html}keytoolchangeKeyPassword:}} changes the key password of an entry of a keystore.
+
+  * <<Since 1.2>> {{{./changeStorePassword-mojo.html}keytool:changeStorePassword}} changes the store password of a keystore.
+
+  * <<Since 1.2>> {{{./deleteAlias-mojo.html}keytool:deleteAlias}} deletes an entry alias from a keystore.
+
+  * <<Since 1.2>> {{{./exportCertificate-mojo.html}keytool:exportCertificate}} exports a certificate from a keystore.
+
+  * <<Since 1.2>> {{{./generateCertificate-mojo.html}keytool:generateCertificate}} generates a certificate from a certificate request from a keystore.
+
+  * <<Since 1.2>> {{{./generateCertificateRequest-mojo.html}keytool:generateCertificateRequest}} generates a certificate request.
+
+  * <<Since 1.2>> {{{./generateKeyPair-mojo.html}keytool:generateKeyPair}} generates a key pair.
+
+  * <<Since 1.2>> {{{./generateSecretKey-mojo.html}keytool:generateSecretKey}} generates a secret key.
+
+  * <<Since 1.2>> {{{./importCertificate-mojo.html}keytool:importCertificate}} imports a certificate into a keystore.
+
+  * <<Since 1.2>> {{{./importKeystore-mojo.html}keytool:importKeystore}} imports all entries of a keystore to another keystore.
+
+  * <<Since 1.2>> {{{./list-mojo.html}keytool:list}} lists entries in a keystore.
+
+  * <<Since 1.2>> {{{./printCertificate-mojo.html}keytool:printCertificate}} prints the content of a certificate of a keystore.
+
+  * <<Since 1.2>> {{{./printCertificateRequest-mojo.html}keytool:printCertificateRequest}} prints the content of a certificate request of a keystore.
+
+  * <<Since 1.2>> {{{./printCRLFile-mojo.html}keytool:printCRLFile}} prints the content of a CRL file.
+
+* Deprecated goals
+
+  In version 1.2, a lots of new goals were introduced (MKEYTOOL-19) to perform all possible task available in the
+  keytool command.
+
+  <<Note also that new goals are not attached to any phase, so you will have to set explicitly the phase on which attach
+  executions of goals.>>
+
+  As the new goals can set all parameters than older one, we prefer to deprecate the old one... Please use the new
+  mojo (old one will be at next major release removed).
+
+  * <<Deprecated since 1.2>> {{{./genkey-mojo.html}keytool:genkey}} generates a keystore <<replaced by generateKeyPair>>.
+
+  * <<Deprecated since 1.2>> {{{./export-mojo.html}keytool:export}} reads a certificate from a keystore and stores it in a file <<replaced by exportCertificate>>
+
+  * <<Deprecated since 1.2>> {{{./import-mojo.html}keytool:import}} reads a certificate from a file and stores it in a keystore <<replaced by importCertificate>>.
 
 * Usage
 

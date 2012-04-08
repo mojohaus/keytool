@@ -1,11 +1,27 @@
 package org.codehaus.mojo.keytool;
 
+/*
+ * Copyright 2005-2012 The Codehaus
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License" );
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import org.codehaus.mojo.keytool.requests.KeyToolImportCertificateRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
 
 /**
- * To import a certificate into a key store.
+ * To import a certificate into a keystore.
  * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -import} (jdk 1.5) or  {@code keytool -importcert} (jdk 1.6)
  * command.
@@ -16,7 +32,6 @@ import org.codehaus.plexus.util.cli.Commandline;
  *
  * @author tchemit <chemit@codelutin.com>
  * @goal importCertificate
- * @phase package
  * @requiresProject
  * @since 1.2
  */
@@ -64,6 +79,9 @@ public class ImportCertificateMojo
      */
     private boolean trustcacerts;
 
+    /**
+     * Default contructor.
+     */
     public ImportCertificateMojo()
     {
         super( KeyToolImportCertificateRequest.class );
@@ -73,9 +91,9 @@ public class ImportCertificateMojo
      * {@inheritDoc}
      */
     @Override
-    protected KeyToolImportCertificateRequest prepareRequest()
+    protected KeyToolImportCertificateRequest createKeytoolRequest()
     {
-        KeyToolImportCertificateRequest request = super.prepareRequest();
+        KeyToolImportCertificateRequest request = super.createKeytoolRequest();
 
         request.setKeypass( this.keypass );
         request.setFile( this.file );

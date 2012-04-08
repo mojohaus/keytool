@@ -1,5 +1,21 @@
 package org.codehaus.mojo.keytool;
 
+/*
+ * Copyright 2005-2012 The Codehaus
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License" );
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.codehaus.plexus.util.cli.Commandline;
 
@@ -8,6 +24,7 @@ import java.io.File;
 /**
  * Abstract keytool mojo implementing the {@link KeyToolRequest}.
  *
+ * @param <R> generic type of request used by the mojo
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
@@ -18,8 +35,9 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
     /**
      * List of additional arguments to append to the keytool command line.
      * <p/>
-     * <strong>Note: This parameter is left for compatibility reason but should be used at a last resort when
-     * parameters are not found in dedicated mojo due to possible side-effects on parameters
+     * <strong>Note: This parameter is left for compatibility reason but
+     * should be used at a last resort whenparameters are not found in
+     * dedicated mojo due to possible side-effects on parameters
      * (see https://jira.codehaus.org/browse/MKEYTOOL-17)</strong>
      *
      * @parameter expression="${keytool.arguments}"
@@ -48,6 +66,11 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      */
     private KeyTool keyTool;
 
+    /**
+     * Constructor of abstract mojo.
+     *
+     * @param requestType type of keytool request used by the mojo
+     */
     protected AbstractKeyToolRequestMojo( Class<R> requestType )
     {
         this.requestType = requestType;
@@ -68,7 +91,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
         {
 
             //creates the keytool request
-            R request = prepareRequest();
+            R request = createKeytoolRequest();
 
             try
             {
@@ -85,8 +108,11 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
 
     /**
      * To prepare the incoming request, says fill it with mojo parameters.
+     *
+     * @return the created keytool request
+     * @see KeyToolRequest
      */
-    protected R prepareRequest()
+    protected R createKeytoolRequest()
     {
         R request;
         try
