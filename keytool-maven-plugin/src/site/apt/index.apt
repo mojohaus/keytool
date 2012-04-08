@@ -12,13 +12,13 @@ Keytool Maven Plugin
 
   * <<Since 1.2>> {{{./changeAlias-mojo.html}keytool:changeAlias}} changes an entry alias into a keystore.
 
-  * <<Since 1.2>> {{{./changeKeyPassword-mojo.html}keytoolchangeKeyPassword:}} changes the key password of an entry of a keystore.
+  * <<Since 1.2>> {{{./changeKeyPassword-mojo.html}keytool:changeKeyPassword:}} changes the key password of an entry of a keystore.
 
   * <<Since 1.2>> {{{./changeStorePassword-mojo.html}keytool:changeStorePassword}} changes the store password of a keystore.
 
   * <<Since 1.2>> {{{./deleteAlias-mojo.html}keytool:deleteAlias}} deletes an entry alias from a keystore.
 
-  * <<Since 1.2>> {{{./exportCertificate-mojo.html}keytool:exportCertificate}} exports a certificate from a keystore.
+  * <<Since 1.2>> {{{./exportCertificate-mojo.html}keytool:exportCertificate}} reads a certificate from a keystore and stores it in a file.
 
   * <<Since 1.2>> {{{./generateCertificate-mojo.html}keytool:generateCertificate}} generates a certificate from a certificate request from a keystore.
 
@@ -28,7 +28,7 @@ Keytool Maven Plugin
 
   * <<Since 1.2>> {{{./generateSecretKey-mojo.html}keytool:generateSecretKey}} generates a secret key.
 
-  * <<Since 1.2>> {{{./importCertificate-mojo.html}keytool:importCertificate}} imports a certificate into a keystore.
+  * <<Since 1.2>> {{{./importCertificate-mojo.html}keytool:importCertificate}} reads a certificate from a file and stores it in a keystore.
 
   * <<Since 1.2>> {{{./importKeystore-mojo.html}keytool:importKeystore}} imports all entries of a keystore to another keystore.
 
