@@ -18,7 +18,6 @@ package org.codehaus.mojo.keytool;
 
 import org.apache.maven.plugin.AbstractMojo;
 
-import java.io.File;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -34,21 +33,6 @@ public abstract class AbstractKeyToolMojo
 {
 
     /**
-     * Where to execute the keytool command.
-     *
-     * @parameter expression="${keytool.workingdir}" default-value="${basedir}" alias="workingdir"
-     * @required
-     */
-    private File workingDirectory;
-
-    /**
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @parameter expression="${keystore}"
-     */
-    private String keystore;
-
-    /**
      * Set to {@code true} to disable the plugin.
      *
      * @parameter expression="${keytool.skip}" default-value="false"
@@ -57,41 +41,18 @@ public abstract class AbstractKeyToolMojo
     private boolean skip;
 
     /**
-     * @return Returns the keystore.
+     * Enable verbose mode (in mojo and in keytool command).
+     * <p/>
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @parameter expression="${verbose}" default-value="false"
      */
-    public String getKeystore()
-    {
-        return this.keystore;
-    }
+    private boolean verbose;
 
     /**
-     * @param keystore The keystore to set.
+     * @return value of the {@link #skip} flag
      */
-    public void setKeystore( String keystore )
-    {
-        this.keystore = keystore;
-    }
-
-    /**
-     * @return Returns the workingDirectory.
-     */
-    public File getWorkingDir()
-    {
-        return this.workingDirectory;
-    }
-
-    /**
-     * @param workingDir The workingDirectory to set.
-     */
-    public void setWorkingDir( File workingDir )
-    {
-        this.workingDirectory = workingDir;
-    }
-
-    /**
-     * @return value of the {@code skip} flag
-     */
-    public boolean isSkip()
+    public final boolean isSkip()
     {
         return skip;
     }
@@ -99,9 +60,25 @@ public abstract class AbstractKeyToolMojo
     /**
      * @param skip the skip flag value to set.
      */
-    public void setSkip( boolean skip )
+    public final void setSkip( boolean skip )
     {
         this.skip = skip;
+    }
+
+    /**
+     * @return value of the {@link #verbose} flag
+     */
+    public final boolean isVerbose()
+    {
+        return verbose;
+    }
+
+    /**
+     * @param verbose the verbose flag value to set.
+     */
+    public final void setVerbose( boolean verbose )
+    {
+        this.verbose = verbose;
     }
 
     /**

@@ -32,12 +32,30 @@ public class CleanKeyMojo
 {
 
     /**
-     * Remove the keystore file from the working directory. If it doesn't exist,
-     * do nothing?
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @see org.apache.maven.plugin.Mojo#execute()
-     *      throws MojoExecutionException
-     *      throws MojoFailureException
+     * @parameter expression="${keystore}"
+     */
+    private String keystore;
+
+    /**
+     * @return Returns the keystore.
+     */
+    public final String getKeystore()
+    {
+        return this.keystore;
+    }
+
+    /**
+     * @param keystore The keystore to set.
+     */
+    public final void setKeystore( String keystore )
+    {
+        this.keystore = keystore;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public void execute()
     {
