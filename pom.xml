@@ -26,7 +26,7 @@
   </parent>
 
   <artifactId>keytool</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.2</version>
   <packaging>pom</packaging>
 
   <name>Keytool: Project</name>
@@ -103,9 +103,9 @@
   </licenses>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/mojo/trunk/mojo/keytool/</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/keytool/</developerConnection>
-    <url>http://svn.codehaus.org/mojo/trunk/mojo/keytool/</url>
+    <connection>scm:svn:http://svn.codehaus.org/mojo/tags/keytool-1.2</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/mojo/tags/keytool-1.2</developerConnection>
+    <url>http://svn.codehaus.org/mojo/tags/keytool-1.2</url>
   </scm>
 
   <dependencyManagement>
