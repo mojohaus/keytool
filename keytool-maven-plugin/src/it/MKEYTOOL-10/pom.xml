@@ -35,7 +35,7 @@
             <phase>generate-resources</phase>
             <goals>
               <goal>clean</goal>
-              <goal>genkey</goal>
+              <goal>generateKeyPair</goal>
             </goals>
           </execution>
         </executions>
