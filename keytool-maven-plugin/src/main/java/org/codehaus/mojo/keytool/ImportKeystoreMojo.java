@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolImportKeystoreRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
@@ -28,10 +30,9 @@ import org.codehaus.plexus.util.cli.Commandline;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal importKeystore
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "importKeystore", requiresProject = true )
 public class ImportKeystoreMojo
     extends AbstractKeyToolRequestMojo<KeyToolImportKeystoreRequest>
 {
@@ -41,9 +42,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${srckeystore}"
      * @since 1.2
      */
+    @Parameter
     private String srckeystore;
 
     /**
@@ -51,9 +52,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${destkeystore}"
      * @since 1.2
      */
+    @Parameter
     private String destkeystore;
 
     /**
@@ -61,9 +62,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${srcstoretype}"
      * @since 1.2
      */
+    @Parameter
     private String srcstoretype;
 
     /**
@@ -71,9 +72,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${deststoretype}"
      * @since 1.2
      */
+    @Parameter
     private String deststoretype;
 
     /**
@@ -81,9 +82,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${srcstorepass}"
      * @since 1.2
      */
+    @Parameter
     private String srcstorepass;
 
     /**
@@ -91,9 +92,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${deststorepass}"
      * @since 1.2
      */
+    @Parameter
     private String deststorepass;
 
     /**
@@ -101,9 +102,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${srcprotected}"
      * @since 1.2
      */
+    @Parameter
     private boolean srcprotected;
 
     /**
@@ -111,9 +112,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${srcprovidername}"
      * @since 1.2
      */
+    @Parameter
     private String srcprovidername;
 
     /**
@@ -121,9 +122,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a hresf="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${destprovidername}"
      * @since 1.2
      */
+    @Parameter
     private String destprovidername;
 
     /**
@@ -131,9 +132,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${srcalias}"
      * @since 1.2
      */
+    @Parameter
     private String srcalias;
 
     /**
@@ -141,9 +142,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${destalias}"
      * @since 1.2
      */
+    @Parameter
     private String destalias;
 
     /**
@@ -151,9 +152,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${srckeypass}"
      * @since 1.2
      */
+    @Parameter
     private String srckeypass;
 
     /**
@@ -161,9 +162,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${destkeypass}"
      * @since 1.2
      */
+    @Parameter
     private String destkeypass;
 
     /**
@@ -171,9 +172,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${noprompt}"
      * @since 1.2
      */
+    @Parameter
     private boolean noprompt;
 
     /**
@@ -181,9 +182,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${providerclass}"
      * @since 1.2
      */
+    @Parameter
     private String providerclass;
 
     /**
@@ -191,9 +192,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${providerarg}"
      * @since 1.2
      */
+    @Parameter
     private String providerarg;
 
     /**
@@ -201,9 +202,9 @@ public class ImportKeystoreMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${providerpath}"
      * @since 1.2
      */
+    @Parameter
     private String providerpath;
 
     /**

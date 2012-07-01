@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolImportCertificateRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
@@ -31,10 +33,9 @@ import org.codehaus.plexus.util.cli.Commandline;
  * <strong>Since version 1.2, this mojo replace the mojo import.</strong>
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal importCertificate
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "importCertificate", requiresProject = true )
 public class ImportCertificateMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolImportCertificateRequest>
 {
@@ -44,9 +45,9 @@ public class ImportCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keypass}"
      * @since 1.2
      */
+    @Parameter
     private String keypass;
 
     /**
@@ -54,9 +55,9 @@ public class ImportCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${file}"
      * @since 1.2
      */
+    @Parameter
     private String file;
 
     /**
@@ -64,9 +65,9 @@ public class ImportCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${noprompt}"
      * @since 1.2
      */
+    @Parameter
     private boolean noprompt;
 
     /**
@@ -74,9 +75,9 @@ public class ImportCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${trustcacerts}"
      * @since 1.2
      */
+    @Parameter
     private boolean trustcacerts;
 
     /**

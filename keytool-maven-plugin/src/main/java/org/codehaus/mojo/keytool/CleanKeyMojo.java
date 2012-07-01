@@ -16,6 +16,10 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+
 import java.io.File;
 
 /**
@@ -24,18 +28,16 @@ import java.io.File;
  * @author Sharmarke Aden (<a href="mailto:saden1@gmail.com">saden</a>)
  * @author $Author$
  * @version $Revision$
- * @goal clean
- * @phase clean
  */
+@Mojo( name = "clean", defaultPhase = LifecyclePhase.CLEAN )
 public class CleanKeyMojo
     extends AbstractKeyToolMojo
 {
 
     /**
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @parameter expression="${keystore}"
      */
+    @Parameter
     private String keystore;
 
     /**

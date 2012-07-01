@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolGenerateCertificateRequestRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
@@ -31,10 +33,9 @@ import java.io.File;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal generateCertificateRequest
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "generateCertificateRequest", requiresProject = true )
 public class GenerateCertificateRequestMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateCertificateRequestRequest>
 {
@@ -43,9 +44,9 @@ public class GenerateCertificateRequestMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keypass}"
      * @since 1.2
      */
+    @Parameter
     private String keypass;
 
     /**
@@ -53,9 +54,9 @@ public class GenerateCertificateRequestMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${infile}"
      * @since 1.2
      */
+    @Parameter
     private File file;
 
     /**
@@ -63,9 +64,9 @@ public class GenerateCertificateRequestMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${sigalg}"
      * @since 1.2
      */
+    @Parameter
     private String sigalg;
 
     /**
@@ -73,9 +74,9 @@ public class GenerateCertificateRequestMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${dname}"
      * @since 1.2
      */
+    @Parameter
     private String dname;
 
     /**

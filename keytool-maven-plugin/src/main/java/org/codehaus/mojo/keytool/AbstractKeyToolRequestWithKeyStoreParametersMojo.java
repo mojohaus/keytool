@@ -16,10 +16,12 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 /**
  * Abstract mojo to execute a {@link KeyToolRequestWithKeyStoreParameters} request.
@@ -36,27 +38,24 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      * Keystore location.
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @parameter expression="${keystore}"
      */
+    @Parameter
     private String keystore;
 
     /**
      * Keystore type.
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @parameter expression="${storetype}"
      */
+    @Parameter
     private String storetype;
 
     /**
      * Keystore password.
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @parameter expression="${storepass}" alias="storepass"
      */
+    @Parameter( alias = "storepass" )
     private String storepass;
 
     /**
@@ -64,9 +63,9 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${providername}"
      * @since 1.2
      */
+    @Parameter
     private String providername;
 
     /**
@@ -74,9 +73,9 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${providerclass}"
      * @since 1.2
      */
+    @Parameter
     private String providerclass;
 
     /**
@@ -84,9 +83,9 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${providerarg}"
      * @since 1.2
      */
+    @Parameter
     private String providerarg;
 
     /**
@@ -94,9 +93,9 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${providerpath}"
      * @since 1.2
      */
+    @Parameter
     private String providerpath;
 
     /**
@@ -117,15 +116,18 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
     {
         R request = super.createKeytoolRequest();
 
-        String keystoreFile = keystore;
-
         if ( StringUtils.isNotEmpty( keystore ) )
         {
+
+            File file = getFile( keystore );
+
             // make sure the parent directory of the keystore exists
-            createParentDirIfNecessary( keystore );
+
+            boolean mkdirs = file.getParentFile().mkdirs();
+            getLog().debug( "mdkirs: " + mkdirs + " " + file.getParentFile() );
 
             // force to not use this parameter
-            request.setKeystore( keystore );
+            request.setKeystore( file );
         }
 
         request.setProviderarg( providerarg );
@@ -167,6 +169,19 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
                 boolean mkdirs = fileDir.mkdirs();
                 getLog().debug( "mdkirs: " + mkdirs + " " + fileDir );
             }
+        }
+    }
+
+    protected File getFile( String path )
+
+    {
+        try
+        {
+            return new File( new File( path ).toURL().getFile() );
+        }
+        catch ( MalformedURLException e )
+        {
+            throw new IllegalStateException( "Could not obtain directory " + path );
         }
     }
 }

@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
@@ -30,10 +32,9 @@ import org.codehaus.plexus.util.cli.Commandline;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal generateKeyPair
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "generateKeyPair", requiresProject = true )
 public class GenerateKeyPairMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateKeyPairRequest>
 {
@@ -43,9 +44,9 @@ public class GenerateKeyPairMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keyalg}"
      * @since 1.2
      */
+    @Parameter
     private String keyalg;
 
     /**
@@ -53,9 +54,9 @@ public class GenerateKeyPairMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keysize}"
      * @since 1.2
      */
+    @Parameter
     private String keysize;
 
     /**
@@ -63,9 +64,9 @@ public class GenerateKeyPairMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keypass}"
      * @since 1.2
      */
+    @Parameter
     private String keypass;
 
     /**
@@ -73,9 +74,9 @@ public class GenerateKeyPairMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${sigalg}"
      * @since 1.2
      */
+    @Parameter
     private String sigalg;
 
     /**
@@ -83,9 +84,9 @@ public class GenerateKeyPairMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${validity}"
      * @since 1.2
      */
+    @Parameter
     private String validity;
 
     /**
@@ -93,9 +94,9 @@ public class GenerateKeyPairMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${startdate}"
      * @since 1.2
      */
+    @Parameter
     private String startdate;
 
     /**
@@ -103,9 +104,9 @@ public class GenerateKeyPairMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${ext}"
      * @since 1.2
      */
+    @Parameter
     private String ext;
 
     /**
@@ -113,9 +114,9 @@ public class GenerateKeyPairMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${dname}"
      * @since 1.2
      */
+    @Parameter
     private String dname;
 
     /**

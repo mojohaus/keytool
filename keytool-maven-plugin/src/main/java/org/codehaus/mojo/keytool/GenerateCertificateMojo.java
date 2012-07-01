@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolGenerateCertificateRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
@@ -31,10 +33,9 @@ import java.io.File;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal generateCertificate
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "generateCertificate", requiresProject = true )
 public class GenerateCertificateMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateCertificateRequest>
 {
@@ -43,9 +44,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keypass}"
      * @since 1.2
      */
+    @Parameter
     private String keypass;
 
     /**
@@ -53,9 +54,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${rfc}"
      * @since 1.2
      */
+    @Parameter
     private boolean rfc;
 
     /**
@@ -63,9 +64,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${infile}"
      * @since 1.2
      */
+    @Parameter
     private File infile;
 
     /**
@@ -73,9 +74,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${outfile}"
      * @since 1.2
      */
+    @Parameter
     private File outfile;
 
     /**
@@ -83,9 +84,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${sigalg}"
      * @since 1.2
      */
+    @Parameter
     private String sigalg;
 
     /**
@@ -93,9 +94,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${dname}"
      * @since 1.2
      */
+    @Parameter
     private String dname;
 
     /**
@@ -103,9 +104,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${startdate}"
      * @since 1.2
      */
+    @Parameter
     private String startdate;
 
     /**
@@ -113,9 +114,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${ext}"
      * @since 1.2
      */
+    @Parameter
     private String ext;
 
     /**
@@ -123,9 +124,9 @@ public class GenerateCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${validity}"
      * @since 1.2
      */
+    @Parameter
     private String validity;
 
     /**

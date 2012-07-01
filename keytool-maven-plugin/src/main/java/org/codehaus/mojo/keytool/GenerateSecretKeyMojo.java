@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolGenerateSecretKeyRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
@@ -29,10 +31,9 @@ import org.codehaus.plexus.util.cli.Commandline;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal generateSecretKey
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "generateSecretKey", requiresProject = true )
 public class GenerateSecretKeyMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateSecretKeyRequest>
 {
@@ -42,9 +43,9 @@ public class GenerateSecretKeyMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keyalg}"
      * @since 1.2
      */
+    @Parameter
     private String keyalg;
 
     /**
@@ -52,9 +53,9 @@ public class GenerateSecretKeyMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keysize}"
      * @since 1.2
      */
+    @Parameter
     private String keysize;
 
     /**
@@ -62,9 +63,9 @@ public class GenerateSecretKeyMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keypass}"
      * @since 1.2
      */
+    @Parameter
     private String keypass;
 
     /**

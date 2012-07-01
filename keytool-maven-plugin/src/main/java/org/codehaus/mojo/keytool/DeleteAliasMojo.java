@@ -16,6 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
 import org.codehaus.mojo.keytool.requests.KeyToolDeleteRequest;
 
 /**
@@ -26,10 +27,9 @@ import org.codehaus.mojo.keytool.requests.KeyToolDeleteRequest;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal deleteAlias
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "deleteAlias", requiresProject = true )
 public class DeleteAliasMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolDeleteRequest>
 {

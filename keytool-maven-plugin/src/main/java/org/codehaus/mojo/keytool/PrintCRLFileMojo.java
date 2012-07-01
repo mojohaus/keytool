@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCRLFileRequest;
 
 import java.io.File;
@@ -28,10 +30,9 @@ import java.io.File;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal printCRLFile
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "printCRLFile", requiresProject = true )
 public class PrintCRLFileMojo
     extends AbstractKeyToolRequestMojo<KeyToolPrintCRLFileRequest>
 {
@@ -41,9 +42,9 @@ public class PrintCRLFileMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${file}"
      * @since 1.2
      */
+    @Parameter
     private File file;
 
     /**

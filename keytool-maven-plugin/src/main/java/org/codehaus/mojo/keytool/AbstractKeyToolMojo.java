@@ -17,6 +17,7 @@ package org.codehaus.mojo.keytool;
  */
 
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -35,18 +36,17 @@ public abstract class AbstractKeyToolMojo
     /**
      * Set to {@code true} to disable the plugin.
      *
-     * @parameter expression="${keytool.skip}" default-value="false"
      * @since 1.1
      */
+    @Parameter( defaultValue = "false" )
     private boolean skip;
 
     /**
      * Enable verbose mode (in mojo and in keytool command).
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @parameter expression="${verbose}" default-value="false"
      */
+    @Parameter( defaultValue = "false" )
     private boolean verbose;
 
     /**

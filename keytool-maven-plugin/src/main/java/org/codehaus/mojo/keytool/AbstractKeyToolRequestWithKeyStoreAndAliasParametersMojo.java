@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Parameter;
+
 /**
  * Abstract mojo to execute a {@link KeyToolRequestWithKeyStoreAndAliasParameters} request.
  *
@@ -31,18 +33,17 @@ public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<R
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${passwordProtected}"
      * @since 1.2
      */
+    @Parameter
     private boolean passwordProtected;
 
     /**
      * Alias name of the entry to process.
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @parameter expression="${alias}"
      */
+    @Parameter
     private String alias;
 
     /**

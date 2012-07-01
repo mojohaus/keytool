@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
 
 /**
@@ -26,10 +28,9 @@ import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal exportCertificate
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "exportCertificate", requiresProject = true )
 public class ExportCertificateMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolExportCertificateRequest>
 {
@@ -39,9 +40,9 @@ public class ExportCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${rfc}"
      * @since 1.2
      */
+    @Parameter
     private boolean rfc;
 
     /**
@@ -49,9 +50,9 @@ public class ExportCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${file}"
      * @since 1.2
      */
+    @Parameter
     private String file;
 
     /**

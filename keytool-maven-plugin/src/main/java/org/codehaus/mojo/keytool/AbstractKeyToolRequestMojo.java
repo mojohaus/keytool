@@ -17,6 +17,8 @@ package org.codehaus.mojo.keytool;
  */
 
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.cli.Commandline;
 
 import java.io.File;
@@ -40,31 +42,29 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      * dedicated mojo due to possible side-effects on parameters
      * (see https://jira.codehaus.org/browse/MKEYTOOL-17)</strong>
      *
-     * @parameter expression="${keytool.arguments}"
      * @since 1.1
      */
+    @Parameter
     private String[] arguments;
 
     /**
      * Where to execute the keytool command.
-     *
-     * @parameter expression="${keytool.workingdir}" default-value="${basedir}" alias="workingdir"
-     * @required
      */
+    @Parameter( defaultValue = "${basedir}", required = true, alias = "workingdir" )
     private File workingDirectory;
+
+    /**
+     * Keytool component.
+     *
+     * @since 1.2
+     */
+    @Component( role = KeyTool.class )
+    private KeyTool keyTool;
 
     /**
      * Type of keytool request used by the mojo.
      */
     private final Class<R> requestType;
-
-    /**
-     * Keytool component.
-     *
-     * @component role="org.codehaus.mojo.keytool.KeyTool"
-     * @since 1.2
-     */
-    private KeyTool keyTool;
 
     /**
      * Constructor of abstract mojo.

@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolChangeKeyPasswordRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
@@ -29,10 +31,9 @@ import org.codehaus.plexus.util.cli.Commandline;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal changeKeyPassword
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "changeKeyPassword", requiresProject = true )
 public class ChangeKeyPasswordMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolChangeKeyPasswordRequest>
 {
@@ -42,9 +43,9 @@ public class ChangeKeyPasswordMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${newPassword}"
      * @since 1.2
      */
+    @Parameter
     private String newPassword;
 
     /**
@@ -52,9 +53,9 @@ public class ChangeKeyPasswordMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${keypass}"
      * @since 1.2
      */
+    @Parameter
     private String keypass;
 
     /**

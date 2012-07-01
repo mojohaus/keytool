@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
 
 /**
@@ -26,10 +28,9 @@ import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal list
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "list", requiresProject = true )
 public class ListMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolListRequest>
 {
@@ -38,9 +39,9 @@ public class ListMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${rfc}"
      * @since 1.2
      */
+    @Parameter
     private boolean rfc;
 
     /**

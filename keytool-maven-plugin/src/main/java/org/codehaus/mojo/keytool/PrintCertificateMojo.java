@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequest;
 
 import java.io.File;
@@ -28,10 +30,9 @@ import java.io.File;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal printCertificate
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "printCertificate", requiresProject = true )
 public class PrintCertificateMojo
     extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequest>
 {
@@ -41,9 +42,9 @@ public class PrintCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${rfc}"
      * @since 1.2
      */
+    @Parameter
     private boolean rfc;
 
     /**
@@ -51,9 +52,9 @@ public class PrintCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${file}"
      * @since 1.2
      */
+    @Parameter
     private File file;
 
     /**
@@ -61,9 +62,9 @@ public class PrintCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${sslserver}"
      * @since 1.2
      */
+    @Parameter
     private String sslserver;
 
     /**
@@ -71,9 +72,9 @@ public class PrintCertificateMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${jarfile}"
      * @since 1.2
      */
+    @Parameter
     private File jarfile;
 
     /**

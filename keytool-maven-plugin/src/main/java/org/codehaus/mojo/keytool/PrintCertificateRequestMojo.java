@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest;
 
 import java.io.File;
@@ -28,10 +30,9 @@ import java.io.File;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit <chemit@codelutin.com>
- * @goal printCertificateRequest
- * @requiresProject
  * @since 1.2
  */
+@Mojo( name = "printCertificateRequest", requiresProject = true )
 public class PrintCertificateRequestMojo
     extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequestRequest>
 {
@@ -41,9 +42,9 @@ public class PrintCertificateRequestMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @parameter expression="${file}"
      * @since 1.2
      */
+    @Parameter
     private File file;
 
     /**
