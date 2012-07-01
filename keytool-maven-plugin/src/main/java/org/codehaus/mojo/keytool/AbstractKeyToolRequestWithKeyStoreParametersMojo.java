@@ -127,7 +127,7 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
             getLog().debug( "mdkirs: " + mkdirs + " " + file.getParentFile() );
 
             // force to not use this parameter
-            request.setKeystore( file );
+            request.setKeystore( file.getAbsolutePath() );
         }
 
         request.setProviderarg( providerarg );
