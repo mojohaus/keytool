@@ -149,7 +149,7 @@
     <!--Since MKEYTOOL-21-->
     <mojo.java.target>1.5</mojo.java.target>
 
-    <pluginPluginVersion>3.0</pluginPluginVersion>
+    <pluginPluginVersion>3.1</pluginPluginVersion>
   </properties>
   <build>
 
