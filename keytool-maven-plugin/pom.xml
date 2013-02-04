@@ -168,7 +168,7 @@
       <dependencies>
         <dependency>
           <groupId>${project.groupId}</groupId>
-          <artifactId>keytool-api-1.6</artifactId>
+          <artifactId>keytool-api-1.7</artifactId>
           <version>${project.version}</version>
         </dependency>
       </dependencies>

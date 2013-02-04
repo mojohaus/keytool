@@ -21,7 +21,7 @@
   <parent>
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>30</version>
+    <version>31</version>
     <relativePath>../mojo-parent/pom.xml</relativePath>
   </parent>
 
@@ -43,6 +43,7 @@
     <module>keytool-api</module>
     <module>keytool-api-1.5</module>
     <module>keytool-api-1.6</module>
+    <module>keytool-api-1.7</module>
     <module>keytool-maven-plugin</module>
   </modules>
 
@@ -146,20 +147,13 @@
 
   <properties>
     <mavenVersion>2.0.6</mavenVersion>
-    <!--Since MKEYTOOL-21-->
-    <mojo.java.target>1.5</mojo.java.target>
-
-    <pluginPluginVersion>3.1</pluginPluginVersion>
+    <pluginPluginVersion>3.2</pluginPluginVersion>
+    
   </properties>
   <build>
 
     <pluginManagement>
       <plugins>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>animal-sniffer-maven-plugin</artifactId>
-          <version>1.7</version>
-        </plugin>
         <plugin>
           <artifactId>maven-plugin-plugin</artifactId>
           <version>${pluginPluginVersion}</version>
@@ -190,7 +184,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-invoker-plugin</artifactId>
-            <version>1.5</version>
+            <version>1.8</version>
           </plugin>
           <plugin>
             <groupId>org.codehaus.mojo</groupId>

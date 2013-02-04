@@ -123,7 +123,9 @@ public class DefaultKeyTool
 
         InputStream systemIn = new InputStream()
         {
-
+            /**
+             * {@inheritDoc}
+             */
             public int read()
             {
                 return -1;
@@ -136,7 +138,9 @@ public class DefaultKeyTool
         {
             systemOut = new StreamConsumer()
             {
-
+                /**
+                 * {@inheritDoc}
+                 */
                 public void consumeLine( final String line )
                 {
                     if ( verbose )
@@ -158,7 +162,9 @@ public class DefaultKeyTool
         {
             systemErr = new StreamConsumer()
             {
-
+                /**
+                 * {@inheritDoc}
+                 */
                 public void consumeLine( final String line )
                 {
                     getLogger().warn( line );
@@ -245,12 +251,10 @@ public class DefaultKeyTool
     {
         if ( StringUtils.isNotEmpty( homeDir ) )
         {
-            for ( int i = 0; i < subDirs.length; i++ )
-            {
-                File file = new File( new File( homeDir, subDirs[i] ), command );
+            for (String subDir : subDirs) {
+                File file = new File(new File(homeDir, subDir), command);
 
-                if ( file.isFile() )
-                {
+                if (file.isFile()) {
                     return file.getAbsolutePath();
                 }
             }
