@@ -289,8 +289,8 @@ public class DefaultKeyToolCommandLineBuilder
         addArgIfNotEmpty( cli, "-destkeystore", request.getDestkeystore() );
         addArgIfNotEmpty( cli, "-srcstoretype", request.getSrcstoretype() );
         addArgIfNotEmpty( cli, "-deststoretype", request.getDeststoretype() );
-        addArgIfNotEmpty( cli, "-srcstorepass", request.getSrckeypass() );
-        addArgIfNotEmpty( cli, "-deststorepass", request.getDestkeypass() );
+        addArgIfNotEmpty( cli, "-srcstorepass", request.getSrcstorepass() );
+        addArgIfNotEmpty( cli, "-deststorepass", request.getDeststorepass() );
         addArgIfNotEmpty( cli, "-srcprovidername", request.getSrcprovidername() );
         addArgIfNotEmpty( cli, "-destprovidername", request.getDestprovidername() );
         addArgIfNotEmpty( cli, "-srcalias", request.getSrcalias() );
