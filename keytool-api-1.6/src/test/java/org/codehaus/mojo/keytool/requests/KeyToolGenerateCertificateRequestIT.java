@@ -32,12 +32,9 @@ public class KeyToolGenerateCertificateRequestIT
     extends AbstractKeyToolRequestIT
 {
 
-    //FIXME : tchemit 2011-11-06 : find a way to check jdk >= 1.7
     public void testSimpleRequest()
         throws Exception
     {
-
-//        String javaVersion = System.getProperty( "java.version" );
 
         URL keyStoreURL = getKeyStoreURL( "simple" );
         File keyStore = new File( workingDirectory, "testSimpleRequest-keystore" );
@@ -74,16 +71,17 @@ public class KeyToolGenerateCertificateRequestIT
         KeyToolResult keyToolResult = executeKeyToolRequest( request );
 
         System.out.println( keyToolResult.getCommandline().toString() );
+
+        // before java 1.7, this operation does not exist
+
         assertKeyToolResult( keyToolResult,
                              new String[]{ "-gencert", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
                                  "changeit", "-storetype", "jks", "-alias", "foo_alias", "-rfc", "-infile",
                                  inFile.getAbsolutePath(), "-outfile", outputFile.getAbsolutePath(), "-sigalg",
                                  "SHA1withDSA", "-dname",
                                  "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France", "-startdate",
-                                 "2011/11/11", "-validity", "100", "-keypass", "key-passwd" } );
-        //FIXME : tchemit 2011-11-06 : find a way to check jdk >= 1.7
-//        , 0);
-//        Assert.assertTrue( outputFile.exists() );
+                                 "2011/11/11", "-validity", "100", "-keypass", "key-passwd" }, 1 );
+         Assert.assertFalse( outputFile.exists() );
 
     }
 

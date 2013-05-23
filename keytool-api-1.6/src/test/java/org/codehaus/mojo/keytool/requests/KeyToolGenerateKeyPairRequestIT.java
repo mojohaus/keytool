@@ -18,6 +18,7 @@ package org.codehaus.mojo.keytool.requests;
 
 import junit.framework.Assert;
 import org.codehaus.mojo.keytool.KeyToolResult;
+import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
 import java.net.URL;
@@ -36,10 +37,10 @@ public class KeyToolGenerateKeyPairRequestIT
         throws Exception
     {
 
-        URL keyStoreURL = getKeyStoreURL( "simple" );
         File keyStore = new File( workingDirectory, "testSimpleRequest-keystore" );
-        copyURLToFile( keyStoreURL, keyStore );
-        Assert.assertTrue( keyStore.exists() );
+        FileUtils.forceMkdir( keyStore.getParentFile() );
+
+        Assert.assertFalse( keyStore.exists() );
 
         KeyToolGenerateKeyPairRequest request = new KeyToolGenerateKeyPairRequest();
         request.setAlias( "dest_foo_alias" );
@@ -67,6 +68,8 @@ public class KeyToolGenerateKeyPairRequestIT
                                  "key-passwd", "-validity", "100", "-keyalg", "DSA", "-keysize", "1024", "-sigalg",
                                  "SHA1withDSA", "-startdate", "2011/11/11" }, 0 );
 
+        // key store was created
+        Assert.assertTrue( keyStore.exists() );
     }
 
 }

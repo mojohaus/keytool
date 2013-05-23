@@ -79,7 +79,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
     /**
      * {@inheritDoc}
      */
-    public final void execute()
+    public void execute()
         throws MojoExecutionException
     {
 
@@ -167,4 +167,8 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
         }
     }
 
+    public KeyTool getKeyTool()
+    {
+        return keyTool;
+    }
 }

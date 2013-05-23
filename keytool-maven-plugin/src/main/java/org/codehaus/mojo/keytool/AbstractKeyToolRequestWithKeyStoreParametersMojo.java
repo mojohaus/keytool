@@ -184,4 +184,9 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
             throw new IllegalStateException( "Could not obtain directory " + path );
         }
     }
+
+    protected File getKeystoreFile()
+    {
+        return getFile(keystore);
+    }
 }

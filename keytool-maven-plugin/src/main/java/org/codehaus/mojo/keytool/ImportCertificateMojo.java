@@ -16,11 +16,14 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolImportCertificateRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
+
+import java.io.File;
 
 /**
  * To import a certificate into a keystore.
@@ -35,7 +38,7 @@ import org.codehaus.plexus.util.cli.Commandline;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo( name = "importCertificate", requiresProject = true )
+@Mojo(name = "importCertificate", requiresProject = true)
 public class ImportCertificateMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolImportCertificateRequest>
 {
@@ -81,11 +84,41 @@ public class ImportCertificateMojo
     private boolean trustcacerts;
 
     /**
+     * If value is {@code true}, then will do nothing if keystore already exists.
+     *
+     * @since 1.3
+     */
+    @Parameter
+    private boolean skipIfExist;
+
+    /**
      * Default contructor.
      */
     public ImportCertificateMojo()
     {
         super( KeyToolImportCertificateRequest.class );
+    }
+
+    @Override
+    public void execute()
+        throws MojoExecutionException
+    {
+
+        if ( skipIfExist )
+        {
+
+            // check if keystore already exist
+            File keystoreFile = getKeystoreFile();
+            boolean keystoreFileExists = keystoreFile.exists();
+
+            if ( keystoreFileExists )
+            {
+                getLog().info( "Skip execution, keystore already exists at " + keystoreFile );
+                setSkip( true );
+            }
+
+        }
+        super.execute();
     }
 
     /**

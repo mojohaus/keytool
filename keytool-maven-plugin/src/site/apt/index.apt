@@ -20,7 +20,7 @@ Keytool Maven Plugin
 
   * <<Since 1.2>> {{{./exportCertificate-mojo.html}keytool:exportCertificate}} reads a certificate from a keystore and stores it in a file.
 
-  * <<Since 1.2>> {{{./generateCertificate-mojo.html}keytool:generateCertificate}} generates a certificate from a certificate request from a keystore.
+  * <<Since 1.2>> {{{./generateCertificate-mojo.html}keytool:generateCertificate}} generates a certificate from a certificate request from a keystore (<<Note:>> This operation was not implemented by the keytool before jdk 1.7, so this goal will not work for a such jdk).
 
   * <<Since 1.2>> {{{./generateCertificateRequest-mojo.html}keytool:generateCertificateRequest}} generates a certificate request.
 
@@ -30,7 +30,7 @@ Keytool Maven Plugin
 
   * <<Since 1.2>> {{{./importCertificate-mojo.html}keytool:importCertificate}} reads a certificate from a file and stores it in a keystore.
 
-  * <<Since 1.2>> {{{./importKeystore-mojo.html}keytool:importKeystore}} imports all entries of a keystore to another keystore (<<Note:>> This operation was not implemented by the keyttol on jdk 1.5, so this goal will not work for a such jdk).
+  * <<Since 1.2>> {{{./importKeystore-mojo.html}keytool:importKeystore}} imports all entries of a keystore to another keystore (<<Note:>> This operation was not implemented by the keytool on jdk 1.5, so this goal will not work for a such jdk).
 
   * <<Since 1.2>> {{{./list-mojo.html}keytool:list}} lists entries in a keystore.
 
@@ -39,6 +39,14 @@ Keytool Maven Plugin
   * <<Since 1.2>> {{{./printCertificateRequest-mojo.html}keytool:printCertificateRequest}} prints the content of a certificate request of a keystore.
 
   * <<Since 1.2>> {{{./printCRLFile-mojo.html}keytool:printCRLFile}} prints the content of a CRL file.
+
+* Keytool compatibility with jdk
+
+  As said before, there is some goals not effective for any jdk.
+
+  * <<generateCertificate>> only work since jdk 1.7
+
+  * <<importKeystore>> only work since jdk 1.6
 
 * Deprecated goals
 

@@ -17,6 +17,7 @@ package org.codehaus.mojo.keytool.requests;
  */
 
 import org.codehaus.mojo.keytool.KeyToolResult;
+import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
 import java.net.URL;
@@ -35,12 +36,9 @@ public class KeyToolImportCertificateRequestIT
         throws Exception
     {
 
-        URL keyStoreURL = getKeyStoreURL( "simple" );
-        assertNotNull( keyStoreURL );
         File keyStore = new File( workingDirectory, "testSimpleRequest-keystore" );
+        FileUtils.forceMkdir( keyStore.getParentFile() );
         assertFalse( keyStore.exists() );
-        copyURLToFile( keyStoreURL, keyStore );
-        assertTrue( keyStore.exists() );
 
         URL certificateURL = getCertificateURL( "simple" );
         assertNotNull( certificateURL );
@@ -68,6 +66,9 @@ public class KeyToolImportCertificateRequestIT
                                  "-file", file.getAbsolutePath(), "-keypass", "new-passwd" }, 0 );
 
         assertTrue( file.exists() );
+
+        // key store was created
+        assertTrue( keyStore.exists() );
     }
 
 }
