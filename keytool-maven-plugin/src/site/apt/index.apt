@@ -30,7 +30,7 @@ Keytool Maven Plugin
 
   * <<Since 1.2>> {{{./importCertificate-mojo.html}keytool:importCertificate}} reads a certificate from a file and stores it in a keystore.
 
-  * <<Since 1.2>> {{{./importKeystore-mojo.html}keytool:importKeystore}} imports all entries of a keystore to another keystore.
+  * <<Since 1.2>> {{{./importKeystore-mojo.html}keytool:importKeystore}} imports all entries of a keystore to another keystore (<<Note:>> This operation was not implemented by the keyttol on jdk 1.5, so this goal will not work for a such jdk).
 
   * <<Since 1.2>> {{{./list-mojo.html}keytool:list}} lists entries in a keystore.
 
