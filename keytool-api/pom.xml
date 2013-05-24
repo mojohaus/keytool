@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.codehaus.mojo</groupId>
     <artifactId>keytool</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
   </parent>
 
   <artifactId>keytool-api</artifactId>
