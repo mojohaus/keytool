@@ -33,7 +33,7 @@ public class KeyToolPrintCRLFileRequestIT
     @Override
     protected void requestResult( KeyToolResult keyToolResult, File file )
     {
-        assertKeyToolResult( keyToolResult, new String[]{ "-printcrl", "-v", "-file", file.getAbsolutePath() } );
+        assertKeyToolResult( keyToolResult, new String[]{ "-printcrl", "-v", "-file", file.getAbsolutePath() }, 1 );
 
         //FIXME tchemit 2011-11-06 : this only works with jdk 7
 //        ,0);
