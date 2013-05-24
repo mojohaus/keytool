@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool.requests;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package org.codehaus.mojo.keytool.requests;
 import org.codehaus.mojo.keytool.KeyToolResult;
 
 import java.io.File;
-import java.net.URL;
 
 /**
  * Test the {@link KeyToolGenerateCertificateRequestRequest}.
@@ -28,32 +27,10 @@ import java.net.URL;
  * @since 1.1
  */
 public class KeyToolGenerateCertificateRequestRequestIT
-    extends AbstractKeyToolRequestIT
+    extends AbstractKeyToolGenerateCertificateRequestRequestIT
 {
 
-    public void testSimpleRequest()
-        throws Exception
-    {
-
-        URL keyStoreURL = getKeyStoreURL( "simple" );
-        File keyStore = new File( workingDirectory, "testSimpleRequest-keystore" );
-        copyURLToFile( keyStoreURL, keyStore );
-        assertTrue( keyStore.exists() );
-        File outputFile = new File( workingDirectory, "outputFile" );
-        assertFalse( outputFile.exists() );
-
-        KeyToolGenerateCertificateRequestRequest request = new KeyToolGenerateCertificateRequestRequest();
-        request.setAlias( "foo_alias" );
-        request.setStoretype( "jks" );
-        request.setStorepass( "changeit" );
-        request.setKeystore( keyStore.getAbsolutePath() );
-        request.setKeypass( "key-passwd" );
-        request.setFile( outputFile );
-        request.setSigalg( "SHA1withDSA" );
-        request.setDname( "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France" );
-        request.setVerbose( true );
-        KeyToolResult keyToolResult = executeKeyToolRequest( request );
-
+    protected void requestResult( KeyToolResult keyToolResult, File keyStore ,File outputFile) {
         assertKeyToolResult( keyToolResult,
                              new String[]{ "-certreq", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
                                  "changeit", "-storetype", "jks", "-alias", "foo_alias", "-sigalg", "SHA1withDSA",
@@ -61,7 +38,5 @@ public class KeyToolGenerateCertificateRequestRequestIT
                                  "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France" }, 0 );
 
         assertTrue( outputFile.exists() );
-
     }
-
 }

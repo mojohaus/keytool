@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,8 @@ package org.codehaus.mojo.keytool;
 public class KeyToolException
     extends Exception
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Creates a new exception using the specified detail message and cause.

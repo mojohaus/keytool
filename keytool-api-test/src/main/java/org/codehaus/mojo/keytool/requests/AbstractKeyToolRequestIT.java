@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool.requests;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,18 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import junit.framework.Assert;
 import org.codehaus.mojo.keytool.KeyTool;
 import org.codehaus.mojo.keytool.KeyToolException;
 import org.codehaus.mojo.keytool.KeyToolRequest;
 import org.codehaus.mojo.keytool.KeyToolResult;
+import org.codehaus.mojo.keytool.UnsupportedKeyToolRequestException;
 import org.codehaus.plexus.PlexusTestCase;
-import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.cli.Commandline;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
 import java.util.Arrays;
 
 /**
@@ -40,7 +36,7 @@ import java.util.Arrays;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.1
  */
-public abstract class AbstractKeyToolRequestIT
+public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
     extends PlexusTestCase
 {
 
@@ -53,68 +49,74 @@ public abstract class AbstractKeyToolRequestIT
 
     protected File workingDirectory;
 
+    protected KeyToolRequestFixtures requestFixtures;
+
+    protected ResourceFixtures resourceFixtures;
+
+    private final boolean supportedRequest;
+
+    protected AbstractKeyToolRequestIT()
+    {
+        this( true );
+    }
+
+    protected AbstractKeyToolRequestIT( boolean supportedRequest )
+    {
+        this.supportedRequest = supportedRequest;
+    }
+
+    public abstract void testRequest()
+        throws Exception;
+
+    protected final KeyToolResult consumeRequest( R request )
+        throws KeyToolException
+    {
+
+        KeyToolResult result = null;
+
+        if ( supportedRequest )
+        {
+            result = executeKeyToolRequest( request );
+        }
+        else
+        {
+            executeUnsupportedKeyToolRequest( request );
+        }
+        return result;
+    }
+
     /**
      * {@inheritDoc}
      */
+    @Before
     public void setUp()
         throws Exception
     {
         super.setUp();
 
-        tool = (KeyTool) lookup( KeyTool.ROLE );
-        Assert.assertNotNull( tool );
-
         String basedir = getBasedir();
         workingDirectory = new File( basedir, "target" + File.separator + "surefire-workdir" + File.separator +
             getClass().getName() + "_" + BUILD_TIMESTAMP );
+
+        tool = (KeyTool) lookup( KeyTool.ROLE );
+
+        Assert.assertNotNull( tool );
+
+        requestFixtures = new KeyToolRequestFixtures();
+        resourceFixtures = new ResourceFixtures( workingDirectory );
     }
 
     /**
      * {@inheritDoc}
      */
+    @After
     public void tearDown()
         throws Exception
     {
         super.tearDown();
         tool = null;
-    }
-
-    protected URL getKeyStoreURL( String prefix )
-    {
-        return getClass().getResource( "/" + prefix + "-keystore" );
-    }
-
-    protected URL getCertificateRequestURL( String prefix )
-    {
-        return getClass().getResource( "/" + prefix + "-certificate-request" );
-    }
-
-    protected URL getCertificateURL( String prefix )
-    {
-        return getClass().getResource( "/" + prefix + "-certificate" );
-    }
-
-    protected void copyURLToFile( URL url, File dest )
-        throws IOException
-    {
-        FileUtils.mkdir( dest.getParentFile().getAbsolutePath() );
-        InputStream inputStream = url.openStream();
-        try
-        {
-            OutputStream outputStream = new FileOutputStream( dest );
-            try
-            {
-                IOUtil.copy( inputStream, outputStream );
-            }
-            finally
-            {
-                IOUtil.close( outputStream );
-            }
-        }
-        finally
-        {
-            IOUtil.close( inputStream );
-        }
+        requestFixtures = null;
+        resourceFixtures = null;
     }
 
     protected KeyToolResult executeKeyToolRequest( KeyToolRequest request )
@@ -122,6 +124,7 @@ public abstract class AbstractKeyToolRequestIT
     {
         Assert.assertNotNull( request );
         KeyToolResult result = tool.execute( request );
+        System.out.println( result.getCommandline().toString() );
         Assert.assertNotNull( result );
         return result;
     }
@@ -147,6 +150,21 @@ public abstract class AbstractKeyToolRequestIT
         for ( int i = 0; i < arguments.length; i++ )
         {
             assertEquals( expectedCommandLineArguments[i], arguments[i] );
+        }
+    }
+
+    protected void executeUnsupportedKeyToolRequest( KeyToolRequest request )
+        throws KeyToolException
+    {
+        Assert.assertNotNull( request );
+        try
+        {
+            tool.execute( request );
+            Assert.fail( "Request of type " + request.getClass().getName() + " is not supported." );
+        }
+        catch ( UnsupportedKeyToolRequestException e )
+        {
+            Assert.assertTrue( true );
         }
     }
 }

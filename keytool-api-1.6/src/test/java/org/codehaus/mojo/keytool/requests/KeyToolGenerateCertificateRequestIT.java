@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool.requests;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,8 @@ package org.codehaus.mojo.keytool.requests;
  */
 
 import org.codehaus.mojo.keytool.KeyToolResult;
-import org.junit.Assert;
 
 import java.io.File;
-import java.net.URL;
 
 /**
  * Test the {@link KeyToolGenerateCertificateRequest}.
@@ -29,60 +27,17 @@ import java.net.URL;
  * @since 1.1
  */
 public class KeyToolGenerateCertificateRequestIT
-    extends AbstractKeyToolRequestIT
+    extends AbstractKeyToolGenerateCertificateRequestIT
 {
 
-    public void testSimpleRequest()
-        throws Exception
+    public KeyToolGenerateCertificateRequestIT()
     {
+        super( false );
+    }
 
-        URL keyStoreURL = getKeyStoreURL( "simple" );
-        File keyStore = new File( workingDirectory, "testSimpleRequest-keystore" );
-        Assert.assertFalse( keyStore.exists() );
-        copyURLToFile( keyStoreURL, keyStore );
-        Assert.assertTrue( keyStore.exists() );
-
-        File outputFile = new File( workingDirectory, "outputFile" );
-        Assert.assertFalse( outputFile.exists() );
-
-        URL certificateRequestURL = getCertificateRequestURL( "simple" );
-        File inFile = new File( workingDirectory, "inFile" );
-        Assert.assertFalse( inFile.exists() );
-        copyURLToFile( certificateRequestURL, inFile );
-        Assert.assertTrue( inFile.exists() );
-
-        KeyToolGenerateCertificateRequest request = new KeyToolGenerateCertificateRequest();
-        request.setAlias( "foo_alias" );
-        request.setStoretype( "jks" );
-        request.setStorepass( "changeit" );
-        request.setKeystore( keyStore.getAbsolutePath() );
-        request.setKeypass( "key-passwd" );
-        request.setRfc( true );
-
-        request.setInfile( inFile );
-        request.setOutfile( outputFile );
-        request.setSigalg( "SHA1withDSA" );
-        request.setDname( "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France" );
-        request.setStartdate( "2011/11/11" );
-        request.setExt( "" );
-        request.setValidity( "100" );
-        request.setVerbose( true );
-
-        KeyToolResult keyToolResult = executeKeyToolRequest( request );
-
-        System.out.println( keyToolResult.getCommandline().toString() );
-
-        // before java 1.7, this operation does not exist
-
-        assertKeyToolResult( keyToolResult,
-                             new String[]{ "-gencert", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
-                                 "changeit", "-storetype", "jks", "-alias", "foo_alias", "-rfc", "-infile",
-                                 inFile.getAbsolutePath(), "-outfile", outputFile.getAbsolutePath(), "-sigalg",
-                                 "SHA1withDSA", "-dname",
-                                 "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France", "-startdate",
-                                 "2011/11/11", "-validity", "100", "-keypass", "key-passwd" }, 1 );
-         Assert.assertFalse( outputFile.exists() );
-
+    @Override
+    protected void requestResult( KeyToolResult keyToolResult, File keyStore, File inFile, File outputFile )
+    {
     }
 
 }

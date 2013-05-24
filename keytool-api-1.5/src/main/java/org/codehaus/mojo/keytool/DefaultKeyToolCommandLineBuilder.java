@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,9 @@ import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest;
 import org.codehaus.plexus.util.cli.Commandline;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * To build the command line for a given {@link KeyToolRequest}.
  *
@@ -46,12 +49,38 @@ public class DefaultKeyToolCommandLineBuilder
 {
 
     /**
+     * Unsupported request types.
+     *
+     * @since 1.3
+     */
+    final Set<Class<? extends KeyToolRequest>> unsupportedRequestTypes;
+
+    public DefaultKeyToolCommandLineBuilder()
+    {
+        this.unsupportedRequestTypes = new HashSet<Class<? extends KeyToolRequest>>();
+        this.unsupportedRequestTypes.add( KeyToolImportKeystoreRequest.class );
+        this.unsupportedRequestTypes.add( KeyToolGenerateCertificateRequest.class );
+        this.unsupportedRequestTypes.add( KeyToolPrintCertificateRequestRequest.class );
+        this.unsupportedRequestTypes.add( KeyToolPrintCRLFileRequest.class );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public <R extends KeyToolRequest> boolean supportRequestType( Class<R> requestType )
+    {
+
+        return !unsupportedRequestTypes.contains( requestType );
+    }
+
+    /**
      * {@inheritDoc}
      */
     public Commandline build( KeyToolRequest request )
-        throws CommandLineConfigurationException
+        throws CommandLineConfigurationException, UnsupportedKeyToolRequestException
     {
         checkRequiredState();
+        checkSupportedRequest( request );
 
         Commandline cli = new Commandline();
 

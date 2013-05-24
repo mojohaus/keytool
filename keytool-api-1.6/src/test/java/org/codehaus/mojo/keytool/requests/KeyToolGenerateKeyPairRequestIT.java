@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool.requests;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,10 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.codehaus.mojo.keytool.KeyToolResult;
-import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
-import java.net.URL;
 
 /**
  * Test the {@link KeyToolGenerateKeyPairRequest}.
@@ -30,37 +28,12 @@ import java.net.URL;
  * @since 1.1
  */
 public class KeyToolGenerateKeyPairRequestIT
-    extends AbstractKeyToolRequestIT
+    extends AbstractKeyToolGenerateKeyPairRequestIT
 {
 
-    public void testSimpleRequest()
-        throws Exception
+    @Override
+    protected void requestResult( KeyToolResult keyToolResult, File keyStore )
     {
-
-        File keyStore = new File( workingDirectory, "testSimpleRequest-keystore" );
-        FileUtils.forceMkdir( keyStore.getParentFile() );
-
-        Assert.assertFalse( keyStore.exists() );
-
-        KeyToolGenerateKeyPairRequest request = new KeyToolGenerateKeyPairRequest();
-        request.setAlias( "dest_foo_alias" );
-        request.setStoretype( "jks" );
-        request.setStorepass( "changeit" );
-        request.setKeystore( keyStore.getAbsolutePath() );
-        request.setKeypass( "key-passwd" );
-        request.setSigalg( "SHA1withDSA" );
-        request.setDname( "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France" );
-        request.setVerbose( true );
-        request.setValidity( "100" );
-        request.setStartdate( "2011/11/11" );
-        request.setKeyalg( "DSA" );
-        request.setKeysize( "1024" );
-        request.setExt( "" );
-
-        KeyToolResult keyToolResult = executeKeyToolRequest( request );
-
-        System.out.println( keyToolResult.getCommandline().toString() );
-
         assertKeyToolResult( keyToolResult,
                              new String[]{ "-genkeypair", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
                                  "changeit", "-storetype", "jks", "-alias", "dest_foo_alias", "-dname",

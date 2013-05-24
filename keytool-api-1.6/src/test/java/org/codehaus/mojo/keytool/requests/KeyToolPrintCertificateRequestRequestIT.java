@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool.requests;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import junit.framework.Assert;
 import org.codehaus.mojo.keytool.KeyToolResult;
 
 import java.io.File;
-import java.net.URL;
 
 /**
  * Test the {@link KeyToolPrintCertificateRequestRequest}.
@@ -29,30 +27,18 @@ import java.net.URL;
  * @since 1.1
  */
 public class KeyToolPrintCertificateRequestRequestIT
-    extends AbstractKeyToolRequestIT
+    extends AbstractKeyToolPrintCertificateRequestRequestIT
 {
 
-    public void testSimpleRequest()
-        throws Exception
+
+    public KeyToolPrintCertificateRequestRequestIT()
     {
+        super(false);
+    }
 
-        URL certificateURL = getCertificateRequestURL( "simple" );
-        Assert.assertNotNull( certificateURL );
-        File file = new File( workingDirectory, "testSimpleRequest-certificate" );
-        Assert.assertFalse( file.exists() );
-        copyURLToFile( certificateURL, file );
-        Assert.assertTrue( file.exists() );
-
-        KeyToolPrintCertificateRequestRequest request = new KeyToolPrintCertificateRequestRequest();
-
-        request.setFile( file );
-        request.setVerbose( true );
-
-        KeyToolResult keyToolResult = executeKeyToolRequest( request );
-
-        assertKeyToolResult( keyToolResult, new String[]{ "-printcertreq", "-v", "-file", file.getAbsolutePath() } );
-        //FIXME tchemit 2011-11-06 : this only works with jdk 7
-//        ,0);
+    @Override
+    protected void requestResult( KeyToolResult keyToolResult, File file )
+    {
     }
 
 }

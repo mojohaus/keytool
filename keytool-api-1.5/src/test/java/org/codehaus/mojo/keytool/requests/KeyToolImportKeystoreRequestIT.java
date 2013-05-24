@@ -19,7 +19,6 @@ package org.codehaus.mojo.keytool.requests;
 import org.codehaus.mojo.keytool.KeyToolResult;
 
 import java.io.File;
-import java.net.URL;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolImportKeystoreRequest}.
@@ -28,47 +27,17 @@ import java.net.URL;
  * @since 1.3
  */
 public class KeyToolImportKeystoreRequestIT
-    extends AbstractKeyToolRequestIT
+    extends AbstractKeyToolImportKeystoreRequestIT
 {
 
-    public void testSimpleRequest()
-        throws Exception
+    public KeyToolImportKeystoreRequestIT()
     {
-
-        URL keyStoreURL = getKeyStoreURL( "simple" );
-        File srcKeyStore = new File( workingDirectory, "testSimpleRequest-srckeystore" );
-        File destKeyStore = new File( workingDirectory, "testSimpleRequest-destkeystore" );
-        copyURLToFile( keyStoreURL, srcKeyStore );
-        assertTrue( srcKeyStore.exists() );
-        assertFalse( destKeyStore.exists() );
-
-        KeyToolImportKeystoreRequest request = new KeyToolImportKeystoreRequest();
-
-        request.setSrcalias( "foo_alias" );
-        request.setDestalias( "new_alias" );
-
-        request.setSrcstoretype( "jks" );
-        request.setDeststoretype( "jks" );
-
-        request.setSrcstorepass( "changeit" );
-        request.setDeststorepass( "changeit" );
-
-        request.setSrckeystore( srcKeyStore.getAbsolutePath() );
-        request.setDestkeystore( destKeyStore.getAbsolutePath() );
-
-        request.setSrckeypass( "key-passwd" );
-        request.setDestkeypass( "key-passwd" );
-        request.setVerbose( true );
-        request.setNoprompt( true );
-
-        KeyToolResult keyToolResult = executeKeyToolRequest( request );
-
-        assertKeyToolResult( keyToolResult, new String[]{ "-importkeystore", "-v", "-noprompt", "-srckeystore",
-            srcKeyStore.getAbsolutePath(), "-destkeystore", destKeyStore.getAbsolutePath(), "-srcstoretype", "jks",
-            "-deststoretype", "jks", "-srcstorepass", "changeit", "-deststorepass", "changeit", "-srcalias",
-            "foo_alias", "-destalias", "new_alias", "-srckeypass", "key-passwd", "-destkeypass", "key-passwd", }, 1 );
-
-        // can not use this request with java 1.5
-        assertFalse( destKeyStore.exists() );
+        super( false );
     }
+
+    @Override
+    protected void requestResult( KeyToolResult keyToolResult, File srcKeyStore, File destKeyStore )
+    {
+    }
+
 }

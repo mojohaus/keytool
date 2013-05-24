@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,18 @@ public interface KeyToolCommandLineBuilder
     String ROLE = KeyToolCommandLineBuilder.class.getName();
 
     /**
+     * Test if given request type is supported by the underlined keytool implementation.
+     * <p/>
+     * <strong>Note:</strong> a request of a none supported type will then thrown a {@link UnsupportedKeyToolRequestException} in method {@link #build(KeyToolRequest)}
+     *
+     * @param requestType type of request to test
+     * @param <R>         type of request to test
+     * @return {@code true} if can create a such request type, {@code false} otherwise.
+     * @since 1.3
+     */
+    <R extends KeyToolRequest> boolean supportRequestType( Class<R> requestType );
+
+    /**
      * Build the commandline given the incoming keytool request.
      *
      * @param request keytool request
@@ -42,7 +54,7 @@ public interface KeyToolCommandLineBuilder
      *          if could not find keytool executable
      */
     Commandline build( KeyToolRequest request )
-        throws CommandLineConfigurationException;
+        throws CommandLineConfigurationException, UnsupportedKeyToolRequestException;
 
     /**
      * Sets the logger used by the builder.
@@ -64,5 +76,14 @@ public interface KeyToolCommandLineBuilder
      * Says a logger is set and a keytool executable location is setted.
      */
     void checkRequiredState();
+
+    /**
+     * Checks that builder can build the given type of request.
+     *
+     * @param request request to test
+     * @since 1.3
+     */
+    void checkSupportedRequest( KeyToolRequest request )
+        throws UnsupportedKeyToolRequestException;
 
 }

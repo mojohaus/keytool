@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,9 @@ import java.io.File;
 /**
  * To generate certificate from a certificate request from a keystore.
  * <p/>
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -gencert} command.
+ * <p/>
+ * <strong>Note</strong> This operation was not implemented by the keytool before jdk 1.7.
  * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *

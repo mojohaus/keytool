@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool.requests;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package org.codehaus.mojo.keytool.requests;
 import org.codehaus.mojo.keytool.KeyToolResult;
 
 import java.io.File;
-import java.net.URL;
 
 /**
  * Test the {@link KeyToolPrintCertificateRequest}.
@@ -28,33 +27,13 @@ import java.net.URL;
  * @since 1.1
  */
 public class KeyToolPrintCertificateRequestIT
-    extends AbstractKeyToolRequestIT
+    extends AbstractKeyToolPrintCertificateRequestIT
 {
 
-    public void testSimpleRequest()
-        throws Exception
+    @Override
+    protected void requestResult( KeyToolResult keyToolResult, File file )
     {
-
-        URL certificateURL = getCertificateURL( "simple" );
-        assertNotNull( certificateURL );
-        File file = new File( workingDirectory, "testSimpleRequest-certificate" );
-        assertFalse( file.exists() );
-        copyURLToFile( certificateURL, file );
-        assertTrue( file.exists() );
-
-        KeyToolPrintCertificateRequest request = new KeyToolPrintCertificateRequest();
-
-        request.setFile( file );
-
-        request.setVerbose( true );
-        request.setRfc( true );
-
-        KeyToolResult keyToolResult = executeKeyToolRequest( request );
-
         assertKeyToolResult( keyToolResult, new String[]{ "-printcert", "-v", "-rfc", "-file", file.getAbsolutePath() },
                              0 );
-
-
     }
-
 }

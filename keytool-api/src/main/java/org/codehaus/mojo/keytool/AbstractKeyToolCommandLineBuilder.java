@@ -1,7 +1,7 @@
 package org.codehaus.mojo.keytool;
 
 /*
- * Copyright 2005-2012 The Codehaus
+ * Copyright 2005-2013 The Codehaus
  *
  * Licensed under the Apache License, Version 2.0 (the "License" );
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.commons.lang.SystemUtils;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
@@ -72,6 +73,21 @@ public abstract class AbstractKeyToolCommandLineBuilder
         if ( keyToolFile == null )
         {
             throw new IllegalStateException( "A keyTool file is required." );
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public final void checkSupportedRequest( KeyToolRequest request )
+        throws UnsupportedKeyToolRequestException
+    {
+        Class<? extends KeyToolRequest> requestType = request.getClass();
+        if ( !supportRequestType( requestType ) )
+        {
+            throw new UnsupportedKeyToolRequestException( "Request " + requestType.getName() +
+                                                              " is not supported by your version of keytool (java " +
+                                                              SystemUtils.JAVA_VERSION + ")" );
         }
     }
 
@@ -218,6 +234,5 @@ public abstract class AbstractKeyToolCommandLineBuilder
     {
         cli.createArg().setFile( value );
     }
-
 
 }
