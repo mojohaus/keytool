@@ -19,7 +19,7 @@ package org.codehaus.mojo.keytool;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.plexus.util.cli.Commandline;
+import org.apache.maven.shared.utils.cli.Commandline;
 
 import java.io.File;
 

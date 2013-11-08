@@ -16,8 +16,8 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
+import org.apache.maven.shared.utils.cli.StreamConsumer;
 import org.codehaus.mojo.keytool.KeyToolRequest;
-import org.codehaus.plexus.util.cli.StreamConsumer;
 
 import java.io.File;
 

@@ -16,13 +16,13 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
+import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.mojo.keytool.KeyTool;
 import org.codehaus.mojo.keytool.KeyToolException;
 import org.codehaus.mojo.keytool.KeyToolRequest;
 import org.codehaus.mojo.keytool.KeyToolResult;
 import org.codehaus.mojo.keytool.UnsupportedKeyToolRequestException;
 import org.codehaus.plexus.PlexusTestCase;
-import org.codehaus.plexus.util.cli.Commandline;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

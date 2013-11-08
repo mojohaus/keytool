@@ -17,9 +17,9 @@ package org.codehaus.mojo.keytool;
  */
 
 import org.apache.commons.lang.SystemUtils;
+import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
-import org.codehaus.plexus.util.cli.Commandline;
 
 import java.io.File;
 

@@ -16,16 +16,15 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.shared.utils.cli.CommandLineException;
+import org.apache.maven.shared.utils.cli.CommandLineUtils;
+import org.apache.maven.shared.utils.cli.Commandline;
+import org.apache.maven.shared.utils.cli.StreamConsumer;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.Os;
 import org.codehaus.plexus.util.StringUtils;
-import org.codehaus.plexus.util.cli.CommandLineException;
-import org.codehaus.plexus.util.cli.CommandLineUtils;
-import org.codehaus.plexus.util.cli.Commandline;
-import org.codehaus.plexus.util.cli.StreamConsumer;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -64,14 +63,7 @@ public class DefaultKeyTool
         {
 
             // find the jar singer to use
-            try
-            {
-                keyToolFile = findKeyToolExecutable();
-            }
-            catch ( IOException e )
-            {
-                throw new KeyToolException( "Error finding key tool executable. Reason: " + e.getMessage(), e );
-            }
+            keyToolFile = findKeyToolExecutable();
         }
 
         // creates the command line
@@ -194,10 +186,8 @@ public class DefaultKeyTool
      * Finds the keeytool executable location.
      *
      * @return location of the keyttol executable
-     * @throws java.io.IOException if could  not find the executable
      */
     protected String findKeyToolExecutable()
-        throws IOException
     {
         String command = "keytool" + ( Os.isFamily( Os.FAMILY_WINDOWS ) ? ".exe" : "" );
 
@@ -206,28 +196,13 @@ public class DefaultKeyTool
 
         if ( executable == null )
         {
-            try
-            {
-                Properties env = CommandLineUtils.getSystemEnvVars();
+            Properties env = CommandLineUtils.getSystemEnvVars();
 
-                String[] variables = { "JDK_HOME", "JAVA_HOME" };
+            String[] variables = { "JDK_HOME", "JAVA_HOME" };
 
-                for ( int i = 0; i < variables.length && executable == null; i++ )
-                {
-                    executable =
-                        findExecutable( command, env.getProperty( variables[i] ), new String[]{ "bin", "sh" } );
-                }
-            }
-            catch ( IOException e )
+            for ( int i = 0; i < variables.length && executable == null; i++ )
             {
-                if ( getLogger().isDebugEnabled() )
-                {
-                    getLogger().warn( "Failed to retrieve environment variables, cannot search for " + command, e );
-                }
-                else
-                {
-                    getLogger().warn( "Failed to retrieve environment variables, cannot search for " + command );
-                }
+                executable = findExecutable( command, env.getProperty( variables[i] ), new String[]{ "bin", "sh" } );
             }
         }
 
@@ -251,10 +226,12 @@ public class DefaultKeyTool
     {
         if ( StringUtils.isNotEmpty( homeDir ) )
         {
-            for (String subDir : subDirs) {
-                File file = new File(new File(homeDir, subDir), command);
+            for ( String subDir : subDirs )
+            {
+                File file = new File( new File( homeDir, subDir ), command );
 
-                if (file.isFile()) {
+                if ( file.isFile() )
+                {
                     return file.getAbsolutePath();
                 }
             }

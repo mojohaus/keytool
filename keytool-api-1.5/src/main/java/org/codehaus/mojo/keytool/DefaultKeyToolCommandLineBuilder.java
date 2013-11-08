@@ -16,6 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.mojo.keytool.requests.KeyToolChangeAliasRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolChangeKeyPasswordRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolChangeStorePasswordRequest;
@@ -31,7 +32,6 @@ import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCRLFileRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest;
-import org.codehaus.plexus.util.cli.Commandline;
 
 import java.util.HashSet;
 import java.util.Set;

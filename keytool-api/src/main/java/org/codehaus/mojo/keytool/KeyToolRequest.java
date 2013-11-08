@@ -16,7 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.util.cli.StreamConsumer;
+
+import org.apache.maven.shared.utils.cli.StreamConsumer;
 
 import java.io.File;
 

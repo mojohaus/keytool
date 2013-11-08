@@ -16,8 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.plexus.logging.Logger;
-import org.codehaus.plexus.util.cli.Commandline;
 
 /**
  * To build the command line for a given {@link KeyToolRequest}.
