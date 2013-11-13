@@ -32,6 +32,7 @@ import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCRLFileRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequest;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest;
+import org.codehaus.plexus.component.annotations.Component;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,9 +42,9 @@ import java.util.Set;
  *
  * @author tchemit <chemit@codelutin.com>
  * @version $Id$
- * @plexus.component role="org.codehaus.mojo.keytool.KeyToolCommandLineBuilder" role-hint="default"
  * @since 1.1
  */
+@Component( role = KeyToolCommandLineBuilder.class, hint = "default" )
 public class DefaultKeyToolCommandLineBuilder
     extends AbstractKeyToolCommandLineBuilder
 {

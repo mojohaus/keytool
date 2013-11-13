@@ -148,6 +148,13 @@
         <scope>provided</scope>
       </dependency>
 
+      <!-- dependencies to plexus annotations -->
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-component-annotations</artifactId>
+        <version>1.5.5</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -163,6 +170,11 @@
         <plugin>
           <artifactId>maven-plugin-plugin</artifactId>
           <version>${pluginPluginVersion}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-component-metadata</artifactId>
+          <version>1.5.5</version>
         </plugin>
       </plugins>
     </pluginManagement>

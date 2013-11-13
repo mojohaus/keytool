@@ -20,6 +20,8 @@ import org.apache.maven.shared.utils.cli.CommandLineException;
 import org.apache.maven.shared.utils.cli.CommandLineUtils;
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.apache.maven.shared.utils.cli.StreamConsumer;
+import org.codehaus.plexus.component.annotations.Component;
+import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.Os;
 import org.codehaus.plexus.util.StringUtils;
@@ -33,9 +35,9 @@ import java.util.Properties;
  *
  * @author tchemit <chemit@codelutin.com>
  * @version $Id$
- * @plexus.component role="org.codehaus.mojo.keytool.KeyTool" role-hint="default"
  * @since 1.1
  */
+@Component( role = KeyTool.class, hint = "default" )
 public class DefaultKeyTool
     extends AbstractLogEnabled
     implements KeyTool
@@ -47,9 +49,8 @@ public class DefaultKeyTool
 
     /**
      * Command line builder.
-     *
-     * @plexus.requirement
      */
+    @Requirement
     protected KeyToolCommandLineBuilder builder;
 
     /**
@@ -192,7 +193,7 @@ public class DefaultKeyTool
         String command = "keytool" + ( Os.isFamily( Os.FAMILY_WINDOWS ) ? ".exe" : "" );
 
         String executable =
-            findExecutable( command, System.getProperty( "java.home" ), new String[]{ "../bin", "bin", "../sh" } );
+            findExecutable( command, System.getProperty( "java.home" ), "../bin", "bin", "../sh" );
 
         if ( executable == null )
         {
@@ -202,7 +203,7 @@ public class DefaultKeyTool
 
             for ( int i = 0; i < variables.length && executable == null; i++ )
             {
-                executable = findExecutable( command, env.getProperty( variables[i] ), new String[]{ "bin", "sh" } );
+                executable = findExecutable( command, env.getProperty( variables[i] ), "bin", "sh" );
             }
         }
 
@@ -222,8 +223,9 @@ public class DefaultKeyTool
      * @param subDirs The sub directories of the home directory to search in, must not be <code>null</code>.
      * @return The (absolute) path to the command if found, <code>null</code> otherwise.
      */
-    protected String findExecutable( String command, String homeDir, String[] subDirs )
+    protected String findExecutable( String command, String homeDir, String... subDirs )
     {
+        String result = null;
         if ( StringUtils.isNotEmpty( homeDir ) )
         {
             for ( String subDir : subDirs )
@@ -232,11 +234,12 @@ public class DefaultKeyTool
 
                 if ( file.isFile() )
                 {
-                    return file.getAbsolutePath();
+                    result = file.getAbsolutePath();
+                    break;
                 }
             }
         }
 
-        return null;
+        return result;
     }
 }
