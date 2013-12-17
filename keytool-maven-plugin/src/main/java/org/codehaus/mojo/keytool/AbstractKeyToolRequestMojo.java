@@ -16,12 +16,15 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.apache.maven.shared.utils.cli.javatool.JavaToolException;
 import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
+import org.apache.maven.toolchain.Toolchain;
+import org.apache.maven.toolchain.ToolchainManager;
 
 import java.io.File;
 
@@ -64,6 +67,23 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
     private KeyTool keyTool;
 
     /**
+     * To obtain a toolchain if possible.
+     *
+     * @since 1.4
+     */
+    @Component
+    private ToolchainManager toolchainManager;
+
+    /**
+     * The current build session instance. This is used for
+     * toolchain manager API calls.
+     *
+     * @since 1.4
+     */
+    @Component
+    private MavenSession session;
+
+    /**
      * Type of keytool request used by the mojo.
      */
     private final Class<R> requestType;
@@ -91,6 +111,14 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
         }
         else
         {
+
+            // add toolchain support if found
+            Toolchain toolchain = getToolchain();
+
+            if ( toolchain != null )
+            {
+                keyTool.setToolchain(toolchain);
+            }
 
             //creates the keytool request
             R request = createKeytoolRequest();
@@ -169,8 +197,21 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
         }
     }
 
-    public KeyTool getKeyTool()
+    /**
+     * FIXME tchemit-20123-11-13, need to find out how to do this...
+     * TODO remove the part with ToolchainManager lookup once we depend on
+     * 2.0.9 (have it as prerequisite). Define as regular component field then.
+     *
+     * @return Toolchain instance
+     */
+    private Toolchain getToolchain()
     {
-        return keyTool;
+        Toolchain tc = null;
+        if ( toolchainManager != null )
+        {
+            tc = toolchainManager.getToolchainFromBuildContext( "jdk", session );
+        }
+
+        return tc;
     }
 }
