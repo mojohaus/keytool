@@ -16,7 +16,7 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.StreamConsumer;
+import org.apache.maven.shared.utils.cli.javatool.AbstractJavaToolRequest;
 import org.codehaus.mojo.keytool.KeyToolRequest;
 
 import java.io.File;
@@ -29,6 +29,7 @@ import java.io.File;
  * @since 1.1
  */
 public abstract class AbstractKeyToolRequest
+    extends AbstractJavaToolRequest
     implements KeyToolRequest
 {
 
@@ -48,16 +49,6 @@ public abstract class AbstractKeyToolRequest
      * Location of the working directory.
      */
     private File workingDirectory;
-
-    /**
-     * Optional system out stream consumer used by the commandline execution.
-     */
-    private StreamConsumer systemOutStreamConsumer;
-
-    /**
-     * Optional system error stream consumer used by the commandline execution.
-     */
-    private StreamConsumer systemErrorStreamConsumer;
 
     /**
      * {@inheritDoc}
@@ -86,22 +77,6 @@ public abstract class AbstractKeyToolRequest
     /**
      * {@inheritDoc}
      */
-    public StreamConsumer getSystemOutStreamConsumer()
-    {
-        return systemOutStreamConsumer;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public StreamConsumer getSystemErrorStreamConsumer()
-    {
-        return systemErrorStreamConsumer;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public void setVerbose( boolean verbose )
     {
         this.verbose = verbose;
@@ -121,21 +96,5 @@ public abstract class AbstractKeyToolRequest
     public void setWorkingDirectory( File workingDirectory )
     {
         this.workingDirectory = workingDirectory;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setSystemOutStreamConsumer( StreamConsumer systemOutStreamConsumer )
-    {
-        this.systemOutStreamConsumer = systemOutStreamConsumer;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setSystemErrorStreamConsumer( StreamConsumer systemErrorStreamConsumer )
-    {
-        this.systemErrorStreamConsumer = systemErrorStreamConsumer;
     }
 }

@@ -20,6 +20,8 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.cli.Commandline;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolException;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 import java.io.File;
 
@@ -95,11 +97,11 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
 
             try
             {
-                KeyToolResult result = keyTool.execute( request );
+                JavaToolResult result = keyTool.execute( request );
 
                 consumeResult( result );
             }
-            catch ( KeyToolException e )
+            catch ( JavaToolException e )
             {
                 throw new MojoExecutionException( getMessage( "commandLineException", e.getMessage() ), e );
             }
@@ -154,7 +156,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      * @param result result of the command line action
      * @throws MojoExecutionException if the result is not 0 (means something bad occurs)
      */
-    protected final void consumeResult( KeyToolResult result )
+    protected final void consumeResult( JavaToolResult result )
         throws MojoExecutionException
     {
         Commandline commandLine = result.getCommandline();

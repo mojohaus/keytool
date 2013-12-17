@@ -16,7 +16,7 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.codehaus.mojo.keytool.KeyToolResult;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 import java.io.File;
 
@@ -48,11 +48,11 @@ public abstract class AbstractKeyToolPrintCRLFileRequestIT
 
         KeyToolPrintCRLFileRequest request = requestFixtures.createKeyToolPrintCRLFileRequest( file );
 
-        KeyToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest( request );
 
         requestResult( keyToolResult, file );
     }
 
-    protected abstract void requestResult( KeyToolResult keyToolResult, File file );
+    protected abstract void requestResult( JavaToolResult keyToolResult, File file );
 
 }

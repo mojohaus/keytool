@@ -16,7 +16,7 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.codehaus.mojo.keytool.KeyToolResult;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 import java.io.File;
 
@@ -31,7 +31,7 @@ public class KeyToolImportKeystoreRequestIT
 {
 
     @Override
-    protected void requestResult( KeyToolResult keyToolResult, File srcKeyStore, File destKeyStore )
+    protected void requestResult( JavaToolResult keyToolResult, File srcKeyStore, File destKeyStore )
     {
         assertKeyToolResult( keyToolResult, new String[]{ "-importkeystore", "-v", "-noprompt", "-srckeystore",
             srcKeyStore.getAbsolutePath(), "-destkeystore", destKeyStore.getAbsolutePath(), "-srcstoretype", "jks",

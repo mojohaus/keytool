@@ -17,10 +17,10 @@ package org.codehaus.mojo.keytool.requests;
  */
 
 import org.apache.maven.shared.utils.cli.Commandline;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolException;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 import org.codehaus.mojo.keytool.KeyTool;
-import org.codehaus.mojo.keytool.KeyToolException;
 import org.codehaus.mojo.keytool.KeyToolRequest;
-import org.codehaus.mojo.keytool.KeyToolResult;
 import org.codehaus.mojo.keytool.UnsupportedKeyToolRequestException;
 import org.codehaus.plexus.PlexusTestCase;
 import org.junit.After;
@@ -68,11 +68,11 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
     public abstract void testRequest()
         throws Exception;
 
-    protected final KeyToolResult consumeRequest( R request )
-        throws KeyToolException
+    protected final JavaToolResult consumeRequest( R request )
+        throws JavaToolException
     {
 
-        KeyToolResult result = null;
+        JavaToolResult result = null;
 
         if ( supportedRequest )
         {
@@ -119,17 +119,17 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
         resourceFixtures = null;
     }
 
-    protected KeyToolResult executeKeyToolRequest( KeyToolRequest request )
-        throws KeyToolException
+    protected JavaToolResult executeKeyToolRequest( KeyToolRequest request )
+        throws JavaToolException
     {
         Assert.assertNotNull( request );
-        KeyToolResult result = tool.execute( request );
+        JavaToolResult result = tool.execute( request );
         System.out.println( result.getCommandline().toString() );
         Assert.assertNotNull( result );
         return result;
     }
 
-    protected void assertKeyToolResult( KeyToolResult result, String[] expectedCommandLineArguments,
+    protected void assertKeyToolResult( JavaToolResult result, String[] expectedCommandLineArguments,
                                         int expectedExitCode )
     {
         assertKeyToolResult( result, expectedCommandLineArguments );
@@ -138,7 +138,7 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
                       expectedExitCode, result.getExitCode() );
     }
 
-    protected void assertKeyToolResult( KeyToolResult result, String[] expectedCommandLineArguments )
+    protected void assertKeyToolResult( JavaToolResult result, String[] expectedCommandLineArguments )
     {
 
         Commandline commandline = result.getCommandline();
@@ -154,7 +154,7 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
     }
 
     protected void executeUnsupportedKeyToolRequest( KeyToolRequest request )
-        throws KeyToolException
+        throws JavaToolException
     {
         Assert.assertNotNull( request );
         try

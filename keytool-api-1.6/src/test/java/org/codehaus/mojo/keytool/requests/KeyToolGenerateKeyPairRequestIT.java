@@ -16,8 +16,8 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 import org.junit.Assert;
-import org.codehaus.mojo.keytool.KeyToolResult;
 
 import java.io.File;
 
@@ -32,7 +32,7 @@ public class KeyToolGenerateKeyPairRequestIT
 {
 
     @Override
-    protected void requestResult( KeyToolResult keyToolResult, File keyStore )
+    protected void requestResult( JavaToolResult keyToolResult, File keyStore )
     {
         assertKeyToolResult( keyToolResult,
                              new String[]{ "-genkeypair", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",

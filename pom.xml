@@ -118,9 +118,14 @@
         <version>${mavenVersion}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-toolchain</artifactId>
+        <version>${mavenVersion}</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.maven.shared</groupId>
         <artifactId>maven-shared-utils</artifactId>
-        <version>0.3</version>
+        <version>0.5-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
@@ -153,13 +158,14 @@
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-component-annotations</artifactId>
         <version>1.5.5</version>
+        <scope>provided</scope>
       </dependency>
 
     </dependencies>
   </dependencyManagement>
 
   <properties>
-    <mavenVersion>2.0.6</mavenVersion>
+    <mavenVersion>2.1.0</mavenVersion>
     <pluginPluginVersion>3.2</pluginPluginVersion>
     
   </properties>

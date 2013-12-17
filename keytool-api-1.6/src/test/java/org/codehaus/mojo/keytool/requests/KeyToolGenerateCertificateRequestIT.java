@@ -16,7 +16,7 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.codehaus.mojo.keytool.KeyToolResult;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 import java.io.File;
 
@@ -36,7 +36,7 @@ public class KeyToolGenerateCertificateRequestIT
     }
 
     @Override
-    protected void requestResult( KeyToolResult keyToolResult, File keyStore, File inFile, File outputFile )
+    protected void requestResult( JavaToolResult keyToolResult, File keyStore, File inFile, File outputFile )
     {
     }
 

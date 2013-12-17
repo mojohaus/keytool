@@ -16,7 +16,7 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.codehaus.mojo.keytool.KeyToolResult;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 import java.io.File;
 
@@ -48,10 +48,10 @@ public abstract class AbstractKeyToolGenerateSecretKeyRequestIT
 
         KeyToolGenerateSecretKeyRequest request = requestFixtures.createKeyToolGenerateSecretKeyRequest( keyStore );
 
-        KeyToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest( request );
 
         requestResult( keyToolResult, keyStore );
     }
 
-    protected abstract void requestResult( KeyToolResult keyToolResult, File keyStore );
+    protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore );
 }

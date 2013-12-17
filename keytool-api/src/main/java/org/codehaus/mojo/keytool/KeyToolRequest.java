@@ -16,8 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-
-import org.apache.maven.shared.utils.cli.StreamConsumer;
+import org.apache.maven.shared.utils.cli.javatool.JavaToolRequest;
 
 import java.io.File;
 
@@ -29,7 +28,7 @@ import java.io.File;
  * @version $Id$
  * @since 1.1
  */
-public interface KeyToolRequest
+public interface KeyToolRequest extends JavaToolRequest
 {
 
     /**
@@ -55,26 +54,6 @@ public interface KeyToolRequest
     File getWorkingDirectory();
 
     /**
-     * Gets the value of the {@code systemOutStreamConsumer} field.
-     * <p/>
-     * This option field if filled is used by the commandline tool to consume system ouput stream of the jarsigner
-     * command.
-     *
-     * @return the value of the {@code systemOutStreamConsumer} field.
-     */
-    StreamConsumer getSystemOutStreamConsumer();
-
-    /**
-     * Gets the value of the {@code systemErrorStreamConsumer} field.
-     * <p/>
-     * This option field if filled is used by the commandline tool to consume system error stream of the jarsigner
-     * command.
-     *
-     * @return the value of the {@code systemErrorStreamConsumer} field.
-     */
-    StreamConsumer getSystemErrorStreamConsumer();
-
-    /**
      * Sets the new given value to the field {@code verbose} of the request.
      *
      * @param verbose the new value of the field {@code verbose}.
@@ -94,18 +73,4 @@ public interface KeyToolRequest
      * @param workingDirectory the new value of the field {@code workingDirectory}.
      */
     void setWorkingDirectory( File workingDirectory );
-
-    /**
-     * Sets the new given value to the field {@code systemOutStreamConsumer} of the request.
-     *
-     * @param systemOutStreamConsumer the new value of the field {@code systemOutStreamConsumer}.
-     */
-    void setSystemOutStreamConsumer( StreamConsumer systemOutStreamConsumer );
-
-    /**
-     * Sets the new given value to the field {@code systemErrorStreamConsumer} of the request.
-     *
-     * @param systemErrorStreamConsumer the new value of the field {@code systemErrorStreamConsumer}.
-     */
-    void setSystemErrorStreamConsumer( StreamConsumer systemErrorStreamConsumer );
 }

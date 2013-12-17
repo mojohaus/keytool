@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.shared.utils.cli.javatool.JavaToolException;
+
 /**
  * Signals that a request can not be consumed by the underlined keytool implementation.
  *
@@ -23,7 +25,7 @@ package org.codehaus.mojo.keytool;
  * @since 1.3
  */
 public class UnsupportedKeyToolRequestException
-    extends KeyToolException
+    extends JavaToolException
 {
     private static final long serialVersionUID = 1L;
 

@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.shared.utils.cli.javatool.JavaTool;
+
 /**
  * Provides a facade to invoke KeyTool tool.
  *
@@ -24,20 +26,11 @@ package org.codehaus.mojo.keytool;
  * @since 1.1
  */
 public interface KeyTool
+    extends JavaTool<KeyToolRequest>
 {
 
     /**
      * Plexus role name.
      */
     String ROLE = KeyTool.class.getName();
-
-    /**
-     * Executes KeyTool tool using the parameters specified by the given invocation request.
-     *
-     * @param request The invocation request to execute, must not be <code>null</code>.
-     * @return The result of the KeyTool invocation, never <code>null</code>.
-     * @throws KeyToolException if something fails while init the command
-     */
-    KeyToolResult execute( KeyToolRequest request )
-        throws KeyToolException;
 }
