@@ -57,6 +57,10 @@
       <artifactId>maven-shared-utils</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-toolchain</artifactId>
+    </dependency>
+    <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
     </dependency>
@@ -68,9 +72,6 @@
 
   </dependencies>
 
-  <properties>
-    <mavenVersion>2.0.6</mavenVersion>
-  </properties>
   <build>
 
     <plugins>
