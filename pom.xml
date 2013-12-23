@@ -21,7 +21,7 @@
   <parent>
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>31</version>
+    <version>32</version>
     <relativePath>../mojo-parent/pom.xml</relativePath>
   </parent>
 
@@ -167,7 +167,9 @@
   <properties>
     <mavenVersion>2.1.0</mavenVersion>
     <pluginPluginVersion>3.2</pluginPluginVersion>
-    
+
+    <!-- m-site-p version (remove this when using parent 33) -->
+    <sitePluginVersion>3.3</sitePluginVersion>
   </properties>
   <build>
 
