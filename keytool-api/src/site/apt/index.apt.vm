@@ -103,7 +103,7 @@ request.setDestalias( "dest-alias" );
 
 +---------
 
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -128,7 +128,7 @@ request.setNewPassword( "new-key-passwd" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -151,7 +151,7 @@ request.setNewPassword( "new-changeit" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -174,7 +174,7 @@ request.setAlias( "foo_alias" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -198,7 +198,7 @@ request.setFile( "outputFile" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -228,7 +228,7 @@ request.setValidity( "100" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -255,7 +255,7 @@ request.setDname( "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=Franc
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -285,7 +285,7 @@ request.setKeysize( "1024" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -311,7 +311,7 @@ request.setKeysize( "56" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -336,7 +336,7 @@ request.setFile( "certificate" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -360,7 +360,7 @@ request.setDeststorepass( "changeit" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -380,7 +380,7 @@ request.setVerbose( true );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -401,7 +401,7 @@ request.setFile( "certificate" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -422,7 +422,7 @@ request.setFile( "certificate-request" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
@@ -443,7 +443,7 @@ request.setFile( "crf-file" );
   Now you can use the component to sign your jar:
 
 +---------
-KeyToolResult result = keyTool.execute( request );
+JavaToolResult result = keyTool.execute( request );
 // control the execution result
 result.getExitCode()
 // get exception
