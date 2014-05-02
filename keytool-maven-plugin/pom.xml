@@ -20,7 +20,7 @@
   <parent>
     <artifactId>keytool</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.4.1</version>
   </parent>
 
   <artifactId>keytool-maven-plugin</artifactId>
