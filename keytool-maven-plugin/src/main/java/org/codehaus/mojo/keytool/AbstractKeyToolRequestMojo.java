@@ -117,6 +117,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
 
             if ( toolchain != null )
             {
+                getLog().info( "Toolchain in keytool-maven-plugin: " + toolchain );
                 keyTool.setToolchain(toolchain);
             }
 
