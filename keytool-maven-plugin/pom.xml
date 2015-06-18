@@ -17,6 +17,7 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>keytool</artifactId>
     <groupId>org.codehaus.mojo</groupId>
@@ -25,16 +26,16 @@
 
   <artifactId>keytool-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
+
   <name>Keytool: Maven Plugin</name>
   <description>
     A plugin that wraps the keytool program bundled with Sun's Java SDK. Allows to manipulate keystores.
   </description>
+  <inceptionYear>2005</inceptionYear>
 
   <prerequisites>
     <maven>${mavenVersion}</maven>
   </prerequisites>
-
-  <inceptionYear>2005</inceptionYear>
 
   <dependencies>
     <dependency>
@@ -73,7 +74,6 @@
   </dependencies>
 
   <build>
-
     <plugins>
 
       <plugin>
@@ -110,7 +110,6 @@
         </executions>
       </plugin>
     </plugins>
-
   </build>
 
   <profiles>
@@ -245,5 +244,4 @@
     </profile>
 
   </profiles>
-
 </project>

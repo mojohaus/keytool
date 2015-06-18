@@ -24,9 +24,9 @@
   </parent>
 
   <artifactId>keytool-api-test</artifactId>
+
   <name>Keytool: API Test</name>
   <description>A component to test keytool-api</description>
-
   <inceptionYear>2005-2013</inceptionYear>
 
   <dependencies>
@@ -47,7 +47,6 @@
   </dependencies>
 
   <build>
-
     <plugins>
 
       <plugin>
@@ -82,7 +81,5 @@
         </executions>
       </plugin>
     </plugins>
-
   </build>
-
 </project>

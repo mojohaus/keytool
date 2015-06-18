@@ -34,36 +34,14 @@
     Project to invoke the the keytool program bundled with Sun's Java SDK. Allows to manipulate keystores.
     the project includes a java api to inkove the program and also a maven plugin.
   </description>
-
-  <prerequisites>
-    <maven>${mavenVersion}</maven>
-  </prerequisites>
-
-  <modules>
-    <module>keytool-api</module>
-    <module>keytool-api-test</module>
-    <module>keytool-api-1.5</module>
-    <module>keytool-api-1.6</module>
-    <module>keytool-api-1.7</module>
-    <module>keytool-maven-plugin</module>
-  </modules>
-
-  <scm>
-    <connection>scm:git:git@github.com:mojohaus/keytool.git</connection>
-    <developerConnection>scm:git:git@github.com:mojohaus/keytool.git</developerConnection>
-    <url>https://github.com/mojohaus/keytool</url>
-  </scm>
-  <issueManagement>
-    <system>github</system>
-    <url>https://github.com/mojohaus/keytool/issues/</url>
-  </issueManagement>
-
-  <ciManagement>
-    <system>BAMBOO</system>
-    <url>http://bamboo.ci.codehaus.org/browse/MOJO-MKEYTOOL/</url>
-  </ciManagement>
-
   <inceptionYear>2005</inceptionYear>
+  <licenses>
+    <license>
+      <name>Apache License 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <developers>
     <developer>
@@ -87,7 +65,6 @@
       </roles>
     </developer>
   </developers>
-
   <contributors>
     <contributor>
       <name>Sharmarke Aden</name>
@@ -101,13 +78,37 @@
     </contributor>
   </contributors>
 
-  <licenses>
-    <license>
-      <name>Apache License 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+  <prerequisites>
+    <maven>${mavenVersion}</maven>
+  </prerequisites>
+
+  <modules>
+    <module>keytool-api</module>
+    <module>keytool-api-test</module>
+    <module>keytool-api-1.5</module>
+    <module>keytool-api-1.6</module>
+    <module>keytool-api-1.7</module>
+    <module>keytool-maven-plugin</module>
+  </modules>
+
+  <scm>
+    <connection>scm:git:git@github.com:mojohaus/keytool.git</connection>
+    <developerConnection>scm:git:git@github.com:mojohaus/keytool.git</developerConnection>
+    <url>https://github.com/mojohaus/keytool</url>
+  </scm>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/mojohaus/keytool/issues/</url>
+  </issueManagement>
+  <ciManagement>
+    <system>BAMBOO</system>
+    <url>http://bamboo.ci.codehaus.org/browse/MOJO-MKEYTOOL/</url>
+  </ciManagement>
+
+  <properties>
+    <mavenVersion>2.1.0</mavenVersion>
+    <pluginPluginVersion>3.2</pluginPluginVersion>
+  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -163,15 +164,7 @@
     </dependencies>
   </dependencyManagement>
 
-  <properties>
-    <mavenVersion>2.1.0</mavenVersion>
-    <pluginPluginVersion>3.2</pluginPluginVersion>
-
-    <!-- m-site-p version (remove this when using parent 33) -->
-    <sitePluginVersion>3.3</sitePluginVersion>
-  </properties>
   <build>
-
     <pluginManagement>
       <plugins>
         <plugin>
@@ -185,7 +178,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
   </build>
 
   <profiles>
@@ -226,5 +218,4 @@
     </profile>
 
   </profiles>
-
 </project>

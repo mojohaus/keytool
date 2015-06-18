@@ -24,9 +24,9 @@
   </parent>
 
   <artifactId>keytool-api</artifactId>
+
   <name>Keytool: API</name>
   <description>A component to assist in using keytool application</description>
-
   <inceptionYear>2012</inceptionYear>
 
   <dependencies>
@@ -49,7 +49,6 @@
   </dependencies>
 
   <build>
-
     <plugins>
 
       <plugin>
@@ -83,7 +82,5 @@
         </executions>
       </plugin>
     </plugins>
-
   </build>
-
 </project>

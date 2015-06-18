@@ -24,9 +24,9 @@
   </parent>
 
   <artifactId>keytool-api-1.7</artifactId>
+
   <name>Keytool: API (jdk 1.7)</name>
   <description>A component to assist in using keytool application</description>
-
   <inceptionYear>2012</inceptionYear>
 
   <dependencies>
@@ -56,7 +56,6 @@
   </dependencies>
 
   <build>
-
     <plugins>
 
       <plugin>
@@ -90,7 +89,6 @@
         </executions>
       </plugin>
     </plugins>
-
   </build>
 
   <profiles>
@@ -115,5 +113,4 @@
       </build>
     </profile>
   </profiles>
-
 </project>
