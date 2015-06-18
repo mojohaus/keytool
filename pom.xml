@@ -48,9 +48,14 @@
     <module>keytool-maven-plugin</module>
   </modules>
 
+  <scm>
+    <connection>scm:git:git@github.com:mojohaus/keytool.git</connection>
+    <developerConnection>scm:git:git@github.com:mojohaus/keytool.git</developerConnection>
+    <url>https://github.com/mojohaus/keytool</url>
+  </scm>
   <issueManagement>
-    <system>jira</system>
-    <url>http://jira.codehaus.org/browse/MKEYTOOL</url>
+    <system>github</system>
+    <url>https://github.com/mojohaus/keytool/</url>
   </issueManagement>
 
   <ciManagement>
@@ -103,12 +108,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/mojo/trunk/mojo/keytool/</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/keytool/</developerConnection>
-    <url>http://svn.codehaus.org/mojo/trunk/mojo/keytool/</url>
-  </scm>
 
   <dependencyManagement>
     <dependencies>
