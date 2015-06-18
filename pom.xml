@@ -55,7 +55,7 @@
   </scm>
   <issueManagement>
     <system>github</system>
-    <url>https://github.com/mojohaus/keytool/</url>
+    <url>https://github.com/mojohaus/keytool/issues/</url>
   </issueManagement>
 
   <ciManagement>
