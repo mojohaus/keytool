@@ -1,0 +1,451 @@
+ ------
+ Overview
+ ------
+ Tony Chemit
+ ------
+ 2012-01-29
+ ------
+
+~~ Licensed to the Apache Software Foundation (ASF) under one
+~~ or more contributor license agreements.  See the NOTICE file
+~~ distributed with this work for additional information
+~~ regarding copyright ownership.  The ASF licenses this file
+~~ to you under the Apache License, Version 2.0 (the
+~~ "License"); you may not use this file except in compliance
+~~ with the License.  You may obtain a copy of the License at
+~~
+~~   http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing,
+~~ software distributed under the License is distributed on an
+~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~~ KIND, either express or implied.  See the License for the
+~~ specific language governing permissions and limitations
+~~ under the License.
+
+~~ NOTE: For help with the syntax of this file, see:
+~~ http://maven.apache.org/doxia/references/apt-format.html
+
+Overview
+
+  This component provides a api to invoke the keytool java program. As the keytool is not compatible from a jdk to
+  another one.
+
+  There is implementation for jdk 1.5 and 1.6+. (jdk 1.6 and more are compatible)
+
+* Dependency declaration
+
+  To use it according to the jdk installed on your system, use some profile activated by the jdk version:
+
++---------
+<profile>
+  <id>api-1.5</id>
+  <activation>
+    <jdk>1.5</jdk>
+  </activation>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>keytool-api-1.5</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</profile>
+
+<profile>
+  <id>api-1.6</id>
+  <activation>
+    <jdk>1.6</jdk>
+  </activation>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>keytool-api-1.6</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</profile>
+
+<profile>
+  <id>api-1.7</id>
+  <activation>
+    <jdk>1.7</jdk>
+  </activation>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>keytool-api-1.6</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</profile>
++---------
+
+API
+
+* Change an alias inside a keystore
+
+ You must construct a KeyToolChangeAliasRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolChangeAliasRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolChangeAliasRequest request = new KeyToolChangeAliasRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
+request.setKeypass( "key-passwd" );
+request.setDestalias( "dest-alias" );
++---------
+
+ Now you can use the component to sign your jar:
+
++---------
+
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Change a key password
+
+  You must construct a KeyToolChangeKeyPasswordRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolChangeKeyPasswordRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolChangeKeyPasswordRequest request = new KeyToolChangeKeyPasswordRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
+request.setKeypass( "key-passwd" );
+request.setNewPassword( "new-key-passwd" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Change a key store password
+
+  You must construct a KeyToolChangeStorePasswordRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolChangeStorePasswordRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolChangeStorePasswordRequest request = new KeyToolChangeStorePasswordRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setNewPassword( "new-changeit" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Delete a key
+
+  You must construct a KeyToolDeleteRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolDeleteRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolDeleteRequest request = new KeyToolDeleteRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Export a certificate
+
+  You must construct a KeyToolExportCertificateRequest. See {{{./apidocs/org/codehaus/mojo/shared/keytool/requests/KeyToolExportCertificateRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolExportCertificateRequest request = new KeyToolExportCertificateRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
+request.setFile( "outputFile" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Generate a certificate from a certificate request
+
+  You must construct a KeyToolGenerateCertificateRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolGenerateCertificateRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolGenerateCertificateRequest request = new KeyToolGenerateCertificateRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
+request.setKeypass( "key-passwd" );
+request.setInfile( inFile );
+request.setOutfile( "outputFile" );
+request.setSigalg( "SHA1withDSA" );
+request.setDname( "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France" );
+request.setStartdate( "2011/11/11" );
+request.setValidity( "100" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Generate a certificate request
+
+  You must construct a KeyToolGenerateCertificateRequestRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolGenerateCertificateRequestRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolGenerateCertificateRequestRequest request = new KeyToolGenerateCertificateRequestRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
+request.setKeypass( "key-passwd" );
+request.setFile( outputFile );
+request.setSigalg( "SHA1withDSA" );
+request.setDname( "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Generate a key pair
+
+  You must construct a KeyToolGenerateKeyPairRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolGenerateKeyPairRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolGenerateKeyPairRequest request = new KeyToolGenerateKeyPairRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
+request.setKeypass( "key-passwd" );
+request.setSigalg( "SHA1withDSA" );
+request.setDname( "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France" );
+request.setValidity( "100" );
+request.setStartdate( "2011/11/11" );
+request.setKeyalg( "DSA" );
+request.setKeysize( "1024" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Generate a secret key
+
+  You must construct a KeyToolGenerateSecretKeyRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolGenerateSecretKeyRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolGenerateSecretKeyRequest request = new KeyToolGenerateSecretKeyRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
+request.setKeypass( "key-passwd" );
+request.setKeyalg( "DES" );
+request.setKeysize( "56" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Import a certificate into a key store
+
+  You must construct a KeyToolImportCertificateRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolImportCertificateRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolImportCertificateRequest request = new KeyToolImportCertificateRequest();
+request.setVerbose( true );
+request.setKeystore( "keystore" );
+request.setStorepass( "changeit" );
+request.setAlias( "foo_alias" );
+request.setKeypass( "key-passwd" );
+request.setFile( "certificate" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Import a key store to another one
+
+  You must construct a KeyToolImportKeystoreRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolImportKeystoreRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolImportKeystoreRequest request = new KeyToolImportKeystoreRequest();
+request.setVerbose( true );
+request.setSrckeystore( "keystore" );
+request.setDestkeystore( "dest-keystore" );
+request.setSrcstorepass( "changeit" );
+request.setDeststorepass( "changeit" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* List the content of a key store
+
+  You must construct a KeyToolListRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolListRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolListRequest request = new KeyToolListRequest();
+request.setVerbose( true );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Display content of a certificate
+
+  You must construct a KeyToolPrintCertificateRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolPrintCertificateRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolPrintCertificateRequest request = new KeyToolPrintCertificateRequest();
+request.setVerbose( true );
+request.setFile( "certificate" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Display content of a certificate request
+
+  You must construct a KeyToolPrintCertificateRequestRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolPrintCertificateRequestRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolPrintCertificateRequestRequest request = new KeyToolPrintCertificateRequestRequest();
+request.setVerbose( true );
+request.setFile( "certificate-request" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
+
+* Display content of a CRL file
+
+  You must construct a KeyToolPrintCRLFileRequest. See {{{./apidocs/org/codehaus/mojo/keytool/requests/KeyToolPrintCRLFileRequest.html}javadoc}} for more available options.
+
++---------
+
+KeyToolPrintCRLFileRequest request = new KeyToolPrintCRLFileRequest();
+request.setVerbose( true );
+request.setFile( "crf-file" );
++---------
+
+  Now you can use the component to sign your jar:
+
++---------
+JavaToolResult result = keyTool.execute( request );
+// control the execution result
+result.getExitCode()
+// get exception
+result.getExecutionException()
++---------
