@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150619" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Keytool: Maven Plugin - Introduction</title>
+    <title>Keytool: Project &#x2013; About</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -52,17 +52,12 @@
         Mojo</a>
         </li>
       <li class="divider ">/</li>
-            <li class="">
-                    <a href="../" title="Keytool: Project">
+                <li class="">
+                    <a href="./" title="Keytool: Project">
         Keytool: Project</a>
         </li>
       <li class="divider ">/</li>
-                <li class="">
-                    <a href="./" title="Keytool: Maven Plugin">
-        Keytool: Maven Plugin</a>
-        </li>
-      <li class="divider ">/</li>
-        <li class="">Introduction</li>
+        <li class="">About</li>
         
                 
                     
@@ -85,55 +80,48 @@
                 
                     
                 <ul class="nav nav-list">
-                    <li class="nav-header">Parent Project</li>
+                    <li class="nav-header">Modules</li>
                                 
       <li>
     
-                          <a href="../index.html" title="Keytool: Project">
+                          <a href="keytool-api/index.html" title="Keytool: API">
           <i class="none"></i>
-        Keytool: Project</a>
-            </li>
-                              <li class="nav-header">Overview</li>
-                                
-      <li class="active">
-    
-            <a href="#"><i class="none"></i>Introduction</a>
-          </li>
-                  
-      <li>
-    
-                          <a href="plugin-info.html" title="Goals">
-          <i class="none"></i>
-        Goals</a>
+        Keytool: API</a>
             </li>
                   
       <li>
     
-                          <a href="usage.html" title="Usage">
+                          <a href="keytool-api-test/index.html" title="Keytool: API Test">
           <i class="none"></i>
-        Usage</a>
+        Keytool: API Test</a>
             </li>
                   
       <li>
     
-                          <a href="faq.html" title="FAQ">
+                          <a href="keytool-api-1.5/index.html" title="Keytool: API (jdk 1.5)">
           <i class="none"></i>
-        FAQ</a>
-            </li>
-                              <li class="nav-header">Links</li>
-                                
-      <li>
-    
-                          <a href="http://download.oracle.com/javase/6/docs/technotes/tools/index.html#security" class="externalLink" title="Java Security Tools">
-          <i class="none"></i>
-        Java Security Tools</a>
+        Keytool: API (jdk 1.5)</a>
             </li>
                   
       <li>
     
-                          <a href="http://maven.apache.org/plugins/maven-jarsigner-plugin/" class="externalLink" title="Jar signing with Maven">
+                          <a href="keytool-api-1.6/index.html" title="Keytool: API (jdk 1.6)">
           <i class="none"></i>
-        Jar signing with Maven</a>
+        Keytool: API (jdk 1.6)</a>
+            </li>
+                  
+      <li>
+    
+                          <a href="keytool-api-1.7/index.html" title="Keytool: API (jdk 1.7)">
+          <i class="none"></i>
+        Keytool: API (jdk 1.7)</a>
+            </li>
+                  
+      <li>
+    
+                          <a href="keytool-maven-plugin/index.html" title="Keytool: Maven Plugin">
+          <i class="none"></i>
+        Keytool: Maven Plugin</a>
             </li>
                                         <li class="nav-header">Project Documentation</li>
                                                                                                                                                                                                                                                                                                                     
@@ -234,7 +222,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                                                                                                                                                                          
+                                                                                                                          
       <li>
     
                           <a href="project-reports.html" title="Project Reports">
@@ -268,48 +256,34 @@
         <div id="bodyColumn"  class="span9" >
                                   
             <div class="section">
-<h2>Keytool Maven Plugin<a name="Keytool_Maven_Plugin"></a></h2>
-<p>This plugin provides the capability to manipulate keys and keystores and acts as a wrapper of the keytool command.</p>
+<h2><a name="About_Keytool:_Project"></a>About Keytool: Project</h2><a name="About_Keytool:_Project"></a>
+<p>Project to invoke the the keytool program bundled with Sun's Java SDK. Allows to manipulate keystores.
+    the project includes a java api to inkove the program and also a maven plugin.</p>
 <div class="section">
-<h3>Goals Overview<a name="Goals_Overview"></a></h3>
-<ul>
-<li><a href="./clean-mojo.html">keytool:clean</a> deletes a generated keystore file.</li>
-<li><b>Since 1.2</b> <a href="./changeAlias-mojo.html">keytool:changeAlias</a> changes an entry alias into a keystore.</li>
-<li><b>Since 1.2</b> <a href="./changeKeyPassword-mojo.html">keytool:changeKeyPassword:</a> changes the key password of an entry of a keystore.</li>
-<li><b>Since 1.2</b> <a href="./changeStorePassword-mojo.html">keytool:changeStorePassword</a> changes the store password of a keystore.</li>
-<li><b>Since 1.2</b> <a href="./deleteAlias-mojo.html">keytool:deleteAlias</a> deletes an entry alias from a keystore.</li>
-<li><b>Since 1.2</b> <a href="./exportCertificate-mojo.html">keytool:exportCertificate</a> reads a certificate from a keystore and stores it in a file.</li>
-<li><b>Since 1.2</b> <a href="./generateCertificate-mojo.html">keytool:generateCertificate</a> generates a certificate from a certificate request from a keystore (<b>Note:</b> This operation was not implemented by the keytool before jdk 1.7).</li>
-<li><b>Since 1.2</b> <a href="./generateCertificateRequest-mojo.html">keytool:generateCertificateRequest</a> generates a certificate request.</li>
-<li><b>Since 1.2</b> <a href="./generateKeyPair-mojo.html">keytool:generateKeyPair</a> generates a key pair.</li>
-<li><b>Since 1.2</b> <a href="./generateSecretKey-mojo.html">keytool:generateSecretKey</a> generates a secret key.</li>
-<li><b>Since 1.2</b> <a href="./importCertificate-mojo.html">keytool:importCertificate</a> reads a certificate from a file and stores it in a keystore.</li>
-<li><b>Since 1.2</b> <a href="./importKeystore-mojo.html">keytool:importKeystore</a> imports all entries of a keystore to another keystore (<b>Note:</b> This operation was not implemented by the keytool before jdk 1.6).</li>
-<li><b>Since 1.2</b> <a href="./list-mojo.html">keytool:list</a> lists entries in a keystore.</li>
-<li><b>Since 1.2</b> <a href="./printCertificate-mojo.html">keytool:printCertificate</a> prints the content of a certificate of a keystore.</li>
-<li><b>Since 1.2</b> <a href="./printCertificateRequest-mojo.html">keytool:printCertificateRequest</a> prints the content of a certificate request of a keystore. (<b>Note:</b> This operation was not implemented by the keytool before jdk 1.7).</li>
-<li><b>Since 1.2</b> <a href="./printCRLFile-mojo.html">keytool:printCRLFile</a> prints the content of a CRL file. (<b>Note:</b> This operation was not implemented by the keytool before jdk 1.7).</li></ul></div>
-<div class="section">
-<h3>Keytool compatibility with jdk<a name="Keytool_compatibility_with_jdk"></a></h3>
-<p>Keytool does not have same operations available for any jdk, see here list of restrictions for older jdk:</p>
-<ul>
-<li><b>importKeystore</b> works only since jdk 1.6</li>
-<li><b>generateCertificate</b> works only since jdk 1.7</li>
-<li><b>printCertificateRequest</b> works only since jdk 1.7</li>
-<li><b>printCRFile</b> works only since jdk 1.7
-<p>Since version 1.3, goals will failed for unsupported operations.</p></li></ul></div>
-<div class="section">
-<h3>Deprecated goals<a name="Deprecated_goals"></a></h3>
-<p>In version 1.2, a lots of new goals were introduced (MKEYTOOL-19) to perform all possible task available in the keytool command.</p>
-<p><b>Note also that new goals are not attached to any phase, so you will have to set explicitly the phase on which attach executions of goals.</b></p>
-<p>As the new goals can set all parameters than older one, we prefer to deprecate the old one... Please use the new mojo (old one will be at next major release removed).</p>
-<ul>
-<li><b>Deprecated since 1.2</b> <a href="./genkey-mojo.html">keytool:genkey</a> generates a keystore <b>replaced by generateKeyPair</b>.</li>
-<li><b>Deprecated since 1.2</b> <a href="./export-mojo.html">keytool:export</a> reads a certificate from a keystore and stores it in a file <b>replaced by exportCertificate</b></li>
-<li><b>Deprecated since 1.2</b> <a href="./import-mojo.html">keytool:import</a> reads a certificate from a file and stores it in a keystore <b>replaced by importCertificate</b>.</li></ul></div>
-<div class="section">
-<h3>Usage<a name="Usage"></a></h3>
-<p>Instructions on how to use the Keytool Plugin can be found on the <a href="./usage.html">usage page</a>.</p></div></div>
+<h3><a name="Project_Modules"></a>Project Modules</h3><a name="Project_Modules"></a>
+<p>This project has declared the following modules:</p>
+<table border="0" class="table table-striped">
+<tr class="a">
+<th>Name</th>
+<th>Description</th></tr>
+<tr class="b">
+<td><a href="keytool-api/index.html">Keytool: API</a></td>
+<td>A component to assist in using keytool application</td></tr>
+<tr class="a">
+<td><a href="keytool-api-test/index.html">Keytool: API Test</a></td>
+<td>A component to test keytool-api</td></tr>
+<tr class="b">
+<td><a href="keytool-api-1.5/index.html">Keytool: API (jdk 1.5)</a></td>
+<td>A component to assist in using keytool application</td></tr>
+<tr class="a">
+<td><a href="keytool-api-1.6/index.html">Keytool: API (jdk 1.6)</a></td>
+<td>A component to assist in using keytool application</td></tr>
+<tr class="b">
+<td><a href="keytool-api-1.7/index.html">Keytool: API (jdk 1.7)</a></td>
+<td>A component to assist in using keytool application</td></tr>
+<tr class="a">
+<td><a href="keytool-maven-plugin/index.html">Keytool: Maven Plugin</a></td>
+<td>A plugin that wraps the keytool program bundled with Sun's Java SDK. Allows to manipulate keystores.</td></tr></table></div></div>
                   </div>
             </div>
           </div>
