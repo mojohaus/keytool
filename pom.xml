@@ -187,8 +187,15 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.4</version>
+          <executions>
+            <execution>
+              <id>default-site</id>
+              <configuration>
+                <topSiteURL>${project.distributionManagement.site.url}</topSiteURL>
+              </configuration>
+            </execution>
+          </executions>
           <configuration>
-            <topSiteURL>${project.distributionManagement.site.url}</topSiteURL>
             <skipDeploy>true</skipDeploy><!-- don't deploy site with maven-site-plugin -->
           </configuration>
         </plugin>
@@ -198,7 +205,6 @@
           <artifactId>maven-scm-publish-plugin</artifactId>
           <version>1.1</version>
           <configuration>
-            <content>${project.build.directory}/staging</content>
             <scmBranch>gh-pages</scmBranch> <!-- branch where to deploy -->
           </configuration>
         </plugin>
