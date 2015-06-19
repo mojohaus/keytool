@@ -22,7 +22,6 @@
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
     <version>33</version>
-    <relativePath>../mojo-parent/pom.xml</relativePath>
   </parent>
 
   <artifactId>keytool</artifactId>
@@ -34,6 +33,7 @@
     Project to invoke the the keytool program bundled with Sun's Java SDK. Allows to manipulate keystores.
     the project includes a java api to inkove the program and also a maven plugin.
   </description>
+  <url>http://www.mojohaus.org/keytool</url>
   <inceptionYear>2005</inceptionYear>
   <licenses>
     <license>
@@ -104,6 +104,12 @@
     <system>BAMBOO</system>
     <url>http://bamboo.ci.codehaus.org/browse/MOJO-MKEYTOOL/</url>
   </ciManagement>
+  <distributionManagement>
+    <site>
+      <id>github</id>
+      <url>scm:git:git@github.com:mojohaus/keytool.git</url>
+    </site>
+  </distributionManagement>
 
   <properties>
     <mavenVersion>2.1.0</mavenVersion>
@@ -176,8 +182,36 @@
           <artifactId>plexus-component-metadata</artifactId>
           <version>1.5.5</version>
         </plugin>
+        <!-- TODO Move this to mojo-parent ? -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.4</version>
+          <executions>
+            <execution>
+              <id>default-site</id>
+              <configuration>
+                <topSiteURL>${project.distributionManagement.site.url}</topSiteURL>
+              </configuration>
+            </execution>
+          </executions>
+          <configuration>
+            <skipDeploy>true</skipDeploy><!-- don't deploy site with maven-site-plugin -->
+          </configuration>
+        </plugin>
+        <!-- TODO Move this to mojo-parent ? -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-publish-plugin</artifactId>
+          <version>1.1</version>
+          <configuration>
+            <scmBranch>gh-pages</scmBranch> <!-- branch where to deploy -->
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+    </plugins>
   </build>
 
   <profiles>
