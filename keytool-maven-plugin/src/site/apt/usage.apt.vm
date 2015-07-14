@@ -23,7 +23,7 @@ Usage
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -68,7 +68,7 @@ mvn keytool:changeAlias -Dkeystore=/path/to/your/keystore -Dstorepass=storepass 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -113,7 +113,7 @@ mvn keytool:changeKeyPassword -Dkeystore=/path/to/your/keystore -Dstorepass=stor
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -155,7 +155,7 @@ mvn keytool:changeStorePassword -Dkeystore=/path/to/your/keystore -Dstorepass=st
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -198,7 +198,7 @@ mvn keytool:deleteAlias -Dkeystore=/path/to/your/keystore -Dstorepass=storepass 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -242,7 +242,7 @@ mvn keytool:exportCertificate -Dkeystore=/path/to/your/keystore -Dstorepass=stor
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -295,7 +295,7 @@ mvn keytool:generateCertificate -Dkeystore=/path/to/your/keystore -Dstorepass=st
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -344,7 +344,7 @@ mvn keytool:generateCertificateRequest -Dkeystore=/path/to/your/keystore -Dstore
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -396,7 +396,7 @@ mvn keytool:generateKeyPair -Dkeystore=/path/to/your/keystore -Dstorepass=storep
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -442,7 +442,7 @@ mvn keytool:generateSecretKey -Dkeystore=/path/to/your/keystore -Dstorepass=stor
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -488,7 +488,7 @@ mvn keytool:importCertificate -Dkeystore=/path/to/your/keystore -Dstorepass=stor
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -531,7 +531,7 @@ mvn keytool:list -Dkeystore=/path/to/your/keystore -Dstorepass=storepass -Dkeypa
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -571,7 +571,7 @@ mvn keytool:printCertificate -Dfile=/path/to/certificate
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -611,7 +611,7 @@ mvn keytool:printCertificateRequest -Dfile=/path/to/certificateRequest
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -649,7 +649,7 @@ mvn keytool:printCRLFile -Dfile=/path/to/CRLFile
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -691,7 +691,7 @@ mvn keytool:genkey -Dkeystore=/path/to/your/keystore -Dstorepass=storepass -Dkey
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <phase>clean</phase>
@@ -729,7 +729,7 @@ mvn keytool:clean [-Dkeystore=...]
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
@@ -770,7 +770,7 @@ mvn keytool:export -Dkeystore=/path/to/your/keystore -Dstorepass=storepass -Dkey
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>${project.version}>/version>
+        <version>${project.version}</version>
         <executions>
           <execution>
             <goals>
