@@ -22,6 +22,7 @@ import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * To build the command line for a given {@link org.codehaus.mojo.keytool.KeyToolRequest}.
@@ -179,6 +180,24 @@ public abstract class AbstractKeyToolCommandLineBuilder
         {
             addArg( cli, key );
             addArg( cli, value );
+        }
+    }
+
+    /**
+     * Convenience method to add repeated arguments to the <code>command line</code> for each value that is not null or empty.
+     *
+     * @param cli    command line to fill
+     * @param key    the argument name.
+     * @param values the argument values to be added.
+     */
+    protected final void addArgsIfNotEmpty( Commandline cli, String key, List<String> values )
+    {
+        if ( values != null )
+        {
+            for( String value : values )
+            {
+                addArgIfNotEmpty( cli, key, value );
+            }
         }
     }
 
