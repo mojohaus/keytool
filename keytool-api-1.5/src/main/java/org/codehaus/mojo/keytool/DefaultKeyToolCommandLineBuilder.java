@@ -236,7 +236,7 @@ public class DefaultKeyToolCommandLineBuilder
         addArgIfNotEmpty( cli, "-sigalg", request.getSigalg() );
         addArgIfNotEmpty( cli, "-dname", request.getDname() );
         addArgIfNotEmpty( cli, "-startdate", request.getStartdate() );
-        addArgIfNotEmpty( cli, "-ext", request.getExt() );
+        addArgsIfNotEmpty( cli, "-ext", request.getExts() );
         addArgIfNotEmpty( cli, "-validity", request.getValidity() );
         addArgIfNotEmpty( cli, "-keypass", request.getKeypass() );
     }
@@ -273,7 +273,7 @@ public class DefaultKeyToolCommandLineBuilder
         addArgIfNotEmpty( cli, "-keysize", request.getKeysize() );
         addArgIfNotEmpty( cli, "-sigalg", request.getSigalg() );
 //        addArgIfNotEmpty( cli, "-startdate", request.getStartdate() );
-        addArgIfNotEmpty( cli, "-ext", request.getExt() );
+        addArgsIfNotEmpty( cli, "-ext", request.getExts() );
     }
 
     /**

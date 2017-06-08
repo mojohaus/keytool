@@ -1,5 +1,8 @@
 package org.codehaus.mojo.keytool.requests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * Copyright 2005-2013 The Codehaus
  *
@@ -73,7 +76,7 @@ public class KeyToolGenerateKeyPairRequest
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
-    private String ext;
+    private List<String> exts = new ArrayList<String>();
 
     /**
      * Distinguished name.
@@ -212,20 +215,52 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
-     * Gets the value of the {@link #ext} field.
+     * Gets the value of the {@link #exts} field.
      *
-     * @return the value of the {@link #ext} field
+     * @return the value of the {@link #exts} field
+     * 
+     * @deprecated
      */
     public String getExt()
     {
-        return ext;
+        return exts.isEmpty() ? null : exts.get(0);
     }
 
     /**
-     * @param ext value of the field {@link #ext} to set
+     * @param ext value of the field {@link #exts} to set
+     * 
+     * @deprecated
      */
     public void setExt( String ext )
     {
-        this.ext = ext;
+        this.exts.clear();
+
+        if (ext != null)
+        {
+            this.exts.add(ext);
+        }
+    }
+
+    /**
+     * @param exts values of the field {@link #exts} to set
+     */
+    public void setExts( List<String> exts )
+    {
+        this.exts.clear();
+
+        if (exts != null)
+        {
+            this.exts.addAll(exts);
+        }
+    }
+
+    /**
+     * Gets the values of the {@link #exts} field.
+     *
+     * @return the values of the {@link #exts} field
+     */
+    public List<String> getExts()
+    {
+        return exts;
     }
 }
