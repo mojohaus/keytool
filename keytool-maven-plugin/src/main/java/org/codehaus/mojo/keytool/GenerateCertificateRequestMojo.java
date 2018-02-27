@@ -16,6 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.cli.Commandline;
@@ -95,6 +96,12 @@ public class GenerateCertificateRequestMojo
     public GenerateCertificateRequestMojo()
     {
         super( KeyToolGenerateCertificateRequestRequest.class );
+    }
+
+    @Override
+    public void execute() throws MojoExecutionException {
+        createParentDirIfNecessary(this.file.getPath());
+        super.execute();
     }
 
     /**
