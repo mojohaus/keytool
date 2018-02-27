@@ -246,6 +246,7 @@ public class DefaultKeyToolCommandLineBuilder
     {
         addKeytoolCommandAndDefaultoptions( cli, "-certreq", request );
         addArgIfNotEmpty( cli, "-sigalg", request.getSigalg() );
+        addArgsIfNotEmpty( cli, "-ext", request.getExts() );
         addArgIfNotEmpty( cli, "-file", request.getFile() );
         addArgIfNotEmpty( cli, "-keypass", request.getKeypass() );
         addArgIfNotEmpty( cli, "-dname", request.getDname() );
