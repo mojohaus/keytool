@@ -74,7 +74,7 @@ public class GenerateCertificateRequestMojo
      * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
-     * @since 1.2
+     * @since 1.6
      */
     @Parameter
     private String ext;
