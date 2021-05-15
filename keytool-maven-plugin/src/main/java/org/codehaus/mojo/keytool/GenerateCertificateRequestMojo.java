@@ -24,6 +24,9 @@ import org.codehaus.mojo.keytool.requests.KeyToolGenerateCertificateRequestReque
 import org.codehaus.plexus.util.StringUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * To generate certificate request.
@@ -76,9 +79,22 @@ public class GenerateCertificateRequestMojo
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.6
+     *
+     * @deprecated Use {@link #exts instead}.
      */
+    @Deprecated
     @Parameter
     private String ext;
+
+    /**
+     * X.509 extension.
+     * <p/>
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @since 1.6
+     */
+    @Parameter
+    private List<String> exts;
 
     /**
      * Distinguished name.
@@ -113,7 +129,11 @@ public class GenerateCertificateRequestMojo
         KeyToolGenerateCertificateRequestRequest request = super.createKeytoolRequest();
 
         request.setSigalg( this.sigalg );
-        request.setExt( this.ext );
+        if (this.exts != null && !this.exts.isEmpty()) {
+            request.setExts(exts);
+        } else {
+            request.setExt(ext);
+        }
         request.setDname( this.dname );
         request.setFile( this.file );
         request.setKeypass( this.keypass );
