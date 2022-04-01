@@ -21,7 +21,7 @@
   <parent>
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>33</version>
+    <version>65</version>
   </parent>
 
   <artifactId>keytool</artifactId>
@@ -186,7 +186,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.4</version>
+          <version>3.11.0</version>
           <executions>
             <execution>
               <id>default-site</id>
