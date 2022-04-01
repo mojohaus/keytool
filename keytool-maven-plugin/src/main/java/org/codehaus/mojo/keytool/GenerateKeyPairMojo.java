@@ -24,6 +24,9 @@ import org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest;
 import org.codehaus.plexus.util.StringUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * To generate a key pair into a keystore.
@@ -108,9 +111,21 @@ public class GenerateKeyPairMojo
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
+     *
+     * @deprecated Use {@link #exts instead}.
+     */
+    @Deprecated
+    private String ext;
+
+    /**
+     * X.509 extension.
+     * <p/>
+     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     *
+     * @since 1.6
      */
     @Parameter
-    private String ext;
+    private List<String> exts;
 
     /**
      * Distinguished name.
@@ -174,7 +189,11 @@ public class GenerateKeyPairMojo
         request.setSigalg( this.sigalg );
         request.setDname( this.dname );
         request.setStartdate( this.startdate );
-        request.setExt( this.ext );
+        if (this.exts != null && !this.exts.isEmpty()) {
+            request.setExts(exts);
+        } else {
+            request.setExt(ext);
+        }
         request.setValidity( this.validity );
         return request;
     }
