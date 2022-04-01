@@ -227,7 +227,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-invoker-plugin</artifactId>
-            <version>1.5</version>
+            <version>3.2.2</version>
           </plugin>
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
