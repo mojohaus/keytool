@@ -112,7 +112,7 @@
   </distributionManagement>
 
   <properties>
-    <mavenVersion>2.1.0</mavenVersion>
+    <mavenVersion>2.2.1</mavenVersion>
     <pluginPluginVersion>3.2</pluginPluginVersion>
   </properties>
 
