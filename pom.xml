@@ -21,7 +21,7 @@
   <parent>
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>33</version>
+    <version>65</version>
   </parent>
 
   <artifactId>keytool</artifactId>
@@ -131,7 +131,7 @@
       <dependency>
         <groupId>org.apache.maven.shared</groupId>
         <artifactId>maven-shared-utils</artifactId>
-        <version>0.5</version>
+        <version>3.3.4</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
