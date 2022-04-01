@@ -24,8 +24,7 @@ jobs:
 
     strategy:
       matrix:
-        # windows-latest
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
         java: [8]
         jdk: [temurin, zulu]
       fail-fast: false
