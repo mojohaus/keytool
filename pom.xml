@@ -92,8 +92,8 @@
   </modules>
 
   <scm>
-    <connection>scm:git:https://github.com/mojohaus/keytool</connection>
-    <developerConnection>scm:git:https://github.com/mojohaus/keytool</developerConnection>
+    <connection>scm:git:https://github.com/mojohaus/keytool.git</connection>
+    <developerConnection>scm:git:https://github.com/mojohaus/keytool.git</developerConnection>
     <url>https://github.com/mojohaus/keytool</url>
   </scm>
   <issueManagement>
