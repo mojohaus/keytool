@@ -38,7 +38,7 @@
   <licenses>
     <license>
       <name>Apache License 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -92,22 +92,18 @@
   </modules>
 
   <scm>
-    <connection>scm:git:git@github.com:mojohaus/keytool.git</connection>
-    <developerConnection>scm:git:git@github.com:mojohaus/keytool.git</developerConnection>
+    <connection>scm:git:https://github.com/mojohaus/keytool</connection>
+    <developerConnection>scm:git:https://github.com/mojohaus/keytool</developerConnection>
     <url>https://github.com/mojohaus/keytool</url>
   </scm>
   <issueManagement>
     <system>github</system>
     <url>https://github.com/mojohaus/keytool/issues/</url>
   </issueManagement>
-  <ciManagement>
-    <system>BAMBOO</system>
-    <url>http://bamboo.ci.codehaus.org/browse/MOJO-MKEYTOOL/</url>
-  </ciManagement>
   <distributionManagement>
     <site>
       <id>github</id>
-      <url>scm:git:git@github.com:mojohaus/keytool.git</url>
+      <url>scm:git:https://github.com/mojohaus/keytool</url>
     </site>
   </distributionManagement>
 
