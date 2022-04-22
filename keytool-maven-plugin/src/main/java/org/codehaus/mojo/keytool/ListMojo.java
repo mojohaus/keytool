@@ -30,7 +30,7 @@ import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo( name = "list", requiresProject = true )
+@Mojo( name = "list", requiresProject = true, threadSafe = true )
 public class ListMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolListRequest>
 {

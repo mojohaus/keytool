@@ -38,7 +38,7 @@ import java.util.List;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo( name = "generateCertificate", requiresProject = true )
+@Mojo( name = "generateCertificate", requiresProject = true, threadSafe = true )
 public class GenerateCertificateMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateCertificateRequest>
 {

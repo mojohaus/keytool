@@ -31,7 +31,7 @@ import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo( name = "exportCertificate", requiresProject = true )
+@Mojo( name = "exportCertificate", requiresProject = true, threadSafe = true )
 public class ExportCertificateMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolExportCertificateRequest>
 {
