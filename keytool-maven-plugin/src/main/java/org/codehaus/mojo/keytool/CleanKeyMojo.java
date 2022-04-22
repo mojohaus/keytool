@@ -29,7 +29,7 @@ import java.io.File;
  * @author $Author$
  * @version $Revision$
  */
-@Mojo( name = "clean", defaultPhase = LifecyclePhase.CLEAN )
+@Mojo( name = "clean", defaultPhase = LifecyclePhase.CLEAN, threadSafe = true )
 public class CleanKeyMojo
     extends AbstractKeyToolMojo
 {

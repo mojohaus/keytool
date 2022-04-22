@@ -33,7 +33,7 @@ import org.codehaus.plexus.util.StringUtils;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo( name = "changeStorePassword", requiresProject = true )
+@Mojo( name = "changeStorePassword", requiresProject = true, threadSafe = true )
 public class ChangeStorePasswordMojo
     extends AbstractKeyToolRequestWithKeyStoreParametersMojo<KeyToolChangeStorePasswordRequest>
 {

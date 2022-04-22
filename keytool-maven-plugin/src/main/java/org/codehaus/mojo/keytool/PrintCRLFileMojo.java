@@ -34,7 +34,7 @@ import java.io.File;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo(name = "printCRLFile", requiresProject = true)
+@Mojo( name = "printCRLFile", requiresProject = true, threadSafe = true )
 public class PrintCRLFileMojo
     extends AbstractKeyToolRequestMojo<KeyToolPrintCRLFileRequest>
 {

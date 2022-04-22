@@ -34,7 +34,7 @@ import java.io.File;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo(name = "printCertificateRequest", requiresProject = true)
+@Mojo( name = "printCertificateRequest", requiresProject = true, threadSafe = true )
 public class PrintCertificateRequestMojo
     extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequestRequest>
 {

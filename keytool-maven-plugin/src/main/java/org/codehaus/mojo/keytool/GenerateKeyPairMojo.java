@@ -40,7 +40,7 @@ import java.util.List;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo(name = "generateKeyPair", requiresProject = true)
+@Mojo( name = "generateKeyPair", requiresProject = true, threadSafe = true )
 public class GenerateKeyPairMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateKeyPairRequest>
 {

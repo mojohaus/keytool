@@ -38,7 +38,7 @@ import java.io.File;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo(name = "importCertificate", requiresProject = true)
+@Mojo( name = "importCertificate", requiresProject = true, threadSafe = true )
 public class ImportCertificateMojo
     extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolImportCertificateRequest>
 {

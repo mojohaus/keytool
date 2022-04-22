@@ -37,7 +37,7 @@ import java.io.File;
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-@Mojo(name = "importKeystore", requiresProject = true)
+@Mojo( name = "importKeystore", requiresProject = true, threadSafe = true )
 public class ImportKeystoreMojo
     extends AbstractKeyToolRequestMojo<KeyToolImportKeystoreRequest>
 {
