@@ -1,6 +1,6 @@
 = MojoHaus Keytool Maven Plugin
 
-This is the MojoHaus http://www.mojohaus.org/keytool/[keytool].
+This is the MojoHaus http://www.mojohaus.org/keytool/[keytool-maven-plugin].
 This repository also includes the https://www.mojohaus.org/keytool/keytool-maven-plugin/[keytool-maven-plugin].
 
 image:https://img.shields.io/github/license/mojohaus/keytool.svg?label=License["Apache License, Version 2.0, January 2004",link=http://www.apache.org/licenses/]
@@ -11,6 +11,7 @@ image:https://github.com/mojohaus/keytool/workflows/GitHub%20CI/badge.svg?branch
 
 === Creating Issues
 
+// TODO: Change URL?
 If you find a problem please create an https://github.com/mojohaus/keytool/issues[issue in the ticket] and describe what is going wrong or what you expect to happen.
 If you have a full working example or a log file this is also helpful.
 You should of course describe only a single issue in a single ticket and not mixing up several different things into a single issue.
