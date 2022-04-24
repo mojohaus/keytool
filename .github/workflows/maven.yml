@@ -43,7 +43,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
-        java: [8, 11, 17]
+        java: [8, 11] # build fails for 17
         # switch to semeru after: https://github.com/actions/setup-java/pull/289
         jdk: [temurin, zulu, adopt-openj9]
         exclude:
@@ -52,8 +52,8 @@ jobs:
             java: 11
             jdk: temurin
           # not ready yet, only as semeru
-          - java: 17
-            jdk: adopt-openj9
+          # - java: 17
+          #   jdk: adopt-openj9
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
