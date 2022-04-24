@@ -44,6 +44,7 @@
           <dname>cn=Test Development, ou=Development,
             L=Herzele, ST=VL, o=FrankCornelis, c=BE
           </dname>
+          <keyalg>ec</keyalg>
           <keypass>secret</keypass>
           <storepass>secret</storepass>
           <alias>alias</alias>
