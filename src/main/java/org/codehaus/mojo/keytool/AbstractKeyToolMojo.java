@@ -19,6 +19,7 @@ package org.codehaus.mojo.keytool;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -48,6 +49,13 @@ public abstract class AbstractKeyToolMojo
      */
     @Parameter( defaultValue = "false" )
     private boolean verbose;
+
+    /**
+     * Where to execute the keytool command.
+     */
+    @Parameter( defaultValue = "${basedir}", required = true, alias = "workingdir" )
+    private File workingDirectory;
+
 
     /**
      * @return value of the {@link #skip} flag

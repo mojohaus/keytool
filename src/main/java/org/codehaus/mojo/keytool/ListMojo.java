@@ -16,9 +16,21 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.util.Enumeration;
+import java.util.Locale;
+
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
 
 /**
  * To list entries in a keystore.
@@ -32,7 +44,7 @@ import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
  */
 @Mojo( name = "list", requiresProject = true, threadSafe = true )
 public class ListMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolListRequest>
+        extends AbstractKeyToolRequestWithKeyStoreParametersMojo
 {
     /**
      * Output in RFC style.
@@ -49,19 +61,54 @@ public class ListMojo
      */
     public ListMojo()
     {
-        super( KeyToolListRequest.class );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    protected KeyToolListRequest createKeytoolRequest()
+    public void execute() throws MojoExecutionException, MojoFailureException
     {
-        KeyToolListRequest request = super.createKeytoolRequest();
+        try
+        {
+            printKeyStore();
+        }
+        catch ( KeyStoreException kse )
+        {
+            throw new MojoExecutionException( "Error while printing keystore information.", kse );
+        }
 
-        request.setRfc( this.rfc );
-        return request;
     }
 
+    private void printKeyStore() throws KeyStoreException, MojoFailureException
+    {
+        final KeyStore keyStore = KeyStore.getInstance( getStoretype() );
+
+        try ( InputStream ksIn = Files.newInputStream( getKeystoreFile().toPath() ) )
+        {
+            keyStore.load( ksIn, getStorepass().toCharArray() );
+        }
+        catch ( IOException ioException )
+        {
+            throw new MojoFailureException( "Unable to open file [" + keyStore + "].", ioException );
+        }
+        catch ( CertificateException | NoSuchAlgorithmException keystoreLoadException )
+        {
+            throw new MojoFailureException( "Unable to load keystore [" + getKeystoreFile().getAbsolutePath() + "].",
+                    keystoreLoadException );
+        }
+
+        final Enumeration<String> aliases = keyStore.aliases();
+
+        for ( String alias = aliases.nextElement(); aliases.hasMoreElements(); )
+        {
+            printAlias( keyStore, alias );
+        }
+    }
+
+    private void printAlias( KeyStore keyStore, String alias ) throws KeyStoreException
+    {
+        final Certificate certificate = keyStore.getCertificate( alias );
+        final String entry = String.format( Locale.ROOT, "%s:%s",
+                alias, certificate.getType() );
+
+        System.out.println( entry );
+    }
 }

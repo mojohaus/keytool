@@ -312,7 +312,7 @@
             <artifactId>maven-invoker-plugin</artifactId>
             <configuration>
               <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-              <settingsFile>src/it/settings.xml</settingsFile>
+              <settingsFile>src/old_it/settings.xml</settingsFile>
               <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
             </configuration>
             <executions>

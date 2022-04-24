@@ -16,22 +16,19 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.plexus.util.StringUtils;
-
 import java.io.File;
 import java.net.MalformedURLException;
 
+import org.apache.maven.plugins.annotations.Parameter;
+
 /**
- * Abstract mojo to execute a {@link KeyToolRequestWithKeyStoreParameters} request.
+ * Abstract mojo to execute a Keytool with Store Parameters request.
  *
- * @param <R> generic type of request used by the mojo
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends KeyToolRequestWithKeyStoreParameters>
-    extends AbstractKeyToolRequestMojo<R>
+public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo
+        extends AbstractKeyToolMojo
 {
 
     /**
@@ -100,56 +97,10 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
 
     /**
      * Constructor of abstract mojo.
-     *
-     * @param requestType type of keytool request used by the mojo
      */
-    public AbstractKeyToolRequestWithKeyStoreParametersMojo( Class<R> requestType )
+    public AbstractKeyToolRequestWithKeyStoreParametersMojo()
     {
-        super( requestType );
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected R createKeytoolRequest()
-    {
-        R request = super.createKeytoolRequest();
-
-        if ( StringUtils.isNotEmpty( keystore ) )
-        {
-
-            File file = getFile( keystore );
-
-            // make sure the parent directory of the keystore exists
-
-            boolean mkdirs = file.getParentFile().mkdirs();
-            getLog().debug( "mdkirs: " + mkdirs + " " + file.getParentFile() );
-
-            // force to not use this parameter
-            request.setKeystore( file.getAbsolutePath() );
-        }
-
-        request.setProviderarg( providerarg );
-        request.setProviderclass( providerclass );
-        request.setProvidername( providername );
-        request.setProviderpath( providerpath );
-        request.setStorepass( storepass );
-        request.setStoretype( storetype );
-        return request;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getCommandlineInfo( final Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
-
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.storepass, "'*****'" );
-
-        return commandLineInfo;
     }
 
     /**
@@ -187,6 +138,16 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
 
     protected File getKeystoreFile()
     {
-        return getFile(keystore);
+        return getFile( keystore );
+    }
+
+    public String getStoretype()
+    {
+        return storetype;
+    }
+
+    public String getStorepass()
+    {
+        return storepass;
     }
 }

@@ -19,14 +19,13 @@ package org.codehaus.mojo.keytool;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
- * Abstract mojo to execute a {@link KeyToolRequestWithKeyStoreAndAliasParameters} request.
+ * Abstract mojo to execute a store with alias parameters request.
  *
- * @param <R> generic type of request used by the mojo
  * @author tchemit <chemit@codelutin.com>
  * @since 1.2
  */
-public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<R extends KeyToolRequestWithKeyStoreAndAliasParameters>
-    extends AbstractKeyToolRequestWithKeyStoreParametersMojo<R>
+public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo
+        extends AbstractKeyToolRequestWithKeyStoreParametersMojo
 {
     /**
      * Password through protected mechanism.
@@ -48,24 +47,18 @@ public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<R
 
     /**
      * Constructor of abstract mojo.
-     *
-     * @param requestType type of keytool request used by the mojo
      */
-    protected AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo( Class<R> requestType )
+    protected AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo()
     {
-        super( requestType );
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected R createKeytoolRequest()
+    public boolean isPasswordProtected()
     {
-        R request = super.createKeytoolRequest();
+        return passwordProtected;
+    }
 
-        request.setPasswordProtected( this.passwordProtected );
-        request.setAlias( this.alias );
-        return request;
+    public String getAlias()
+    {
+        return alias;
     }
 }
