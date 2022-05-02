@@ -23,22 +23,31 @@ import java.io.File;
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolListRequest}.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public abstract class AbstractKeyToolListRequestIT
     extends AbstractKeyToolRequestIT<KeyToolListRequest>
 {
 
+    /**
+     * <p>Constructor for AbstractKeyToolListRequestIT.</p>
+     */
     protected AbstractKeyToolListRequestIT()
     {
     }
 
+    /**
+     * <p>Constructor for AbstractKeyToolListRequestIT.</p>
+     *
+     * @param supportedRequest a boolean
+     */
     protected AbstractKeyToolListRequestIT( boolean supportedRequest )
     {
         super( supportedRequest );
     }
 
+    /** {@inheritDoc} */
     @Override
     public final void testRequest()
         throws Exception
@@ -53,6 +62,12 @@ public abstract class AbstractKeyToolListRequestIT
         requestResult( keyToolResult, keyStore );
     }
 
+    /**
+     * <p>requestResult.</p>
+     *
+     * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
+     * @param keyStore a {@link java.io.File} object
+     */
     protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore );
 
 }

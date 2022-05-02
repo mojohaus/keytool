@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Request to do a Generate certificate request using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolGenerateCertificateRequestRequest
@@ -31,35 +31,30 @@ public class KeyToolGenerateCertificateRequestRequest
 {
     /**
      * Signature algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String sigalg;
 
     /**
      * X.509 extension.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private List<String> exts = new ArrayList<String>();
 
     /**
      * Distinguished name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String dname;
 
     /**
      * Output file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private File file;
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keypass;
@@ -75,6 +70,8 @@ public class KeyToolGenerateCertificateRequestRequest
     }
 
     /**
+     * <p>Setter for the field <code>file</code>.</p>
+     *
      * @param file value of the field {@link #file} to set
      */
     public void setFile( File file )
@@ -93,6 +90,8 @@ public class KeyToolGenerateCertificateRequestRequest
     }
 
     /**
+     * <p>Setter for the field <code>sigalg</code>.</p>
+     *
      * @param sigalg value of the field {@link #sigalg} to set
      */
     public void setSigalg( String sigalg )
@@ -104,8 +103,7 @@ public class KeyToolGenerateCertificateRequestRequest
      * Gets the value of the {@link #exts} field.
      *
      * @return the value of the {@link #exts} field
-     *
-     * @deprecated
+     * @since 1.6
      */
     public String getExt()
     {
@@ -113,9 +111,10 @@ public class KeyToolGenerateCertificateRequestRequest
     }
 
     /**
-     * @param ext value of the field {@link #exts} to set
+     * <p>setExt.</p>
      *
-     * @deprecated
+     * @param ext value of the field {@link #exts} to set
+     * @since 1.6
      */
     public void setExt( String ext )
     {
@@ -128,7 +127,10 @@ public class KeyToolGenerateCertificateRequestRequest
     }
 
     /**
+     * <p>Setter for the field <code>exts</code>.</p>
+     *
      * @param exts values of the field {@link #exts} to set
+     * @since 1.6
      */
     public void setExts( List<String> exts )
     {
@@ -144,6 +146,7 @@ public class KeyToolGenerateCertificateRequestRequest
      * Gets the values of the {@link #exts} field.
      *
      * @return the values of the {@link #exts} field
+     * @since 1.6
      */
     public List<String> getExts()
     {
@@ -161,6 +164,8 @@ public class KeyToolGenerateCertificateRequestRequest
     }
 
     /**
+     * <p>Setter for the field <code>dname</code>.</p>
+     *
      * @param dname value of the field {@link #dname} to set
      */
     public void setDname( String dname )

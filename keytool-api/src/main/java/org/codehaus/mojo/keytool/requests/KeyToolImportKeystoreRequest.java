@@ -19,7 +19,7 @@ package org.codehaus.mojo.keytool.requests;
 /**
  * Request to import all entries of a keystore to another keystore using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolImportKeystoreRequest
@@ -28,119 +28,102 @@ public class KeyToolImportKeystoreRequest
 
     /**
      * Source keystore name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String srckeystore;
 
     /**
      * Destination keystore name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String destkeystore;
 
     /**
      * Source keystore type.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String srcstoretype;
 
     /**
      * Destination keystore type.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String deststoretype;
 
     /**
      * Source keystore password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String srcstorepass;
 
     /**
      * Destination keystore password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String deststorepass;
 
     /**
      * Source keystore password protected.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private boolean srcprotected;
 
     /**
      * Source keystore provider name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String srcprovidername;
 
     /**
      * Destination keystore provider name.
-     * <p/>
      * See <a hresf="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String destprovidername;
 
     /**
      * Source alias.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String srcalias;
 
     /**
      * Destination alias.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String destalias;
 
     /**
      * Source key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String srckeypass;
 
     /**
      * Destination key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String destkeypass;
 
     /**
      * Do not prompt.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private boolean noprompt;
 
     /**
      * Provider class name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String providerclass;
 
     /**
      * Provider argument.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String providerarg;
 
     /**
      * Provider classpath.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String providerpath;
@@ -156,6 +139,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>srckeystore</code>.</p>
+     *
      * @param srckeystore value of the field {@link #srckeystore} to set
      */
     public void setSrckeystore( String srckeystore )
@@ -174,6 +159,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>destkeystore</code>.</p>
+     *
      * @param destkeystore value of the field {@link #destkeystore} to set
      */
     public void setDestkeystore( String destkeystore )
@@ -192,6 +179,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>srcstoretype</code>.</p>
+     *
      * @param srcstoretype value of the field {@link #srcstoretype} to set
      */
     public void setSrcstoretype( String srcstoretype )
@@ -210,6 +199,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>deststoretype</code>.</p>
+     *
      * @param deststoretype value of the field {@link #deststoretype} to set
      */
     public void setDeststoretype( String deststoretype )
@@ -228,6 +219,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>srcstorepass</code>.</p>
+     *
      * @param srcstorepass value of the field {@link #srcstorepass} to set
      */
     public void setSrcstorepass( String srcstorepass )
@@ -246,6 +239,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>deststorepass</code>.</p>
+     *
      * @param deststorepass value of the field {@link #deststorepass} to set
      */
     public void setDeststorepass( String deststorepass )
@@ -264,6 +259,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>srcprotected</code>.</p>
+     *
      * @param srcprotected value of the field {@link #srcprotected} to set
      */
     public void setSrcprotected( boolean srcprotected )
@@ -282,6 +279,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>srcprovidername</code>.</p>
+     *
      * @param srcprovidername value of the field {@link #srcprovidername} to set
      */
     public void setSrcprovidername( String srcprovidername )
@@ -300,6 +299,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>destprovidername</code>.</p>
+     *
      * @param destprovidername value of the field {@link #destprovidername} to set
      */
     public void setDestprovidername( String destprovidername )
@@ -318,6 +319,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>srcalias</code>.</p>
+     *
      * @param srcalias value of the field {@link #srcalias} to set
      */
     public void setSrcalias( String srcalias )
@@ -336,6 +339,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>destalias</code>.</p>
+     *
      * @param destalias value of the field {@link #destalias} to set
      */
     public void setDestalias( String destalias )
@@ -354,6 +359,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>srckeypass</code>.</p>
+     *
      * @param srckeypass value of the field {@link #srckeypass} to set
      */
     public void setSrckeypass( String srckeypass )
@@ -372,6 +379,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>destkeypass</code>.</p>
+     *
      * @param destkeypass value of the field {@link #destkeypass} to set
      */
     public void setDestkeypass( String destkeypass )
@@ -390,6 +399,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>noprompt</code>.</p>
+     *
      * @param noprompt value of the field {@link #noprompt} to set
      */
     public void setNoprompt( boolean noprompt )
@@ -409,6 +420,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>providerclass</code>.</p>
+     *
      * @param providerclass value of the field {@link #providerclass} to set
      */
     public void setProviderclass( String providerclass )
@@ -427,6 +440,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>providerarg</code>.</p>
+     *
      * @param providerarg value of the field {@link #providerarg} to set
      */
     public void setProviderarg( String providerarg )
@@ -445,6 +460,8 @@ public class KeyToolImportKeystoreRequest
     }
 
     /**
+     * <p>Setter for the field <code>providerpath</code>.</p>
+     *
      * @param providerpath value of the field {@link #providerpath} to set
      */
     public void setProviderpath( String providerpath )

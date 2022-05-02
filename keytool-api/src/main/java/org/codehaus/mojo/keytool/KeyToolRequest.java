@@ -24,8 +24,7 @@ import java.io.File;
 /**
  * Specifies the common parameters used to control a KeyTool tool invocation.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
  * @since 1.1
  */
 public interface KeyToolRequest extends JavaToolRequest
@@ -36,7 +35,6 @@ public interface KeyToolRequest extends JavaToolRequest
      *
      * @return the value of the {@code verbose} field.
      */
-
     boolean isVerbose();
 
     /**

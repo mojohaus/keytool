@@ -24,8 +24,7 @@ import java.io.File;
 /**
  * Specifies the commons parameters used to control a key tool invocation.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
  * @since 1.1
  */
 public abstract class AbstractKeyToolRequest
@@ -35,7 +34,6 @@ public abstract class AbstractKeyToolRequest
 
     /**
      * Verbose output.
-     * <p/>
      * See <a href="http://java.sun.com/javase/6/docs/technotes/tools/windows/keytool.html#Options">options</a>.
      */
     private boolean verbose;
@@ -52,6 +50,8 @@ public abstract class AbstractKeyToolRequest
 
     /**
      * {@inheritDoc}
+     *
+     * @return a boolean
      */
     public boolean isVerbose()
     {
@@ -60,6 +60,8 @@ public abstract class AbstractKeyToolRequest
 
     /**
      * {@inheritDoc}
+     *
+     * @return an array of {@link java.lang.String} objects
      */
     public String[] getArguments()
     {
@@ -68,15 +70,15 @@ public abstract class AbstractKeyToolRequest
 
     /**
      * {@inheritDoc}
+     *
+     * @return a {@link java.io.File} object
      */
     public File getWorkingDirectory()
     {
         return workingDirectory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public void setVerbose( boolean verbose )
     {
         this.verbose = verbose;
@@ -84,15 +86,15 @@ public abstract class AbstractKeyToolRequest
 
     /**
      * {@inheritDoc}
+     *
+     * @param arguments an array of {@link java.lang.String} objects
      */
     public void setArguments( String[] arguments )
     {
         this.arguments = arguments;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public void setWorkingDirectory( File workingDirectory )
     {
         this.workingDirectory = workingDirectory;

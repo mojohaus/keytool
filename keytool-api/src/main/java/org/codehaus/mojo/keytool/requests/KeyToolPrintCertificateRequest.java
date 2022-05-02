@@ -21,7 +21,7 @@ import java.io.File;
 /**
  * Request to print the content of a certificate using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolPrintCertificateRequest
@@ -30,28 +30,24 @@ public class KeyToolPrintCertificateRequest
 
     /**
      * Output in RFC style.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private boolean rfc;
 
     /**
      * Input file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private File file;
 
     /**
      * SSL server host and port.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String sslserver;
 
     /**
      * Signed jar file.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private File jarfile;
@@ -67,6 +63,8 @@ public class KeyToolPrintCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>rfc</code>.</p>
+     *
      * @param rfc value of the field {@link #rfc} to set
      */
     public void setRfc( boolean rfc )
@@ -85,6 +83,8 @@ public class KeyToolPrintCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>file</code>.</p>
+     *
      * @param file value of the field {@link #file} to set
      */
     public void setFile( File file )
@@ -103,6 +103,8 @@ public class KeyToolPrintCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>sslserver</code>.</p>
+     *
      * @param sslserver value of the field {@link #sslserver} to set
      */
     public void setSslserver( String sslserver )
@@ -121,6 +123,8 @@ public class KeyToolPrintCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>jarfile</code>.</p>
+     *
      * @param jarfile value of the field {@link #jarfile} to set
      */
     public void setJarfile( File jarfile )

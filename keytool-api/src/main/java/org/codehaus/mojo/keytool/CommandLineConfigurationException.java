@@ -19,8 +19,7 @@ package org.codehaus.mojo.keytool;
 /**
  * Signals an error during the construction of the command line used to invoke key tool.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
  * @since 1.1
  */
 public class CommandLineConfigurationException

@@ -21,8 +21,7 @@ import org.apache.maven.shared.utils.cli.javatool.JavaTool;
 /**
  * Provides a facade to invoke KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
  * @since 1.1
  */
 public interface KeyTool

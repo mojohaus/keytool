@@ -23,12 +23,10 @@ import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
 
 /**
  * To export a certificate from a keystore.
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -export} command.
- * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 @Mojo( name = "exportCertificate", requiresProject = true, threadSafe = true )
@@ -38,7 +36,6 @@ public class ExportCertificateMojo
 
     /**
      * Output in RFC style.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -48,7 +45,6 @@ public class ExportCertificateMojo
 
     /**
      * Output file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -64,15 +60,14 @@ public class ExportCertificateMojo
         super( KeyToolExportCertificateRequest.class );
     }
 
+    /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
         createParentDirIfNecessary(file);
         super.execute();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected KeyToolExportCertificateRequest createKeytoolRequest()
     {

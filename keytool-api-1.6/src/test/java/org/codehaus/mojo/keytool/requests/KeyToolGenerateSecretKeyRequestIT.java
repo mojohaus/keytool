@@ -23,7 +23,7 @@ import java.io.File;
 /**
  * Test the {@link KeyToolGenerateSecretKeyRequest}.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolGenerateSecretKeyRequestIT

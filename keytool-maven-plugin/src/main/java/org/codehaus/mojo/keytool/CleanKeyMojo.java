@@ -41,6 +41,8 @@ public class CleanKeyMojo
     private String keystore;
 
     /**
+     * <p>Getter for the field <code>keystore</code>.</p>
+     *
      * @return Returns the keystore.
      */
     public final String getKeystore()
@@ -49,6 +51,8 @@ public class CleanKeyMojo
     }
 
     /**
+     * <p>Setter for the field <code>keystore</code>.</p>
+     *
      * @param keystore The keystore to set.
      */
     public final void setKeystore( String keystore )

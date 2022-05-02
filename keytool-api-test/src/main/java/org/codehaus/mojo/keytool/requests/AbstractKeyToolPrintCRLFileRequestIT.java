@@ -21,24 +21,33 @@ import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 import java.io.File;
 
 /**
- * Test the {@link KeyToolPrintCRLFileRequest}.
+ * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolPrintCRLFileRequest}.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public abstract class AbstractKeyToolPrintCRLFileRequestIT
     extends AbstractKeyToolRequestIT<KeyToolPrintCRLFileRequest>
 {
 
+    /**
+     * <p>Constructor for AbstractKeyToolPrintCRLFileRequestIT.</p>
+     */
     protected AbstractKeyToolPrintCRLFileRequestIT()
     {
     }
 
+    /**
+     * <p>Constructor for AbstractKeyToolPrintCRLFileRequestIT.</p>
+     *
+     * @param supportedRequest a boolean
+     */
     protected AbstractKeyToolPrintCRLFileRequestIT( boolean supportedRequest )
     {
         super( supportedRequest );
     }
 
+    /** {@inheritDoc} */
     @Override
     public final void testRequest()
         throws Exception
@@ -53,6 +62,12 @@ public abstract class AbstractKeyToolPrintCRLFileRequestIT
         requestResult( keyToolResult, file );
     }
 
+    /**
+     * <p>requestResult.</p>
+     *
+     * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
+     * @param file a {@link java.io.File} object
+     */
     protected abstract void requestResult( JavaToolResult keyToolResult, File file );
 
 }

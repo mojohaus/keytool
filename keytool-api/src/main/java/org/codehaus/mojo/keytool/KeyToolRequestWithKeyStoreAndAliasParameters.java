@@ -19,8 +19,7 @@ package org.codehaus.mojo.keytool;
 /**
  * Specifies the common parameters used to control a KeyTool tool invocation.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
  * @since 1.1
  */
 public interface KeyToolRequestWithKeyStoreAndAliasParameters
@@ -49,6 +48,8 @@ public interface KeyToolRequestWithKeyStoreAndAliasParameters
     boolean isPasswordProtected();
 
     /**
+     * <p>setPasswordProtected.</p>
+     *
      * @param passwordProtected value of the field {@code passwordProtected} to set
      */
     void setPasswordProtected( boolean passwordProtected );

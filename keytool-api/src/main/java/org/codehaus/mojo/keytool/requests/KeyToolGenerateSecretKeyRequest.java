@@ -19,7 +19,7 @@ package org.codehaus.mojo.keytool.requests;
 /**
  * Request to generate a secret key using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolGenerateSecretKeyRequest
@@ -28,21 +28,18 @@ public class KeyToolGenerateSecretKeyRequest
 
     /**
      * Key algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keyalg;
 
     /**
      * Key bit size.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keysize;
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keypass;
@@ -58,6 +55,8 @@ public class KeyToolGenerateSecretKeyRequest
     }
 
     /**
+     * <p>Setter for the field <code>keyalg</code>.</p>
+     *
      * @param keyalg value of the field {@link #keyalg} to set
      */
     public void setKeyalg( String keyalg )
@@ -76,6 +75,8 @@ public class KeyToolGenerateSecretKeyRequest
     }
 
     /**
+     * <p>Setter for the field <code>keysize</code>.</p>
+     *
      * @param keysize value of the field {@link #keysize} to set
      */
     public void setKeysize( String keysize )
@@ -94,6 +95,8 @@ public class KeyToolGenerateSecretKeyRequest
     }
 
     /**
+     * <p>Setter for the field <code>keypass</code>.</p>
+     *
      * @param keypass value of the field {@link #keypass} to set
      */
     public void setKeypass( String keypass )

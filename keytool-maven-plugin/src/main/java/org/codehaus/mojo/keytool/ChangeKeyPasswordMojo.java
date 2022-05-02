@@ -24,13 +24,10 @@ import org.codehaus.plexus.util.StringUtils;
 
 /**
  * To change the key password of an entry of a keystore.
- * <p/>
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -keypasswd} command.
- * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 @Mojo( name = "changeKeyPassword", requiresProject = true, threadSafe = true )
@@ -40,7 +37,6 @@ public class ChangeKeyPasswordMojo
 
     /**
      * New password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -50,7 +46,6 @@ public class ChangeKeyPasswordMojo
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -66,9 +61,7 @@ public class ChangeKeyPasswordMojo
         super( KeyToolChangeKeyPasswordRequest.class );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected KeyToolChangeKeyPasswordRequest createKeytoolRequest()
     {
@@ -78,9 +71,7 @@ public class ChangeKeyPasswordMojo
         return request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected String getCommandlineInfo( Commandline commandLine )
     {

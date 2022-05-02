@@ -19,7 +19,7 @@ package org.codehaus.mojo.keytool.requests;
 /**
  * Request to import a certificate using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolImportCertificateRequest
@@ -27,28 +27,24 @@ public class KeyToolImportCertificateRequest
 {
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keypass;
 
     /**
      * Input file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String file;
 
     /**
      * Do not prompt.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private boolean noprompt;
 
     /**
      * Trust certificates from cacerts.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private boolean trustcacerts;
@@ -64,6 +60,8 @@ public class KeyToolImportCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>file</code>.</p>
+     *
      * @param file value of the field {@link #file} to set
      */
     public void setFile( String file )
@@ -82,6 +80,8 @@ public class KeyToolImportCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>noprompt</code>.</p>
+     *
      * @param noprompt value of the field {@link #noprompt} to set
      */
     public void setNoprompt( boolean noprompt )
@@ -100,6 +100,8 @@ public class KeyToolImportCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>trustcacerts</code>.</p>
+     *
      * @param trustcacerts value of the field {@link #trustcacerts} to set
      */
     public void setTrustcacerts( boolean trustcacerts )

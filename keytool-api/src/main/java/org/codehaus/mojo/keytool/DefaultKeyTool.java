@@ -24,10 +24,9 @@ import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 
 /**
- * Default implementation of component {@link KeyTool}.
+ * Default implementation of component {@link org.codehaus.mojo.keytool.KeyTool}.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit§
  * @since 1.1
  */
 @Component( role = KeyTool.class, hint = "default" )
@@ -41,11 +40,15 @@ public class DefaultKeyTool
     @Requirement
     protected KeyToolCommandLineBuilder builder;
 
+    /**
+     * <p>Constructor for DefaultKeyTool.</p>
+     */
     public DefaultKeyTool()
     {
         super( "keytool" );
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Commandline createCommandLine( KeyToolRequest request, String javaToolFile )
         throws JavaToolException
@@ -76,6 +79,7 @@ public class DefaultKeyTool
         return cli;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected StreamConsumer createSystemOutStreamConsumer( KeyToolRequest request )
     {

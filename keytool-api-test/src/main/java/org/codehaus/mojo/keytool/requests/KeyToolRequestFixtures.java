@@ -21,11 +21,17 @@ import java.io.File;
 /**
  * Request Fixtures.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.3
  */
 public class KeyToolRequestFixtures
 {
+    /**
+     * <p>createKeyToolChangeAliasRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolChangeAliasRequest} object
+     */
     public KeyToolChangeAliasRequest createKeyToolChangeAliasRequest( File keyStore )
     {
         KeyToolChangeAliasRequest request = new KeyToolChangeAliasRequest();
@@ -39,6 +45,12 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolPrintCRLFileRequest.</p>
+     *
+     * @param file a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolPrintCRLFileRequest} object
+     */
     public KeyToolPrintCRLFileRequest createKeyToolPrintCRLFileRequest( File file )
     {
         KeyToolPrintCRLFileRequest request = new KeyToolPrintCRLFileRequest();
@@ -49,6 +61,12 @@ public class KeyToolRequestFixtures
     }
 
 
+    /**
+     * <p>createKeyToolPrintCertificateRequestRequest.</p>
+     *
+     * @param file a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest} object
+     */
     public KeyToolPrintCertificateRequestRequest createKeyToolPrintCertificateRequestRequest( File file )
     {
         KeyToolPrintCertificateRequestRequest request = new KeyToolPrintCertificateRequestRequest();
@@ -58,6 +76,12 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolPrintCertificateRequest.</p>
+     *
+     * @param file a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequest} object
+     */
     public KeyToolPrintCertificateRequest createKeyToolPrintCertificateRequest( File file )
     {
         KeyToolPrintCertificateRequest request = new KeyToolPrintCertificateRequest();
@@ -69,6 +93,12 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolListRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolListRequest} object
+     */
     public KeyToolListRequest createKeyToolListRequest( File keyStore )
     {
         KeyToolListRequest request = new KeyToolListRequest();
@@ -82,6 +112,13 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolImportKeystoreRequest.</p>
+     *
+     * @param srcKeyStore a {@link java.io.File} object
+     * @param destKeyStore a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolImportKeystoreRequest} object
+     */
     public KeyToolImportKeystoreRequest createKeyToolImportKeystoreRequest( File srcKeyStore, File destKeyStore )
     {
         KeyToolImportKeystoreRequest request = new KeyToolImportKeystoreRequest();
@@ -105,6 +142,13 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolImportCertificateRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @param file a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolImportCertificateRequest} object
+     */
     public KeyToolImportCertificateRequest createKeyToolImportCertificateRequest( File keyStore, File file )
     {
         KeyToolImportCertificateRequest request = new KeyToolImportCertificateRequest();
@@ -120,6 +164,12 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolGenerateSecretKeyRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolGenerateSecretKeyRequest} object
+     */
     public KeyToolGenerateSecretKeyRequest createKeyToolGenerateSecretKeyRequest( File keyStore )
     {
         KeyToolGenerateSecretKeyRequest request = new KeyToolGenerateSecretKeyRequest();
@@ -134,6 +184,12 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolGenerateKeyPairRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest} object
+     */
     public KeyToolGenerateKeyPairRequest createKeyToolGenerateKeyPairRequest( File keyStore )
     {
         KeyToolGenerateKeyPairRequest request = new KeyToolGenerateKeyPairRequest();
@@ -153,6 +209,13 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolGenerateCertificateRequestRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @param outputFile a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolGenerateCertificateRequestRequest} object
+     */
     public KeyToolGenerateCertificateRequestRequest createKeyToolGenerateCertificateRequestRequest( File keyStore,
                                                                                                     File outputFile )
     {
@@ -169,6 +232,14 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolGenerateCertificateRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @param inFile a {@link java.io.File} object
+     * @param outputFile a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolGenerateCertificateRequest} object
+     */
     public KeyToolGenerateCertificateRequest createKeyToolGenerateCertificateRequest( File keyStore, File inFile,
                                                                                       File outputFile )
     {
@@ -191,6 +262,13 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolExportCertificateRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @param outputFile a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest} object
+     */
     public KeyToolExportCertificateRequest createKeyToolExportCertificateRequest( File keyStore, File outputFile )
     {
         KeyToolExportCertificateRequest request = new KeyToolExportCertificateRequest();
@@ -204,6 +282,12 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolDeleteRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolDeleteRequest} object
+     */
     public KeyToolDeleteRequest createKeyToolDeleteRequest( File keyStore )
     {
         KeyToolDeleteRequest request = new KeyToolDeleteRequest();
@@ -215,6 +299,12 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolChangeStorePasswordRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolChangeStorePasswordRequest} object
+     */
     public KeyToolChangeStorePasswordRequest createKeyToolChangeStorePasswordRequest( File keyStore )
     {
         KeyToolChangeStorePasswordRequest request = new KeyToolChangeStorePasswordRequest();
@@ -226,6 +316,12 @@ public class KeyToolRequestFixtures
         return request;
     }
 
+    /**
+     * <p>createKeyToolChangeKeyPasswordRequest.</p>
+     *
+     * @param keyStore a {@link java.io.File} object
+     * @return a {@link org.codehaus.mojo.keytool.requests.KeyToolChangeKeyPasswordRequest} object
+     */
     public KeyToolChangeKeyPasswordRequest createKeyToolChangeKeyPasswordRequest( File keyStore )
     {
         KeyToolChangeKeyPasswordRequest request = new KeyToolChangeKeyPasswordRequest();

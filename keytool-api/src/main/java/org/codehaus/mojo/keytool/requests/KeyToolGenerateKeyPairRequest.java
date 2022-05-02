@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Request to generate a key pair using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolGenerateKeyPairRequest
@@ -31,56 +31,48 @@ public class KeyToolGenerateKeyPairRequest
 
     /**
      * Key algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keyalg;
 
     /**
      * Key bit size.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keysize;
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keypass;
 
     /**
      * Signature algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String sigalg;
 
     /**
      * Validity number of days.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String validity;
 
     /**
      * Certificate validity start date/time.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String startdate;
 
     /**
      * X.509 extension.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private List<String> exts = new ArrayList<String>();
 
     /**
      * Distinguished name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String dname;
@@ -96,6 +88,8 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
+     * <p>Setter for the field <code>keyalg</code>.</p>
+     *
      * @param keyalg value of the field {@link #keyalg} to set
      */
     public void setKeyalg( String keyalg )
@@ -114,6 +108,8 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
+     * <p>Setter for the field <code>keysize</code>.</p>
+     *
      * @param keysize value of the field {@link #keysize} to set
      */
     public void setKeysize( String keysize )
@@ -152,6 +148,8 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
+     * <p>Setter for the field <code>sigalg</code>.</p>
+     *
      * @param sigalg value of the field {@link #sigalg} to set
      */
     public void setSigalg( String sigalg )
@@ -170,6 +168,8 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
+     * <p>Setter for the field <code>validity</code>.</p>
+     *
      * @param validity value of the field {@link #validity} to set
      */
     public void setValidity( String validity )
@@ -188,6 +188,8 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
+     * <p>Setter for the field <code>dname</code>.</p>
+     *
      * @param dname value of the field {@link #dname} to set
      */
     public void setDname( String dname )
@@ -207,6 +209,8 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
+     * <p>Setter for the field <code>startdate</code>.</p>
+     *
      * @param startdate value of the field {@link #startdate} to set
      */
     public void setStartdate( String startdate )
@@ -218,8 +222,6 @@ public class KeyToolGenerateKeyPairRequest
      * Gets the value of the {@link #exts} field.
      *
      * @return the value of the {@link #exts} field
-     * 
-     * @deprecated
      */
     public String getExt()
     {
@@ -227,9 +229,9 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
+     * <p>setExt.</p>
+     *
      * @param ext value of the field {@link #exts} to set
-     * 
-     * @deprecated
      */
     public void setExt( String ext )
     {
@@ -242,7 +244,10 @@ public class KeyToolGenerateKeyPairRequest
     }
 
     /**
+     * <p>Setter for the field <code>exts</code>.</p>
+     *
      * @param exts values of the field {@link #exts} to set
+     * @since 1.6
      */
     public void setExts( List<String> exts )
     {
@@ -258,6 +263,7 @@ public class KeyToolGenerateKeyPairRequest
      * Gets the values of the {@link #exts} field.
      *
      * @return the values of the {@link #exts} field
+     * @since 1.6
      */
     public List<String> getExts()
     {

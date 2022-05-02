@@ -30,7 +30,7 @@ import java.net.URL;
 /**
  * Input resources fixtures.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.3
  */
 public class ResourceFixtures
@@ -38,11 +38,22 @@ public class ResourceFixtures
 
     protected final File workingDirectory;
 
+    /**
+     * <p>Constructor for ResourceFixtures.</p>
+     *
+     * @param workingDirectory a {@link java.io.File} object
+     */
     public ResourceFixtures( File workingDirectory )
     {
         this.workingDirectory = workingDirectory;
     }
 
+    /**
+     * <p>simpleDestKeyStoreFile.</p>
+     *
+     * @param name a {@link java.lang.String} object
+     * @return a {@link java.io.File} object
+     */
     public File simpleDestKeyStoreFile( String name )
     {
         File file = new File( workingDirectory, name );
@@ -52,11 +63,24 @@ public class ResourceFixtures
         return file;
     }
 
+    /**
+     * <p>simpleDestKeyStoreFile.</p>
+     *
+     * @return a {@link java.io.File} object
+     */
     public File simpleDestKeyStoreFile()
     {
         return simpleDestKeyStoreFile( "destkeystore" );
     }
 
+    /**
+     * <p>simpleKeyStore.</p>
+     *
+     * @param name a {@link java.lang.String} object
+     * @param copy a boolean
+     * @return a {@link java.io.File} object
+     * @throws java.io.IOException if any.
+     */
     public File simpleKeyStore( String name, boolean copy )
         throws IOException
     {
@@ -69,6 +93,12 @@ public class ResourceFixtures
         return keyStore;
     }
 
+    /**
+     * <p>simpleKeyStore.</p>
+     *
+     * @return a {@link java.io.File} object
+     * @throws java.io.IOException if any.
+     */
     public File simpleKeyStore()
         throws IOException
     {
@@ -76,6 +106,13 @@ public class ResourceFixtures
         return keyStore;
     }
 
+    /**
+     * <p>simpleKeyStore.</p>
+     *
+     * @param copy a boolean
+     * @return a {@link java.io.File} object
+     * @throws java.io.IOException if any.
+     */
     public File simpleKeyStore( boolean copy )
         throws IOException
     {
@@ -84,6 +121,13 @@ public class ResourceFixtures
         return keyStore;
     }
 
+    /**
+     * <p>simpleKeyStore.</p>
+     *
+     * @param name a {@link java.lang.String} object
+     * @return a {@link java.io.File} object
+     * @throws java.io.IOException if any.
+     */
     public File simpleKeyStore( String name )
         throws IOException
     {
@@ -92,6 +136,12 @@ public class ResourceFixtures
         return keyStore;
     }
 
+    /**
+     * <p>simpleCertificateRequest.</p>
+     *
+     * @return a {@link java.io.File} object
+     * @throws java.io.IOException if any.
+     */
     public File simpleCertificateRequest()
         throws IOException
     {
@@ -103,6 +153,12 @@ public class ResourceFixtures
         return inFile;
     }
 
+    /**
+     * <p>simpleCertificate.</p>
+     *
+     * @return a {@link java.io.File} object
+     * @throws java.io.IOException if any.
+     */
     public File simpleCertificate()
         throws IOException
     {
@@ -114,6 +170,11 @@ public class ResourceFixtures
         return inFile;
     }
 
+    /**
+     * <p>outputFile.</p>
+     *
+     * @return a {@link java.io.File} object
+     */
     public File outputFile()
     {
         File outputFile = new File( workingDirectory, "outputFile" );
@@ -121,21 +182,46 @@ public class ResourceFixtures
         return outputFile;
     }
 
+    /**
+     * <p>getKeyStoreURL.</p>
+     *
+     * @param prefix a {@link java.lang.String} object
+     * @return a {@link java.net.URL} object
+     */
     protected URL getKeyStoreURL( String prefix )
     {
         return getClass().getResource( "/" + prefix + "-keystore" );
     }
 
+    /**
+     * <p>getCertificateRequestURL.</p>
+     *
+     * @param prefix a {@link java.lang.String} object
+     * @return a {@link java.net.URL} object
+     */
     protected URL getCertificateRequestURL( String prefix )
     {
         return getClass().getResource( "/" + prefix + "-certificate-request" );
     }
 
+    /**
+     * <p>getCertificateURL.</p>
+     *
+     * @param prefix a {@link java.lang.String} object
+     * @return a {@link java.net.URL} object
+     */
     protected URL getCertificateURL( String prefix )
     {
         return getClass().getResource( "/" + prefix + "-certificate" );
     }
 
+    /**
+     * <p>copyURLToFile.</p>
+     *
+     * @param url a {@link java.net.URL} object
+     * @param dest a {@link java.io.File} object
+     * @throws java.io.IOException if any.
+     */
     protected void copyURLToFile( URL url, File dest )
         throws IOException
     {

@@ -27,8 +27,7 @@ import java.util.List;
 /**
  * To build the command line for a given {@link org.codehaus.mojo.keytool.KeyToolRequest}.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
  * @since 1.1
  */
 public abstract class AbstractKeyToolCommandLineBuilder
@@ -45,17 +44,13 @@ public abstract class AbstractKeyToolCommandLineBuilder
      */
     private String keyToolFile;
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setLogger( Logger logger )
     {
         this.logger = logger;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setKeyToolFile( String keyToolFile )
     {
         this.keyToolFile = keyToolFile;
@@ -77,9 +72,7 @@ public abstract class AbstractKeyToolCommandLineBuilder
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void checkSupportedRequest( KeyToolRequest request )
         throws UnsupportedKeyToolRequestException
     {
@@ -189,6 +182,7 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param cli    command line to fill
      * @param key    the argument name.
      * @param values the argument values to be added.
+     * @since 1.6
      */
     protected final void addArgsIfNotEmpty( Commandline cli, String key, List<String> values )
     {

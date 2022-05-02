@@ -22,12 +22,10 @@ import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
 
 /**
  * To list entries in a keystore.
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -list} (jdk 1.5) command.
- * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 @Mojo( name = "list", requiresProject = true, threadSafe = true )
@@ -36,7 +34,6 @@ public class ListMojo
 {
     /**
      * Output in RFC style.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -52,9 +49,7 @@ public class ListMojo
         super( KeyToolListRequest.class );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected KeyToolListRequest createKeytoolRequest()
     {

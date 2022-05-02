@@ -27,14 +27,11 @@ import java.io.File;
 
 /**
  * To import all entries of a keystore to another keystore.
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -importkeystore} command.
- * <p/>
  * <strong>Note</strong> This operation was not implemented by the keytool before jdk 1.6.
- * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 @Mojo( name = "importKeystore", requiresProject = true, threadSafe = true )
@@ -44,7 +41,6 @@ public class ImportKeystoreMojo
 
     /**
      * Source keystore name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -54,7 +50,6 @@ public class ImportKeystoreMojo
 
     /**
      * Destination keystore name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -64,7 +59,6 @@ public class ImportKeystoreMojo
 
     /**
      * Source keystore type.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -74,7 +68,6 @@ public class ImportKeystoreMojo
 
     /**
      * Destination keystore type.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -84,7 +77,6 @@ public class ImportKeystoreMojo
 
     /**
      * Source keystore password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -94,7 +86,6 @@ public class ImportKeystoreMojo
 
     /**
      * Destination keystore password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -104,7 +95,6 @@ public class ImportKeystoreMojo
 
     /**
      * Source keystore password protected.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -114,7 +104,6 @@ public class ImportKeystoreMojo
 
     /**
      * Source keystore provider name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -124,7 +113,6 @@ public class ImportKeystoreMojo
 
     /**
      * Destination keystore provider name.
-     * <p/>
      * See <a hresf="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -134,7 +122,6 @@ public class ImportKeystoreMojo
 
     /**
      * Source alias.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -144,7 +131,6 @@ public class ImportKeystoreMojo
 
     /**
      * Destination alias.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -154,7 +140,6 @@ public class ImportKeystoreMojo
 
     /**
      * Source key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -164,7 +149,6 @@ public class ImportKeystoreMojo
 
     /**
      * Destination key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -174,7 +158,6 @@ public class ImportKeystoreMojo
 
     /**
      * Do not prompt.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -184,7 +167,6 @@ public class ImportKeystoreMojo
 
     /**
      * Provider class name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -194,7 +176,6 @@ public class ImportKeystoreMojo
 
     /**
      * Provider argument.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -204,7 +185,6 @@ public class ImportKeystoreMojo
 
     /**
      * Provider classpath.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -228,6 +208,7 @@ public class ImportKeystoreMojo
         super( KeyToolImportKeystoreRequest.class );
     }
 
+    /** {@inheritDoc} */
     @Override
     public void execute()
         throws MojoExecutionException
@@ -251,9 +232,7 @@ public class ImportKeystoreMojo
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected KeyToolImportKeystoreRequest createKeytoolRequest()
     {
@@ -279,9 +258,7 @@ public class ImportKeystoreMojo
         return request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected String getCommandlineInfo( Commandline commandLine )
     {

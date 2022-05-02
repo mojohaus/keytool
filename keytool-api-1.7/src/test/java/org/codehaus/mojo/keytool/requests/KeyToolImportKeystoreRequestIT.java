@@ -23,7 +23,7 @@ import java.io.File;
 /**
  * Test the {@link KeyToolImportKeystoreRequest}.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.3
  */
 public class KeyToolImportKeystoreRequestIT

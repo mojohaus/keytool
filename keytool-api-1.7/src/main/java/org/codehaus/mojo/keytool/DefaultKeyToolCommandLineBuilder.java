@@ -38,10 +38,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * To build the command line for a given {@link KeyToolRequest}.
+ * To build the command line for a given {@link org.codehaus.mojo.keytool.KeyToolRequest}.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
+
  * @since 1.1
  */
 @Component( role = KeyToolCommandLineBuilder.class, hint = "default" )
@@ -56,22 +56,21 @@ public class DefaultKeyToolCommandLineBuilder
      */
     final Set<Class<? extends KeyToolRequest>> unsupportedRequestTypes;
 
+    /**
+     * <p>Constructor for DefaultKeyToolCommandLineBuilder.</p>
+     */
     public DefaultKeyToolCommandLineBuilder()
     {
         this.unsupportedRequestTypes = new HashSet<Class<? extends KeyToolRequest>>();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public <R extends KeyToolRequest> boolean supportRequestType( Class<R> requestType )
     {
         return !unsupportedRequestTypes.contains( requestType );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public Commandline build( KeyToolRequest request )
         throws CommandLineConfigurationException, UnsupportedKeyToolRequestException
     {

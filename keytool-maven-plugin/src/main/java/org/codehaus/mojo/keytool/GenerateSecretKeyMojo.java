@@ -24,13 +24,9 @@ import org.codehaus.plexus.util.StringUtils;
 
 /**
  * To generate a secret key into a keystore.
- * <p/>
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -genseckey} command.
- * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
- *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 @Mojo( name = "generateSecretKey", requiresProject = true, threadSafe = true )
@@ -40,7 +36,6 @@ public class GenerateSecretKeyMojo
 
     /**
      * Key algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -50,7 +45,6 @@ public class GenerateSecretKeyMojo
 
     /**
      * Key bit size.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -60,7 +54,6 @@ public class GenerateSecretKeyMojo
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -76,9 +69,7 @@ public class GenerateSecretKeyMojo
         super( KeyToolGenerateSecretKeyRequest.class );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected KeyToolGenerateSecretKeyRequest createKeytoolRequest()
     {
@@ -90,9 +81,7 @@ public class GenerateSecretKeyMojo
         return request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected String getCommandlineInfo( Commandline commandLine )
     {

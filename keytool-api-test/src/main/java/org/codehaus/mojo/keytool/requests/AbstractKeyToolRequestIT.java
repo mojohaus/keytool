@@ -33,7 +33,7 @@ import java.util.Arrays;
 /**
  * abstract test of a keytool request.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
@@ -55,19 +55,39 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
 
     private final boolean supportedRequest;
 
+    /**
+     * <p>Constructor for AbstractKeyToolRequestIT.</p>
+     */
     protected AbstractKeyToolRequestIT()
     {
         this( true );
     }
 
+    /**
+     * <p>Constructor for AbstractKeyToolRequestIT.</p>
+     *
+     * @param supportedRequest a boolean
+     */
     protected AbstractKeyToolRequestIT( boolean supportedRequest )
     {
         this.supportedRequest = supportedRequest;
     }
 
+    /**
+     * <p>testRequest.</p>
+     *
+     * @throws java.lang.Exception if any.
+     */
     public abstract void testRequest()
         throws Exception;
 
+    /**
+     * <p>consumeRequest.</p>
+     *
+     * @param request a R object
+     * @return a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
+     * @throws org.apache.maven.shared.utils.cli.javatool.JavaToolException if any.
+     */
     protected final JavaToolResult consumeRequest( R request )
         throws JavaToolException
     {
@@ -87,6 +107,8 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
 
     /**
      * {@inheritDoc}
+     *
+     * @throws java.lang.Exception if any.
      */
     @Before
     public void setUp()
@@ -108,6 +130,8 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
 
     /**
      * {@inheritDoc}
+     *
+     * @throws java.lang.Exception if any.
      */
     @After
     public void tearDown()
@@ -119,6 +143,13 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
         resourceFixtures = null;
     }
 
+    /**
+     * <p>executeKeyToolRequest.</p>
+     *
+     * @param request a {@link org.codehaus.mojo.keytool.KeyToolRequest} object
+     * @return a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
+     * @throws org.apache.maven.shared.utils.cli.javatool.JavaToolException if any.
+     */
     protected JavaToolResult executeKeyToolRequest( KeyToolRequest request )
         throws JavaToolException
     {
@@ -129,6 +160,13 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
         return result;
     }
 
+    /**
+     * <p>assertKeyToolResult.</p>
+     *
+     * @param result a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
+     * @param expectedCommandLineArguments an array of {@link java.lang.String} objects
+     * @param expectedExitCode a int
+     */
     protected void assertKeyToolResult( JavaToolResult result, String[] expectedCommandLineArguments,
                                         int expectedExitCode )
     {
@@ -138,6 +176,12 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
                       expectedExitCode, result.getExitCode() );
     }
 
+    /**
+     * <p>assertKeyToolResult.</p>
+     *
+     * @param result a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
+     * @param expectedCommandLineArguments an array of {@link java.lang.String} objects
+     */
     protected void assertKeyToolResult( JavaToolResult result, String[] expectedCommandLineArguments )
     {
 
@@ -153,6 +197,12 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
         }
     }
 
+    /**
+     * <p>executeUnsupportedKeyToolRequest.</p>
+     *
+     * @param request a {@link org.codehaus.mojo.keytool.KeyToolRequest} object
+     * @throws org.apache.maven.shared.utils.cli.javatool.JavaToolException if any.
+     */
     protected void executeUnsupportedKeyToolRequest( KeyToolRequest request )
         throws JavaToolException
     {

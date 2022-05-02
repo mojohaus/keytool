@@ -19,7 +19,7 @@ package org.codehaus.mojo.keytool.requests;
 /**
  * Request to list entries in a keystore using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolListRequest
@@ -28,7 +28,6 @@ public class KeyToolListRequest
 
     /**
      * Output in RFC style.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private boolean rfc;
@@ -44,6 +43,8 @@ public class KeyToolListRequest
     }
 
     /**
+     * <p>Setter for the field <code>rfc</code>.</p>
+     *
      * @param rfc value of the field {@link #rfc} to set
      */
     public void setRfc( boolean rfc )

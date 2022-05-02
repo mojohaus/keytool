@@ -43,13 +43,14 @@ public abstract class AbstractKeyToolMojo
 
     /**
      * Enable verbose mode (in mojo and in keytool command).
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     @Parameter( defaultValue = "false" )
     private boolean verbose;
 
     /**
+     * <p>isSkip.</p>
+     *
      * @return value of the {@link #skip} flag
      */
     public final boolean isSkip()
@@ -58,6 +59,8 @@ public abstract class AbstractKeyToolMojo
     }
 
     /**
+     * <p>Setter for the field <code>skip</code>.</p>
+     *
      * @param skip the skip flag value to set.
      */
     public final void setSkip( boolean skip )
@@ -66,6 +69,8 @@ public abstract class AbstractKeyToolMojo
     }
 
     /**
+     * <p>isVerbose.</p>
+     *
      * @return value of the {@link #verbose} flag
      */
     public final boolean isVerbose()
@@ -74,6 +79,8 @@ public abstract class AbstractKeyToolMojo
     }
 
     /**
+     * <p>Setter for the field <code>verbose</code>.</p>
+     *
      * @param verbose the verbose flag value to set.
      */
     public final void setVerbose( boolean verbose )

@@ -19,7 +19,7 @@ package org.codehaus.mojo.keytool.requests;
 /**
  * Request to export a certificate using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolExportCertificateRequest
@@ -28,14 +28,12 @@ public class KeyToolExportCertificateRequest
 
     /**
      * Output in RFC style.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private boolean rfc;
 
     /**
      * Output file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String file;
@@ -51,6 +49,8 @@ public class KeyToolExportCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>rfc</code>.</p>
+     *
      * @param rfc value of the field {@link #rfc} to set
      */
     public void setRfc( boolean rfc )
@@ -69,6 +69,8 @@ public class KeyToolExportCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>file</code>.</p>
+     *
      * @param file value of the field {@link #file} to set
      */
     public void setFile( String file )

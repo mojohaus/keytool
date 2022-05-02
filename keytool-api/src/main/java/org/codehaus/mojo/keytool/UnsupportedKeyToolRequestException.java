@@ -21,7 +21,7 @@ import org.apache.maven.shared.utils.cli.javatool.JavaToolException;
 /**
  * Signals that a request can not be consumed by the underlined keytool implementation.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.3
  */
 public class UnsupportedKeyToolRequestException
@@ -29,11 +29,22 @@ public class UnsupportedKeyToolRequestException
 {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * <p>Constructor for UnsupportedKeyToolRequestException.</p>
+     *
+     * @param message a {@link java.lang.String} object
+     * @param cause a {@link java.lang.Throwable} object
+     */
     public UnsupportedKeyToolRequestException( String message, Throwable cause )
     {
         super( message, cause );
     }
 
+    /**
+     * <p>Constructor for UnsupportedKeyToolRequestException.</p>
+     *
+     * @param message a {@link java.lang.String} object
+     */
     public UnsupportedKeyToolRequestException( String message )
     {
         super( message );

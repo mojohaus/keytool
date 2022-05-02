@@ -27,15 +27,12 @@ import java.io.File;
 
 /**
  * To import a certificate into a keystore.
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -import} (jdk 1.5) or  {@code keytool -importcert} (jdk 1.6)
  * command.
- * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
- * <p/>
  * <strong>Since version 1.2, this mojo replace the mojo import.</strong>
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 @Mojo( name = "importCertificate", requiresProject = true, threadSafe = true )
@@ -45,7 +42,6 @@ public class ImportCertificateMojo
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -55,7 +51,6 @@ public class ImportCertificateMojo
 
     /**
      * Input file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -65,7 +60,6 @@ public class ImportCertificateMojo
 
     /**
      * Do not prompt.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -75,7 +69,6 @@ public class ImportCertificateMojo
 
     /**
      * Trust certificates from cacerts.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -99,6 +92,7 @@ public class ImportCertificateMojo
         super( KeyToolImportCertificateRequest.class );
     }
 
+    /** {@inheritDoc} */
     @Override
     public void execute()
         throws MojoExecutionException
@@ -121,9 +115,7 @@ public class ImportCertificateMojo
         super.execute();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected KeyToolImportCertificateRequest createKeytoolRequest()
     {
@@ -136,9 +128,7 @@ public class ImportCertificateMojo
         return request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected String getCommandlineInfo( Commandline commandLine )
     {

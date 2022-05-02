@@ -19,8 +19,7 @@ package org.codehaus.mojo.keytool;
 /**
  * Specifies the common parameters used to control a KeyTool tool invocation.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
  * @since 1.1
  */
 public interface KeyToolRequestWithKeyStoreParameters
@@ -77,6 +76,8 @@ public interface KeyToolRequestWithKeyStoreParameters
     String getProvidername();
 
     /**
+     * <p>setProvidername.</p>
+     *
      * @param providername value of the field {@code providername} to set
      */
     void setProvidername( String providername );
@@ -89,6 +90,8 @@ public interface KeyToolRequestWithKeyStoreParameters
     String getProviderclass();
 
     /**
+     * <p>setProviderclass.</p>
+     *
      * @param providerclass value of the field {@code providerclass} to set
      */
     void setProviderclass( String providerclass );
@@ -101,6 +104,8 @@ public interface KeyToolRequestWithKeyStoreParameters
     String getProviderarg();
 
     /**
+     * <p>setProviderarg.</p>
+     *
      * @param providerarg value of the field {@code providerarg} to set
      */
     void setProviderarg( String providerarg );
@@ -113,6 +118,8 @@ public interface KeyToolRequestWithKeyStoreParameters
     String getProviderpath();
 
     /**
+     * <p>setProviderpath.</p>
+     *
      * @param providerpath value of the field {@code providerpath} to set
      */
     void setProviderpath( String providerpath );

@@ -30,14 +30,11 @@ import java.util.List;
 
 /**
  * To generate a key pair into a keystore.
- * <p/>
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -genkey} (jdk 1.5) {@code keytool -genkeypair} (jdk 1.6)
  * command.
- * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 @Mojo( name = "generateKeyPair", requiresProject = true, threadSafe = true )
@@ -47,7 +44,6 @@ public class GenerateKeyPairMojo
 
     /**
      * Key algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -57,7 +53,6 @@ public class GenerateKeyPairMojo
 
     /**
      * Key bit size.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -67,7 +62,6 @@ public class GenerateKeyPairMojo
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -77,7 +71,6 @@ public class GenerateKeyPairMojo
 
     /**
      * Signature algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -87,7 +80,6 @@ public class GenerateKeyPairMojo
 
     /**
      * Validity number of days.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -97,7 +89,6 @@ public class GenerateKeyPairMojo
 
     /**
      * Certificate validity start date/time.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -107,7 +98,6 @@ public class GenerateKeyPairMojo
 
     /**
      * X.509 extension.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -119,7 +109,6 @@ public class GenerateKeyPairMojo
 
     /**
      * X.509 extension.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.6
@@ -129,7 +118,6 @@ public class GenerateKeyPairMojo
 
     /**
      * Distinguished name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -153,6 +141,7 @@ public class GenerateKeyPairMojo
         super( KeyToolGenerateKeyPairRequest.class );
     }
 
+    /** {@inheritDoc} */
     @Override
     public void execute()
         throws MojoExecutionException
@@ -175,9 +164,7 @@ public class GenerateKeyPairMojo
         super.execute();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected KeyToolGenerateKeyPairRequest createKeytoolRequest()
     {
@@ -198,9 +185,7 @@ public class GenerateKeyPairMojo
         return request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected String getCommandlineInfo( Commandline commandLine )
     {

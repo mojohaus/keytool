@@ -23,10 +23,9 @@ import java.util.List;
 
 /**
  * Request to do a Generate certificate from a certificate request using the KeyTool tool.
- * <p/>
  * <strong>Note:</strong> Such a request requires a jdk &gt;= 1.7.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolGenerateCertificateRequest
@@ -35,63 +34,54 @@ public class KeyToolGenerateCertificateRequest
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keypass;
 
     /**
      * Output in RFC style.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private boolean rfc;
 
     /**
      * input file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private File infile;
 
     /**
      * output file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private File outfile;
 
     /**
      * Signature algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String sigalg;
 
     /**
      * Distinguished name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String dname;
 
     /**
      * Certificate validity start date/time.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String startdate;
 
     /**
      * X.509 extension.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private List<String> exts = new ArrayList<String>();
 
     /**
      * Validity number of days.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String validity;
@@ -107,6 +97,8 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>rfc</code>.</p>
+     *
      * @param rfc value of the field {@link #rfc} to set
      */
     public void setRfc( boolean rfc )
@@ -125,6 +117,8 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>infile</code>.</p>
+     *
      * @param infile value of the field {@link #infile} to set
      */
     public void setInfile( File infile )
@@ -143,6 +137,8 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>outfile</code>.</p>
+     *
      * @param outfile value of the field {@link #outfile} to set
      */
     public void setOutfile( File outfile )
@@ -161,6 +157,8 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>sigalg</code>.</p>
+     *
      * @param sigalg value of the field {@link #sigalg} to set
      */
     public void setSigalg( String sigalg )
@@ -179,6 +177,8 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>dname</code>.</p>
+     *
      * @param dname value of the field {@link #dname} to set
      */
     public void setDname( String dname )
@@ -197,6 +197,8 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>startdate</code>.</p>
+     *
      * @param startdate value of the field {@link #startdate} to set
      */
     public void setStartdate( String startdate )
@@ -208,8 +210,6 @@ public class KeyToolGenerateCertificateRequest
      * Gets the value of the {@link #exts} field.
      *
      * @return the value of the {@link #exts} field
-     * 
-     * @deprecated
      */
     public String getExt()
     {
@@ -217,9 +217,9 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>setExt.</p>
+     *
      * @param ext value of the field {@link #exts} to set
-     * 
-     * @deprecated
      */
     public void setExt( String ext )
     {
@@ -232,7 +232,10 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>exts</code>.</p>
+     *
      * @param exts values of the field {@link #exts} to set
+     * @since 1.6
      */
     public void setExts( List<String> exts )
     {
@@ -248,6 +251,7 @@ public class KeyToolGenerateCertificateRequest
      * Gets the values of the {@link #exts} field.
      *
      * @return the values of the {@link #exts} field
+     * @since 1.6
      */
     public List<String> getExts()
     {
@@ -265,6 +269,8 @@ public class KeyToolGenerateCertificateRequest
     }
 
     /**
+     * <p>Setter for the field <code>validity</code>.</p>
+     *
      * @param validity value of the field {@link #validity} to set
      */
     public void setValidity( String validity )

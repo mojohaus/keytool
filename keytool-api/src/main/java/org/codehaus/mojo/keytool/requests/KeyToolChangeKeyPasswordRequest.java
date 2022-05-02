@@ -19,7 +19,7 @@ package org.codehaus.mojo.keytool.requests;
 /**
  * Request to change the key password of an entry using the KeyTool tool.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public class KeyToolChangeKeyPasswordRequest
@@ -28,14 +28,12 @@ public class KeyToolChangeKeyPasswordRequest
 
     /**
      * New password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String newPassword;
 
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keypass;
@@ -51,6 +49,8 @@ public class KeyToolChangeKeyPasswordRequest
     }
 
     /**
+     * <p>Setter for the field <code>newPassword</code>.</p>
+     *
      * @param newPassword value of the field {@link #newPassword} to set
      */
     public void setNewPassword( String newPassword )

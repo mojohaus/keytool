@@ -29,10 +29,10 @@ import org.apache.maven.toolchain.ToolchainManager;
 import java.io.File;
 
 /**
- * Abstract keytool mojo implementing the {@link KeyToolRequest}.
+ * Abstract keytool mojo implementing the {@link org.codehaus.mojo.keytool.KeyToolRequest}.
  *
  * @param <R> generic type of request used by the mojo
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
@@ -41,7 +41,6 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
 
     /**
      * List of additional arguments to append to the keytool command line.
-     * <p/>
      * <strong>Note: This parameter is left for compatibility reasons but
      * should be used as a last resort when parameters are not found in a
      * dedicated mojo due to possible side-effects on parameters
@@ -100,6 +99,8 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
 
     /**
      * {@inheritDoc}
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
      */
     public void execute()
         throws MojoExecutionException
@@ -183,7 +184,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      * To consume the keytool comand execution.
      *
      * @param result result of the command line action
-     * @throws MojoExecutionException if the result is not 0 (means something bad occurs)
+     * @throws org.apache.maven.plugin.MojoExecutionException if the result is not 0 (means something bad occurs)
      */
     protected final void consumeResult( JavaToolResult result )
         throws MojoExecutionException

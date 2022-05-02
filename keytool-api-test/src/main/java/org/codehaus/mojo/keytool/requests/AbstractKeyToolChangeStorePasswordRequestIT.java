@@ -23,22 +23,31 @@ import java.io.File;
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolChangeStorePasswordRequest}.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public abstract class AbstractKeyToolChangeStorePasswordRequestIT
     extends AbstractKeyToolRequestIT<KeyToolChangeStorePasswordRequest>
 {
 
+    /**
+     * <p>Constructor for AbstractKeyToolChangeStorePasswordRequestIT.</p>
+     */
     protected AbstractKeyToolChangeStorePasswordRequestIT()
     {
     }
 
+    /**
+     * <p>Constructor for AbstractKeyToolChangeStorePasswordRequestIT.</p>
+     *
+     * @param supportedRequest a boolean
+     */
     protected AbstractKeyToolChangeStorePasswordRequestIT( boolean supportedRequest )
     {
         super( supportedRequest );
     }
 
+    /** {@inheritDoc} */
     @Override
     public final void testRequest()
         throws Exception
@@ -54,6 +63,12 @@ public abstract class AbstractKeyToolChangeStorePasswordRequestIT
 
     }
 
+    /**
+     * <p>requestResult.</p>
+     *
+     * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
+     * @param keyStore a {@link java.io.File} object
+     */
     protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore );
 
 }

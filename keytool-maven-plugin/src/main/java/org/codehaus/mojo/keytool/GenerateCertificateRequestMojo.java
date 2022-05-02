@@ -30,13 +30,10 @@ import java.util.List;
 
 /**
  * To generate certificate request.
- * <p/>
- * <p/>
  * Implemented as a wrapper around the SDK {@code keytool -certreq} command.
- * <p/>
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.2
  */
 @Mojo( name = "generateCertificateRequest", requiresProject = true, threadSafe = true )
@@ -45,7 +42,6 @@ public class GenerateCertificateRequestMojo
 {
     /**
      * Key password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -55,7 +51,6 @@ public class GenerateCertificateRequestMojo
 
     /**
      * Output file name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -65,7 +60,6 @@ public class GenerateCertificateRequestMojo
 
     /**
      * Signature algorithm name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -75,7 +69,6 @@ public class GenerateCertificateRequestMojo
 
     /**
      * X.509 extension.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.6
@@ -88,7 +81,6 @@ public class GenerateCertificateRequestMojo
 
     /**
      * X.509 extension.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.6
@@ -98,7 +90,6 @@ public class GenerateCertificateRequestMojo
 
     /**
      * Distinguished name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
@@ -114,15 +105,14 @@ public class GenerateCertificateRequestMojo
         super( KeyToolGenerateCertificateRequestRequest.class );
     }
 
+    /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
         createParentDirIfNecessary(this.file.getPath());
         super.execute();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected KeyToolGenerateCertificateRequestRequest createKeytoolRequest()
     {
@@ -140,9 +130,7 @@ public class GenerateCertificateRequestMojo
         return request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected String getCommandlineInfo( Commandline commandLine )
     {

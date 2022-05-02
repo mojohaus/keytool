@@ -21,8 +21,7 @@ import org.codehaus.mojo.keytool.KeyToolRequestWithKeyStoreParameters;
 /**
  * Specifies the commons parameters used to control a key tool invocation which have propviders options.
  *
- * @author tchemit <chemit@codelutin.com>
- * @version $Id$
+ * @author tchemit
  * @since 1.1
  */
 public abstract class AbstractKeyToolRequestWithKeyStoreParameters
@@ -32,64 +31,57 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
 
     /**
      * Provider name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String providername;
 
     /**
      * Provider class name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String providerclass;
 
     /**
      * Provider argument.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String providerarg;
 
     /**
      * Provider classpath.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String providerpath;
 
     /**
      * Keystore name.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String keystore;
 
     /**
      * Keystore type.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String storetype;
 
     /**
      * Keystore password.
-     * <p/>
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
     private String storepass;
 
     /**
      * {@inheritDoc}
+     *
+     * @return a {@link java.lang.String} object
      */
     public final String getProvidername()
     {
         return providername;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setProvidername( String providername )
     {
         this.providername = providername;
@@ -97,15 +89,15 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
 
     /**
      * {@inheritDoc}
+     *
+     * @return a {@link java.lang.String} object
      */
     public final String getProviderclass()
     {
         return providerclass;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setProviderclass( String providerclass )
     {
         this.providerclass = providerclass;
@@ -113,15 +105,15 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
 
     /**
      * {@inheritDoc}
+     *
+     * @return a {@link java.lang.String} object
      */
     public final String getProviderarg()
     {
         return providerarg;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setProviderarg( String providerarg )
     {
         this.providerarg = providerarg;
@@ -129,15 +121,15 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
 
     /**
      * {@inheritDoc}
+     *
+     * @return a {@link java.lang.String} object
      */
     public final String getProviderpath()
     {
         return providerpath;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setProviderpath( String providerpath )
     {
         this.providerpath = providerpath;
@@ -145,15 +137,15 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
 
     /**
      * {@inheritDoc}
+     *
+     * @return a {@link java.lang.String} object
      */
     public final String getKeystore()
     {
         return keystore;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setKeystore( String keystore )
     {
         this.keystore = keystore;
@@ -161,15 +153,15 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
 
     /**
      * {@inheritDoc}
+     *
+     * @return a {@link java.lang.String} object
      */
     public final String getStoretype()
     {
         return storetype;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setStoretype( String storetype )
     {
         this.storetype = storetype;
@@ -177,15 +169,15 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
 
     /**
      * {@inheritDoc}
+     *
+     * @return a {@link java.lang.String} object
      */
     public final String getStorepass()
     {
         return storepass;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final void setStorepass( String storepass )
     {
         this.storepass = storepass;

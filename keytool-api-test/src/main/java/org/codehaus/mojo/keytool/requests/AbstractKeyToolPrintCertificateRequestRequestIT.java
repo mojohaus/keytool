@@ -23,22 +23,31 @@ import java.io.File;
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest}.
  *
- * @author tchemit <chemit@codelutin.com>
+ * @author tchemit
  * @since 1.1
  */
 public abstract class AbstractKeyToolPrintCertificateRequestRequestIT
     extends AbstractKeyToolRequestIT<KeyToolPrintCertificateRequestRequest>
 {
 
+    /**
+     * <p>Constructor for AbstractKeyToolPrintCertificateRequestRequestIT.</p>
+     */
     protected AbstractKeyToolPrintCertificateRequestRequestIT()
     {
     }
 
+    /**
+     * <p>Constructor for AbstractKeyToolPrintCertificateRequestRequestIT.</p>
+     *
+     * @param supportedRequest a boolean
+     */
     protected AbstractKeyToolPrintCertificateRequestRequestIT( boolean supportedRequest )
     {
         super( supportedRequest );
     }
 
+    /** {@inheritDoc} */
     @Override
     public final void testRequest()
         throws Exception
@@ -54,6 +63,12 @@ public abstract class AbstractKeyToolPrintCertificateRequestRequestIT
         requestResult( keyToolResult, file );
     }
 
+    /**
+     * <p>requestResult.</p>
+     *
+     * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
+     * @param file a {@link java.io.File} object
+     */
     protected abstract void requestResult( JavaToolResult keyToolResult, File file );
 
 }
