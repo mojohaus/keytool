@@ -42,7 +42,6 @@ public class CleanKeyMojoTest
     private CleanKeyMojo mojo;
 
     protected void setUp()
-        throws Exception
     {
         mojo = new CleanKeyMojo();
 
@@ -56,12 +55,10 @@ public class CleanKeyMojoTest
     /**
      * Remove the temp keystore file created in the setup.
      *
-     * @throws MojoExecutionException
-     * @throws MojoFailureException
      * @throws IOException
      */
     public void testExistingRemoveKeystore()
-        throws MojoExecutionException, MojoFailureException, IOException
+        throws IOException
     {
         String tempKeystore =
             System.getProperty( "java.io.tmpdir" ) + File.separator + CleanKeyMojoTest.EXISTING_TEST_KEYSTORE;
@@ -75,11 +72,8 @@ public class CleanKeyMojoTest
     /**
      * Remove the temp keystore file created in the setup. existent
      *
-     * @throws MojoExecutionException
-     * @throws MojoFailureException
      */
     public void testRemoveNonExistentKeystore()
-        throws MojoExecutionException, MojoFailureException
     {
         mojo.setKeystore( CleanKeyMojoTest.NON_EXISTING_TEST_KEYSTORE );
         mojo.execute();

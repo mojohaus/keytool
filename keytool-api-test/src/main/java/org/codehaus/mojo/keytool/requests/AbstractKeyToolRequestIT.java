@@ -120,7 +120,7 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
         workingDirectory = new File( basedir, "target" + File.separator + "surefire-workdir" + File.separator +
             getClass().getName() + "_" + BUILD_TIMESTAMP );
 
-        tool = (KeyTool) lookup( KeyTool.ROLE );
+        tool = lookup( KeyTool.ROLE );
 
         Assert.assertNotNull( tool );
 

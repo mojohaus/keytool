@@ -60,7 +60,7 @@ public class DefaultKeyToolCommandLineBuilder
      */
     public DefaultKeyToolCommandLineBuilder()
     {
-        this.unsupportedRequestTypes = new HashSet<Class<? extends KeyToolRequest>>();
+        this.unsupportedRequestTypes = new HashSet<>();
         this.unsupportedRequestTypes.add( KeyToolImportKeystoreRequest.class );
         this.unsupportedRequestTypes.add( KeyToolGenerateCertificateRequest.class );
         this.unsupportedRequestTypes.add( KeyToolPrintCertificateRequestRequest.class );

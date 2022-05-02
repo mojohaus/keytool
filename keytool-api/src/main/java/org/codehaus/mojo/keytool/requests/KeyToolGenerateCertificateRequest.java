@@ -18,7 +18,6 @@ package org.codehaus.mojo.keytool.requests;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -78,7 +77,7 @@ public class KeyToolGenerateCertificateRequest
      * X.509 extension.
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
-    private List<String> exts = new ArrayList<String>();
+    private List<String> exts = new ArrayList<>();
 
     /**
      * Validity number of days.

@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
 
 /**
  * Input resources fixtures.
@@ -226,22 +227,10 @@ public class ResourceFixtures
         throws IOException
     {
         FileUtils.mkdir( dest.getParentFile().getAbsolutePath() );
-        InputStream inputStream = url.openStream();
-        try
+        try ( InputStream inputStream = url.openStream();
+                OutputStream outputStream = Files.newOutputStream( dest.toPath() ) )
         {
-            OutputStream outputStream = new FileOutputStream( dest );
-            try
-            {
-                IOUtil.copy( inputStream, outputStream );
-            }
-            finally
-            {
-                IOUtil.close( outputStream );
-            }
-        }
-        finally
-        {
-            IOUtil.close( inputStream );
+            IOUtil.copy( inputStream, outputStream );
         }
     }
 }

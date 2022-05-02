@@ -61,7 +61,7 @@ public class DefaultKeyToolCommandLineBuilder
      */
     public DefaultKeyToolCommandLineBuilder()
     {
-        this.unsupportedRequestTypes = new HashSet<Class<? extends KeyToolRequest>>();
+        this.unsupportedRequestTypes = new HashSet<>();
     }
 
     /** {@inheritDoc} */

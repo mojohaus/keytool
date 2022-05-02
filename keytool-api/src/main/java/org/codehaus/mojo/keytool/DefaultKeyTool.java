@@ -60,11 +60,7 @@ public class DefaultKeyTool
         {
             cli = builder.build( request );
         }
-        catch ( CommandLineConfigurationException e )
-        {
-            throw new JavaToolException( "Error configuring command-line. Reason: " + e.getMessage(), e );
-        }
-        catch ( UnsupportedKeyToolRequestException e )
+        catch ( CommandLineConfigurationException | UnsupportedKeyToolRequestException e )
         {
             throw new JavaToolException( "Error configuring command-line. Reason: " + e.getMessage(), e );
         }

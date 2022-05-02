@@ -44,7 +44,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      * <strong>Note: This parameter is left for compatibility reasons but
      * should be used as a last resort when parameters are not found in a
      * dedicated mojo due to possible side-effects on parameters
-     * (see https://jira.codehaus.org/browse/MKEYTOOL-17)</strong>
+     * (see MKEYTOOL-17</strong>
      *
      * @since 1.1
      */
