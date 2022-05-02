@@ -22,6 +22,7 @@
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
     <version>67</version>
+    <relativePath/>
   </parent>
 
   <artifactId>keytool</artifactId>
@@ -104,7 +105,7 @@
   </distributionManagement>
 
   <properties>
-    <mavenVersion>2.2.1</mavenVersion>
+    <mavenVersion>3.2.5</mavenVersion>
     <pluginPluginVersion>3.6.4</pluginPluginVersion>
   </properties>
 
@@ -113,11 +114,6 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-plugin-api</artifactId>
-        <version>${mavenVersion}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-toolchain</artifactId>
         <version>${mavenVersion}</version>
       </dependency>
       <dependency>
@@ -137,9 +133,9 @@
         <scope>provided</scope>
       </dependency>
       <dependency>
-        <groupId>commons-lang</groupId>
-        <artifactId>commons-lang</artifactId>
-        <version>2.6</version>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.12.0</version>
       </dependency>
 
 
@@ -233,16 +229,6 @@
           <plugin>
             <artifactId>maven-invoker-plugin</artifactId>
             <version>3.2.2</version>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>l10n-maven-plugin</artifactId>
-            <version>1.0-alpha-2</version>
-            <configuration>
-              <locales>
-                <locale>fr</locale>
-              </locales>
-            </configuration>
           </plugin>
         </plugins>
       </reporting>

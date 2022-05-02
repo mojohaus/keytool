@@ -16,7 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 import java.io.File;
 
