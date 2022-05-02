@@ -105,7 +105,7 @@
 
   <properties>
     <mavenVersion>2.2.1</mavenVersion>
-    <pluginPluginVersion>3.2</pluginPluginVersion>
+    <pluginPluginVersion>3.6.4</pluginPluginVersion>
   </properties>
 
   <dependencyManagement>
