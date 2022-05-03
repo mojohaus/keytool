@@ -103,7 +103,7 @@
   </distributionManagement>
 
   <properties>
-    <mavenVersion>3.2.5</mavenVersion>
+    <mavenVersion>3.6.3</mavenVersion>
     <pluginPluginVersion>3.6.4</pluginPluginVersion>
   </properties>
 
