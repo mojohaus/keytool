@@ -22,11 +22,11 @@
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
     <version>67</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <artifactId>keytool</artifactId>
-  <version>1.6-SNAPSHOT</version>
+  <version>1.6</version>
   <packaging>pom</packaging>
 
   <name>Keytool: Project</name>
@@ -90,6 +90,7 @@
     <connection>scm:git:https://github.com/mojohaus/keytool.git</connection>
     <developerConnection>scm:git:https://github.com/mojohaus/keytool.git</developerConnection>
     <url>https://github.com/mojohaus/keytool</url>
+    <tag>keytool-1.6</tag>
   </scm>
   <issueManagement>
     <system>github</system>
