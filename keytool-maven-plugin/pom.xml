@@ -21,7 +21,7 @@
   <parent>
     <artifactId>keytool</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>1.6</version>
+    <version>1.7-SNAPSHOT</version>
   </parent>
 
   <artifactId>keytool-maven-plugin</artifactId>
