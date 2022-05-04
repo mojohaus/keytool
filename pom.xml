@@ -31,7 +31,7 @@
 
   <name>Keytool: Project</name>
   <description>
-    Project to invoke the the keytool program bundled with Sun's Java SDK. Allows to manipulate keystores.
+    Project to invoke the the keytool program bundled with Java SDK. Allows to manipulate keystores.
     the project includes a java api to inkove the program and also a maven plugin.
   </description>
   <url>http://www.mojohaus.org/keytool</url>
