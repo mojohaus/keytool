@@ -37,12 +37,12 @@ A pull request has to fulfill only a single ticket and should never create/add/f
 == Releasing
 
 * Make sure `gpg-agent` is running.
-* Execute `./mvnw -B release:prepare release:perform`
+* Execute `mvn -B release:prepare release:perform`
 
 For publishing the site do the following:
 
 [source,bash]
 ----
 cd target/checkout
-../mvnw verify site site:stage scm-publish:publish-scm
+mvn verify site site:stage scm-publish:publish-scm
 ----
