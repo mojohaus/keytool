@@ -21,7 +21,7 @@
   <parent>
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>69</version>
+    <version>70</version>
     <relativePath />
   </parent>
 
