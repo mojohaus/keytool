@@ -79,7 +79,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      *
      * @since 1.4
      */
-    @Component
+    @Parameter( defaultValue = "${session}", readonly = true )
     private MavenSession session;
 
     /**
