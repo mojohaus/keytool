@@ -105,7 +105,8 @@
 
   <properties>
     <mavenVersion>3.2.5</mavenVersion>
-    <pluginPluginVersion>3.7.1</pluginPluginVersion>
+    <maven-invoker-plugin.version>3.5.0</maven-invoker-plugin.version>
+    <pluginPluginVersion>3.8.1</pluginPluginVersion>
   </properties>
 
   <dependencyManagement>
@@ -227,7 +228,6 @@
           </plugin>
           <plugin>
             <artifactId>maven-invoker-plugin</artifactId>
-            <version>3.4.0</version>
           </plugin>
         </plugins>
       </reporting>
