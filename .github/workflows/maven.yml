@@ -45,7 +45,7 @@ jobs:
         os: [ubuntu-latest, macOS-latest, windows-latest]
         java: [8, 11, 17]
         # switch to semeru after: https://github.com/actions/setup-java/pull/289
-        jdk: [temurin, zulu, adopt-openj9]
+        jdk: [temurin, adopt-openj9]
         exclude:
           # was already built
           - os: ubuntu-latest
