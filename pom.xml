@@ -26,7 +26,7 @@
   </parent>
 
   <artifactId>keytool</artifactId>
-  <version>1.7</version>
+  <version>1.8-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Keytool: Project</name>
@@ -90,7 +90,7 @@
     <connection>scm:git:https://github.com/mojohaus/keytool.git</connection>
     <developerConnection>scm:git:https://github.com/mojohaus/keytool.git</developerConnection>
     <url>https://github.com/mojohaus/keytool</url>
-    <tag>keytool-1.7</tag>
+    <tag>keytool-1.6</tag>
   </scm>
   <issueManagement>
     <system>github</system>
