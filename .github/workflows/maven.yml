@@ -21,56 +21,16 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 11
-          cache: 'maven'
-
-      - name: Build with Maven
-        run: mvn --batch-mode --show-version --errors verify -P run-its
-
-  build-all:
-    needs: build
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macOS-latest, windows-latest]
-        java: [8, 11, 17, "20-ea"]
-        # switch to semeru after: https://github.com/actions/setup-java/pull/289
-        jdk: [temurin, adopt-openj9]
-        exclude:
-          # was already built
-          - os: ubuntu-latest
-            java: 11
-            jdk: temurin
-          # not ready yet, only as semeru
-          - java: 17
-            jdk: adopt-openj9
-          # not available yet
-          - java: 20-ea
-            jdk: adopt-openj9
-      fail-fast: false
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: ${{ matrix.jdk }}
-          java-version: ${{ matrix.java }}
-          cache: 'maven'
-
-      - name: Build with Maven
-        run: mvn --batch-mode --show-version --errors verify -P run-its
+    name: Verify
+    uses: apache/maven-gh-actions-shared/.github/workflows/maven-verify.yml@v3
+    with:
+      ff-maven: "3.9.0"                     # Maven version for fail-fast-build
+      maven-matrix: '[ "3.8.7", "3.9.0" ]'  # Maven versions matrix for verify builds
+      jdk-matrix: '["8", "11", "17", "20-ea"]'
+      jdk-distribution-matrix: '["temurin", "adopt-openj9"]'
+      matrix-exclude: >
+        [ 
+          {"jdk": "17", "distribution": "adopt-openj9"},        
+          {"jdk": "20-ea", "distribution": "adopt-openj9"}
+        ]
+      ff-site-goal: '-DskipTests -P reporting site'
