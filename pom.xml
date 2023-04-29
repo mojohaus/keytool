@@ -104,7 +104,7 @@
   </distributionManagement>
 
   <properties>
-    <mavenVersion>3.2.5</mavenVersion>
+    <mavenVersion>3.5.4</mavenVersion>
     <maven-invoker-plugin.version>3.5.0</maven-invoker-plugin.version>
     <pluginPluginVersion>3.9.0</pluginPluginVersion>
   </properties>
