@@ -17,7 +17,7 @@ package org.codehaus.mojo.keytool;
  */
 
 import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.plexus.logging.Logger;
+import org.slf4j.Logger;
 
 /**
  * To build the command line for a given {@link org.codehaus.mojo.keytool.KeyToolRequest}.
