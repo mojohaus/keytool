@@ -18,8 +18,8 @@ package org.codehaus.mojo.keytool;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.List;
