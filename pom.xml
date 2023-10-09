@@ -21,7 +21,7 @@
   <parent>
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>70</version>
+    <version>77</version>
     <relativePath />
   </parent>
 
@@ -104,8 +104,6 @@
   </distributionManagement>
 
   <properties>
-    <mavenVersion>3.5.4</mavenVersion>
-    <maven-invoker-plugin.version>3.5.0</maven-invoker-plugin.version>
     <pluginPluginVersion>3.9.0</pluginPluginVersion>
   </properties>
 
@@ -168,10 +166,6 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <artifactId>maven-plugin-plugin</artifactId>
-          <version>${pluginPluginVersion}</version>
-        </plugin>
-        <plugin>
           <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-component-metadata</artifactId>
           <version>2.1.1</version>
@@ -180,7 +174,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.12.1</version>
+          <version>${maven-site-plugin.version}</version>
           <executions>
             <execution>
               <id>default-site</id>
