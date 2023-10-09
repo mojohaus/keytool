@@ -23,14 +23,3 @@ jobs:
   build:
     name: Verify
     uses: apache/maven-gh-actions-shared/.github/workflows/maven-verify.yml@v3
-    with:
-      ff-maven: "3.9.1"                     # Maven version for fail-fast-build
-      maven-matrix: '[ "3.8.8", "3.9.1" ]'  # Maven versions matrix for verify builds
-      jdk-matrix: '["8", "11", "17", "20-ea"]'
-      jdk-distribution-matrix: '["temurin", "adopt-openj9"]'
-      matrix-exclude: >
-        [ 
-          {"jdk": "17", "distribution": "adopt-openj9"},        
-          {"jdk": "20-ea", "distribution": "adopt-openj9"}
-        ]
-      ff-site-goal: '-DskipTests -P reporting site'
