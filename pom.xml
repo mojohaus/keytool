@@ -104,7 +104,7 @@
   </distributionManagement>
 
   <properties>
-    <pluginPluginVersion>3.10.1</pluginPluginVersion>
+    <pluginPluginVersion>3.10.2</pluginPluginVersion>
   </properties>
 
   <dependencyManagement>
