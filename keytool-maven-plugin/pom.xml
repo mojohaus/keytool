@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   ~ Copyright 2012 Tony Chemit
   ~
@@ -19,8 +18,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>keytool</artifactId>
     <groupId>org.codehaus.mojo</groupId>
+    <artifactId>keytool</artifactId>
     <version>1.8-SNAPSHOT</version>
   </parent>
 
@@ -28,9 +27,7 @@
   <packaging>maven-plugin</packaging>
 
   <name>Keytool: Maven Plugin</name>
-  <description>
-    A plugin that wraps the keytool program bundled with Sun's Java SDK. Allows to manipulate keystores.
-  </description>
+  <description>A plugin that wraps the keytool program bundled with Sun's Java SDK. Allows to manipulate keystores.</description>
   <inceptionYear>2005</inceptionYear>
 
   <prerequisites>
@@ -61,10 +58,9 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>keytool-api-1.7</artifactId>
+      <artifactId>keytool-api-8</artifactId>
       <version>${project.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.apache.maven.shared</groupId>
       <artifactId>maven-shared-utils</artifactId>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2005-2013 Tony Chemit
+  ~ Copyright 2012 Tony Chemit
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@
     <version>1.8-SNAPSHOT</version>
   </parent>
 
-  <artifactId>keytool-api-test</artifactId>
+  <artifactId>keytool-api-8</artifactId>
 
-  <name>Keytool: API Test</name>
-  <description>A component to test keytool-api</description>
-  <inceptionYear>2005-2013</inceptionYear>
+  <name>Keytool: API (jdk 8)</name>
+  <description>A component to assist in using keytool application</description>
+  <inceptionYear>2012</inceptionYear>
 
   <dependencies>
     <dependency>
@@ -36,9 +36,18 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>keytool-api-test</artifactId>
+      <scope>test</scope>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-component-annotations</artifactId>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
@@ -48,16 +57,15 @@
 
   <build>
     <plugins>
+      <!-- expose new plexus components -->
       <plugin>
         <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-maven-plugin</artifactId>
+        <artifactId>plexus-component-metadata</artifactId>
         <executions>
           <execution>
-            <id>create-component-descriptor</id>
             <goals>
-              <goal>descriptor</goal>
+              <goal>generate-metadata</goal>
             </goals>
-            <phase>generate-resources</phase>
           </execution>
         </executions>
       </plugin>

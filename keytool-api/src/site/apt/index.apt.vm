@@ -28,59 +28,7 @@
 
 Overview
 
-  This component provides a api to invoke the keytool java program. As the keytool is not compatible from a jdk to
-  another one.
-
-  There is implementation for jdk 1.5 and 1.6+. (jdk 1.6 and more are compatible)
-
-* Dependency declaration
-
-  To use it according to the jdk installed on your system, use some profile activated by the jdk version:
-
-+---------
-<profile>
-  <id>api-1.5</id>
-  <activation>
-    <jdk>1.5</jdk>
-  </activation>
-
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>keytool-api-1.5</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
-</profile>
-
-<profile>
-  <id>api-1.6</id>
-  <activation>
-    <jdk>1.6</jdk>
-  </activation>
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>keytool-api-1.6</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
-</profile>
-
-<profile>
-  <id>api-1.7</id>
-  <activation>
-    <jdk>1.7</jdk>
-  </activation>
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>keytool-api-1.6</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
-</profile>
-+---------
+  This component provides a api to invoke the keytool java program.
 
 API
 
