@@ -207,31 +207,4 @@
     </plugins>
   </build>
 
-  <profiles>
-
-    <profile>
-      <id>reporting</id>
-      <activation>
-        <property>
-          <name>skipReports</name>
-          <value>!true</value>
-        </property>
-      </activation>
-
-      <reporting>
-        <plugins>
-          <plugin>
-            <artifactId>maven-checkstyle-plugin</artifactId>
-            <configuration>
-              <headerLocation>config/checkstyle-header.txt</headerLocation>
-            </configuration>
-          </plugin>
-          <plugin>
-            <artifactId>maven-invoker-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </reporting>
-    </profile>
-
-  </profiles>
 </project>
