@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolPrintCRLFileRequest}.
@@ -27,39 +27,33 @@ import java.io.File;
  * @since 1.1
  */
 public abstract class AbstractKeyToolPrintCRLFileRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolPrintCRLFileRequest>
-{
+        extends AbstractKeyToolRequestIT<KeyToolPrintCRLFileRequest> {
 
     /**
      * <p>Constructor for AbstractKeyToolPrintCRLFileRequestIT.</p>
      */
-    protected AbstractKeyToolPrintCRLFileRequestIT()
-    {
-    }
+    protected AbstractKeyToolPrintCRLFileRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolPrintCRLFileRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolPrintCRLFileRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolPrintCRLFileRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
         File file = resourceFixtures.simpleCertificate();
 
-        KeyToolPrintCRLFileRequest request = requestFixtures.createKeyToolPrintCRLFileRequest( file );
+        KeyToolPrintCRLFileRequest request = requestFixtures.createKeyToolPrintCRLFileRequest(file);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, file );
+        requestResult(keyToolResult, file);
     }
 
     /**
@@ -68,6 +62,5 @@ public abstract class AbstractKeyToolPrintCRLFileRequestIT
      * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @param file a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File file );
-
+    protected abstract void requestResult(JavaToolResult keyToolResult, File file);
 }

@@ -30,10 +30,9 @@ import org.codehaus.plexus.util.StringUtils;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "changeKeyPassword", requiresProject = true, threadSafe = true )
+@Mojo(name = "changeKeyPassword", requiresProject = true, threadSafe = true)
 public class ChangeKeyPasswordMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolChangeKeyPasswordRequest>
-{
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolChangeKeyPasswordRequest> {
 
     /**
      * New password.
@@ -56,29 +55,26 @@ public class ChangeKeyPasswordMojo
     /**
      * Default contructor.
      */
-    public ChangeKeyPasswordMojo()
-    {
-        super( KeyToolChangeKeyPasswordRequest.class );
+    public ChangeKeyPasswordMojo() {
+        super(KeyToolChangeKeyPasswordRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolChangeKeyPasswordRequest createKeytoolRequest()
-    {
+    protected KeyToolChangeKeyPasswordRequest createKeytoolRequest() {
         KeyToolChangeKeyPasswordRequest request = super.createKeytoolRequest();
-        request.setNewPassword( this.newPassword );
-        request.setKeypass( this.keypass );
+        request.setNewPassword(this.newPassword);
+        request.setKeypass(this.keypass);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.keypass, "'*****'" );
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.newPassword, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.newPassword, "'*****'");
 
         return commandLineInfo;
     }

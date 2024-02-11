@@ -24,9 +24,7 @@ import org.apache.maven.shared.utils.cli.javatool.JavaToolException;
  * @author tchemit
  * @since 1.3
  */
-public class UnsupportedKeyToolRequestException
-    extends JavaToolException
-{
+public class UnsupportedKeyToolRequestException extends JavaToolException {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -35,9 +33,8 @@ public class UnsupportedKeyToolRequestException
      * @param message a {@link java.lang.String} object
      * @param cause a {@link java.lang.Throwable} object
      */
-    public UnsupportedKeyToolRequestException( String message, Throwable cause )
-    {
-        super( message, cause );
+    public UnsupportedKeyToolRequestException(String message, Throwable cause) {
+        super(message, cause);
     }
 
     /**
@@ -45,8 +42,7 @@ public class UnsupportedKeyToolRequestException
      *
      * @param message a {@link java.lang.String} object
      */
-    public UnsupportedKeyToolRequestException( String message )
-    {
-        super( message );
+    public UnsupportedKeyToolRequestException(String message) {
+        super(message);
     }
 }

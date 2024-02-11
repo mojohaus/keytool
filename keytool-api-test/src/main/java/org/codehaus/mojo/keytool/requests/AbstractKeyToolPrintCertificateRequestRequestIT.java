@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest}.
@@ -27,40 +27,34 @@ import java.io.File;
  * @since 1.1
  */
 public abstract class AbstractKeyToolPrintCertificateRequestRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolPrintCertificateRequestRequest>
-{
+        extends AbstractKeyToolRequestIT<KeyToolPrintCertificateRequestRequest> {
 
     /**
      * <p>Constructor for AbstractKeyToolPrintCertificateRequestRequestIT.</p>
      */
-    protected AbstractKeyToolPrintCertificateRequestRequestIT()
-    {
-    }
+    protected AbstractKeyToolPrintCertificateRequestRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolPrintCertificateRequestRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolPrintCertificateRequestRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolPrintCertificateRequestRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
         File file = resourceFixtures.simpleCertificateRequest();
 
         KeyToolPrintCertificateRequestRequest request =
-            requestFixtures.createKeyToolPrintCertificateRequestRequest( file );
+                requestFixtures.createKeyToolPrintCertificateRequestRequest(file);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, file );
+        requestResult(keyToolResult, file);
     }
 
     /**
@@ -69,6 +63,5 @@ public abstract class AbstractKeyToolPrintCertificateRequestRequestIT
      * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @param file a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File file );
-
+    protected abstract void requestResult(JavaToolResult keyToolResult, File file);
 }

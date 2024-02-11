@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link KeyToolChangeStorePasswordRequest}.
@@ -26,16 +26,24 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolChangeStorePasswordRequestIT
-    extends AbstractKeyToolChangeStorePasswordRequestIT
-{
+public class KeyToolChangeStorePasswordRequestIT extends AbstractKeyToolChangeStorePasswordRequestIT {
 
     @Override
-    protected void requestResult( JavaToolResult keyToolResult, File keyStore )
-    {
-        assertKeyToolResult( keyToolResult,
-                             new String[]{ "-storepasswd", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
-                                 "changeit", "-storetype", "jks", "-new", "new-changeit", }, 0 );
+    protected void requestResult(JavaToolResult keyToolResult, File keyStore) {
+        assertKeyToolResult(
+                keyToolResult,
+                new String[] {
+                    "-storepasswd",
+                    "-v",
+                    "-keystore",
+                    keyStore.getAbsolutePath(),
+                    "-storepass",
+                    "changeit",
+                    "-storetype",
+                    "jks",
+                    "-new",
+                    "new-changeit",
+                },
+                0);
     }
-
 }

@@ -16,10 +16,10 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.shared.utils.cli.javatool.AbstractJavaToolRequest;
 import org.codehaus.mojo.keytool.KeyToolRequest;
-
-import java.io.File;
 
 /**
  * Specifies the commons parameters used to control a key tool invocation.
@@ -27,10 +27,7 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public abstract class AbstractKeyToolRequest
-    extends AbstractJavaToolRequest
-    implements KeyToolRequest
-{
+public abstract class AbstractKeyToolRequest extends AbstractJavaToolRequest implements KeyToolRequest {
 
     /**
      * Verbose output.
@@ -53,8 +50,7 @@ public abstract class AbstractKeyToolRequest
      *
      * @return a boolean
      */
-    public boolean isVerbose()
-    {
+    public boolean isVerbose() {
         return verbose;
     }
 
@@ -63,8 +59,7 @@ public abstract class AbstractKeyToolRequest
      *
      * @return an array of {@link java.lang.String} objects
      */
-    public String[] getArguments()
-    {
+    public String[] getArguments() {
         return arguments;
     }
 
@@ -73,14 +68,12 @@ public abstract class AbstractKeyToolRequest
      *
      * @return a {@link java.io.File} object
      */
-    public File getWorkingDirectory()
-    {
+    public File getWorkingDirectory() {
         return workingDirectory;
     }
 
     /** {@inheritDoc} */
-    public void setVerbose( boolean verbose )
-    {
+    public void setVerbose(boolean verbose) {
         this.verbose = verbose;
     }
 
@@ -89,14 +82,12 @@ public abstract class AbstractKeyToolRequest
      *
      * @param arguments an array of {@link java.lang.String} objects
      */
-    public void setArguments( String[] arguments )
-    {
+    public void setArguments(String[] arguments) {
         this.arguments = arguments;
     }
 
     /** {@inheritDoc} */
-    public void setWorkingDirectory( File workingDirectory )
-    {
+    public void setWorkingDirectory(File workingDirectory) {
         this.workingDirectory = workingDirectory;
     }
 }

@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolListRequest}.
@@ -26,40 +26,33 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public abstract class AbstractKeyToolListRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolListRequest>
-{
+public abstract class AbstractKeyToolListRequestIT extends AbstractKeyToolRequestIT<KeyToolListRequest> {
 
     /**
      * <p>Constructor for AbstractKeyToolListRequestIT.</p>
      */
-    protected AbstractKeyToolListRequestIT()
-    {
-    }
+    protected AbstractKeyToolListRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolListRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolListRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolListRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
         File keyStore = resourceFixtures.simpleKeyStore();
 
-        KeyToolListRequest request = requestFixtures.createKeyToolListRequest( keyStore );
+        KeyToolListRequest request = requestFixtures.createKeyToolListRequest(keyStore);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, keyStore );
+        requestResult(keyToolResult, keyStore);
     }
 
     /**
@@ -68,6 +61,5 @@ public abstract class AbstractKeyToolListRequestIT
      * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @param keyStore a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore );
-
+    protected abstract void requestResult(JavaToolResult keyToolResult, File keyStore);
 }

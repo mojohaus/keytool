@@ -16,10 +16,9 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolRequest;
-
 import java.io.File;
 
+import org.apache.maven.shared.utils.cli.javatool.JavaToolRequest;
 
 /**
  * Specifies the common parameters used to control a KeyTool tool invocation.
@@ -27,8 +26,7 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public interface KeyToolRequest extends JavaToolRequest
-{
+public interface KeyToolRequest extends JavaToolRequest {
 
     /**
      * Gets the value of the {@code verbose} field.
@@ -56,19 +54,19 @@ public interface KeyToolRequest extends JavaToolRequest
      *
      * @param verbose the new value of the field {@code verbose}.
      */
-    void setVerbose( boolean verbose );
+    void setVerbose(boolean verbose);
 
     /**
      * Sets the new given value to the field {@code arguments} of the request.
      *
      * @param arguments the new value of the field {@code arguments}.
      */
-    void setArguments( String[] arguments );
+    void setArguments(String[] arguments);
 
     /**
      * Sets the new given value to the field {@code workingDirectory} of the request.
      *
      * @param workingDirectory the new value of the field {@code workingDirectory}.
      */
-    void setWorkingDirectory( File workingDirectory );
+    void setWorkingDirectory(File workingDirectory);
 }

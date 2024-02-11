@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool.requests;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolImportKeystoreRequest
-    extends AbstractKeyToolRequest
-{
+public class KeyToolImportKeystoreRequest extends AbstractKeyToolRequest {
 
     /**
      * Source keystore name.
@@ -133,8 +131,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #srckeystore} field
      */
-    public String getSrckeystore()
-    {
+    public String getSrckeystore() {
         return srckeystore;
     }
 
@@ -143,8 +140,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param srckeystore value of the field {@link #srckeystore} to set
      */
-    public void setSrckeystore( String srckeystore )
-    {
+    public void setSrckeystore(String srckeystore) {
         this.srckeystore = srckeystore;
     }
 
@@ -153,8 +149,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #destkeystore} field
      */
-    public String getDestkeystore()
-    {
+    public String getDestkeystore() {
         return destkeystore;
     }
 
@@ -163,8 +158,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param destkeystore value of the field {@link #destkeystore} to set
      */
-    public void setDestkeystore( String destkeystore )
-    {
+    public void setDestkeystore(String destkeystore) {
         this.destkeystore = destkeystore;
     }
 
@@ -173,8 +167,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #srcstoretype} field
      */
-    public String getSrcstoretype()
-    {
+    public String getSrcstoretype() {
         return srcstoretype;
     }
 
@@ -183,8 +176,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param srcstoretype value of the field {@link #srcstoretype} to set
      */
-    public void setSrcstoretype( String srcstoretype )
-    {
+    public void setSrcstoretype(String srcstoretype) {
         this.srcstoretype = srcstoretype;
     }
 
@@ -193,8 +185,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #deststoretype} field
      */
-    public String getDeststoretype()
-    {
+    public String getDeststoretype() {
         return deststoretype;
     }
 
@@ -203,8 +194,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param deststoretype value of the field {@link #deststoretype} to set
      */
-    public void setDeststoretype( String deststoretype )
-    {
+    public void setDeststoretype(String deststoretype) {
         this.deststoretype = deststoretype;
     }
 
@@ -213,8 +203,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #srcstorepass} field
      */
-    public String getSrcstorepass()
-    {
+    public String getSrcstorepass() {
         return srcstorepass;
     }
 
@@ -223,8 +212,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param srcstorepass value of the field {@link #srcstorepass} to set
      */
-    public void setSrcstorepass( String srcstorepass )
-    {
+    public void setSrcstorepass(String srcstorepass) {
         this.srcstorepass = srcstorepass;
     }
 
@@ -233,8 +221,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #deststorepass} field
      */
-    public String getDeststorepass()
-    {
+    public String getDeststorepass() {
         return deststorepass;
     }
 
@@ -243,8 +230,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param deststorepass value of the field {@link #deststorepass} to set
      */
-    public void setDeststorepass( String deststorepass )
-    {
+    public void setDeststorepass(String deststorepass) {
         this.deststorepass = deststorepass;
     }
 
@@ -253,8 +239,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #srcprotected} field
      */
-    public boolean isSrcprotected()
-    {
+    public boolean isSrcprotected() {
         return srcprotected;
     }
 
@@ -263,8 +248,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param srcprotected value of the field {@link #srcprotected} to set
      */
-    public void setSrcprotected( boolean srcprotected )
-    {
+    public void setSrcprotected(boolean srcprotected) {
         this.srcprotected = srcprotected;
     }
 
@@ -273,8 +257,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #srcprovidername} field
      */
-    public String getSrcprovidername()
-    {
+    public String getSrcprovidername() {
         return srcprovidername;
     }
 
@@ -283,8 +266,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param srcprovidername value of the field {@link #srcprovidername} to set
      */
-    public void setSrcprovidername( String srcprovidername )
-    {
+    public void setSrcprovidername(String srcprovidername) {
         this.srcprovidername = srcprovidername;
     }
 
@@ -293,8 +275,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #destprovidername} field
      */
-    public String getDestprovidername()
-    {
+    public String getDestprovidername() {
         return destprovidername;
     }
 
@@ -303,8 +284,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param destprovidername value of the field {@link #destprovidername} to set
      */
-    public void setDestprovidername( String destprovidername )
-    {
+    public void setDestprovidername(String destprovidername) {
         this.destprovidername = destprovidername;
     }
 
@@ -313,8 +293,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #srcalias} field
      */
-    public String getSrcalias()
-    {
+    public String getSrcalias() {
         return srcalias;
     }
 
@@ -323,8 +302,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param srcalias value of the field {@link #srcalias} to set
      */
-    public void setSrcalias( String srcalias )
-    {
+    public void setSrcalias(String srcalias) {
         this.srcalias = srcalias;
     }
 
@@ -333,8 +311,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #destalias} field
      */
-    public String getDestalias()
-    {
+    public String getDestalias() {
         return destalias;
     }
 
@@ -343,8 +320,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param destalias value of the field {@link #destalias} to set
      */
-    public void setDestalias( String destalias )
-    {
+    public void setDestalias(String destalias) {
         this.destalias = destalias;
     }
 
@@ -353,8 +329,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #srckeypass} field
      */
-    public String getSrckeypass()
-    {
+    public String getSrckeypass() {
         return srckeypass;
     }
 
@@ -363,8 +338,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param srckeypass value of the field {@link #srckeypass} to set
      */
-    public void setSrckeypass( String srckeypass )
-    {
+    public void setSrckeypass(String srckeypass) {
         this.srckeypass = srckeypass;
     }
 
@@ -373,8 +347,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #destkeypass} field
      */
-    public String getDestkeypass()
-    {
+    public String getDestkeypass() {
         return destkeypass;
     }
 
@@ -383,8 +356,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param destkeypass value of the field {@link #destkeypass} to set
      */
-    public void setDestkeypass( String destkeypass )
-    {
+    public void setDestkeypass(String destkeypass) {
         this.destkeypass = destkeypass;
     }
 
@@ -393,8 +365,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #noprompt} field
      */
-    public boolean isNoprompt()
-    {
+    public boolean isNoprompt() {
         return noprompt;
     }
 
@@ -403,19 +374,16 @@ public class KeyToolImportKeystoreRequest
      *
      * @param noprompt value of the field {@link #noprompt} to set
      */
-    public void setNoprompt( boolean noprompt )
-    {
+    public void setNoprompt(boolean noprompt) {
         this.noprompt = noprompt;
     }
-
 
     /**
      * Gets the value of the {@link #providerclass} field.
      *
      * @return the value of the {@link #providerclass} field
      */
-    public String getProviderclass()
-    {
+    public String getProviderclass() {
         return providerclass;
     }
 
@@ -424,8 +392,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param providerclass value of the field {@link #providerclass} to set
      */
-    public void setProviderclass( String providerclass )
-    {
+    public void setProviderclass(String providerclass) {
         this.providerclass = providerclass;
     }
 
@@ -434,8 +401,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #providerarg} field
      */
-    public String getProviderarg()
-    {
+    public String getProviderarg() {
         return providerarg;
     }
 
@@ -444,8 +410,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param providerarg value of the field {@link #providerarg} to set
      */
-    public void setProviderarg( String providerarg )
-    {
+    public void setProviderarg(String providerarg) {
         this.providerarg = providerarg;
     }
 
@@ -454,8 +419,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @return the value of the {@link #providerpath} field
      */
-    public String getProviderpath()
-    {
+    public String getProviderpath() {
         return providerpath;
     }
 
@@ -464,9 +428,7 @@ public class KeyToolImportKeystoreRequest
      *
      * @param providerpath value of the field {@link #providerpath} to set
      */
-    public void setProviderpath( String providerpath )
-    {
+    public void setProviderpath(String providerpath) {
         this.providerpath = providerpath;
     }
-
 }

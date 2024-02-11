@@ -16,6 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
+import java.io.File;
+import java.util.Arrays;
+
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.apache.maven.shared.utils.cli.javatool.JavaToolException;
 import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
@@ -27,18 +30,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 
-import java.io.File;
-import java.util.Arrays;
-
 /**
  * abstract test of a keytool request.
  *
  * @author tchemit
  * @since 1.1
  */
-public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
-    extends PlexusTestCase
-{
+public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest> extends PlexusTestCase {
 
     private static final long BUILD_TIMESTAMP = System.nanoTime();
 
@@ -58,9 +56,8 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
     /**
      * <p>Constructor for AbstractKeyToolRequestIT.</p>
      */
-    protected AbstractKeyToolRequestIT()
-    {
-        this( true );
+    protected AbstractKeyToolRequestIT() {
+        this(true);
     }
 
     /**
@@ -68,8 +65,7 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolRequestIT( boolean supportedRequest )
-    {
+    protected AbstractKeyToolRequestIT(boolean supportedRequest) {
         this.supportedRequest = supportedRequest;
     }
 
@@ -78,8 +74,7 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      *
      * @throws java.lang.Exception if any.
      */
-    public abstract void testRequest()
-        throws Exception;
+    public abstract void testRequest() throws Exception;
 
     /**
      * <p>consumeRequest.</p>
@@ -88,19 +83,14 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      * @return a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @throws org.apache.maven.shared.utils.cli.javatool.JavaToolException if any.
      */
-    protected final JavaToolResult consumeRequest( R request )
-        throws JavaToolException
-    {
+    protected final JavaToolResult consumeRequest(R request) throws JavaToolException {
 
         JavaToolResult result = null;
 
-        if ( supportedRequest )
-        {
-            result = executeKeyToolRequest( request );
-        }
-        else
-        {
-            executeUnsupportedKeyToolRequest( request );
+        if (supportedRequest) {
+            result = executeKeyToolRequest(request);
+        } else {
+            executeUnsupportedKeyToolRequest(request);
         }
         return result;
     }
@@ -111,21 +101,21 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      * @throws java.lang.Exception if any.
      */
     @Before
-    public void setUp()
-        throws Exception
-    {
+    public void setUp() throws Exception {
         super.setUp();
 
         String basedir = getBasedir();
-        workingDirectory = new File( basedir, "target" + File.separator + "surefire-workdir" + File.separator +
-            getClass().getName() + "_" + BUILD_TIMESTAMP );
+        workingDirectory = new File(
+                basedir,
+                "target" + File.separator + "surefire-workdir" + File.separator
+                        + getClass().getName() + "_" + BUILD_TIMESTAMP);
 
-        tool = lookup( KeyTool.ROLE );
+        tool = lookup(KeyTool.ROLE);
 
-        Assert.assertNotNull( tool );
+        Assert.assertNotNull(tool);
 
         requestFixtures = new KeyToolRequestFixtures();
-        resourceFixtures = new ResourceFixtures( workingDirectory );
+        resourceFixtures = new ResourceFixtures(workingDirectory);
     }
 
     /**
@@ -134,9 +124,7 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      * @throws java.lang.Exception if any.
      */
     @After
-    public void tearDown()
-        throws Exception
-    {
+    public void tearDown() throws Exception {
         super.tearDown();
         tool = null;
         requestFixtures = null;
@@ -150,13 +138,11 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      * @return a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @throws org.apache.maven.shared.utils.cli.javatool.JavaToolException if any.
      */
-    protected JavaToolResult executeKeyToolRequest( KeyToolRequest request )
-        throws JavaToolException
-    {
-        Assert.assertNotNull( request );
-        JavaToolResult result = tool.execute( request );
-        System.out.println( result.getCommandline().toString() );
-        Assert.assertNotNull( result );
+    protected JavaToolResult executeKeyToolRequest(KeyToolRequest request) throws JavaToolException {
+        Assert.assertNotNull(request);
+        JavaToolResult result = tool.execute(request);
+        System.out.println(result.getCommandline().toString());
+        Assert.assertNotNull(result);
         return result;
     }
 
@@ -167,13 +153,14 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      * @param expectedCommandLineArguments an array of {@link java.lang.String} objects
      * @param expectedExitCode a int
      */
-    protected void assertKeyToolResult( JavaToolResult result, String[] expectedCommandLineArguments,
-                                        int expectedExitCode )
-    {
-        assertKeyToolResult( result, expectedCommandLineArguments );
+    protected void assertKeyToolResult(
+            JavaToolResult result, String[] expectedCommandLineArguments, int expectedExitCode) {
+        assertKeyToolResult(result, expectedCommandLineArguments);
 
-        assertEquals( "Differing exit code , required " + expectedExitCode + " but had : " + result.getExitCode(),
-                      expectedExitCode, result.getExitCode() );
+        assertEquals(
+                "Differing exit code , required " + expectedExitCode + " but had : " + result.getExitCode(),
+                expectedExitCode,
+                result.getExitCode());
     }
 
     /**
@@ -182,18 +169,18 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      * @param result a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @param expectedCommandLineArguments an array of {@link java.lang.String} objects
      */
-    protected void assertKeyToolResult( JavaToolResult result, String[] expectedCommandLineArguments )
-    {
+    protected void assertKeyToolResult(JavaToolResult result, String[] expectedCommandLineArguments) {
 
         Commandline commandline = result.getCommandline();
         String[] arguments = commandline.getArguments();
 
         assertEquals(
-            "Differing number of arguments, required " + Arrays.asList( expectedCommandLineArguments ) + " but had : " +
-                Arrays.asList( arguments ), expectedCommandLineArguments.length, arguments.length );
-        for ( int i = 0; i < arguments.length; i++ )
-        {
-            assertEquals( expectedCommandLineArguments[i], arguments[i] );
+                "Differing number of arguments, required " + Arrays.asList(expectedCommandLineArguments) + " but had : "
+                        + Arrays.asList(arguments),
+                expectedCommandLineArguments.length,
+                arguments.length);
+        for (int i = 0; i < arguments.length; i++) {
+            assertEquals(expectedCommandLineArguments[i], arguments[i]);
         }
     }
 
@@ -203,18 +190,13 @@ public abstract class AbstractKeyToolRequestIT<R extends KeyToolRequest>
      * @param request a {@link org.codehaus.mojo.keytool.KeyToolRequest} object
      * @throws org.apache.maven.shared.utils.cli.javatool.JavaToolException if any.
      */
-    protected void executeUnsupportedKeyToolRequest( KeyToolRequest request )
-        throws JavaToolException
-    {
-        Assert.assertNotNull( request );
-        try
-        {
-            tool.execute( request );
-            Assert.fail( "Request of type " + request.getClass().getName() + " is not supported." );
-        }
-        catch ( UnsupportedKeyToolRequestException e )
-        {
-            Assert.assertTrue( true );
+    protected void executeUnsupportedKeyToolRequest(KeyToolRequest request) throws JavaToolException {
+        Assert.assertNotNull(request);
+        try {
+            tool.execute(request);
+            Assert.fail("Request of type " + request.getClass().getName() + " is not supported.");
+        } catch (UnsupportedKeyToolRequestException e) {
+            Assert.assertTrue(true);
         }
     }
 }

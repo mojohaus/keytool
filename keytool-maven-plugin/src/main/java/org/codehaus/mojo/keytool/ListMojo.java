@@ -28,10 +28,8 @@ import org.codehaus.mojo.keytool.requests.KeyToolListRequest;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "list", requiresProject = true, threadSafe = true )
-public class ListMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolListRequest>
-{
+@Mojo(name = "list", requiresProject = true, threadSafe = true)
+public class ListMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolListRequest> {
     /**
      * Output in RFC style.
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
@@ -44,19 +42,16 @@ public class ListMojo
     /**
      * Default contructor.
      */
-    public ListMojo()
-    {
-        super( KeyToolListRequest.class );
+    public ListMojo() {
+        super(KeyToolListRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolListRequest createKeytoolRequest()
-    {
+    protected KeyToolListRequest createKeytoolRequest() {
         KeyToolListRequest request = super.createKeytoolRequest();
 
-        request.setRfc( this.rfc );
+        request.setRfc(this.rfc);
         return request;
     }
-
 }

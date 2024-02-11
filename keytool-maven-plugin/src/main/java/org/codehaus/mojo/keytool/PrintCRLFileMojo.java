@@ -16,11 +16,11 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCRLFileRequest;
-
-import java.io.File;
 
 /**
  * To print the content of a CRL file.
@@ -31,10 +31,8 @@ import java.io.File;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "printCRLFile", requiresProject = true, threadSafe = true )
-public class PrintCRLFileMojo
-    extends AbstractKeyToolRequestMojo<KeyToolPrintCRLFileRequest>
-{
+@Mojo(name = "printCRLFile", requiresProject = true, threadSafe = true)
+public class PrintCRLFileMojo extends AbstractKeyToolRequestMojo<KeyToolPrintCRLFileRequest> {
 
     /**
      * Input file name.
@@ -48,20 +46,17 @@ public class PrintCRLFileMojo
     /**
      * Default contructor.
      */
-    public PrintCRLFileMojo()
-    {
-        super( KeyToolPrintCRLFileRequest.class );
+    public PrintCRLFileMojo() {
+        super(KeyToolPrintCRLFileRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolPrintCRLFileRequest createKeytoolRequest()
-    {
+    protected KeyToolPrintCRLFileRequest createKeytoolRequest() {
         KeyToolPrintCRLFileRequest request = super.createKeytoolRequest();
 
-        request.setFile( this.file );
+        request.setFile(this.file);
 
         return request;
     }
-
 }

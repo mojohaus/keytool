@@ -27,9 +27,7 @@ import java.util.List;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolGenerateCertificateRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
+public class KeyToolGenerateCertificateRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {
 
     /**
      * Key password.
@@ -90,8 +88,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@link #rfc} field
      */
-    public boolean isRfc()
-    {
+    public boolean isRfc() {
         return rfc;
     }
 
@@ -100,8 +97,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param rfc value of the field {@link #rfc} to set
      */
-    public void setRfc( boolean rfc )
-    {
+    public void setRfc(boolean rfc) {
         this.rfc = rfc;
     }
 
@@ -110,8 +106,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@link #infile} field
      */
-    public File getInfile()
-    {
+    public File getInfile() {
         return infile;
     }
 
@@ -120,8 +115,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param infile value of the field {@link #infile} to set
      */
-    public void setInfile( File infile )
-    {
+    public void setInfile(File infile) {
         this.infile = infile;
     }
 
@@ -130,8 +124,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@link #outfile} field
      */
-    public File getOutfile()
-    {
+    public File getOutfile() {
         return outfile;
     }
 
@@ -140,8 +133,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param outfile value of the field {@link #outfile} to set
      */
-    public void setOutfile( File outfile )
-    {
+    public void setOutfile(File outfile) {
         this.outfile = outfile;
     }
 
@@ -150,8 +142,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@link #sigalg} field
      */
-    public String getSigalg()
-    {
+    public String getSigalg() {
         return sigalg;
     }
 
@@ -160,8 +151,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param sigalg value of the field {@link #sigalg} to set
      */
-    public void setSigalg( String sigalg )
-    {
+    public void setSigalg(String sigalg) {
         this.sigalg = sigalg;
     }
 
@@ -170,8 +160,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@link #dname} field
      */
-    public String getDname()
-    {
+    public String getDname() {
         return dname;
     }
 
@@ -180,8 +169,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param dname value of the field {@link #dname} to set
      */
-    public void setDname( String dname )
-    {
+    public void setDname(String dname) {
         this.dname = dname;
     }
 
@@ -190,8 +178,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@link #startdate} field
      */
-    public String getStartdate()
-    {
+    public String getStartdate() {
         return startdate;
     }
 
@@ -200,8 +187,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param startdate value of the field {@link #startdate} to set
      */
-    public void setStartdate( String startdate )
-    {
+    public void setStartdate(String startdate) {
         this.startdate = startdate;
     }
 
@@ -210,8 +196,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@link #exts} field
      */
-    public String getExt()
-    {
+    public String getExt() {
         return exts.isEmpty() ? null : exts.get(0);
     }
 
@@ -220,12 +205,10 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param ext value of the field {@link #exts} to set
      */
-    public void setExt( String ext )
-    {
+    public void setExt(String ext) {
         exts.clear();
 
-        if (ext != null)
-        {
+        if (ext != null) {
             exts.add(ext);
         }
     }
@@ -236,12 +219,10 @@ public class KeyToolGenerateCertificateRequest
      * @param exts values of the field {@link #exts} to set
      * @since 1.6
      */
-    public void setExts( List<String> exts )
-    {
+    public void setExts(List<String> exts) {
         this.exts.clear();
 
-        if (exts != null)
-        {
+        if (exts != null) {
             this.exts.addAll(exts);
         }
     }
@@ -252,8 +233,7 @@ public class KeyToolGenerateCertificateRequest
      * @return the values of the {@link #exts} field
      * @since 1.6
      */
-    public List<String> getExts()
-    {
+    public List<String> getExts() {
         return exts;
     }
 
@@ -262,8 +242,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@link #validity} field
      */
-    public String getValidity()
-    {
+    public String getValidity() {
         return validity;
     }
 
@@ -272,8 +251,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param validity value of the field {@link #validity} to set
      */
-    public void setValidity( String validity )
-    {
+    public void setValidity(String validity) {
         this.validity = validity;
     }
 
@@ -282,8 +260,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @return the value of the {@code keypass} field.
      */
-    public String getKeypass()
-    {
+    public String getKeypass() {
         return keypass;
     }
 
@@ -292,8 +269,7 @@ public class KeyToolGenerateCertificateRequest
      *
      * @param keypass the new value of the field {@code keypass}.
      */
-    public void setKeypass( String keypass )
-    {
+    public void setKeypass(String keypass) {
         this.keypass = keypass;
     }
 }

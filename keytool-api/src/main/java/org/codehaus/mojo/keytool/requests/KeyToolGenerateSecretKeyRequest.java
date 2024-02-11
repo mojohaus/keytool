@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool.requests;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolGenerateSecretKeyRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
+public class KeyToolGenerateSecretKeyRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {
 
     /**
      * Key algorithm name.
@@ -49,8 +47,7 @@ public class KeyToolGenerateSecretKeyRequest
      *
      * @return the value of the {@link #keyalg} field
      */
-    public String getKeyalg()
-    {
+    public String getKeyalg() {
         return keyalg;
     }
 
@@ -59,8 +56,7 @@ public class KeyToolGenerateSecretKeyRequest
      *
      * @param keyalg value of the field {@link #keyalg} to set
      */
-    public void setKeyalg( String keyalg )
-    {
+    public void setKeyalg(String keyalg) {
         this.keyalg = keyalg;
     }
 
@@ -69,8 +65,7 @@ public class KeyToolGenerateSecretKeyRequest
      *
      * @return the value of the {@link #keysize} field
      */
-    public String getKeysize()
-    {
+    public String getKeysize() {
         return keysize;
     }
 
@@ -79,8 +74,7 @@ public class KeyToolGenerateSecretKeyRequest
      *
      * @param keysize value of the field {@link #keysize} to set
      */
-    public void setKeysize( String keysize )
-    {
+    public void setKeysize(String keysize) {
         this.keysize = keysize;
     }
 
@@ -89,8 +83,7 @@ public class KeyToolGenerateSecretKeyRequest
      *
      * @return the value of the {@link #keypass} field
      */
-    public String getKeypass()
-    {
+    public String getKeypass() {
         return keypass;
     }
 
@@ -99,9 +92,7 @@ public class KeyToolGenerateSecretKeyRequest
      *
      * @param keypass value of the field {@link #keypass} to set
      */
-    public void setKeypass( String keypass )
-    {
+    public void setKeypass(String keypass) {
         this.keypass = keypass;
     }
-
 }

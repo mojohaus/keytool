@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolGenerateCertificateRequest}.
@@ -27,30 +27,24 @@ import java.io.File;
  * @since 1.1
  */
 public abstract class AbstractKeyToolGenerateCertificateRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolGenerateCertificateRequest>
-{
+        extends AbstractKeyToolRequestIT<KeyToolGenerateCertificateRequest> {
     /**
      * <p>Constructor for AbstractKeyToolGenerateCertificateRequestIT.</p>
      */
-    protected AbstractKeyToolGenerateCertificateRequestIT()
-    {
-    }
+    protected AbstractKeyToolGenerateCertificateRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolGenerateCertificateRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolGenerateCertificateRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolGenerateCertificateRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
         File keyStore = resourceFixtures.simpleKeyStore();
 
@@ -59,11 +53,11 @@ public abstract class AbstractKeyToolGenerateCertificateRequestIT
         File inFile = resourceFixtures.simpleCertificateRequest();
 
         KeyToolGenerateCertificateRequest request =
-            requestFixtures.createKeyToolGenerateCertificateRequest( keyStore, inFile, outputFile );
+                requestFixtures.createKeyToolGenerateCertificateRequest(keyStore, inFile, outputFile);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, keyStore, inFile, outputFile );
+        requestResult(keyToolResult, keyStore, inFile, outputFile);
     }
 
     /**
@@ -74,7 +68,5 @@ public abstract class AbstractKeyToolGenerateCertificateRequestIT
      * @param inFile a {@link java.io.File} object
      * @param outputFile a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore, File inFile, File outputFile );
-
-
+    protected abstract void requestResult(JavaToolResult keyToolResult, File keyStore, File inFile, File outputFile);
 }

@@ -29,11 +29,8 @@ import org.codehaus.plexus.component.annotations.Requirement;
  * @author tchemit§
  * @since 1.1
  */
-@Component( role = KeyTool.class, hint = "default" )
-public class DefaultKeyTool
-    extends AbstractJavaTool<KeyToolRequest>
-    implements KeyTool
-{
+@Component(role = KeyTool.class, hint = "default")
+public class DefaultKeyTool extends AbstractJavaTool<KeyToolRequest> implements KeyTool {
     /**
      * Command line builder.
      */
@@ -43,67 +40,50 @@ public class DefaultKeyTool
     /**
      * <p>Constructor for DefaultKeyTool.</p>
      */
-    public DefaultKeyTool()
-    {
-        super( "keytool" );
+    public DefaultKeyTool() {
+        super("keytool");
     }
 
     /** {@inheritDoc} */
     @Override
-    protected Commandline createCommandLine( KeyToolRequest request, String javaToolFile )
-        throws JavaToolException
-    {
-        builder.setLogger( getLogger() );
-        builder.setKeyToolFile( javaToolFile );
+    protected Commandline createCommandLine(KeyToolRequest request, String javaToolFile) throws JavaToolException {
+        builder.setLogger(getLogger());
+        builder.setKeyToolFile(javaToolFile);
         Commandline cli;
-        try
-        {
-            cli = builder.build( request );
+        try {
+            cli = builder.build(request);
+        } catch (CommandLineConfigurationException | UnsupportedKeyToolRequestException e) {
+            throw new JavaToolException("Error configuring command-line. Reason: " + e.getMessage(), e);
         }
-        catch ( CommandLineConfigurationException | UnsupportedKeyToolRequestException e )
-        {
-            throw new JavaToolException( "Error configuring command-line. Reason: " + e.getMessage(), e );
-        }
-        if ( request.isVerbose() )
-        {
-            getLogger().info( cli.toString() );
-        }
-        else
-        {
-            getLogger().debug( cli.toString() );
+        if (request.isVerbose()) {
+            getLogger().info(cli.toString());
+        } else {
+            getLogger().debug(cli.toString());
         }
         return cli;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected StreamConsumer createSystemOutStreamConsumer( KeyToolRequest request )
-    {
+    protected StreamConsumer createSystemOutStreamConsumer(KeyToolRequest request) {
         StreamConsumer systemOut = request.getSystemOutStreamConsumer();
 
-        if ( systemOut == null )
-        {
+        if (systemOut == null) {
 
             final boolean verbose = request.isVerbose();
 
-            systemOut = new StreamConsumer()
-            {
+            systemOut = new StreamConsumer() {
 
                 /**
                  * {@inheritDoc}
                  */
-                public void consumeLine( final String line )
-                {
-                    if ( verbose )
-                    {
-                        getLogger().info( line );
-                    }
-                    else
-                    {
-                        getLogger().debug( line );
+                public void consumeLine(final String line) {
+                    if (verbose) {
+                        getLogger().info(line);
+                    } else {
+                        getLogger().debug(line);
                     }
                 }
-
             };
         }
         return systemOut;

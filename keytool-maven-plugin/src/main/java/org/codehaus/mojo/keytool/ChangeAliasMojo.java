@@ -31,10 +31,9 @@ import org.codehaus.plexus.util.StringUtils;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "changeAlias", requiresProject = true, threadSafe = true )
+@Mojo(name = "changeAlias", requiresProject = true, threadSafe = true)
 public class ChangeAliasMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolChangeAliasRequest>
-{
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolChangeAliasRequest> {
 
     /**
      * Destination alias.
@@ -57,9 +56,8 @@ public class ChangeAliasMojo
     /**
      * Default contructor.
      */
-    public ChangeAliasMojo()
-    {
-        super( KeyToolChangeAliasRequest.class );
+    public ChangeAliasMojo() {
+        super(KeyToolChangeAliasRequest.class);
     }
 
     /**
@@ -67,8 +65,7 @@ public class ChangeAliasMojo
      *
      * @return the value of the {@link #destalias} field
      */
-    public String getDestalias()
-    {
+    public String getDestalias() {
         return destalias;
     }
 
@@ -77,8 +74,7 @@ public class ChangeAliasMojo
      *
      * @param destalias value of the field {@link #destalias} to set
      */
-    public void setDestalias( String destalias )
-    {
+    public void setDestalias(String destalias) {
         this.destalias = destalias;
     }
 
@@ -87,8 +83,7 @@ public class ChangeAliasMojo
      *
      * @return the value of the {@code keypass} field.
      */
-    public String getKeypass()
-    {
+    public String getKeypass() {
         return keypass;
     }
 
@@ -97,28 +92,25 @@ public class ChangeAliasMojo
      *
      * @param keypass the new value of the field {@code keypass}.
      */
-    public void setKeypass( String keypass )
-    {
+    public void setKeypass(String keypass) {
         this.keypass = keypass;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolChangeAliasRequest createKeytoolRequest()
-    {
+    protected KeyToolChangeAliasRequest createKeytoolRequest() {
         KeyToolChangeAliasRequest request = super.createKeytoolRequest();
-        request.setDestalias( this.destalias );
-        request.setKeypass( this.keypass );
+        request.setDestalias(this.destalias);
+        request.setKeypass(this.keypass);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.keypass, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
 
         return commandLineInfo;
     }

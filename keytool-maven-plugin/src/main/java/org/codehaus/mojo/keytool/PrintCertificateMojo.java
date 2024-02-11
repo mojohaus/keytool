@@ -16,11 +16,11 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequest;
-
-import java.io.File;
 
 /**
  * To print the content of a certificate.
@@ -30,10 +30,8 @@ import java.io.File;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "printCertificate", requiresProject = true, threadSafe = true )
-public class PrintCertificateMojo
-    extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequest>
-{
+@Mojo(name = "printCertificate", requiresProject = true, threadSafe = true)
+public class PrintCertificateMojo extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequest> {
 
     /**
      * Output in RFC style.
@@ -74,22 +72,19 @@ public class PrintCertificateMojo
     /**
      * Default contructor.
      */
-    public PrintCertificateMojo()
-    {
-        super( KeyToolPrintCertificateRequest.class );
+    public PrintCertificateMojo() {
+        super(KeyToolPrintCertificateRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolPrintCertificateRequest createKeytoolRequest()
-    {
+    protected KeyToolPrintCertificateRequest createKeytoolRequest() {
         KeyToolPrintCertificateRequest request = super.createKeytoolRequest();
 
-        request.setRfc( this.rfc );
-        request.setFile( this.file );
-        request.setSslserver( this.sslserver );
-        request.setJarfile( this.jarfile );
+        request.setRfc(this.rfc);
+        request.setFile(this.file);
+        request.setSslserver(this.sslserver);
+        request.setJarfile(this.jarfile);
         return request;
     }
-
 }

@@ -16,17 +16,16 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.IOUtil;
-import org.junit.Assert;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.nio.file.Files;
+
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.IOUtil;
+import org.junit.Assert;
 
 /**
  * Input resources fixtures.
@@ -34,8 +33,7 @@ import java.nio.file.Files;
  * @author tchemit
  * @since 1.3
  */
-public class ResourceFixtures
-{
+public class ResourceFixtures {
 
     protected final File workingDirectory;
 
@@ -44,8 +42,7 @@ public class ResourceFixtures
      *
      * @param workingDirectory a {@link java.io.File} object
      */
-    public ResourceFixtures( File workingDirectory )
-    {
+    public ResourceFixtures(File workingDirectory) {
         this.workingDirectory = workingDirectory;
     }
 
@@ -55,11 +52,10 @@ public class ResourceFixtures
      * @param name a {@link java.lang.String} object
      * @return a {@link java.io.File} object
      */
-    public File simpleDestKeyStoreFile( String name )
-    {
-        File file = new File( workingDirectory, name );
+    public File simpleDestKeyStoreFile(String name) {
+        File file = new File(workingDirectory, name);
 
-        Assert.assertFalse( file.exists() );
+        Assert.assertFalse(file.exists());
 
         return file;
     }
@@ -69,9 +65,8 @@ public class ResourceFixtures
      *
      * @return a {@link java.io.File} object
      */
-    public File simpleDestKeyStoreFile()
-    {
-        return simpleDestKeyStoreFile( "destkeystore" );
+    public File simpleDestKeyStoreFile() {
+        return simpleDestKeyStoreFile("destkeystore");
     }
 
     /**
@@ -82,14 +77,11 @@ public class ResourceFixtures
      * @return a {@link java.io.File} object
      * @throws java.io.IOException if any.
      */
-    public File simpleKeyStore( String name, boolean copy )
-        throws IOException
-    {
-        URL keyStoreURL = getKeyStoreURL( "simple" );
-        File keyStore = new File( workingDirectory, name );
-        if ( copy )
-        {
-            copyURLToFile( keyStoreURL, keyStore );
+    public File simpleKeyStore(String name, boolean copy) throws IOException {
+        URL keyStoreURL = getKeyStoreURL("simple");
+        File keyStore = new File(workingDirectory, name);
+        if (copy) {
+            copyURLToFile(keyStoreURL, keyStore);
         }
         return keyStore;
     }
@@ -100,10 +92,8 @@ public class ResourceFixtures
      * @return a {@link java.io.File} object
      * @throws java.io.IOException if any.
      */
-    public File simpleKeyStore()
-        throws IOException
-    {
-        File keyStore = simpleKeyStore( true );
+    public File simpleKeyStore() throws IOException {
+        File keyStore = simpleKeyStore(true);
         return keyStore;
     }
 
@@ -114,11 +104,9 @@ public class ResourceFixtures
      * @return a {@link java.io.File} object
      * @throws java.io.IOException if any.
      */
-    public File simpleKeyStore( boolean copy )
-        throws IOException
-    {
-        File keyStore = simpleKeyStore( "keystore.jks", copy );
-        FileUtils.forceMkdir( keyStore.getParentFile() );
+    public File simpleKeyStore(boolean copy) throws IOException {
+        File keyStore = simpleKeyStore("keystore.jks", copy);
+        FileUtils.forceMkdir(keyStore.getParentFile());
         return keyStore;
     }
 
@@ -129,11 +117,9 @@ public class ResourceFixtures
      * @return a {@link java.io.File} object
      * @throws java.io.IOException if any.
      */
-    public File simpleKeyStore( String name )
-        throws IOException
-    {
-        File keyStore = simpleKeyStore( name, true );
-        Assert.assertTrue( keyStore.exists() );
+    public File simpleKeyStore(String name) throws IOException {
+        File keyStore = simpleKeyStore(name, true);
+        Assert.assertTrue(keyStore.exists());
         return keyStore;
     }
 
@@ -143,14 +129,12 @@ public class ResourceFixtures
      * @return a {@link java.io.File} object
      * @throws java.io.IOException if any.
      */
-    public File simpleCertificateRequest()
-        throws IOException
-    {
-        URL certificateRequestURL = getCertificateRequestURL( "simple" );
-        File inFile = new File( workingDirectory, "inFile" );
-        Assert.assertFalse( inFile.exists() );
-        copyURLToFile( certificateRequestURL, inFile );
-        Assert.assertTrue( inFile.exists() );
+    public File simpleCertificateRequest() throws IOException {
+        URL certificateRequestURL = getCertificateRequestURL("simple");
+        File inFile = new File(workingDirectory, "inFile");
+        Assert.assertFalse(inFile.exists());
+        copyURLToFile(certificateRequestURL, inFile);
+        Assert.assertTrue(inFile.exists());
         return inFile;
     }
 
@@ -160,14 +144,12 @@ public class ResourceFixtures
      * @return a {@link java.io.File} object
      * @throws java.io.IOException if any.
      */
-    public File simpleCertificate()
-        throws IOException
-    {
-        URL certificateURL = getCertificateURL( "simple" );
-        File inFile = new File( workingDirectory, "inFile" );
-        Assert.assertFalse( inFile.exists() );
-        copyURLToFile( certificateURL, inFile );
-        Assert.assertTrue( inFile.exists() );
+    public File simpleCertificate() throws IOException {
+        URL certificateURL = getCertificateURL("simple");
+        File inFile = new File(workingDirectory, "inFile");
+        Assert.assertFalse(inFile.exists());
+        copyURLToFile(certificateURL, inFile);
+        Assert.assertTrue(inFile.exists());
         return inFile;
     }
 
@@ -176,10 +158,9 @@ public class ResourceFixtures
      *
      * @return a {@link java.io.File} object
      */
-    public File outputFile()
-    {
-        File outputFile = new File( workingDirectory, "outputFile" );
-        Assert.assertFalse( outputFile.exists() );
+    public File outputFile() {
+        File outputFile = new File(workingDirectory, "outputFile");
+        Assert.assertFalse(outputFile.exists());
         return outputFile;
     }
 
@@ -189,9 +170,8 @@ public class ResourceFixtures
      * @param prefix a {@link java.lang.String} object
      * @return a {@link java.net.URL} object
      */
-    protected URL getKeyStoreURL( String prefix )
-    {
-        return getClass().getResource( "/" + prefix + "-keystore" );
+    protected URL getKeyStoreURL(String prefix) {
+        return getClass().getResource("/" + prefix + "-keystore");
     }
 
     /**
@@ -200,9 +180,8 @@ public class ResourceFixtures
      * @param prefix a {@link java.lang.String} object
      * @return a {@link java.net.URL} object
      */
-    protected URL getCertificateRequestURL( String prefix )
-    {
-        return getClass().getResource( "/" + prefix + "-certificate-request" );
+    protected URL getCertificateRequestURL(String prefix) {
+        return getClass().getResource("/" + prefix + "-certificate-request");
     }
 
     /**
@@ -211,9 +190,8 @@ public class ResourceFixtures
      * @param prefix a {@link java.lang.String} object
      * @return a {@link java.net.URL} object
      */
-    protected URL getCertificateURL( String prefix )
-    {
-        return getClass().getResource( "/" + prefix + "-certificate" );
+    protected URL getCertificateURL(String prefix) {
+        return getClass().getResource("/" + prefix + "-certificate");
     }
 
     /**
@@ -223,14 +201,11 @@ public class ResourceFixtures
      * @param dest a {@link java.io.File} object
      * @throws java.io.IOException if any.
      */
-    protected void copyURLToFile( URL url, File dest )
-        throws IOException
-    {
-        FileUtils.mkdir( dest.getParentFile().getAbsolutePath() );
-        try ( InputStream inputStream = url.openStream();
-                OutputStream outputStream = Files.newOutputStream( dest.toPath() ) )
-        {
-            IOUtil.copy( inputStream, outputStream );
+    protected void copyURLToFile(URL url, File dest) throws IOException {
+        FileUtils.mkdir(dest.getParentFile().getAbsolutePath());
+        try (InputStream inputStream = url.openStream();
+                OutputStream outputStream = Files.newOutputStream(dest.toPath())) {
+            IOUtil.copy(inputStream, outputStream);
         }
     }
 }

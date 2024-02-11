@@ -25,9 +25,7 @@ import org.codehaus.mojo.keytool.KeyToolRequestWithKeyStoreAndAliasParameters;
  * @since 1.1
  */
 public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-    extends AbstractKeyToolRequestWithKeyStoreParameters
-    implements KeyToolRequestWithKeyStoreAndAliasParameters
-{
+        extends AbstractKeyToolRequestWithKeyStoreParameters implements KeyToolRequestWithKeyStoreAndAliasParameters {
 
     /**
      * Password through protected mechanism.
@@ -46,14 +44,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParameters
      *
      * @return a boolean
      */
-    public final boolean isPasswordProtected()
-    {
+    public final boolean isPasswordProtected() {
         return passwordProtected;
     }
 
     /** {@inheritDoc} */
-    public final void setPasswordProtected( boolean passwordProtected )
-    {
+    public final void setPasswordProtected(boolean passwordProtected) {
         this.passwordProtected = passwordProtected;
     }
 
@@ -62,15 +58,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParameters
      *
      * @return a {@link java.lang.String} object
      */
-    public final String getAlias()
-    {
+    public final String getAlias() {
         return alias;
     }
 
     /** {@inheritDoc} */
-    public final void setAlias( String alias )
-    {
+    public final void setAlias(String alias) {
         this.alias = alias;
     }
-
 }

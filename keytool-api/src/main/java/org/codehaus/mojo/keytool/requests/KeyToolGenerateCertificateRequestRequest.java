@@ -26,9 +26,7 @@ import java.util.List;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolGenerateCertificateRequestRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
+public class KeyToolGenerateCertificateRequestRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {
     /**
      * Signature algorithm name.
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
@@ -64,8 +62,7 @@ public class KeyToolGenerateCertificateRequestRequest
      *
      * @return the value of the {@link #file} field
      */
-    public File getFile()
-    {
+    public File getFile() {
         return file;
     }
 
@@ -74,8 +71,7 @@ public class KeyToolGenerateCertificateRequestRequest
      *
      * @param file value of the field {@link #file} to set
      */
-    public void setFile( File file )
-    {
+    public void setFile(File file) {
         this.file = file;
     }
 
@@ -84,8 +80,7 @@ public class KeyToolGenerateCertificateRequestRequest
      *
      * @return the value of the {@link #sigalg} field
      */
-    public String getSigalg()
-    {
+    public String getSigalg() {
         return sigalg;
     }
 
@@ -94,8 +89,7 @@ public class KeyToolGenerateCertificateRequestRequest
      *
      * @param sigalg value of the field {@link #sigalg} to set
      */
-    public void setSigalg( String sigalg )
-    {
+    public void setSigalg(String sigalg) {
         this.sigalg = sigalg;
     }
 
@@ -105,8 +99,7 @@ public class KeyToolGenerateCertificateRequestRequest
      * @return the value of the {@link #exts} field
      * @since 1.6
      */
-    public String getExt()
-    {
+    public String getExt() {
         return exts.isEmpty() ? null : exts.get(0);
     }
 
@@ -116,12 +109,10 @@ public class KeyToolGenerateCertificateRequestRequest
      * @param ext value of the field {@link #exts} to set
      * @since 1.6
      */
-    public void setExt( String ext )
-    {
+    public void setExt(String ext) {
         exts.clear();
 
-        if (ext != null)
-        {
+        if (ext != null) {
             exts.add(ext);
         }
     }
@@ -132,12 +123,10 @@ public class KeyToolGenerateCertificateRequestRequest
      * @param exts values of the field {@link #exts} to set
      * @since 1.6
      */
-    public void setExts( List<String> exts )
-    {
+    public void setExts(List<String> exts) {
         this.exts.clear();
 
-        if (exts != null)
-        {
+        if (exts != null) {
             this.exts.addAll(exts);
         }
     }
@@ -148,8 +137,7 @@ public class KeyToolGenerateCertificateRequestRequest
      * @return the values of the {@link #exts} field
      * @since 1.6
      */
-    public List<String> getExts()
-    {
+    public List<String> getExts() {
         return exts;
     }
 
@@ -158,8 +146,7 @@ public class KeyToolGenerateCertificateRequestRequest
      *
      * @return the value of the {@link #dname} field
      */
-    public String getDname()
-    {
+    public String getDname() {
         return dname;
     }
 
@@ -168,8 +155,7 @@ public class KeyToolGenerateCertificateRequestRequest
      *
      * @param dname value of the field {@link #dname} to set
      */
-    public void setDname( String dname )
-    {
+    public void setDname(String dname) {
         this.dname = dname;
     }
 
@@ -178,8 +164,7 @@ public class KeyToolGenerateCertificateRequestRequest
      *
      * @return the value of the {@code keypass} field.
      */
-    public String getKeypass()
-    {
+    public String getKeypass() {
         return keypass;
     }
 
@@ -188,8 +173,7 @@ public class KeyToolGenerateCertificateRequestRequest
      *
      * @param keypass the new value of the field {@code keypass}.
      */
-    public void setKeypass( String keypass )
-    {
+    public void setKeypass(String keypass) {
         this.keypass = keypass;
     }
 }

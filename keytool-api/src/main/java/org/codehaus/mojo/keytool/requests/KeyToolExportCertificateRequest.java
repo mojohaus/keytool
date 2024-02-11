@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool.requests;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolExportCertificateRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
+public class KeyToolExportCertificateRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {
 
     /**
      * Output in RFC style.
@@ -43,8 +41,7 @@ public class KeyToolExportCertificateRequest
      *
      * @return the value of the {@link #rfc} field
      */
-    public boolean isRfc()
-    {
+    public boolean isRfc() {
         return rfc;
     }
 
@@ -53,8 +50,7 @@ public class KeyToolExportCertificateRequest
      *
      * @param rfc value of the field {@link #rfc} to set
      */
-    public void setRfc( boolean rfc )
-    {
+    public void setRfc(boolean rfc) {
         this.rfc = rfc;
     }
 
@@ -63,8 +59,7 @@ public class KeyToolExportCertificateRequest
      *
      * @return the value of the {@link #file} field
      */
-    public String getFile()
-    {
+    public String getFile() {
         return file;
     }
 
@@ -73,8 +68,7 @@ public class KeyToolExportCertificateRequest
      *
      * @param file value of the field {@link #file} to set
      */
-    public void setFile( String file )
-    {
+    public void setFile(String file) {
         this.file = file;
     }
 }

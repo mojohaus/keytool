@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.apache.commons.lang3.SystemUtils;
-
 import java.io.File;
+
+import org.apache.commons.lang3.SystemUtils;
 
 /**
  * Util methods for keytool.
@@ -26,32 +26,26 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolUtil
-{
+public class KeyToolUtil {
     /**
      * Constructs the operating system specific File path of the JRE cacerts file.
      *
      * @return a File representing the path to the command.
      */
-    public static File getJRECACerts()
-    {
+    public static File getJRECACerts() {
 
         File cacertsFile;
 
         String cacertsFilepath = "lib" + File.separator + "security" + File.separator + "cacerts";
 
         // For IBM's JDK 1.2
-        if ( SystemUtils.IS_OS_AIX )
+        if (SystemUtils.IS_OS_AIX) {
+            cacertsFile = new File(SystemUtils.getJavaHome() + "/", cacertsFilepath);
+        } else if (SystemUtils.IS_OS_MAC_OSX) // what about IS_OS_MAC_OS ??
         {
-            cacertsFile = new File( SystemUtils.getJavaHome() + "/", cacertsFilepath );
-        }
-        else if ( SystemUtils.IS_OS_MAC_OSX ) // what about IS_OS_MAC_OS ??
-        {
-            cacertsFile = new File( SystemUtils.getJavaHome() + "/", cacertsFilepath );
-        }
-        else
-        {
-            cacertsFile = new File( SystemUtils.getJavaHome() + "/", cacertsFilepath );
+            cacertsFile = new File(SystemUtils.getJavaHome() + "/", cacertsFilepath);
+        } else {
+            cacertsFile = new File(SystemUtils.getJavaHome() + "/", cacertsFilepath);
         }
 
         return cacertsFile;
@@ -60,7 +54,5 @@ public class KeyToolUtil
     /**
      * Prevent instanciation of util class.
      */
-    private KeyToolUtil()
-    {
-    }
+    private KeyToolUtil() {}
 }

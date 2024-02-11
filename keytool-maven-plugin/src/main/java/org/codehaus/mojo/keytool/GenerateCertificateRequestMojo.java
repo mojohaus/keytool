@@ -16,15 +16,15 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+import java.util.List;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.mojo.keytool.requests.KeyToolGenerateCertificateRequestRequest;
 import org.codehaus.plexus.util.StringUtils;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * To generate certificate request.
@@ -34,10 +34,9 @@ import java.util.List;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "generateCertificateRequest", requiresProject = true, threadSafe = true )
+@Mojo(name = "generateCertificateRequest", requiresProject = true, threadSafe = true)
 public class GenerateCertificateRequestMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateCertificateRequestRequest>
-{
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateCertificateRequestRequest> {
     /**
      * Key password.
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
@@ -98,9 +97,8 @@ public class GenerateCertificateRequestMojo
     /**
      * Default contructor.
      */
-    public GenerateCertificateRequestMojo()
-    {
-        super( KeyToolGenerateCertificateRequestRequest.class );
+    public GenerateCertificateRequestMojo() {
+        super(KeyToolGenerateCertificateRequestRequest.class);
     }
 
     /** {@inheritDoc} */
@@ -112,29 +110,27 @@ public class GenerateCertificateRequestMojo
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolGenerateCertificateRequestRequest createKeytoolRequest()
-    {
+    protected KeyToolGenerateCertificateRequestRequest createKeytoolRequest() {
         KeyToolGenerateCertificateRequestRequest request = super.createKeytoolRequest();
 
-        request.setSigalg( this.sigalg );
+        request.setSigalg(this.sigalg);
         if (this.exts != null && !this.exts.isEmpty()) {
             request.setExts(exts);
         } else {
             request.setExt(ext);
         }
-        request.setDname( this.dname );
-        request.setFile( this.file );
-        request.setKeypass( this.keypass );
+        request.setDname(this.dname);
+        request.setFile(this.file);
+        request.setKeypass(this.keypass);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.keypass, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
 
         return commandLineInfo;
     }

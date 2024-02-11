@@ -16,12 +16,12 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.plexus.util.StringUtils;
-
-import java.io.File;
-import java.net.MalformedURLException;
 
 /**
  * Abstract mojo to execute a {@link org.codehaus.mojo.keytool.KeyToolRequestWithKeyStoreParameters} request.
@@ -31,8 +31,7 @@ import java.net.MalformedURLException;
  * @since 1.2
  */
 public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends KeyToolRequestWithKeyStoreParameters>
-    extends AbstractKeyToolRequestMojo<R>
-{
+        extends AbstractKeyToolRequestMojo<R> {
 
     /**
      * Keystore location.
@@ -52,7 +51,7 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      * Keystore password.
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
-    @Parameter( alias = "storepass" )
+    @Parameter(alias = "storepass")
     private String storepass;
 
     /**
@@ -96,47 +95,43 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      *
      * @param requestType type of keytool request used by the mojo
      */
-    public AbstractKeyToolRequestWithKeyStoreParametersMojo( Class<R> requestType )
-    {
-        super( requestType );
+    public AbstractKeyToolRequestWithKeyStoreParametersMojo(Class<R> requestType) {
+        super(requestType);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected R createKeytoolRequest()
-    {
+    protected R createKeytoolRequest() {
         R request = super.createKeytoolRequest();
 
-        if ( StringUtils.isNotEmpty( keystore ) )
-        {
+        if (StringUtils.isNotEmpty(keystore)) {
 
-            File file = getFile( keystore );
+            File file = getFile(keystore);
 
             // make sure the parent directory of the keystore exists
 
             boolean mkdirs = file.getParentFile().mkdirs();
-            getLog().debug( "mdkirs: " + mkdirs + " " + file.getParentFile() );
+            getLog().debug("mdkirs: " + mkdirs + " " + file.getParentFile());
 
             // force to not use this parameter
-            request.setKeystore( file.getAbsolutePath() );
+            request.setKeystore(file.getAbsolutePath());
         }
 
-        request.setProviderarg( providerarg );
-        request.setProviderclass( providerclass );
-        request.setProvidername( providername );
-        request.setProviderpath( providerpath );
-        request.setStorepass( storepass );
-        request.setStoretype( storetype );
+        request.setProviderarg(providerarg);
+        request.setProviderclass(providerclass);
+        request.setProvidername(providername);
+        request.setProviderpath(providerpath);
+        request.setStorepass(storepass);
+        request.setStoretype(storetype);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( final Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(final Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.storepass, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.storepass, "'*****'");
 
         return commandLineInfo;
     }
@@ -146,17 +141,14 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      *
      * @param file file location to check
      */
-    protected final void createParentDirIfNecessary( final String file )
-    {
-        if ( file != null )
-        {
-            final File fileDir = new File( file ).getParentFile();
+    protected final void createParentDirIfNecessary(final String file) {
+        if (file != null) {
+            final File fileDir = new File(file).getParentFile();
 
-            if ( fileDir != null )
-            {
+            if (fileDir != null) {
                 // not a relative path
                 boolean mkdirs = fileDir.mkdirs();
-                getLog().debug( "mdkirs: " + mkdirs + " " + fileDir );
+                getLog().debug("mdkirs: " + mkdirs + " " + fileDir);
             }
         }
     }
@@ -167,16 +159,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      * @param path a {@link java.lang.String} object
      * @return a {@link java.io.File} object
      */
-    protected File getFile( String path )
+    protected File getFile(String path) {
 
-    {
-        try
-        {
-            return new File( new File( path ).toURL().getFile() );
-        }
-        catch ( MalformedURLException e )
-        {
-            throw new IllegalStateException( "Could not obtain directory " + path );
+        try {
+            return new File(new File(path).toURL().getFile());
+        } catch (MalformedURLException e) {
+            throw new IllegalStateException("Could not obtain directory " + path);
         }
     }
 
@@ -185,8 +173,7 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
      *
      * @return a {@link java.io.File} object
      */
-    protected File getKeystoreFile()
-    {
+    protected File getKeystoreFile() {
         return getFile(keystore);
     }
 }

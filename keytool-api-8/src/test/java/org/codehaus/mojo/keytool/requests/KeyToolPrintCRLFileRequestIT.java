@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolPrintCRLFileRequest}.
@@ -26,17 +26,13 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolPrintCRLFileRequestIT
-    extends AbstractKeyToolPrintCRLFileRequestIT
-{
+public class KeyToolPrintCRLFileRequestIT extends AbstractKeyToolPrintCRLFileRequestIT {
 
     @Override
-    protected void requestResult( JavaToolResult keyToolResult, File file )
-    {
-        assertKeyToolResult( keyToolResult, new String[]{ "-printcrl", "-v", "-file", file.getAbsolutePath() }, 1 );
+    protected void requestResult(JavaToolResult keyToolResult, File file) {
+        assertKeyToolResult(keyToolResult, new String[] {"-printcrl", "-v", "-file", file.getAbsolutePath()}, 1);
 
-        //FIXME tchemit 2011-11-06 : this only works with jdk 7
-//        ,0);
+        // FIXME tchemit 2011-11-06 : this only works with jdk 7
+        //        ,0);
     }
-
 }

@@ -16,14 +16,14 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.mojo.keytool.requests.KeyToolImportCertificateRequest;
 import org.codehaus.plexus.util.StringUtils;
-
-import java.io.File;
 
 /**
  * To import a certificate into a keystore.
@@ -35,10 +35,9 @@ import java.io.File;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "importCertificate", requiresProject = true, threadSafe = true )
+@Mojo(name = "importCertificate", requiresProject = true, threadSafe = true)
 public class ImportCertificateMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolImportCertificateRequest>
-{
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolImportCertificateRequest> {
 
     /**
      * Key password.
@@ -87,54 +86,46 @@ public class ImportCertificateMojo
     /**
      * Default contructor.
      */
-    public ImportCertificateMojo()
-    {
-        super( KeyToolImportCertificateRequest.class );
+    public ImportCertificateMojo() {
+        super(KeyToolImportCertificateRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void execute()
-        throws MojoExecutionException
-    {
+    public void execute() throws MojoExecutionException {
 
-        if ( skipIfExist )
-        {
+        if (skipIfExist) {
 
             // check if keystore already exist
             File keystoreFile = getKeystoreFile();
             boolean keystoreFileExists = keystoreFile.exists();
 
-            if ( keystoreFileExists )
-            {
-                getLog().info( "Skip execution, keystore already exists at " + keystoreFile );
-                setSkip( true );
+            if (keystoreFileExists) {
+                getLog().info("Skip execution, keystore already exists at " + keystoreFile);
+                setSkip(true);
             }
-
         }
         super.execute();
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolImportCertificateRequest createKeytoolRequest()
-    {
+    protected KeyToolImportCertificateRequest createKeytoolRequest() {
         KeyToolImportCertificateRequest request = super.createKeytoolRequest();
 
-        request.setKeypass( this.keypass );
-        request.setFile( this.file );
-        request.setNoprompt( this.noprompt );
-        request.setTrustcacerts( this.trustcacerts );
+        request.setKeypass(this.keypass);
+        request.setFile(this.file);
+        request.setNoprompt(this.noprompt);
+        request.setTrustcacerts(this.trustcacerts);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.keypass, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
 
         return commandLineInfo;
     }

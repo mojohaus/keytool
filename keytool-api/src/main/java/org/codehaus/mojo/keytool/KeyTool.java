@@ -24,9 +24,7 @@ import org.apache.maven.shared.utils.cli.javatool.JavaTool;
  * @author tchemit
  * @since 1.1
  */
-public interface KeyTool
-    extends JavaTool<KeyToolRequest>
-{
+public interface KeyTool extends JavaTool<KeyToolRequest> {
 
     /**
      * Plexus role name.

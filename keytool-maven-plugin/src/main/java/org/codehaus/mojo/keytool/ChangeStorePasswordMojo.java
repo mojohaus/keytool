@@ -30,10 +30,9 @@ import org.codehaus.plexus.util.StringUtils;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "changeStorePassword", requiresProject = true, threadSafe = true )
+@Mojo(name = "changeStorePassword", requiresProject = true, threadSafe = true)
 public class ChangeStorePasswordMojo
-    extends AbstractKeyToolRequestWithKeyStoreParametersMojo<KeyToolChangeStorePasswordRequest>
-{
+        extends AbstractKeyToolRequestWithKeyStoreParametersMojo<KeyToolChangeStorePasswordRequest> {
 
     /**
      * New password.
@@ -47,27 +46,24 @@ public class ChangeStorePasswordMojo
     /**
      * Default contructor.
      */
-    public ChangeStorePasswordMojo()
-    {
-        super( KeyToolChangeStorePasswordRequest.class );
+    public ChangeStorePasswordMojo() {
+        super(KeyToolChangeStorePasswordRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolChangeStorePasswordRequest createKeytoolRequest()
-    {
+    protected KeyToolChangeStorePasswordRequest createKeytoolRequest() {
         KeyToolChangeStorePasswordRequest request = super.createKeytoolRequest();
-        request.setNewPassword( this.newPassword );
+        request.setNewPassword(this.newPassword);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.newPassword, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.newPassword, "'*****'");
 
         return commandLineInfo;
     }

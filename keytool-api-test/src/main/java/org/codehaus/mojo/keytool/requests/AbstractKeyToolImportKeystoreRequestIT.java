@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolImportKeystoreRequest}.
@@ -27,42 +27,36 @@ import java.io.File;
  * @since 1.3
  */
 public abstract class AbstractKeyToolImportKeystoreRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolImportKeystoreRequest>
-{
+        extends AbstractKeyToolRequestIT<KeyToolImportKeystoreRequest> {
 
     /**
      * <p>Constructor for AbstractKeyToolImportKeystoreRequestIT.</p>
      */
-    protected AbstractKeyToolImportKeystoreRequestIT()
-    {
-    }
+    protected AbstractKeyToolImportKeystoreRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolImportKeystoreRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolImportKeystoreRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolImportKeystoreRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
         File srcKeyStore = resourceFixtures.simpleKeyStore();
 
         File destKeyStore = resourceFixtures.simpleDestKeyStoreFile();
 
         KeyToolImportKeystoreRequest request =
-            requestFixtures.createKeyToolImportKeystoreRequest( srcKeyStore, destKeyStore );
+                requestFixtures.createKeyToolImportKeystoreRequest(srcKeyStore, destKeyStore);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, srcKeyStore, destKeyStore );
+        requestResult(keyToolResult, srcKeyStore, destKeyStore);
     }
 
     /**
@@ -72,6 +66,5 @@ public abstract class AbstractKeyToolImportKeystoreRequestIT
      * @param srcKeyStore a {@link java.io.File} object
      * @param destKeyStore a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File srcKeyStore, File destKeyStore );
-
+    protected abstract void requestResult(JavaToolResult keyToolResult, File srcKeyStore, File destKeyStore);
 }

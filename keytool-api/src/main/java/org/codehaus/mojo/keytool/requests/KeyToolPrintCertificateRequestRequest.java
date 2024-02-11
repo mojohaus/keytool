@@ -24,9 +24,7 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolPrintCertificateRequestRequest
-    extends AbstractKeyToolRequest
-{
+public class KeyToolPrintCertificateRequestRequest extends AbstractKeyToolRequest {
 
     /**
      * Input file name.
@@ -39,8 +37,7 @@ public class KeyToolPrintCertificateRequestRequest
      *
      * @return the value of the {@link #file} field
      */
-    public File getFile()
-    {
+    public File getFile() {
         return file;
     }
 
@@ -49,9 +46,7 @@ public class KeyToolPrintCertificateRequestRequest
      *
      * @param file value of the field {@link #file} to set
      */
-    public void setFile( File file )
-    {
+    public void setFile(File file) {
         this.file = file;
     }
-
 }

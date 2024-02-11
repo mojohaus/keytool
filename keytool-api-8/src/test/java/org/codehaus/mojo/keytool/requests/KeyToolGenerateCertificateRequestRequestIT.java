@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link KeyToolGenerateCertificateRequestRequest}.
@@ -26,18 +26,33 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolGenerateCertificateRequestRequestIT
-    extends AbstractKeyToolGenerateCertificateRequestRequestIT
-{
+public class KeyToolGenerateCertificateRequestRequestIT extends AbstractKeyToolGenerateCertificateRequestRequestIT {
 
-    protected void requestResult( JavaToolResult keyToolResult, File keyStore, File outputFile )
-    {
-        assertKeyToolResult( keyToolResult,
-                             new String[]{ "-certreq", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
-                                 "changeit", "-storetype", "jks", "-alias", "foo_alias", "-sigalg", "SHA1withDSA",
-                                 "-file", outputFile.getAbsolutePath(), "-keypass", "key-passwd", "-dname",
-                                 "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France" }, 0 );
+    protected void requestResult(JavaToolResult keyToolResult, File keyStore, File outputFile) {
+        assertKeyToolResult(
+                keyToolResult,
+                new String[] {
+                    "-certreq",
+                    "-v",
+                    "-keystore",
+                    keyStore.getAbsolutePath(),
+                    "-storepass",
+                    "changeit",
+                    "-storetype",
+                    "jks",
+                    "-alias",
+                    "foo_alias",
+                    "-sigalg",
+                    "SHA1withDSA",
+                    "-file",
+                    outputFile.getAbsolutePath(),
+                    "-keypass",
+                    "key-passwd",
+                    "-dname",
+                    "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France"
+                },
+                0);
 
-        assertTrue( outputFile.exists() );
+        assertTrue(outputFile.exists());
     }
 }

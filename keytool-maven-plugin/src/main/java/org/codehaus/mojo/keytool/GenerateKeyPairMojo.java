@@ -16,15 +16,15 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+import java.util.List;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest;
 import org.codehaus.plexus.util.StringUtils;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * To generate a key pair into a keystore.
@@ -35,10 +35,9 @@ import java.util.List;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "generateKeyPair", requiresProject = true, threadSafe = true )
+@Mojo(name = "generateKeyPair", requiresProject = true, threadSafe = true)
 public class GenerateKeyPairMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateKeyPairRequest>
-{
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateKeyPairRequest> {
 
     /**
      * Key algorithm name.
@@ -134,62 +133,54 @@ public class GenerateKeyPairMojo
     /**
      * Default contructor.
      */
-    public GenerateKeyPairMojo()
-    {
-        super( KeyToolGenerateKeyPairRequest.class );
+    public GenerateKeyPairMojo() {
+        super(KeyToolGenerateKeyPairRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void execute()
-        throws MojoExecutionException
-    {
+    public void execute() throws MojoExecutionException {
 
-        if ( skipIfExist )
-        {
+        if (skipIfExist) {
 
             // check if keystore already exist
             File keystoreFile = getKeystoreFile();
             boolean keystoreFileExists = keystoreFile.exists();
 
-            if ( keystoreFileExists )
-            {
-                getLog().info( "Skip execution, keystore already exists at " + keystoreFile );
-                setSkip( true );
+            if (keystoreFileExists) {
+                getLog().info("Skip execution, keystore already exists at " + keystoreFile);
+                setSkip(true);
             }
-
         }
         super.execute();
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolGenerateKeyPairRequest createKeytoolRequest()
-    {
+    protected KeyToolGenerateKeyPairRequest createKeytoolRequest() {
         KeyToolGenerateKeyPairRequest request = super.createKeytoolRequest();
 
-        request.setKeyalg( this.keyalg );
-        request.setKeysize( this.keysize );
-        request.setKeypass( this.keypass );
-        request.setSigalg( this.sigalg );
-        request.setDname( this.dname );
-        request.setStartdate( this.startdate );
+        request.setKeyalg(this.keyalg);
+        request.setKeysize(this.keysize);
+        request.setKeypass(this.keypass);
+        request.setSigalg(this.sigalg);
+        request.setDname(this.dname);
+        request.setStartdate(this.startdate);
         if (this.exts != null && !this.exts.isEmpty()) {
             request.setExts(exts);
         } else {
             request.setExt(ext);
         }
-        request.setValidity( this.validity );
+        request.setValidity(this.validity);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.keypass, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
 
         return commandLineInfo;
     }

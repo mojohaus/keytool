@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool.requests;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolChangeStorePasswordRequest
-    extends AbstractKeyToolRequestWithKeyStoreParameters
-{
+public class KeyToolChangeStorePasswordRequest extends AbstractKeyToolRequestWithKeyStoreParameters {
 
     /**
      * New password.
@@ -37,8 +35,7 @@ public class KeyToolChangeStorePasswordRequest
      *
      * @return the value of the {@link #newPassword} field
      */
-    public String getNewPassword()
-    {
+    public String getNewPassword() {
         return newPassword;
     }
 
@@ -47,9 +44,7 @@ public class KeyToolChangeStorePasswordRequest
      *
      * @param newPassword value of the field {@link #newPassword} to set
      */
-    public void setNewPassword( String newPassword )
-    {
+    public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
-
 }

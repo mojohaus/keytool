@@ -24,10 +24,8 @@ import org.codehaus.mojo.keytool.KeyToolRequestWithKeyStoreParameters;
  * @author tchemit
  * @since 1.1
  */
-public abstract class AbstractKeyToolRequestWithKeyStoreParameters
-    extends AbstractKeyToolRequest
-    implements KeyToolRequestWithKeyStoreParameters
-{
+public abstract class AbstractKeyToolRequestWithKeyStoreParameters extends AbstractKeyToolRequest
+        implements KeyToolRequestWithKeyStoreParameters {
 
     /**
      * Provider name.
@@ -76,14 +74,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
      *
      * @return a {@link java.lang.String} object
      */
-    public final String getProvidername()
-    {
+    public final String getProvidername() {
         return providername;
     }
 
     /** {@inheritDoc} */
-    public final void setProvidername( String providername )
-    {
+    public final void setProvidername(String providername) {
         this.providername = providername;
     }
 
@@ -92,14 +88,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
      *
      * @return a {@link java.lang.String} object
      */
-    public final String getProviderclass()
-    {
+    public final String getProviderclass() {
         return providerclass;
     }
 
     /** {@inheritDoc} */
-    public final void setProviderclass( String providerclass )
-    {
+    public final void setProviderclass(String providerclass) {
         this.providerclass = providerclass;
     }
 
@@ -108,14 +102,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
      *
      * @return a {@link java.lang.String} object
      */
-    public final String getProviderarg()
-    {
+    public final String getProviderarg() {
         return providerarg;
     }
 
     /** {@inheritDoc} */
-    public final void setProviderarg( String providerarg )
-    {
+    public final void setProviderarg(String providerarg) {
         this.providerarg = providerarg;
     }
 
@@ -124,14 +116,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
      *
      * @return a {@link java.lang.String} object
      */
-    public final String getProviderpath()
-    {
+    public final String getProviderpath() {
         return providerpath;
     }
 
     /** {@inheritDoc} */
-    public final void setProviderpath( String providerpath )
-    {
+    public final void setProviderpath(String providerpath) {
         this.providerpath = providerpath;
     }
 
@@ -140,14 +130,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
      *
      * @return a {@link java.lang.String} object
      */
-    public final String getKeystore()
-    {
+    public final String getKeystore() {
         return keystore;
     }
 
     /** {@inheritDoc} */
-    public final void setKeystore( String keystore )
-    {
+    public final void setKeystore(String keystore) {
         this.keystore = keystore;
     }
 
@@ -156,14 +144,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
      *
      * @return a {@link java.lang.String} object
      */
-    public final String getStoretype()
-    {
+    public final String getStoretype() {
         return storetype;
     }
 
     /** {@inheritDoc} */
-    public final void setStoretype( String storetype )
-    {
+    public final void setStoretype(String storetype) {
         this.storetype = storetype;
     }
 
@@ -172,15 +158,12 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParameters
      *
      * @return a {@link java.lang.String} object
      */
-    public final String getStorepass()
-    {
+    public final String getStorepass() {
         return storepass;
     }
 
     /** {@inheritDoc} */
-    public final void setStorepass( String storepass )
-    {
+    public final void setStorepass(String storepass) {
         this.storepass = storepass;
     }
-
 }

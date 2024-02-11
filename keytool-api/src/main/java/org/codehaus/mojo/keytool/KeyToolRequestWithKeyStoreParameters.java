@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool;
  * @author tchemit
  * @since 1.1
  */
-public interface KeyToolRequestWithKeyStoreParameters
-    extends KeyToolRequest
-{
+public interface KeyToolRequestWithKeyStoreParameters extends KeyToolRequest {
 
     /**
      * Gets the value of the {@code keystore} field.
@@ -38,7 +36,7 @@ public interface KeyToolRequestWithKeyStoreParameters
      *
      * @param keystore the new value of the field {@code keystore}.
      */
-    void setKeystore( String keystore );
+    void setKeystore(String keystore);
 
     /**
      * Gets the value of the {@code storetype} field.
@@ -52,7 +50,7 @@ public interface KeyToolRequestWithKeyStoreParameters
      *
      * @param storetype the new value of the field {@code storetype}.
      */
-    void setStoretype( String storetype );
+    void setStoretype(String storetype);
 
     /**
      * Gets the value of the {@code storepass} field.
@@ -66,7 +64,7 @@ public interface KeyToolRequestWithKeyStoreParameters
      *
      * @param storepass the new value of the field {@code storepass}.
      */
-    void setStorepass( String storepass );
+    void setStorepass(String storepass);
 
     /**
      * Gets the value of the {@code providername} field.
@@ -80,7 +78,7 @@ public interface KeyToolRequestWithKeyStoreParameters
      *
      * @param providername value of the field {@code providername} to set
      */
-    void setProvidername( String providername );
+    void setProvidername(String providername);
 
     /**
      * Gets the value of the {@code providerclass} field.
@@ -94,7 +92,7 @@ public interface KeyToolRequestWithKeyStoreParameters
      *
      * @param providerclass value of the field {@code providerclass} to set
      */
-    void setProviderclass( String providerclass );
+    void setProviderclass(String providerclass);
 
     /**
      * Gets the value of the {@code providerarg} field.
@@ -108,7 +106,7 @@ public interface KeyToolRequestWithKeyStoreParameters
      *
      * @param providerarg value of the field {@code providerarg} to set
      */
-    void setProviderarg( String providerarg );
+    void setProviderarg(String providerarg);
 
     /**
      * Gets the value of the {@code providerpath} field.
@@ -122,6 +120,5 @@ public interface KeyToolRequestWithKeyStoreParameters
      *
      * @param providerpath value of the field {@code providerpath} to set
      */
-    void setProviderpath( String providerpath );
-
+    void setProviderpath(String providerpath);
 }

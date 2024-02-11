@@ -27,17 +27,13 @@ import org.codehaus.mojo.keytool.requests.KeyToolDeleteRequest;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "deleteAlias", requiresProject = true, threadSafe = true )
-public class DeleteAliasMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolDeleteRequest>
-{
+@Mojo(name = "deleteAlias", requiresProject = true, threadSafe = true)
+public class DeleteAliasMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolDeleteRequest> {
 
     /**
      * Default contructor.
      */
-    public DeleteAliasMojo()
-    {
-        super( KeyToolDeleteRequest.class );
+    public DeleteAliasMojo() {
+        super(KeyToolDeleteRequest.class);
     }
-
 }

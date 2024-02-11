@@ -29,10 +29,9 @@ import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "exportCertificate", requiresProject = true, threadSafe = true )
+@Mojo(name = "exportCertificate", requiresProject = true, threadSafe = true)
 public class ExportCertificateMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolExportCertificateRequest>
-{
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolExportCertificateRequest> {
 
     /**
      * Output in RFC style.
@@ -55,9 +54,8 @@ public class ExportCertificateMojo
     /**
      * Default contructor.
      */
-    public ExportCertificateMojo()
-    {
-        super( KeyToolExportCertificateRequest.class );
+    public ExportCertificateMojo() {
+        super(KeyToolExportCertificateRequest.class);
     }
 
     /** {@inheritDoc} */
@@ -69,12 +67,11 @@ public class ExportCertificateMojo
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolExportCertificateRequest createKeytoolRequest()
-    {
+    protected KeyToolExportCertificateRequest createKeytoolRequest() {
         KeyToolExportCertificateRequest request = super.createKeytoolRequest();
 
-        request.setFile( this.file );
-        request.setRfc( this.rfc );
+        request.setFile(this.file);
+        request.setRfc(this.rfc);
         return request;
     }
 }

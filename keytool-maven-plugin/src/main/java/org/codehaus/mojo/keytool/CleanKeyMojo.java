@@ -16,11 +16,11 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-
-import java.io.File;
 
 /**
  * A Mojo that deletes a generated keystore file.
@@ -29,10 +29,8 @@ import java.io.File;
  * @author $Author$
  * @version $Revision$
  */
-@Mojo( name = "clean", defaultPhase = LifecyclePhase.CLEAN, threadSafe = true )
-public class CleanKeyMojo
-    extends AbstractKeyToolMojo
-{
+@Mojo(name = "clean", defaultPhase = LifecyclePhase.CLEAN, threadSafe = true)
+public class CleanKeyMojo extends AbstractKeyToolMojo {
 
     /**
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
@@ -45,8 +43,7 @@ public class CleanKeyMojo
      *
      * @return Returns the keystore.
      */
-    public final String getKeystore()
-    {
+    public final String getKeystore() {
         return this.keystore;
     }
 
@@ -55,30 +52,22 @@ public class CleanKeyMojo
      *
      * @param keystore The keystore to set.
      */
-    public final void setKeystore( String keystore )
-    {
+    public final void setKeystore(String keystore) {
         this.keystore = keystore;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void execute()
-    {
-        if ( isSkip() )
-        {
-            getLog().info( getMessage( "disabled", null ) );
-        }
-        else
-        {
-            File keystoreFile = new File( this.getKeystore() );
-            if ( keystoreFile.delete() )
-            {
-                getLog().info( "Keystore file '" + keystoreFile + "' deleted successfully." );
-            }
-            else
-            {
-                getLog().warn( "Keystore file '" + keystoreFile + "' doesn't exist." );
+    public void execute() {
+        if (isSkip()) {
+            getLog().info(getMessage("disabled", null));
+        } else {
+            File keystoreFile = new File(this.getKeystore());
+            if (keystoreFile.delete()) {
+                getLog().info("Keystore file '" + keystoreFile + "' deleted successfully.");
+            } else {
+                getLog().warn("Keystore file '" + keystoreFile + "' doesn't exist.");
             }
         }
     }

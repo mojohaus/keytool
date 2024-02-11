@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link KeyToolGenerateSecretKeyRequest}.
@@ -26,17 +26,31 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolGenerateSecretKeyRequestIT
-    extends AbstractKeyToolGenerateSecretKeyRequestIT
-{
+public class KeyToolGenerateSecretKeyRequestIT extends AbstractKeyToolGenerateSecretKeyRequestIT {
 
     @Override
-    protected void requestResult( JavaToolResult keyToolResult, File keyStore )
-    {
-        assertKeyToolResult( keyToolResult,
-                             new String[]{ "-genseckey", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
-                                 "changeit", "-storetype", "jks", "-alias", "new_foo_alias", "-keypass", "key-passwd",
-                                 "-keyalg", "DES", "-keysize", "56" }, 1 );
-        //FIXME tchemit 2011-11-06 Can not generate in this keystore a non private key, make this works
+    protected void requestResult(JavaToolResult keyToolResult, File keyStore) {
+        assertKeyToolResult(
+                keyToolResult,
+                new String[] {
+                    "-genseckey",
+                    "-v",
+                    "-keystore",
+                    keyStore.getAbsolutePath(),
+                    "-storepass",
+                    "changeit",
+                    "-storetype",
+                    "jks",
+                    "-alias",
+                    "new_foo_alias",
+                    "-keypass",
+                    "key-passwd",
+                    "-keyalg",
+                    "DES",
+                    "-keysize",
+                    "56"
+                },
+                1);
+        // FIXME tchemit 2011-11-06 Can not generate in this keystore a non private key, make this works
     }
 }

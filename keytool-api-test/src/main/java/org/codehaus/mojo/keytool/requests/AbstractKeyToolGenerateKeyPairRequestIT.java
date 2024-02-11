@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest}.
@@ -27,24 +27,20 @@ import java.io.File;
  * @since 1.1
  */
 public abstract class AbstractKeyToolGenerateKeyPairRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolGenerateKeyPairRequest>
-{
+        extends AbstractKeyToolRequestIT<KeyToolGenerateKeyPairRequest> {
 
     /**
      * <p>Constructor for AbstractKeyToolGenerateKeyPairRequestIT.</p>
      */
-    protected AbstractKeyToolGenerateKeyPairRequestIT()
-    {
-    }
+    protected AbstractKeyToolGenerateKeyPairRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolGenerateKeyPairRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolGenerateKeyPairRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolGenerateKeyPairRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /**
@@ -53,21 +49,18 @@ public abstract class AbstractKeyToolGenerateKeyPairRequestIT
      * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @param keyStore a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore );
+    protected abstract void requestResult(JavaToolResult keyToolResult, File keyStore);
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
-        File keyStore = resourceFixtures.simpleKeyStore( false );
+        File keyStore = resourceFixtures.simpleKeyStore(false);
 
-        KeyToolGenerateKeyPairRequest request = requestFixtures.createKeyToolGenerateKeyPairRequest( keyStore );
+        KeyToolGenerateKeyPairRequest request = requestFixtures.createKeyToolGenerateKeyPairRequest(keyStore);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, keyStore );
+        requestResult(keyToolResult, keyStore);
     }
-
 }

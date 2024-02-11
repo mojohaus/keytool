@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Component;
@@ -26,8 +28,6 @@ import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 import org.apache.maven.toolchain.Toolchain;
 import org.apache.maven.toolchain.ToolchainManager;
 
-import java.io.File;
-
 /**
  * Abstract keytool mojo implementing the {@link org.codehaus.mojo.keytool.KeyToolRequest}.
  *
@@ -35,9 +35,7 @@ import java.io.File;
  * @author tchemit
  * @since 1.2
  */
-public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
-    extends AbstractKeyToolMojo
-{
+public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest> extends AbstractKeyToolMojo {
 
     /**
      * List of additional arguments to append to the keytool command line.
@@ -54,7 +52,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
     /**
      * Where to execute the keytool command.
      */
-    @Parameter( defaultValue = "${basedir}", required = true, alias = "workingdir" )
+    @Parameter(defaultValue = "${basedir}", required = true, alias = "workingdir")
     private File workingDirectory;
 
     /**
@@ -62,7 +60,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      *
      * @since 1.2
      */
-    @Component( role = KeyTool.class )
+    @Component(role = KeyTool.class)
     private KeyTool keyTool;
 
     /**
@@ -79,7 +77,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      *
      * @since 1.4
      */
-    @Parameter( defaultValue = "${session}", readonly = true )
+    @Parameter(defaultValue = "${session}", readonly = true)
     private MavenSession session;
 
     /**
@@ -92,8 +90,7 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      *
      * @param requestType type of keytool request used by the mojo
      */
-    protected AbstractKeyToolRequestMojo( Class<R> requestType )
-    {
+    protected AbstractKeyToolRequestMojo(Class<R> requestType) {
         this.requestType = requestType;
     }
 
@@ -102,38 +99,29 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      *
      * @throws org.apache.maven.plugin.MojoExecutionException if any.
      */
-    public void execute()
-        throws MojoExecutionException
-    {
+    public void execute() throws MojoExecutionException {
 
-        if ( isSkip() )
-        {
-            getLog().info( getMessage( "disabled" ) );
-        }
-        else
-        {
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+        } else {
 
             // add toolchain support if found
             Toolchain toolchain = getToolchain();
 
-            if ( toolchain != null )
-            {
-                getLog().info( "Toolchain in keytool-maven-plugin: " + toolchain );
+            if (toolchain != null) {
+                getLog().info("Toolchain in keytool-maven-plugin: " + toolchain);
                 keyTool.setToolchain(toolchain);
             }
 
-            //creates the keytool request
+            // creates the keytool request
             R request = createKeytoolRequest();
 
-            try
-            {
-                JavaToolResult result = keyTool.execute( request );
+            try {
+                JavaToolResult result = keyTool.execute(request);
 
-                consumeResult( result );
-            }
-            catch ( JavaToolException e )
-            {
-                throw new MojoExecutionException( getMessage( "commandLineException", e.getMessage() ), e );
+                consumeResult(result);
+            } catch (JavaToolException e) {
+                throw new MojoExecutionException(getMessage("commandLineException", e.getMessage()), e);
             }
         }
     }
@@ -144,23 +132,19 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      * @return the created keytool request
      * @see KeyToolRequest
      */
-    protected R createKeytoolRequest()
-    {
+    protected R createKeytoolRequest() {
         R request;
-        try
-        {
+        try {
             request = requestType.getConstructor().newInstance();
-        }
-        catch ( Exception e )
-        {
+        } catch (Exception e) {
             // just throw a runtime exception : this should never happen!
-            throw new RuntimeException( "Failed to create keytool request ", e );
+            throw new RuntimeException("Failed to create keytool request ", e);
         }
 
         // add default parameters
-        request.setVerbose( isVerbose() );
-        request.setWorkingDirectory( this.workingDirectory );
-        request.setArguments( this.arguments );
+        request.setVerbose(isVerbose());
+        request.setWorkingDirectory(this.workingDirectory);
+        request.setArguments(this.arguments);
         return request;
     }
 
@@ -171,11 +155,9 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      * @param commandLine The {@code Commandline} to get a string representation of (can not be null).
      * @return The string representation of {@code commandLine}.
      */
-    protected String getCommandlineInfo( final Commandline commandLine )
-    {
-        if ( commandLine == null )
-        {
-            throw new NullPointerException( "commandLine" );
+    protected String getCommandlineInfo(final Commandline commandLine) {
+        if (commandLine == null) {
+            throw new NullPointerException("commandLine");
         }
         return commandLine.toString();
     }
@@ -186,16 +168,13 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      * @param result result of the command line action
      * @throws org.apache.maven.plugin.MojoExecutionException if the result is not 0 (means something bad occurs)
      */
-    protected final void consumeResult( JavaToolResult result )
-        throws MojoExecutionException
-    {
+    protected final void consumeResult(JavaToolResult result) throws MojoExecutionException {
         Commandline commandLine = result.getCommandline();
 
         int resultCode = result.getExitCode();
 
-        if ( resultCode != 0 )
-        {
-            throw new MojoExecutionException( getMessage( "failure", getCommandlineInfo( commandLine ), resultCode ) );
+        if (resultCode != 0) {
+            throw new MojoExecutionException(getMessage("failure", getCommandlineInfo(commandLine), resultCode));
         }
     }
 
@@ -206,12 +185,10 @@ public abstract class AbstractKeyToolRequestMojo<R extends KeyToolRequest>
      *
      * @return Toolchain instance
      */
-    private Toolchain getToolchain()
-    {
+    private Toolchain getToolchain() {
         Toolchain tc = null;
-        if ( toolchainManager != null )
-        {
-            tc = toolchainManager.getToolchainFromBuildContext( "jdk", session );
+        if (toolchainManager != null) {
+            tc = toolchainManager.getToolchainFromBuildContext("jdk", session);
         }
 
         return tc;

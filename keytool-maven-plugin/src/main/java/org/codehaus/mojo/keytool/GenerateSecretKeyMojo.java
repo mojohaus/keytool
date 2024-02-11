@@ -29,10 +29,9 @@ import org.codehaus.plexus.util.StringUtils;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "generateSecretKey", requiresProject = true, threadSafe = true )
+@Mojo(name = "generateSecretKey", requiresProject = true, threadSafe = true)
 public class GenerateSecretKeyMojo
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateSecretKeyRequest>
-{
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateSecretKeyRequest> {
 
     /**
      * Key algorithm name.
@@ -64,30 +63,27 @@ public class GenerateSecretKeyMojo
     /**
      * Default contructor.
      */
-    public GenerateSecretKeyMojo()
-    {
-        super( KeyToolGenerateSecretKeyRequest.class );
+    public GenerateSecretKeyMojo() {
+        super(KeyToolGenerateSecretKeyRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolGenerateSecretKeyRequest createKeytoolRequest()
-    {
+    protected KeyToolGenerateSecretKeyRequest createKeytoolRequest() {
         KeyToolGenerateSecretKeyRequest request = super.createKeytoolRequest();
 
-        request.setKeyalg( this.keyalg );
-        request.setKeysize( this.keysize );
-        request.setKeypass( this.keypass );
+        request.setKeyalg(this.keyalg);
+        request.setKeysize(this.keysize);
+        request.setKeypass(this.keypass);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.keypass, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
 
         return commandLineInfo;
     }

@@ -16,12 +16,10 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import junit.framework.TestCase;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-
 import java.io.File;
 import java.io.IOException;
+
+import junit.framework.TestCase;
 
 /**
  * Unit Test class that test the removal of an existing and non existing
@@ -31,9 +29,7 @@ import java.io.IOException;
  * @author $Author$
  * @version $Revision$
  */
-public class CleanKeyMojoTest
-    extends TestCase
-{
+public class CleanKeyMojoTest extends TestCase {
 
     private static final String EXISTING_TEST_KEYSTORE = ".keystore";
 
@@ -41,14 +37,11 @@ public class CleanKeyMojoTest
 
     private CleanKeyMojo mojo;
 
-    protected void setUp()
-    {
+    protected void setUp() {
         mojo = new CleanKeyMojo();
-
     }
 
-    public void tearDown()
-    {
+    public void tearDown() {
         mojo = null;
     }
 
@@ -57,26 +50,21 @@ public class CleanKeyMojoTest
      *
      * @throws IOException
      */
-    public void testExistingRemoveKeystore()
-        throws IOException
-    {
+    public void testExistingRemoveKeystore() throws IOException {
         String tempKeystore =
-            System.getProperty( "java.io.tmpdir" ) + File.separator + CleanKeyMojoTest.EXISTING_TEST_KEYSTORE;
-        File tempKeystoreFile = new File( tempKeystore );
+                System.getProperty("java.io.tmpdir") + File.separator + CleanKeyMojoTest.EXISTING_TEST_KEYSTORE;
+        File tempKeystoreFile = new File(tempKeystore);
         tempKeystoreFile.createNewFile();
-        mojo.setKeystore( tempKeystore );
+        mojo.setKeystore(tempKeystore);
         mojo.execute();
-
     }
 
     /**
      * Remove the temp keystore file created in the setup. existent
      *
      */
-    public void testRemoveNonExistentKeystore()
-    {
-        mojo.setKeystore( CleanKeyMojoTest.NON_EXISTING_TEST_KEYSTORE );
+    public void testRemoveNonExistentKeystore() {
+        mojo.setKeystore(CleanKeyMojoTest.NON_EXISTING_TEST_KEYSTORE);
         mojo.execute();
     }
-
 }

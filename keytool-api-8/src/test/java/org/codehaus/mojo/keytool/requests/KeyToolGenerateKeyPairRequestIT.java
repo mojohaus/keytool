@@ -16,10 +16,10 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 import org.junit.Assert;
-
-import java.io.File;
 
 /**
  * Test the {@link KeyToolGenerateKeyPairRequest}.
@@ -27,22 +27,41 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolGenerateKeyPairRequestIT
-    extends AbstractKeyToolGenerateKeyPairRequestIT
-{
+public class KeyToolGenerateKeyPairRequestIT extends AbstractKeyToolGenerateKeyPairRequestIT {
 
     @Override
-    protected void requestResult( JavaToolResult keyToolResult, File keyStore )
-    {
-        assertKeyToolResult( keyToolResult,
-                             new String[]{ "-genkeypair", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
-                                 "changeit", "-storetype", "jks", "-alias", "dest_foo_alias", "-dname",
-                                 "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France", "-keypass",
-                                 "key-passwd", "-validity", "100", "-keyalg", "DSA", "-keysize", "1024", "-sigalg",
-                                 "SHA1withDSA", "-startdate", "2011/11/11" }, 0 );
+    protected void requestResult(JavaToolResult keyToolResult, File keyStore) {
+        assertKeyToolResult(
+                keyToolResult,
+                new String[] {
+                    "-genkeypair",
+                    "-v",
+                    "-keystore",
+                    keyStore.getAbsolutePath(),
+                    "-storepass",
+                    "changeit",
+                    "-storetype",
+                    "jks",
+                    "-alias",
+                    "dest_foo_alias",
+                    "-dname",
+                    "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France",
+                    "-keypass",
+                    "key-passwd",
+                    "-validity",
+                    "100",
+                    "-keyalg",
+                    "DSA",
+                    "-keysize",
+                    "1024",
+                    "-sigalg",
+                    "SHA1withDSA",
+                    "-startdate",
+                    "2011/11/11"
+                },
+                0);
 
         // key store was created
-        Assert.assertTrue( keyStore.exists() );
+        Assert.assertTrue(keyStore.exists());
     }
-
 }

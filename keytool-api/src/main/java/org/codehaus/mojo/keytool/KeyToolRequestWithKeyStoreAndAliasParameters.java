@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool;
  * @author tchemit
  * @since 1.1
  */
-public interface KeyToolRequestWithKeyStoreAndAliasParameters
-    extends KeyToolRequestWithKeyStoreParameters
-{
+public interface KeyToolRequestWithKeyStoreAndAliasParameters extends KeyToolRequestWithKeyStoreParameters {
 
     /**
      * Gets the value of the {@code alias} field.
@@ -38,7 +36,7 @@ public interface KeyToolRequestWithKeyStoreAndAliasParameters
      *
      * @param alias the new value of the field {@code alias}.
      */
-    void setAlias( String alias );
+    void setAlias(String alias);
 
     /**
      * Gets the value of the {@code passwordProtected} field.
@@ -52,6 +50,5 @@ public interface KeyToolRequestWithKeyStoreAndAliasParameters
      *
      * @param passwordProtected value of the field {@code passwordProtected} to set
      */
-    void setPasswordProtected( boolean passwordProtected );
-
+    void setPasswordProtected(boolean passwordProtected);
 }

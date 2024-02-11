@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolGenerateSecretKeyRequest}.
@@ -27,39 +27,33 @@ import java.io.File;
  * @since 1.1
  */
 public abstract class AbstractKeyToolGenerateSecretKeyRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolGenerateSecretKeyRequest>
-{
+        extends AbstractKeyToolRequestIT<KeyToolGenerateSecretKeyRequest> {
 
     /**
      * <p>Constructor for AbstractKeyToolGenerateSecretKeyRequestIT.</p>
      */
-    protected AbstractKeyToolGenerateSecretKeyRequestIT()
-    {
-    }
+    protected AbstractKeyToolGenerateSecretKeyRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolGenerateSecretKeyRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolGenerateSecretKeyRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolGenerateSecretKeyRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
         File keyStore = resourceFixtures.simpleKeyStore();
 
-        KeyToolGenerateSecretKeyRequest request = requestFixtures.createKeyToolGenerateSecretKeyRequest( keyStore );
+        KeyToolGenerateSecretKeyRequest request = requestFixtures.createKeyToolGenerateSecretKeyRequest(keyStore);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, keyStore );
+        requestResult(keyToolResult, keyStore);
     }
 
     /**
@@ -68,5 +62,5 @@ public abstract class AbstractKeyToolGenerateSecretKeyRequestIT
      * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @param keyStore a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore );
+    protected abstract void requestResult(JavaToolResult keyToolResult, File keyStore);
 }

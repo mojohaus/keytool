@@ -25,8 +25,7 @@ import org.slf4j.Logger;
  * @author tchemit
  * @since 1.1
  */
-public interface KeyToolCommandLineBuilder
-{
+public interface KeyToolCommandLineBuilder {
     /**
      * Plexus role name.
      */
@@ -41,7 +40,7 @@ public interface KeyToolCommandLineBuilder
      * @return {@code true} if can create a such request type, {@code false} otherwise.
      * @since 1.3
      */
-    <R extends KeyToolRequest> boolean supportRequestType( Class<R> requestType );
+    <R extends KeyToolRequest> boolean supportRequestType(Class<R> requestType);
 
     /**
      * Build the commandline given the incoming keytool request.
@@ -52,22 +51,22 @@ public interface KeyToolCommandLineBuilder
      *          if could not find keytool executable
      * @throws org.codehaus.mojo.keytool.UnsupportedKeyToolRequestException if any.
      */
-    Commandline build( KeyToolRequest request )
-        throws CommandLineConfigurationException, UnsupportedKeyToolRequestException;
+    Commandline build(KeyToolRequest request)
+            throws CommandLineConfigurationException, UnsupportedKeyToolRequestException;
 
     /**
      * Sets the logger used by the builder.
      *
      * @param logger logger to use in this builder
      */
-    void setLogger( Logger logger );
+    void setLogger(Logger logger);
 
     /**
      * Sets the keytool executable location.
      *
      * @param keyToolFile keytool executable location to use in this builder
      */
-    void setKeyToolFile( String keyToolFile );
+    void setKeyToolFile(String keyToolFile);
 
     /**
      * Checks that builder is ready to produce commandline from incoming request.
@@ -82,7 +81,5 @@ public interface KeyToolCommandLineBuilder
      * @since 1.3
      * @throws org.codehaus.mojo.keytool.UnsupportedKeyToolRequestException if any.
      */
-    void checkSupportedRequest( KeyToolRequest request )
-        throws UnsupportedKeyToolRequestException;
-
+    void checkSupportedRequest(KeyToolRequest request) throws UnsupportedKeyToolRequestException;
 }

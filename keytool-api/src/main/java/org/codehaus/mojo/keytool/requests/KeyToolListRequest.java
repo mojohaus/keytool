@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool.requests;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolListRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
+public class KeyToolListRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {
 
     /**
      * Output in RFC style.
@@ -37,8 +35,7 @@ public class KeyToolListRequest
      *
      * @return the value of the {@link #rfc} field
      */
-    public boolean isRfc()
-    {
+    public boolean isRfc() {
         return rfc;
     }
 
@@ -47,9 +44,7 @@ public class KeyToolListRequest
      *
      * @param rfc value of the field {@link #rfc} to set
      */
-    public void setRfc( boolean rfc )
-    {
+    public void setRfc(boolean rfc) {
         this.rfc = rfc;
     }
-
 }

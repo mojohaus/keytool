@@ -16,13 +16,13 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+import java.util.List;
+
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * To build the command line for a given {@link org.codehaus.mojo.keytool.KeyToolRequest}.
@@ -30,9 +30,7 @@ import java.util.List;
  * @author tchemit
  * @since 1.1
  */
-public abstract class AbstractKeyToolCommandLineBuilder
-    implements KeyToolCommandLineBuilder
-{
+public abstract class AbstractKeyToolCommandLineBuilder implements KeyToolCommandLineBuilder {
 
     /**
      * Builder logger.
@@ -45,43 +43,36 @@ public abstract class AbstractKeyToolCommandLineBuilder
     private String keyToolFile;
 
     /** {@inheritDoc} */
-    public final void setLogger( Logger logger )
-    {
+    public final void setLogger(Logger logger) {
         this.logger = logger;
     }
 
     /** {@inheritDoc} */
-    public final void setKeyToolFile( String keyToolFile )
-    {
+    public final void setKeyToolFile(String keyToolFile) {
         this.keyToolFile = keyToolFile;
     }
 
     /**
      * {@inheritDoc}
      */
-    public final void checkRequiredState()
-    {
-        if ( logger == null )
-        {
-            throw new IllegalStateException( "A logger instance is required." );
+    public final void checkRequiredState() {
+        if (logger == null) {
+            throw new IllegalStateException("A logger instance is required.");
         }
 
-        if ( keyToolFile == null )
-        {
-            throw new IllegalStateException( "A keyTool file is required." );
+        if (keyToolFile == null) {
+            throw new IllegalStateException("A keyTool file is required.");
         }
     }
 
     /** {@inheritDoc} */
-    public final void checkSupportedRequest( KeyToolRequest request )
-        throws UnsupportedKeyToolRequestException
-    {
+    public final void checkSupportedRequest(KeyToolRequest request) throws UnsupportedKeyToolRequestException {
         Class<? extends KeyToolRequest> requestType = request.getClass();
-        if ( !supportRequestType( requestType ) )
-        {
-            throw new UnsupportedKeyToolRequestException( "Request " + requestType.getName() +
-                                                              " is not supported by your version of keytool (java " +
-                                                              SystemUtils.JAVA_VERSION + ")" );
+        if (!supportRequestType(requestType)) {
+            throw new UnsupportedKeyToolRequestException(
+                    "Request " + requestType.getName() + " is not supported by your version of keytool (java "
+                            + SystemUtils.JAVA_VERSION
+                            + ")");
         }
     }
 
@@ -90,8 +81,7 @@ public abstract class AbstractKeyToolCommandLineBuilder
      *
      * @return the builder logger
      */
-    protected final Logger getLogger()
-    {
+    protected final Logger getLogger() {
         return logger;
     }
 
@@ -100,8 +90,7 @@ public abstract class AbstractKeyToolCommandLineBuilder
      *
      * @return the builder keytool program location
      */
-    protected final String getKeyToolFile()
-    {
+    protected final String getKeyToolFile() {
         return keyToolFile;
     }
 
@@ -115,18 +104,15 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @see KeyToolRequestWithKeyStoreParameters
      * @see KeyToolRequestWithKeyStoreAndAliasParameters
      */
-    protected final void addKeytoolCommandAndDefaultoptions( Commandline cli, String keytoolcommand,
-                                                             KeyToolRequest request )
-    {
-        addArg( cli, keytoolcommand );
-        addArgIfTrue( cli, "-v", request.isVerbose() );
-        if ( request instanceof KeyToolRequestWithKeyStoreParameters )
-        {
-            buildWithKeyStoreParameters( (KeyToolRequestWithKeyStoreParameters) request, cli );
+    protected final void addKeytoolCommandAndDefaultoptions(
+            Commandline cli, String keytoolcommand, KeyToolRequest request) {
+        addArg(cli, keytoolcommand);
+        addArgIfTrue(cli, "-v", request.isVerbose());
+        if (request instanceof KeyToolRequestWithKeyStoreParameters) {
+            buildWithKeyStoreParameters((KeyToolRequestWithKeyStoreParameters) request, cli);
         }
-        if ( request instanceof KeyToolRequestWithKeyStoreAndAliasParameters )
-        {
-            buildWithKeyStoreAndAliasParameters( (KeyToolRequestWithKeyStoreAndAliasParameters) request, cli );
+        if (request instanceof KeyToolRequestWithKeyStoreAndAliasParameters) {
+            buildWithKeyStoreAndAliasParameters((KeyToolRequestWithKeyStoreAndAliasParameters) request, cli);
         }
     }
 
@@ -136,15 +122,14 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param request the keytool import request
      * @param cli     the commandline client to prepare
      */
-    protected void buildWithKeyStoreParameters( KeyToolRequestWithKeyStoreParameters request, Commandline cli )
-    {
-        addArgIfNotEmpty( cli, "-keystore", request.getKeystore() );
-        addArgIfNotEmpty( cli, "-storepass", request.getStorepass() );
-        addArgIfNotEmpty( cli, "-storetype", request.getStoretype() );
-        addArgIfNotEmpty( cli, "-providername", request.getProvidername() );
-        addArgIfNotEmpty( cli, "-providerclass", request.getProviderclass() );
-        addArgIfNotEmpty( cli, "-providerarg", request.getProviderarg() );
-        addArgIfNotEmpty( cli, "-providerpath", request.getProviderpath() );
+    protected void buildWithKeyStoreParameters(KeyToolRequestWithKeyStoreParameters request, Commandline cli) {
+        addArgIfNotEmpty(cli, "-keystore", request.getKeystore());
+        addArgIfNotEmpty(cli, "-storepass", request.getStorepass());
+        addArgIfNotEmpty(cli, "-storetype", request.getStoretype());
+        addArgIfNotEmpty(cli, "-providername", request.getProvidername());
+        addArgIfNotEmpty(cli, "-providerclass", request.getProviderclass());
+        addArgIfNotEmpty(cli, "-providerarg", request.getProviderarg());
+        addArgIfNotEmpty(cli, "-providerpath", request.getProviderpath());
     }
 
     /**
@@ -153,11 +138,10 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param request the keytool import request
      * @param cli     the commandline client to prepare
      */
-    protected void buildWithKeyStoreAndAliasParameters( KeyToolRequestWithKeyStoreAndAliasParameters request,
-                                                        Commandline cli )
-    {
-        addArgIfNotEmpty( cli, "-protected", request.isPasswordProtected() ? Boolean.TRUE.toString() : "" );
-        addArgIfNotEmpty( cli, "-alias", request.getAlias() );
+    protected void buildWithKeyStoreAndAliasParameters(
+            KeyToolRequestWithKeyStoreAndAliasParameters request, Commandline cli) {
+        addArgIfNotEmpty(cli, "-protected", request.isPasswordProtected() ? Boolean.TRUE.toString() : "");
+        addArgIfNotEmpty(cli, "-alias", request.getAlias());
     }
 
     /**
@@ -167,12 +151,10 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param key   the argument name.
      * @param value the argument value to be added.
      */
-    protected final void addArgIfNotEmpty( Commandline cli, String key, String value )
-    {
-        if ( !StringUtils.isEmpty( value ) )
-        {
-            addArg( cli, key );
-            addArg( cli, value );
+    protected final void addArgIfNotEmpty(Commandline cli, String key, String value) {
+        if (!StringUtils.isEmpty(value)) {
+            addArg(cli, key);
+            addArg(cli, value);
         }
     }
 
@@ -184,13 +166,10 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param values the argument values to be added.
      * @since 1.6
      */
-    protected final void addArgsIfNotEmpty( Commandline cli, String key, List<String> values )
-    {
-        if ( values != null )
-        {
-            for( String value : values )
-            {
-                addArgIfNotEmpty( cli, key, value );
+    protected final void addArgsIfNotEmpty(Commandline cli, String key, List<String> values) {
+        if (values != null) {
+            for (String value : values) {
+                addArgIfNotEmpty(cli, key, value);
             }
         }
     }
@@ -202,12 +181,10 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param key   the argument name.
      * @param value the argument value to be added.
      */
-    protected final void addArgIfNotEmpty( Commandline cli, String key, File value )
-    {
-        if ( value != null )
-        {
-            addArg( cli, key );
-            addArg( cli, value );
+    protected final void addArgIfNotEmpty(Commandline cli, String key, File value) {
+        if (value != null) {
+            addArg(cli, key);
+            addArg(cli, value);
         }
     }
 
@@ -218,11 +195,9 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param key   the argument name.
      * @param value the argument value to be test.
      */
-    protected final void addArgIfTrue( Commandline cli, String key, boolean value )
-    {
-        if ( value )
-        {
-            addArg( cli, key );
+    protected final void addArgIfTrue(Commandline cli, String key, boolean value) {
+        if (value) {
+            addArg(cli, key);
         }
     }
 
@@ -232,9 +207,8 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param cli   command line to fill
      * @param value the argument value to be added
      */
-    protected final void addArg( Commandline cli, String value )
-    {
-        cli.createArg().setValue( value );
+    protected final void addArg(Commandline cli, String value) {
+        cli.createArg().setValue(value);
     }
 
     /**
@@ -243,9 +217,7 @@ public abstract class AbstractKeyToolCommandLineBuilder
      * @param cli   command line to fill
      * @param value the file argument value to be added
      */
-    protected final void addArg( Commandline cli, File value )
-    {
-        cli.createArg().setFile( value );
+    protected final void addArg(Commandline cli, File value) {
+        cli.createArg().setFile(value);
     }
-
 }

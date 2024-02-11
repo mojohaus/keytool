@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool;
  * @author tchemit
  * @since 1.1
  */
-public class CommandLineConfigurationException
-    extends Exception
-{
+public class CommandLineConfigurationException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,9 +32,8 @@ public class CommandLineConfigurationException
      * @param message The detail message for this exception, may be <code>null</code>.
      * @param cause   The nested exception, may be <code>null</code>.
      */
-    public CommandLineConfigurationException( String message, Throwable cause )
-    {
-        super( message, cause );
+    public CommandLineConfigurationException(String message, Throwable cause) {
+        super(message, cause);
     }
 
     /**
@@ -44,10 +41,7 @@ public class CommandLineConfigurationException
      *
      * @param message The detail message for this exception, may be <code>null</code>.
      */
-    public CommandLineConfigurationException( String message )
-    {
-        super( message );
+    public CommandLineConfigurationException(String message) {
+        super(message);
     }
-
 }
-

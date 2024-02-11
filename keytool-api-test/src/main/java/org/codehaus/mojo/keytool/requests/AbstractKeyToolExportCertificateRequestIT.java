@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest}.
@@ -27,42 +27,36 @@ import java.io.File;
  * @since 1.1
  */
 public abstract class AbstractKeyToolExportCertificateRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolExportCertificateRequest>
-{
+        extends AbstractKeyToolRequestIT<KeyToolExportCertificateRequest> {
 
     /**
      * <p>Constructor for AbstractKeyToolExportCertificateRequestIT.</p>
      */
-    protected AbstractKeyToolExportCertificateRequestIT()
-    {
-    }
+    protected AbstractKeyToolExportCertificateRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolExportCertificateRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolExportCertificateRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolExportCertificateRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
         File keyStore = resourceFixtures.simpleKeyStore();
 
         File outputFile = resourceFixtures.outputFile();
 
         KeyToolExportCertificateRequest request =
-            requestFixtures.createKeyToolExportCertificateRequest( keyStore, outputFile );
+                requestFixtures.createKeyToolExportCertificateRequest(keyStore, outputFile);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, keyStore, outputFile );
+        requestResult(keyToolResult, keyStore, outputFile);
     }
 
     /**
@@ -72,6 +66,5 @@ public abstract class AbstractKeyToolExportCertificateRequestIT
      * @param keyStore a {@link java.io.File} object
      * @param outputFile a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore, File outputFile );
-
+    protected abstract void requestResult(JavaToolResult keyToolResult, File keyStore, File outputFile);
 }

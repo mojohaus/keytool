@@ -16,10 +16,10 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 import org.junit.Assert;
-
-import java.io.File;
 
 /**
  * Test the {@link KeyToolGenerateCertificateRequest}.
@@ -27,21 +27,40 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolGenerateCertificateRequestIT
-    extends AbstractKeyToolGenerateCertificateRequestIT
-{
+public class KeyToolGenerateCertificateRequestIT extends AbstractKeyToolGenerateCertificateRequestIT {
 
     @Override
-    protected void requestResult( JavaToolResult keyToolResult, File keyStore, File inFile, File outputFile )
-    {
-        assertKeyToolResult( keyToolResult,
-                             new String[]{ "-gencert", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
-                                 "changeit", "-storetype", "jks", "-alias", "foo_alias", "-rfc", "-infile",
-                                 inFile.getAbsolutePath(), "-outfile", outputFile.getAbsolutePath(), "-sigalg",
-                                 "SHA1withDSA", "-dname",
-                                 "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France", "-startdate",
-                                 "2011/11/11", "-validity", "100", "-keypass", "key-passwd" }, 0 );
-        Assert.assertTrue( outputFile.exists() );
+    protected void requestResult(JavaToolResult keyToolResult, File keyStore, File inFile, File outputFile) {
+        assertKeyToolResult(
+                keyToolResult,
+                new String[] {
+                    "-gencert",
+                    "-v",
+                    "-keystore",
+                    keyStore.getAbsolutePath(),
+                    "-storepass",
+                    "changeit",
+                    "-storetype",
+                    "jks",
+                    "-alias",
+                    "foo_alias",
+                    "-rfc",
+                    "-infile",
+                    inFile.getAbsolutePath(),
+                    "-outfile",
+                    outputFile.getAbsolutePath(),
+                    "-sigalg",
+                    "SHA1withDSA",
+                    "-dname",
+                    "CN=Me, OU=Unknown, O=Codehaus, L=Unknown, ST=Unknown, C=France",
+                    "-startdate",
+                    "2011/11/11",
+                    "-validity",
+                    "100",
+                    "-keypass",
+                    "key-passwd"
+                },
+                0);
+        Assert.assertTrue(outputFile.exists());
     }
-
 }

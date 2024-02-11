@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link org.codehaus.mojo.keytool.requests.KeyToolChangeStorePasswordRequest}.
@@ -27,40 +27,33 @@ import java.io.File;
  * @since 1.1
  */
 public abstract class AbstractKeyToolChangeStorePasswordRequestIT
-    extends AbstractKeyToolRequestIT<KeyToolChangeStorePasswordRequest>
-{
+        extends AbstractKeyToolRequestIT<KeyToolChangeStorePasswordRequest> {
 
     /**
      * <p>Constructor for AbstractKeyToolChangeStorePasswordRequestIT.</p>
      */
-    protected AbstractKeyToolChangeStorePasswordRequestIT()
-    {
-    }
+    protected AbstractKeyToolChangeStorePasswordRequestIT() {}
 
     /**
      * <p>Constructor for AbstractKeyToolChangeStorePasswordRequestIT.</p>
      *
      * @param supportedRequest a boolean
      */
-    protected AbstractKeyToolChangeStorePasswordRequestIT( boolean supportedRequest )
-    {
-        super( supportedRequest );
+    protected AbstractKeyToolChangeStorePasswordRequestIT(boolean supportedRequest) {
+        super(supportedRequest);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void testRequest()
-        throws Exception
-    {
+    public final void testRequest() throws Exception {
 
         File keyStore = resourceFixtures.simpleKeyStore();
 
-        KeyToolChangeStorePasswordRequest request = requestFixtures.createKeyToolChangeStorePasswordRequest( keyStore );
+        KeyToolChangeStorePasswordRequest request = requestFixtures.createKeyToolChangeStorePasswordRequest(keyStore);
 
-        JavaToolResult keyToolResult = consumeRequest( request );
+        JavaToolResult keyToolResult = consumeRequest(request);
 
-        requestResult( keyToolResult, keyStore );
-
+        requestResult(keyToolResult, keyStore);
     }
 
     /**
@@ -69,6 +62,5 @@ public abstract class AbstractKeyToolChangeStorePasswordRequestIT
      * @param keyToolResult a {@link org.apache.maven.shared.utils.cli.javatool.JavaToolResult} object
      * @param keyStore a {@link java.io.File} object
      */
-    protected abstract void requestResult( JavaToolResult keyToolResult, File keyStore );
-
+    protected abstract void requestResult(JavaToolResult keyToolResult, File keyStore);
 }

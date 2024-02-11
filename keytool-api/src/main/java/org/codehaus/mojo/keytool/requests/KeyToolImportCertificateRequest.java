@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool.requests;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolImportCertificateRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
+public class KeyToolImportCertificateRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {
     /**
      * Key password.
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
@@ -54,8 +52,7 @@ public class KeyToolImportCertificateRequest
      *
      * @return the value of the {@link #file} field
      */
-    public String getFile()
-    {
+    public String getFile() {
         return file;
     }
 
@@ -64,8 +61,7 @@ public class KeyToolImportCertificateRequest
      *
      * @param file value of the field {@link #file} to set
      */
-    public void setFile( String file )
-    {
+    public void setFile(String file) {
         this.file = file;
     }
 
@@ -74,8 +70,7 @@ public class KeyToolImportCertificateRequest
      *
      * @return the value of the {@link #noprompt} field
      */
-    public boolean isNoprompt()
-    {
+    public boolean isNoprompt() {
         return noprompt;
     }
 
@@ -84,8 +79,7 @@ public class KeyToolImportCertificateRequest
      *
      * @param noprompt value of the field {@link #noprompt} to set
      */
-    public void setNoprompt( boolean noprompt )
-    {
+    public void setNoprompt(boolean noprompt) {
         this.noprompt = noprompt;
     }
 
@@ -94,8 +88,7 @@ public class KeyToolImportCertificateRequest
      *
      * @return the value of the {@link #trustcacerts} field
      */
-    public boolean isTrustcacerts()
-    {
+    public boolean isTrustcacerts() {
         return trustcacerts;
     }
 
@@ -104,8 +97,7 @@ public class KeyToolImportCertificateRequest
      *
      * @param trustcacerts value of the field {@link #trustcacerts} to set
      */
-    public void setTrustcacerts( boolean trustcacerts )
-    {
+    public void setTrustcacerts(boolean trustcacerts) {
         this.trustcacerts = trustcacerts;
     }
 
@@ -114,8 +106,7 @@ public class KeyToolImportCertificateRequest
      *
      * @return the value of the {@code keypass} field.
      */
-    public String getKeypass()
-    {
+    public String getKeypass() {
         return keypass;
     }
 
@@ -124,8 +115,7 @@ public class KeyToolImportCertificateRequest
      *
      * @param keypass the new value of the field {@code keypass}.
      */
-    public void setKeypass( String keypass )
-    {
+    public void setKeypass(String keypass) {
         this.keypass = keypass;
     }
 }

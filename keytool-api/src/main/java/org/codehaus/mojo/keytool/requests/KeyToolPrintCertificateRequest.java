@@ -24,9 +24,7 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolPrintCertificateRequest
-    extends AbstractKeyToolRequest
-{
+public class KeyToolPrintCertificateRequest extends AbstractKeyToolRequest {
 
     /**
      * Output in RFC style.
@@ -57,8 +55,7 @@ public class KeyToolPrintCertificateRequest
      *
      * @return the value of the {@link #rfc} field
      */
-    public boolean isRfc()
-    {
+    public boolean isRfc() {
         return rfc;
     }
 
@@ -67,8 +64,7 @@ public class KeyToolPrintCertificateRequest
      *
      * @param rfc value of the field {@link #rfc} to set
      */
-    public void setRfc( boolean rfc )
-    {
+    public void setRfc(boolean rfc) {
         this.rfc = rfc;
     }
 
@@ -77,8 +73,7 @@ public class KeyToolPrintCertificateRequest
      *
      * @return the value of the {@link #file} field
      */
-    public File getFile()
-    {
+    public File getFile() {
         return file;
     }
 
@@ -87,8 +82,7 @@ public class KeyToolPrintCertificateRequest
      *
      * @param file value of the field {@link #file} to set
      */
-    public void setFile( File file )
-    {
+    public void setFile(File file) {
         this.file = file;
     }
 
@@ -97,8 +91,7 @@ public class KeyToolPrintCertificateRequest
      *
      * @return the value of the {@link #sslserver} field
      */
-    public String getSslserver()
-    {
+    public String getSslserver() {
         return sslserver;
     }
 
@@ -107,8 +100,7 @@ public class KeyToolPrintCertificateRequest
      *
      * @param sslserver value of the field {@link #sslserver} to set
      */
-    public void setSslserver( String sslserver )
-    {
+    public void setSslserver(String sslserver) {
         this.sslserver = sslserver;
     }
 
@@ -117,8 +109,7 @@ public class KeyToolPrintCertificateRequest
      *
      * @return the value of the {@link #jarfile} field
      */
-    public File getJarfile()
-    {
+    public File getJarfile() {
         return jarfile;
     }
 
@@ -127,9 +118,7 @@ public class KeyToolPrintCertificateRequest
      *
      * @param jarfile value of the field {@link #jarfile} to set
      */
-    public void setJarfile( File jarfile )
-    {
+    public void setJarfile(File jarfile) {
         this.jarfile = jarfile;
     }
-
 }

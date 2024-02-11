@@ -16,11 +16,11 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolPrintCertificateRequestRequest;
-
-import java.io.File;
 
 /**
  * To print the content of a certificate request.
@@ -31,10 +31,8 @@ import java.io.File;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "printCertificateRequest", requiresProject = true, threadSafe = true )
-public class PrintCertificateRequestMojo
-    extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequestRequest>
-{
+@Mojo(name = "printCertificateRequest", requiresProject = true, threadSafe = true)
+public class PrintCertificateRequestMojo extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequestRequest> {
 
     /**
      * Input file name.
@@ -48,19 +46,16 @@ public class PrintCertificateRequestMojo
     /**
      * Default contructor.
      */
-    public PrintCertificateRequestMojo()
-    {
-        super( KeyToolPrintCertificateRequestRequest.class );
+    public PrintCertificateRequestMojo() {
+        super(KeyToolPrintCertificateRequestRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolPrintCertificateRequestRequest createKeytoolRequest()
-    {
+    protected KeyToolPrintCertificateRequestRequest createKeytoolRequest() {
         KeyToolPrintCertificateRequestRequest request = super.createKeytoolRequest();
 
-        request.setFile( this.file );
+        request.setFile(this.file);
         return request;
     }
-
 }

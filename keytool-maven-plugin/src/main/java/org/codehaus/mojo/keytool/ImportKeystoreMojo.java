@@ -16,14 +16,14 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.mojo.keytool.requests.KeyToolImportKeystoreRequest;
 import org.codehaus.plexus.util.StringUtils;
-
-import java.io.File;
 
 /**
  * To import all entries of a keystore to another keystore.
@@ -34,10 +34,8 @@ import java.io.File;
  * @author tchemit
  * @since 1.2
  */
-@Mojo( name = "importKeystore", requiresProject = true, threadSafe = true )
-public class ImportKeystoreMojo
-    extends AbstractKeyToolRequestMojo<KeyToolImportKeystoreRequest>
-{
+@Mojo(name = "importKeystore", requiresProject = true, threadSafe = true)
+public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImportKeystoreRequest> {
 
     /**
      * Source keystore name.
@@ -203,71 +201,62 @@ public class ImportKeystoreMojo
     /**
      * Default contructor.
      */
-    public ImportKeystoreMojo()
-    {
-        super( KeyToolImportKeystoreRequest.class );
+    public ImportKeystoreMojo() {
+        super(KeyToolImportKeystoreRequest.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void execute()
-        throws MojoExecutionException
-    {
+    public void execute() throws MojoExecutionException {
 
-        if ( skipIfExist )
-        {
+        if (skipIfExist) {
 
             // check if keystore already exist
-            File destinationKeystoreFile = new File( destkeystore );
+            File destinationKeystoreFile = new File(destkeystore);
             boolean keystoreFileExists = destinationKeystoreFile.exists();
 
-            if ( keystoreFileExists )
-            {
-                getLog().info( "Skip execution, keystore already exists at " + destinationKeystoreFile );
-                setSkip( true );
+            if (keystoreFileExists) {
+                getLog().info("Skip execution, keystore already exists at " + destinationKeystoreFile);
+                setSkip(true);
             }
-
         }
         super.execute();
     }
 
-
     /** {@inheritDoc} */
     @Override
-    protected KeyToolImportKeystoreRequest createKeytoolRequest()
-    {
+    protected KeyToolImportKeystoreRequest createKeytoolRequest() {
         KeyToolImportKeystoreRequest request = super.createKeytoolRequest();
 
-        request.setSrckeystore( this.srckeystore );
-        request.setDestkeystore( this.destkeystore );
-        request.setSrcstoretype( this.srcstoretype );
-        request.setDeststoretype( this.deststoretype );
-        request.setSrcstorepass( this.srcstorepass );
-        request.setDeststorepass( this.deststorepass );
-        request.setSrcprotected( this.srcprotected );
-        request.setSrcprovidername( this.srcprovidername );
-        request.setDestprovidername( this.destprovidername );
-        request.setSrcalias( this.srcalias );
-        request.setDestalias( this.destalias );
-        request.setSrckeypass( this.srckeypass );
-        request.setDestkeypass( this.destkeypass );
-        request.setNoprompt( this.noprompt );
-        request.setProviderclass( this.providerclass );
-        request.setProviderarg( this.providerarg );
-        request.setProviderpath( this.providerpath );
+        request.setSrckeystore(this.srckeystore);
+        request.setDestkeystore(this.destkeystore);
+        request.setSrcstoretype(this.srcstoretype);
+        request.setDeststoretype(this.deststoretype);
+        request.setSrcstorepass(this.srcstorepass);
+        request.setDeststorepass(this.deststorepass);
+        request.setSrcprotected(this.srcprotected);
+        request.setSrcprovidername(this.srcprovidername);
+        request.setDestprovidername(this.destprovidername);
+        request.setSrcalias(this.srcalias);
+        request.setDestalias(this.destalias);
+        request.setSrckeypass(this.srckeypass);
+        request.setDestkeypass(this.destkeypass);
+        request.setNoprompt(this.noprompt);
+        request.setProviderclass(this.providerclass);
+        request.setProviderarg(this.providerarg);
+        request.setProviderpath(this.providerpath);
         return request;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCommandlineInfo( Commandline commandLine )
-    {
-        String commandLineInfo = super.getCommandlineInfo( commandLine );
+    protected String getCommandlineInfo(Commandline commandLine) {
+        String commandLineInfo = super.getCommandlineInfo(commandLine);
 
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.srckeypass, "'*****'" );
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.destkeypass, "'*****'" );
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.srcstorepass, "'*****'" );
-        commandLineInfo = StringUtils.replace( commandLineInfo, this.deststorepass, "'*****'" );
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.srckeypass, "'*****'");
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.destkeypass, "'*****'");
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.srcstorepass, "'*****'");
+        commandLineInfo = StringUtils.replace(commandLineInfo, this.deststorepass, "'*****'");
 
         return commandLineInfo;
     }

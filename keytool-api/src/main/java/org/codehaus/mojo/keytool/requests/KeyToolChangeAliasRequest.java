@@ -22,9 +22,7 @@ package org.codehaus.mojo.keytool.requests;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolChangeAliasRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
+public class KeyToolChangeAliasRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {
 
     /**
      * Destination alias.
@@ -43,8 +41,7 @@ public class KeyToolChangeAliasRequest
      *
      * @return the value of the {@link #destalias} field
      */
-    public String getDestalias()
-    {
+    public String getDestalias() {
         return destalias;
     }
 
@@ -53,8 +50,7 @@ public class KeyToolChangeAliasRequest
      *
      * @param destalias value of the field {@link #destalias} to set
      */
-    public void setDestalias( String destalias )
-    {
+    public void setDestalias(String destalias) {
         this.destalias = destalias;
     }
 
@@ -63,8 +59,7 @@ public class KeyToolChangeAliasRequest
      *
      * @return the value of the {@code keypass} field.
      */
-    public String getKeypass()
-    {
+    public String getKeypass() {
         return keypass;
     }
 
@@ -73,9 +68,7 @@ public class KeyToolChangeAliasRequest
      *
      * @param keypass the new value of the field {@code keypass}.
      */
-    public void setKeypass( String keypass )
-    {
+    public void setKeypass(String keypass) {
         this.keypass = keypass;
     }
-
 }

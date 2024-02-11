@@ -22,8 +22,4 @@ package org.codehaus.mojo.keytool.requests;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolDeleteRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
-
-}
+public class KeyToolDeleteRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {}

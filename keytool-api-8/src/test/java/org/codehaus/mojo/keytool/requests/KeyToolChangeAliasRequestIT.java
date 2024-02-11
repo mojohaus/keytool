@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link KeyToolChangeAliasRequest}.
@@ -26,17 +26,28 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolChangeAliasRequestIT
-    extends AbstractKeyToolChangeAliasRequestIT
-{
+public class KeyToolChangeAliasRequestIT extends AbstractKeyToolChangeAliasRequestIT {
 
     @Override
-    protected void requestResult( JavaToolResult keyToolResult, File keyStore )
-    {
-        assertKeyToolResult( keyToolResult,
-                             new String[]{ "-changealias", "-v", "-keystore", keyStore.getAbsolutePath(), "-storepass",
-                                 "changeit", "-storetype", "jks", "-alias", "foo_alias", "-destalias", "new_alias",
-                                 "-keypass", "key-passwd" }, 0 );
+    protected void requestResult(JavaToolResult keyToolResult, File keyStore) {
+        assertKeyToolResult(
+                keyToolResult,
+                new String[] {
+                    "-changealias",
+                    "-v",
+                    "-keystore",
+                    keyStore.getAbsolutePath(),
+                    "-storepass",
+                    "changeit",
+                    "-storetype",
+                    "jks",
+                    "-alias",
+                    "foo_alias",
+                    "-destalias",
+                    "new_alias",
+                    "-keypass",
+                    "key-passwd"
+                },
+                0);
     }
-
 }

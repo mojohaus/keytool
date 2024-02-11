@@ -16,11 +16,11 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugins.annotations.Parameter;
-
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
+
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 /**
  * Abstract class that contains fields/methods common to KeyTool Mojo classes.
@@ -29,23 +29,21 @@ import java.util.ResourceBundle;
  * @author $Author$
  * @version $Revision$
  */
-public abstract class AbstractKeyToolMojo
-    extends AbstractMojo
-{
+public abstract class AbstractKeyToolMojo extends AbstractMojo {
 
     /**
      * Set to {@code true} to disable the plugin.
      *
      * @since 1.1
      */
-    @Parameter( defaultValue = "false" )
+    @Parameter(defaultValue = "false")
     private boolean skip;
 
     /**
      * Enable verbose mode (in mojo and in keytool command).
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      */
-    @Parameter( defaultValue = "false" )
+    @Parameter(defaultValue = "false")
     private boolean verbose;
 
     /**
@@ -53,8 +51,7 @@ public abstract class AbstractKeyToolMojo
      *
      * @return value of the {@link #skip} flag
      */
-    public final boolean isSkip()
-    {
+    public final boolean isSkip() {
         return skip;
     }
 
@@ -63,8 +60,7 @@ public abstract class AbstractKeyToolMojo
      *
      * @param skip the skip flag value to set.
      */
-    public final void setSkip( boolean skip )
-    {
+    public final void setSkip(boolean skip) {
         this.skip = skip;
     }
 
@@ -73,8 +69,7 @@ public abstract class AbstractKeyToolMojo
      *
      * @return value of the {@link #verbose} flag
      */
-    public final boolean isVerbose()
-    {
+    public final boolean isVerbose() {
         return verbose;
     }
 
@@ -83,8 +78,7 @@ public abstract class AbstractKeyToolMojo
      *
      * @param verbose the verbose flag value to set.
      */
-    public final void setVerbose( boolean verbose )
-    {
+    public final void setVerbose(boolean verbose) {
         this.verbose = verbose;
     }
 
@@ -95,14 +89,12 @@ public abstract class AbstractKeyToolMojo
      * @param args Arguments to format the message with or {@code null}.
      * @return The message with key {@code key} from the resource bundle backing the implementation.
      */
-    private String getMessage( final String key, final Object[] args )
-    {
-        if ( key == null )
-        {
-            throw new NullPointerException( "key" );
+    private String getMessage(final String key, final Object[] args) {
+        if (key == null) {
+            throw new NullPointerException("key");
         }
 
-        return new MessageFormat( ResourceBundle.getBundle( "keytool" ).getString( key ) ).format( args );
+        return new MessageFormat(ResourceBundle.getBundle("keytool").getString(key)).format(args);
     }
 
     /**
@@ -111,9 +103,8 @@ public abstract class AbstractKeyToolMojo
      * @param key The key of the message to return.
      * @return The message with key {@code key} from the resource bundle backing the implementation.
      */
-    protected String getMessage( final String key )
-    {
-        return getMessage( key, new Object[]{ } );
+    protected String getMessage(final String key) {
+        return getMessage(key, new Object[] {});
     }
 
     /**
@@ -123,9 +114,8 @@ public abstract class AbstractKeyToolMojo
      * @param arg argument of the sentence to translate
      * @return The message with key {@code key} from the resource bundle backing the implementation.
      */
-    protected String getMessage( final String key, final Object arg )
-    {
-        return getMessage( key, new Object[]{ arg } );
+    protected String getMessage(final String key, final Object arg) {
+        return getMessage(key, new Object[] {arg});
     }
 
     /**
@@ -136,8 +126,7 @@ public abstract class AbstractKeyToolMojo
      * @param arg2 second argument of the sentence to translate
      * @return The message with key {@code key} from the resource bundle backing the implementation.
      */
-    protected String getMessage( final String key, final Object arg1, final Object arg2 )
-    {
-        return getMessage( key, new Object[]{ arg1, arg2 } );
+    protected String getMessage(final String key, final Object arg1, final Object arg2) {
+        return getMessage(key, new Object[] {arg1, arg2});
     }
 }

@@ -16,9 +16,9 @@ package org.codehaus.mojo.keytool.requests;
  * limitations under the License.
  */
 
-import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.cli.javatool.JavaToolResult;
 
 /**
  * Test the {@link KeyToolPrintCertificateRequestRequest}.
@@ -26,14 +26,10 @@ import java.io.File;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolPrintCertificateRequestRequestIT
-    extends AbstractKeyToolPrintCertificateRequestRequestIT
-{
+public class KeyToolPrintCertificateRequestRequestIT extends AbstractKeyToolPrintCertificateRequestRequestIT {
 
     @Override
-    protected void requestResult( JavaToolResult keyToolResult, File file )
-    {
-        assertKeyToolResult( keyToolResult, new String[]{ "-printcertreq", "-v", "-file", file.getAbsolutePath() }, 0 );
+    protected void requestResult(JavaToolResult keyToolResult, File file) {
+        assertKeyToolResult(keyToolResult, new String[] {"-printcertreq", "-v", "-file", file.getAbsolutePath()}, 0);
     }
-
 }

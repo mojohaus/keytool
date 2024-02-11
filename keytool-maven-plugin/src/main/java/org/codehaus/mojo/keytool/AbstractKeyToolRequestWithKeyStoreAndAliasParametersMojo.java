@@ -25,9 +25,9 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author tchemit
  * @since 1.2
  */
-public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<R extends KeyToolRequestWithKeyStoreAndAliasParameters>
-    extends AbstractKeyToolRequestWithKeyStoreParametersMojo<R>
-{
+public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<
+                R extends KeyToolRequestWithKeyStoreAndAliasParameters>
+        extends AbstractKeyToolRequestWithKeyStoreParametersMojo<R> {
     /**
      * Password through protected mechanism.
      * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
@@ -49,19 +49,17 @@ public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<R
      *
      * @param requestType type of keytool request used by the mojo
      */
-    protected AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo( Class<R> requestType )
-    {
-        super( requestType );
+    protected AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo(Class<R> requestType) {
+        super(requestType);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected R createKeytoolRequest()
-    {
+    protected R createKeytoolRequest() {
         R request = super.createKeytoolRequest();
 
-        request.setPasswordProtected( this.passwordProtected );
-        request.setAlias( this.alias );
+        request.setPasswordProtected(this.passwordProtected);
+        request.setAlias(this.alias);
         return request;
     }
 }

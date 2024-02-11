@@ -25,9 +25,7 @@ import java.util.List;
  * @author tchemit
  * @since 1.1
  */
-public class KeyToolGenerateKeyPairRequest
-    extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters
-{
+public class KeyToolGenerateKeyPairRequest extends AbstractKeyToolRequestWithKeyStoreAndAliasParameters {
 
     /**
      * Key algorithm name.
@@ -82,8 +80,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @return the value of the {@link #keyalg} field
      */
-    public String getKeyalg()
-    {
+    public String getKeyalg() {
         return keyalg;
     }
 
@@ -92,8 +89,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @param keyalg value of the field {@link #keyalg} to set
      */
-    public void setKeyalg( String keyalg )
-    {
+    public void setKeyalg(String keyalg) {
         this.keyalg = keyalg;
     }
 
@@ -102,8 +98,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @return the value of the {@link #keysize} field
      */
-    public String getKeysize()
-    {
+    public String getKeysize() {
         return keysize;
     }
 
@@ -112,8 +107,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @param keysize value of the field {@link #keysize} to set
      */
-    public void setKeysize( String keysize )
-    {
+    public void setKeysize(String keysize) {
         this.keysize = keysize;
     }
 
@@ -122,8 +116,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @return the value of the {@code keypass} field.
      */
-    public String getKeypass()
-    {
+    public String getKeypass() {
         return keypass;
     }
 
@@ -132,8 +125,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @param keypass the new value of the field {@code keypass}.
      */
-    public void setKeypass( String keypass )
-    {
+    public void setKeypass(String keypass) {
         this.keypass = keypass;
     }
 
@@ -142,8 +134,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @return the value of the {@link #sigalg} field
      */
-    public String getSigalg()
-    {
+    public String getSigalg() {
         return sigalg;
     }
 
@@ -152,8 +143,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @param sigalg value of the field {@link #sigalg} to set
      */
-    public void setSigalg( String sigalg )
-    {
+    public void setSigalg(String sigalg) {
         this.sigalg = sigalg;
     }
 
@@ -162,8 +152,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @return the value of the {@link #validity} field
      */
-    public String getValidity()
-    {
+    public String getValidity() {
         return validity;
     }
 
@@ -172,8 +161,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @param validity value of the field {@link #validity} to set
      */
-    public void setValidity( String validity )
-    {
+    public void setValidity(String validity) {
         this.validity = validity;
     }
 
@@ -182,8 +170,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @return the value of the {@link #dname} field
      */
-    public String getDname()
-    {
+    public String getDname() {
         return dname;
     }
 
@@ -192,10 +179,9 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @param dname value of the field {@link #dname} to set
      */
-    public void setDname( String dname )
-    {
+    public void setDname(String dname) {
         // Remove any extra spaces, see http://jira.codehaus.org/browse/MKEYTOOL-10
-        this.dname = dname.replaceAll( "\\s+", " " );
+        this.dname = dname.replaceAll("\\s+", " ");
     }
 
     /**
@@ -203,8 +189,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @return the value of the {@link #startdate} field
      */
-    public String getStartdate()
-    {
+    public String getStartdate() {
         return startdate;
     }
 
@@ -213,8 +198,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @param startdate value of the field {@link #startdate} to set
      */
-    public void setStartdate( String startdate )
-    {
+    public void setStartdate(String startdate) {
         this.startdate = startdate;
     }
 
@@ -223,8 +207,7 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @return the value of the {@link #exts} field
      */
-    public String getExt()
-    {
+    public String getExt() {
         return exts.isEmpty() ? null : exts.get(0);
     }
 
@@ -233,12 +216,10 @@ public class KeyToolGenerateKeyPairRequest
      *
      * @param ext value of the field {@link #exts} to set
      */
-    public void setExt( String ext )
-    {
+    public void setExt(String ext) {
         this.exts.clear();
 
-        if (ext != null)
-        {
+        if (ext != null) {
             this.exts.add(ext);
         }
     }
@@ -249,12 +230,10 @@ public class KeyToolGenerateKeyPairRequest
      * @param exts values of the field {@link #exts} to set
      * @since 1.6
      */
-    public void setExts( List<String> exts )
-    {
+    public void setExts(List<String> exts) {
         this.exts.clear();
 
-        if (exts != null)
-        {
+        if (exts != null) {
             this.exts.addAll(exts);
         }
     }
@@ -265,8 +244,7 @@ public class KeyToolGenerateKeyPairRequest
      * @return the values of the {@link #exts} field
      * @since 1.6
      */
-    public List<String> getExts()
-    {
+    public List<String> getExts() {
         return exts;
     }
 }
