@@ -137,37 +137,5 @@
         </plugins>
       </build>
     </profile>
-
-    <profile>
-      <id>reporting</id>
-      <activation>
-        <property>
-          <name>skipReports</name>
-          <value>!true</value>
-        </property>
-      </activation>
-
-      <reporting>
-        <plugins>
-          <plugin>
-            <artifactId>maven-plugin-plugin</artifactId>
-            <version>${pluginPluginVersion}</version>
-            <configuration>
-              <requirements>
-                <!--
-                NOTE: Maven 2.x does not interpolate properties of the form project.*|pom.* so the Maven Plugin Plugin
-                gets garbage when manually examining the config of the Maven Compiler Plugin.
-                -->
-                <jdk>${mojo.java.target}</jdk>
-              </requirements>
-            </configuration>
-          </plugin>
-          <plugin>
-            <artifactId>maven-invoker-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </reporting>
-    </profile>
-
   </profiles>
 </project>

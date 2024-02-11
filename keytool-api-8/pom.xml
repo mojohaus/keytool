@@ -38,8 +38,8 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>keytool-api-test</artifactId>
-      <scope>test</scope>
       <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
