@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.codehaus.mojo.keytool.it</groupId>
+  <artifactId>import-certificate-keystore-api</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Import Certificate using KeyStore API Integration Test</name>
+  <description>Integration test for importing a certificate using Java KeyStore API directly</description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <id>import-certificate</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>importCertificate</goal>
+            </goals>
+            <configuration>
+              <keystore>${project.build.directory}/test-keystore.jks</keystore>
+              <storepass>testpass</storepass>
+              <alias>imported-cert</alias>
+              <file>${project.basedir}/testcert.cer</file>
+              <noprompt>true</noprompt>
+              <useKeyStoreAPI>true</useKeyStoreAPI>
+              <verbose>true</verbose>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
