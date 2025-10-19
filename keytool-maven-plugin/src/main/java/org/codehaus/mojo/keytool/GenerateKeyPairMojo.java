@@ -102,6 +102,7 @@ public class GenerateKeyPairMojo
      * @deprecated Use {@link #exts instead}.
      */
     @Deprecated
+    @Parameter
     private String ext;
 
     /**
