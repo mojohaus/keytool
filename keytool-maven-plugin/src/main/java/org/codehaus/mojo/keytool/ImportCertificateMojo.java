@@ -84,6 +84,15 @@ public class ImportCertificateMojo
     private boolean skipIfExist;
 
     /**
+     * If value is {@code true}, use Java KeyStore API directly instead of invoking external keytool command.
+     * This provides better logging and error handling.
+     *
+     * @since 1.8
+     */
+    @Parameter(defaultValue = "true")
+    private boolean useKeyStoreAPI;
+
+    /**
      * Default contructor.
      */
     public ImportCertificateMojo() {
@@ -94,18 +103,66 @@ public class ImportCertificateMojo
     @Override
     public void execute() throws MojoExecutionException {
 
-        if (skipIfExist) {
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+            return;
+        }
 
+        if (skipIfExist) {
             // check if keystore already exist
             File keystoreFile = getKeystoreFile();
             boolean keystoreFileExists = keystoreFile.exists();
 
             if (keystoreFileExists) {
                 getLog().info("Skip execution, keystore already exists at " + keystoreFile);
-                setSkip(true);
+                return;
             }
         }
-        super.execute();
+
+        if (useKeyStoreAPI) {
+            executeWithKeyStoreAPI();
+        } else {
+            super.execute();
+        }
+    }
+
+    /**
+     * Execute the import using Java KeyStore API directly.
+     *
+     * @throws MojoExecutionException if operation fails
+     */
+    private void executeWithKeyStoreAPI() throws MojoExecutionException {
+        try {
+            // Get parameters
+            File keystoreFile = getKeystoreFile();
+            KeyToolImportCertificateRequest request = createKeytoolRequest();
+
+            // Validate required parameters
+            if (file == null || file.isEmpty()) {
+                throw new MojoExecutionException("Certificate file is required");
+            }
+
+            if (request.getAlias() == null || request.getAlias().isEmpty()) {
+                throw new MojoExecutionException("Alias is required");
+            }
+
+            File certFile = new File(file);
+            if (!certFile.exists()) {
+                throw new MojoExecutionException("Certificate file does not exist: " + certFile);
+            }
+
+            // Get password as char array
+            char[] password =
+                    (request.getStorepass() != null) ? request.getStorepass().toCharArray() : null;
+
+            // Create KeyStore service and import certificate
+            KeyStoreService keyStoreService = new KeyStoreService(getLog());
+            keyStoreService.importCertificate(
+                    keystoreFile, request.getStoretype(), password, request.getAlias(), certFile);
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to import certificate: " + e.getMessage(), e);
+        }
     }
 
     /** {@inheritDoc} */
