@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.codehaus.mojo.keytool.it</groupId>
+  <artifactId>import-certificate-skip-if-alias-exists</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Import Multiple Certificates with Skip If Alias Exists Integration Test</name>
+  <description>Integration test for importing multiple certificates with skipIfAliasExists parameter</description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <!-- First execution: import certificate -->
+          <execution>
+            <id>import-certificate-first</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>importCertificate</goal>
+            </goals>
+            <configuration>
+              <keystore>${project.build.directory}/test-keystore.jks</keystore>
+              <storepass>testpass</storepass>
+              <alias>test-cert</alias>
+              <file>${project.basedir}/testcert.cer</file>
+              <noprompt>true</noprompt>
+              <useKeyStoreAPI>true</useKeyStoreAPI>
+              <verbose>true</verbose>
+            </configuration>
+          </execution>
+          
+          <!-- Second execution: import same certificate with same alias but skipIfAliasExists=true -->
+          <execution>
+            <id>import-certificate-second-skip</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>importCertificate</goal>
+            </goals>
+            <configuration>
+              <keystore>${project.build.directory}/test-keystore.jks</keystore>
+              <storepass>testpass</storepass>
+              <alias>test-cert</alias>
+              <file>${project.basedir}/testcert.cer</file>
+              <noprompt>true</noprompt>
+              <useKeyStoreAPI>true</useKeyStoreAPI>
+              <skipIfAliasExists>true</skipIfAliasExists>
+              <verbose>true</verbose>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -57,17 +57,29 @@ public class KeyStoreService {
      * @param keystorePassword keystore password
      * @param alias certificate alias
      * @param certificateFile certificate file to import
+     * @param skipIfAliasExists if true, skip import if alias already exists
      * @throws KeyStoreException if keystore operation fails
      * @throws IOException if file operations fail
      * @throws NoSuchAlgorithmException if algorithm is not available
      * @throws CertificateException if certificate is invalid
      */
     public void importCertificate(
-            File keystoreFile, String keystoreType, char[] keystorePassword, String alias, File certificateFile)
+            File keystoreFile,
+            String keystoreType,
+            char[] keystorePassword,
+            String alias,
+            File certificateFile,
+            boolean skipIfAliasExists)
             throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
 
         // Load the keystore
         KeyStore keystore = loadKeyStore(keystoreFile, keystoreType, keystorePassword);
+
+        // Check if alias already exists
+        if (skipIfAliasExists && keystore.containsAlias(alias)) {
+            log.info("Certificate alias '" + alias + "' already exists in keystore. Skipping import.");
+            return;
+        }
 
         // Load the certificate
         Certificate certificate = loadCertificate(certificateFile);
@@ -79,6 +91,27 @@ public class KeyStoreService {
         saveKeyStore(keystore, keystoreFile, keystorePassword);
 
         log.info("Certificate was added to keystore");
+    }
+
+    /**
+     * Import a certificate into a keystore.
+     * This is a convenience method that calls {@link #importCertificate(File, String, char[], String, File, boolean)}
+     * with skipIfAliasExists set to false.
+     *
+     * @param keystoreFile keystore file
+     * @param keystoreType keystore type (e.g., "JKS", "PKCS12")
+     * @param keystorePassword keystore password
+     * @param alias certificate alias
+     * @param certificateFile certificate file to import
+     * @throws KeyStoreException if keystore operation fails
+     * @throws IOException if file operations fail
+     * @throws NoSuchAlgorithmException if algorithm is not available
+     * @throws CertificateException if certificate is invalid
+     */
+    public void importCertificate(
+            File keystoreFile, String keystoreType, char[] keystorePassword, String alias, File certificateFile)
+            throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
+        importCertificate(keystoreFile, keystoreType, keystorePassword, alias, certificateFile, false);
     }
 
     /**

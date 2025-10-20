@@ -93,6 +93,17 @@ public class ImportCertificateMojo
     private boolean useKeyStoreAPI;
 
     /**
+     * If value is {@code true}, skip the import silently if the alias already exists in the keystore.
+     * This is useful when running multiple executions without clean, allowing idempotent builds.
+     * When {@code false} (default), the certificate entry will be overwritten if it exists (when using KeyStore API)
+     * or will fail (when using external keytool command).
+     *
+     * @since 1.8
+     */
+    @Parameter(defaultValue = "false")
+    private boolean skipIfAliasExists;
+
+    /**
      * Default contructor.
      */
     public ImportCertificateMojo() {
@@ -158,7 +169,7 @@ public class ImportCertificateMojo
             // Create KeyStore service and import certificate
             KeyStoreService keyStoreService = new KeyStoreService(getLog());
             keyStoreService.importCertificate(
-                    keystoreFile, request.getStoretype(), password, request.getAlias(), certFile);
+                    keystoreFile, request.getStoretype(), password, request.getAlias(), certFile, skipIfAliasExists);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Failed to import certificate: " + e.getMessage(), e);
