@@ -96,7 +96,7 @@
   <distributionManagement>
     <site>
       <id>github:gh-pages</id>
-      <url>${project.scm.developerConnection}</url>
+      <url>${project.url}</url>
     </site>
   </distributionManagement>
 
