@@ -22,22 +22,16 @@ import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest;
-import org.codehaus.plexus.util.StringUtils;
 
 /**
- * To generate a key pair into a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -genkey} (jdk 1.5) {@code keytool -genkeypair} (jdk 1.6)
- * command.
+ * To generate a key pair into a keystore using Java KeyStore API.
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
 @Mojo(name = "generateKeyPair", requiresProject = true, threadSafe = true)
-public class GenerateKeyPairMojo
-        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateKeyPairRequest> {
+public class GenerateKeyPairMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo {
 
     /**
      * Key algorithm name.
@@ -131,22 +125,6 @@ public class GenerateKeyPairMojo
     @Parameter
     private boolean skipIfExist;
 
-    /**
-     * If value is {@code true}, use Java KeyStore API directly instead of invoking external keytool command.
-     * This provides better logging and error handling.
-     *
-     * @since 1.8
-     */
-    @Parameter(defaultValue = "true")
-    private boolean useKeyStoreAPI;
-
-    /**
-     * Default contructor.
-     */
-    public GenerateKeyPairMojo() {
-        super(KeyToolGenerateKeyPairRequest.class);
-    }
-
     /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
@@ -167,26 +145,12 @@ public class GenerateKeyPairMojo
             }
         }
 
-        if (useKeyStoreAPI) {
-            executeWithKeyStoreAPI();
-        } else {
-            super.execute();
-        }
-    }
-
-    /**
-     * Execute the key pair generation using Java KeyStore API directly.
-     *
-     * @throws MojoExecutionException if operation fails
-     */
-    private void executeWithKeyStoreAPI() throws MojoExecutionException {
         try {
             // Get parameters
             File keystoreFile = getKeystoreFile();
-            KeyToolGenerateKeyPairRequest request = createKeytoolRequest();
 
             // Validate required parameters
-            if (request.getAlias() == null || request.getAlias().isEmpty()) {
+            if (getAlias() == null || getAlias().isEmpty()) {
                 throw new MojoExecutionException("Alias is required");
             }
 
@@ -195,8 +159,7 @@ public class GenerateKeyPairMojo
             }
 
             // Get passwords as char arrays
-            char[] storePassword =
-                    (request.getStorepass() != null) ? request.getStorepass().toCharArray() : null;
+            char[] storePassword = (getStorepass() != null) ? getStorepass().toCharArray() : null;
             char[] keyPassword = (keypass != null) ? keypass.toCharArray() : null;
 
             // Parse keysize
@@ -223,9 +186,9 @@ public class GenerateKeyPairMojo
             KeyStoreService keyStoreService = new KeyStoreService(getLog());
             keyStoreService.generateKeyPair(
                     keystoreFile,
-                    request.getStoretype(),
+                    getStoretype(),
                     storePassword,
-                    request.getAlias(),
+                    getAlias(),
                     keyPassword,
                     dname,
                     keyalg,
@@ -236,35 +199,5 @@ public class GenerateKeyPairMojo
         } catch (Exception e) {
             throw new MojoExecutionException("Failed to generate key pair: " + e.getMessage(), e);
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected KeyToolGenerateKeyPairRequest createKeytoolRequest() {
-        KeyToolGenerateKeyPairRequest request = super.createKeytoolRequest();
-
-        request.setKeyalg(this.keyalg);
-        request.setKeysize(this.keysize);
-        request.setKeypass(this.keypass);
-        request.setSigalg(this.sigalg);
-        request.setDname(this.dname);
-        request.setStartdate(this.startdate);
-        if (this.exts != null && !this.exts.isEmpty()) {
-            request.setExts(exts);
-        } else {
-            request.setExt(ext);
-        }
-        request.setValidity(this.validity);
-        return request;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected String getCommandlineInfo(Commandline commandLine) {
-        String commandLineInfo = super.getCommandlineInfo(commandLine);
-
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
-
-        return commandLineInfo;
     }
 }

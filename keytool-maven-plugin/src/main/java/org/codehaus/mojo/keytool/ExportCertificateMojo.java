@@ -21,19 +21,16 @@ import java.io.File;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
 
 /**
- * To export a certificate from a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -export} command.
+ * To export a certificate from a keystore using Java KeyStore API.
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
 @Mojo(name = "exportCertificate", requiresProject = true, threadSafe = true)
-public class ExportCertificateMojo
-        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolExportCertificateRequest> {
+public class ExportCertificateMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo {
 
     /**
      * Output in RFC style.
@@ -53,22 +50,6 @@ public class ExportCertificateMojo
     @Parameter
     private String file;
 
-    /**
-     * If value is {@code true}, use Java KeyStore API directly instead of invoking external keytool command.
-     * This provides better logging and error handling.
-     *
-     * @since 1.8
-     */
-    @Parameter(defaultValue = "true")
-    private boolean useKeyStoreAPI;
-
-    /**
-     * Default constructor.
-     */
-    public ExportCertificateMojo() {
-        super(KeyToolExportCertificateRequest.class);
-    }
-
     /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
@@ -78,27 +59,12 @@ public class ExportCertificateMojo
             return;
         }
 
-        if (useKeyStoreAPI) {
-            executeWithKeyStoreAPI();
-        } else {
-            createParentDirIfNecessary(file);
-            super.execute();
-        }
-    }
-
-    /**
-     * Execute the export operation using Java KeyStore API directly.
-     *
-     * @throws MojoExecutionException if operation fails
-     */
-    private void executeWithKeyStoreAPI() throws MojoExecutionException {
         try {
             // Get parameters
             File keystoreFile = getKeystoreFile();
-            KeyToolExportCertificateRequest request = createKeytoolRequest();
 
             // Validate required parameters
-            if (request.getAlias() == null || request.getAlias().isEmpty()) {
+            if (getAlias() == null || getAlias().isEmpty()) {
                 throw new MojoExecutionException("Alias is required");
             }
 
@@ -109,26 +75,14 @@ public class ExportCertificateMojo
             File outputFile = new File(file);
 
             // Get password as char array
-            char[] storePassword =
-                    (request.getStorepass() != null) ? request.getStorepass().toCharArray() : null;
+            char[] storePassword = (getStorepass() != null) ? getStorepass().toCharArray() : null;
 
             // Create KeyStore service and export certificate
             KeyStoreService keyStoreService = new KeyStoreService(getLog());
-            keyStoreService.exportCertificate(
-                    keystoreFile, request.getStoretype(), storePassword, request.getAlias(), outputFile, rfc);
+            keyStoreService.exportCertificate(keystoreFile, getStoretype(), storePassword, getAlias(), outputFile, rfc);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Failed to export certificate: " + e.getMessage(), e);
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected KeyToolExportCertificateRequest createKeytoolRequest() {
-        KeyToolExportCertificateRequest request = super.createKeytoolRequest();
-
-        request.setFile(this.file);
-        request.setRfc(this.rfc);
-        return request;
     }
 }

@@ -21,14 +21,9 @@ import java.io.File;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.mojo.keytool.requests.KeyToolImportCertificateRequest;
-import org.codehaus.plexus.util.StringUtils;
 
 /**
- * To import a certificate into a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -import} (jdk 1.5) or  {@code keytool -importcert} (jdk 1.6)
- * command.
+ * To import a certificate into a keystore using Java KeyStore API.
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  * <strong>Since version 1.2, this mojo replace the mojo import.</strong>
  *
@@ -36,8 +31,7 @@ import org.codehaus.plexus.util.StringUtils;
  * @since 1.2
  */
 @Mojo(name = "importCertificate", requiresProject = true, threadSafe = true)
-public class ImportCertificateMojo
-        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolImportCertificateRequest> {
+public class ImportCertificateMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo {
 
     /**
      * Key password.
@@ -84,31 +78,14 @@ public class ImportCertificateMojo
     private boolean skipIfExist;
 
     /**
-     * If value is {@code true}, use Java KeyStore API directly instead of invoking external keytool command.
-     * This provides better logging and error handling.
-     *
-     * @since 1.8
-     */
-    @Parameter(defaultValue = "true")
-    private boolean useKeyStoreAPI;
-
-    /**
      * If value is {@code true}, skip the import silently if the alias already exists in the keystore.
      * This is useful when running multiple executions without clean, allowing idempotent builds.
-     * When {@code false} (default), the certificate entry will be overwritten if it exists (when using KeyStore API)
-     * or will fail (when using external keytool command).
+     * When {@code false} (default), the certificate entry will be overwritten if it exists.
      *
      * @since 1.8
      */
     @Parameter(defaultValue = "false")
     private boolean skipIfAliasExists;
-
-    /**
-     * Default contructor.
-     */
-    public ImportCertificateMojo() {
-        super(KeyToolImportCertificateRequest.class);
-    }
 
     /** {@inheritDoc} */
     @Override
@@ -130,30 +107,16 @@ public class ImportCertificateMojo
             }
         }
 
-        if (useKeyStoreAPI) {
-            executeWithKeyStoreAPI();
-        } else {
-            super.execute();
-        }
-    }
-
-    /**
-     * Execute the import using Java KeyStore API directly.
-     *
-     * @throws MojoExecutionException if operation fails
-     */
-    private void executeWithKeyStoreAPI() throws MojoExecutionException {
         try {
             // Get parameters
             File keystoreFile = getKeystoreFile();
-            KeyToolImportCertificateRequest request = createKeytoolRequest();
 
             // Validate required parameters
             if (file == null || file.isEmpty()) {
                 throw new MojoExecutionException("Certificate file is required");
             }
 
-            if (request.getAlias() == null || request.getAlias().isEmpty()) {
+            if (getAlias() == null || getAlias().isEmpty()) {
                 throw new MojoExecutionException("Alias is required");
             }
 
@@ -163,38 +126,15 @@ public class ImportCertificateMojo
             }
 
             // Get password as char array
-            char[] password =
-                    (request.getStorepass() != null) ? request.getStorepass().toCharArray() : null;
+            char[] password = (getStorepass() != null) ? getStorepass().toCharArray() : null;
 
             // Create KeyStore service and import certificate
             KeyStoreService keyStoreService = new KeyStoreService(getLog());
             keyStoreService.importCertificate(
-                    keystoreFile, request.getStoretype(), password, request.getAlias(), certFile, skipIfAliasExists);
+                    keystoreFile, getStoretype(), password, getAlias(), certFile, skipIfAliasExists);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Failed to import certificate: " + e.getMessage(), e);
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected KeyToolImportCertificateRequest createKeytoolRequest() {
-        KeyToolImportCertificateRequest request = super.createKeytoolRequest();
-
-        request.setKeypass(this.keypass);
-        request.setFile(this.file);
-        request.setNoprompt(this.noprompt);
-        request.setTrustcacerts(this.trustcacerts);
-        return request;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected String getCommandlineInfo(Commandline commandLine) {
-        String commandLineInfo = super.getCommandlineInfo(commandLine);
-
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
-
-        return commandLineInfo;
     }
 }
