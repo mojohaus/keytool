@@ -16,6 +16,8 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -52,6 +54,15 @@ public class ExportCertificateMojo
     private String file;
 
     /**
+     * If value is {@code true}, use Java KeyStore API directly instead of invoking external keytool command.
+     * This provides better logging and error handling.
+     *
+     * @since 1.8
+     */
+    @Parameter(defaultValue = "true")
+    private boolean useKeyStoreAPI;
+
+    /**
      * Default contructor.
      */
     public ExportCertificateMojo() {
@@ -61,8 +72,54 @@ public class ExportCertificateMojo
     /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
-        createParentDirIfNecessary(file);
-        super.execute();
+
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+            return;
+        }
+
+        if (useKeyStoreAPI) {
+            executeWithKeyStoreAPI();
+        } else {
+            createParentDirIfNecessary(file);
+            super.execute();
+        }
+    }
+
+    /**
+     * Execute the export operation using Java KeyStore API directly.
+     *
+     * @throws MojoExecutionException if operation fails
+     */
+    private void executeWithKeyStoreAPI() throws MojoExecutionException {
+        try {
+            // Get parameters
+            File keystoreFile = getKeystoreFile();
+            KeyToolExportCertificateRequest request = createKeytoolRequest();
+
+            // Validate required parameters
+            if (request.getAlias() == null || request.getAlias().isEmpty()) {
+                throw new MojoExecutionException("Alias is required");
+            }
+
+            if (file == null || file.isEmpty()) {
+                throw new MojoExecutionException("Output file is required");
+            }
+
+            File outputFile = new File(file);
+
+            // Get password as char array
+            char[] storePassword =
+                    (request.getStorepass() != null) ? request.getStorepass().toCharArray() : null;
+
+            // Create KeyStore service and export certificate
+            KeyStoreService keyStoreService = new KeyStoreService(getLog());
+            keyStoreService.exportCertificate(
+                    keystoreFile, request.getStoretype(), storePassword, request.getAlias(), outputFile, rfc);
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to export certificate: " + e.getMessage(), e);
+        }
     }
 
     /** {@inheritDoc} */

@@ -16,7 +16,11 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.keytool.requests.KeyToolDeleteRequest;
 
 /**
@@ -31,9 +35,63 @@ import org.codehaus.mojo.keytool.requests.KeyToolDeleteRequest;
 public class DeleteAliasMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolDeleteRequest> {
 
     /**
+     * If value is {@code true}, use Java KeyStore API directly instead of invoking external keytool command.
+     * This provides better logging and error handling.
+     *
+     * @since 1.8
+     */
+    @Parameter(defaultValue = "true")
+    private boolean useKeyStoreAPI;
+
+    /**
      * Default contructor.
      */
     public DeleteAliasMojo() {
         super(KeyToolDeleteRequest.class);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void execute() throws MojoExecutionException {
+
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+            return;
+        }
+
+        if (useKeyStoreAPI) {
+            executeWithKeyStoreAPI();
+        } else {
+            super.execute();
+        }
+    }
+
+    /**
+     * Execute the delete operation using Java KeyStore API directly.
+     *
+     * @throws MojoExecutionException if operation fails
+     */
+    private void executeWithKeyStoreAPI() throws MojoExecutionException {
+        try {
+            // Get parameters
+            File keystoreFile = getKeystoreFile();
+            KeyToolDeleteRequest request = createKeytoolRequest();
+
+            // Validate required parameters
+            if (request.getAlias() == null || request.getAlias().isEmpty()) {
+                throw new MojoExecutionException("Alias is required");
+            }
+
+            // Get password as char array
+            char[] storePassword =
+                    (request.getStorepass() != null) ? request.getStorepass().toCharArray() : null;
+
+            // Create KeyStore service and delete entry
+            KeyStoreService keyStoreService = new KeyStoreService(getLog());
+            keyStoreService.deleteEntry(keystoreFile, request.getStoretype(), storePassword, request.getAlias());
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to delete alias: " + e.getMessage(), e);
+        }
     }
 }

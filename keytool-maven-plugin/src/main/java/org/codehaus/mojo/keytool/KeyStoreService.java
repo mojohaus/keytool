@@ -190,6 +190,88 @@ public class KeyStoreService {
     }
 
     /**
+     * Delete an entry from a keystore.
+     *
+     * @param keystoreFile keystore file
+     * @param keystoreType keystore type (e.g., "JKS", "PKCS12")
+     * @param keystorePassword keystore password
+     * @param alias alias of the entry to delete
+     * @throws KeyStoreException if keystore operation fails
+     * @throws IOException if file operations fail
+     * @throws NoSuchAlgorithmException if algorithm is not available
+     * @throws CertificateException if certificate is invalid
+     */
+    public void deleteEntry(File keystoreFile, String keystoreType, char[] keystorePassword, String alias)
+            throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
+
+        // Load the keystore
+        KeyStore keystore = loadKeyStore(keystoreFile, keystoreType, keystorePassword);
+
+        // Check if alias exists
+        if (!keystore.containsAlias(alias)) {
+            log.warn("Alias '" + alias + "' does not exist in keystore");
+            return;
+        }
+
+        // Delete the entry
+        keystore.deleteEntry(alias);
+
+        // Save the keystore
+        saveKeyStore(keystore, keystoreFile, keystorePassword);
+
+        log.info("Deleted entry with alias '" + alias + "' from keystore");
+    }
+
+    /**
+     * Export a certificate from a keystore to a file.
+     *
+     * @param keystoreFile keystore file
+     * @param keystoreType keystore type (e.g., "JKS", "PKCS12")
+     * @param keystorePassword keystore password
+     * @param alias certificate alias
+     * @param outputFile output certificate file
+     * @param rfc if true, output in RFC 1421 base64 encoding (PEM format)
+     * @throws KeyStoreException if keystore operation fails
+     * @throws IOException if file operations fail
+     * @throws NoSuchAlgorithmException if algorithm is not available
+     * @throws CertificateException if certificate is invalid
+     */
+    public void exportCertificate(
+            File keystoreFile, String keystoreType, char[] keystorePassword, String alias, File outputFile, boolean rfc)
+            throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
+
+        // Load the keystore
+        KeyStore keystore = loadKeyStore(keystoreFile, keystoreType, keystorePassword);
+
+        // Get the certificate
+        Certificate certificate = keystore.getCertificate(alias);
+        if (certificate == null) {
+            throw new KeyStoreException("Certificate with alias '" + alias + "' not found in keystore");
+        }
+
+        // Ensure parent directory exists
+        File parentDir = outputFile.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+
+        // Export the certificate
+        try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+            if (rfc) {
+                // PEM format
+                fos.write("-----BEGIN CERTIFICATE-----\n".getBytes());
+                fos.write(java.util.Base64.getMimeEncoder(64, "\n".getBytes()).encode(certificate.getEncoded()));
+                fos.write("\n-----END CERTIFICATE-----\n".getBytes());
+            } else {
+                // Binary DER format
+                fos.write(certificate.getEncoded());
+            }
+        }
+
+        log.info("Exported certificate with alias '" + alias + "' to " + outputFile);
+    }
+
+    /**
      * Generate a self-signed X.509 certificate.
      *
      * @param keyPair key pair to use
