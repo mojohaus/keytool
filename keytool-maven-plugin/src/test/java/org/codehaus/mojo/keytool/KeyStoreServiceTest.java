@@ -123,4 +123,61 @@ public class KeyStoreServiceTest {
             throw new AssertionError(message);
         }
     }
+
+    @Test
+    public void testGenerateKeyPair() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-gen-keypair.jks");
+
+        String alias = "mykey";
+        char[] storePassword = "storepass".toCharArray();
+        char[] keyPassword = "keypass".toCharArray();
+        String dname = "CN=Test, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // Generate key pair
+        service.generateKeyPair(
+                keystoreFile, "JKS", storePassword, alias, keyPassword, dname, "RSA", 2048, "SHA256withRSA", 365);
+
+        // Verify log message
+        verify(log).info(contains("Generated key pair with alias 'mykey'"));
+
+        // Verify keystore file was created
+        assertTrue("Keystore file should exist", keystoreFile.exists());
+    }
+
+    @Test
+    public void testGenerateKeyPairWithDefaults() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-gen-keypair-defaults.jks");
+
+        String alias = "mykey2";
+        char[] storePassword = "storepass".toCharArray();
+        String dname = "CN=Test2, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // Generate key pair with default values (keyAlg=null, keySize=0, sigAlg=null, validity=0)
+        service.generateKeyPair(keystoreFile, "JKS", storePassword, alias, null, dname, null, 0, null, 0);
+
+        // Verify log message
+        verify(log).info(contains("Generated key pair with alias 'mykey2'"));
+
+        // Verify keystore file was created
+        assertTrue("Keystore file should exist", keystoreFile.exists());
+    }
+
+    @Test
+    public void testGenerateKeyPairPKCS12() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-gen-keypair.p12");
+
+        String alias = "mykey3";
+        char[] storePassword = "storepass".toCharArray();
+        String dname = "CN=Test3, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // Generate key pair in PKCS12 keystore
+        service.generateKeyPair(
+                keystoreFile, "PKCS12", storePassword, alias, null, dname, "RSA", 2048, "SHA256withRSA", 365);
+
+        // Verify log message
+        verify(log).info(contains("Generated key pair with alias 'mykey3'"));
+
+        // Verify keystore file was created
+        assertTrue("Keystore file should exist", keystoreFile.exists());
+    }
 }

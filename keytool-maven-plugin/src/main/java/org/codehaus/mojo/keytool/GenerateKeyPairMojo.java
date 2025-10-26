@@ -132,6 +132,15 @@ public class GenerateKeyPairMojo
     private boolean skipIfExist;
 
     /**
+     * If value is {@code true}, use Java KeyStore API directly instead of invoking external keytool command.
+     * This provides better logging and error handling.
+     *
+     * @since 1.8
+     */
+    @Parameter(defaultValue = "true")
+    private boolean useKeyStoreAPI;
+
+    /**
      * Default contructor.
      */
     public GenerateKeyPairMojo() {
@@ -142,18 +151,91 @@ public class GenerateKeyPairMojo
     @Override
     public void execute() throws MojoExecutionException {
 
-        if (skipIfExist) {
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+            return;
+        }
 
+        if (skipIfExist) {
             // check if keystore already exist
             File keystoreFile = getKeystoreFile();
             boolean keystoreFileExists = keystoreFile.exists();
 
             if (keystoreFileExists) {
                 getLog().info("Skip execution, keystore already exists at " + keystoreFile);
-                setSkip(true);
+                return;
             }
         }
-        super.execute();
+
+        if (useKeyStoreAPI) {
+            executeWithKeyStoreAPI();
+        } else {
+            super.execute();
+        }
+    }
+
+    /**
+     * Execute the key pair generation using Java KeyStore API directly.
+     *
+     * @throws MojoExecutionException if operation fails
+     */
+    private void executeWithKeyStoreAPI() throws MojoExecutionException {
+        try {
+            // Get parameters
+            File keystoreFile = getKeystoreFile();
+            KeyToolGenerateKeyPairRequest request = createKeytoolRequest();
+
+            // Validate required parameters
+            if (request.getAlias() == null || request.getAlias().isEmpty()) {
+                throw new MojoExecutionException("Alias is required");
+            }
+
+            if (dname == null || dname.isEmpty()) {
+                throw new MojoExecutionException("Distinguished name (dname) is required");
+            }
+
+            // Get passwords as char arrays
+            char[] storePassword =
+                    (request.getStorepass() != null) ? request.getStorepass().toCharArray() : null;
+            char[] keyPassword = (keypass != null) ? keypass.toCharArray() : null;
+
+            // Parse keysize
+            int keySizeInt = 0;
+            if (keysize != null && !keysize.isEmpty()) {
+                try {
+                    keySizeInt = Integer.parseInt(keysize);
+                } catch (NumberFormatException e) {
+                    throw new MojoExecutionException("Invalid keysize: " + keysize, e);
+                }
+            }
+
+            // Parse validity
+            int validityInt = 0;
+            if (validity != null && !validity.isEmpty()) {
+                try {
+                    validityInt = Integer.parseInt(validity);
+                } catch (NumberFormatException e) {
+                    throw new MojoExecutionException("Invalid validity: " + validity, e);
+                }
+            }
+
+            // Create KeyStore service and generate key pair
+            KeyStoreService keyStoreService = new KeyStoreService(getLog());
+            keyStoreService.generateKeyPair(
+                    keystoreFile,
+                    request.getStoretype(),
+                    storePassword,
+                    request.getAlias(),
+                    keyPassword,
+                    dname,
+                    keyalg,
+                    keySizeInt,
+                    sigalg,
+                    validityInt);
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to generate key pair: " + e.getMessage(), e);
+        }
     }
 
     /** {@inheritDoc} */
