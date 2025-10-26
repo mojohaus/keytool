@@ -123,4 +123,162 @@ public class KeyStoreServiceTest {
             throw new AssertionError(message);
         }
     }
+
+    @Test
+    public void testGenerateKeyPair() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-gen-keypair.jks");
+
+        String alias = "mykey";
+        char[] storePassword = "storepass".toCharArray();
+        char[] keyPassword = "keypass".toCharArray();
+        String dname = "CN=Test, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // Generate key pair
+        service.generateKeyPair(
+                keystoreFile, "JKS", storePassword, alias, keyPassword, dname, "RSA", 2048, "SHA256withRSA", 365);
+
+        // Verify log message
+        verify(log).info(contains("Generated key pair with alias 'mykey'"));
+
+        // Verify keystore file was created
+        assertTrue("Keystore file should exist", keystoreFile.exists());
+    }
+
+    @Test
+    public void testGenerateKeyPairWithDefaults() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-gen-keypair-defaults.jks");
+
+        String alias = "mykey2";
+        char[] storePassword = "storepass".toCharArray();
+        String dname = "CN=Test2, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // Generate key pair with default values (keyAlg=null, keySize=0, sigAlg=null, validity=0)
+        service.generateKeyPair(keystoreFile, "JKS", storePassword, alias, null, dname, null, 0, null, 0);
+
+        // Verify log message
+        verify(log).info(contains("Generated key pair with alias 'mykey2'"));
+
+        // Verify keystore file was created
+        assertTrue("Keystore file should exist", keystoreFile.exists());
+    }
+
+    @Test
+    public void testGenerateKeyPairPKCS12() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-gen-keypair.p12");
+
+        String alias = "mykey3";
+        char[] storePassword = "storepass".toCharArray();
+        String dname = "CN=Test3, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // Generate key pair in PKCS12 keystore
+        service.generateKeyPair(
+                keystoreFile, "PKCS12", storePassword, alias, null, dname, "RSA", 2048, "SHA256withRSA", 365);
+
+        // Verify log message
+        verify(log).info(contains("Generated key pair with alias 'mykey3'"));
+
+        // Verify keystore file was created
+        assertTrue("Keystore file should exist", keystoreFile.exists());
+    }
+
+    @Test
+    public void testDeleteEntry() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-delete.jks");
+
+        String alias = "mykey";
+        char[] storePassword = "storepass".toCharArray();
+        String dname = "CN=Test, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // First generate a key pair
+        service.generateKeyPair(
+                keystoreFile, "JKS", storePassword, alias, null, dname, "RSA", 2048, "SHA256withRSA", 365);
+
+        // Reset mock to verify delete call
+        reset(log);
+
+        // Delete the entry
+        service.deleteEntry(keystoreFile, "JKS", storePassword, alias);
+
+        // Verify log message
+        verify(log).info(contains("Deleted entry with alias 'mykey'"));
+    }
+
+    @Test
+    public void testDeleteNonExistentEntry() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-delete-nonexistent.jks");
+
+        char[] storePassword = "storepass".toCharArray();
+
+        // Create an empty keystore first by generating and then deleting an entry
+        service.generateKeyPair(
+                keystoreFile, "JKS", storePassword, "temp", null, "CN=Temp", "RSA", 2048, "SHA256withRSA", 365);
+        service.deleteEntry(keystoreFile, "JKS", storePassword, "temp");
+
+        // Reset mock
+        reset(log);
+
+        // Try to delete a non-existent entry
+        service.deleteEntry(keystoreFile, "JKS", storePassword, "nonexistent");
+
+        // Verify warning message
+        verify(log).warn(contains("does not exist"));
+        verify(log, never()).info(contains("Deleted"));
+    }
+
+    @Test
+    public void testExportCertificate() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-export.jks");
+        File outputFile = new File(tempFolder.getRoot(), "exported.cer");
+
+        String alias = "mykey";
+        char[] storePassword = "storepass".toCharArray();
+        String dname = "CN=Test, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // First generate a key pair
+        service.generateKeyPair(
+                keystoreFile, "JKS", storePassword, alias, null, dname, "RSA", 2048, "SHA256withRSA", 365);
+
+        // Reset mock to verify export call
+        reset(log);
+
+        // Export the certificate in DER format
+        service.exportCertificate(keystoreFile, "JKS", storePassword, alias, outputFile, false);
+
+        // Verify log message
+        verify(log).info(contains("Exported certificate with alias 'mykey'"));
+
+        // Verify output file was created
+        assertTrue("Output file should exist", outputFile.exists());
+    }
+
+    @Test
+    public void testExportCertificateRFC() throws Exception {
+        File keystoreFile = new File(tempFolder.getRoot(), "test-export-rfc.jks");
+        File outputFile = new File(tempFolder.getRoot(), "exported-rfc.cer");
+
+        String alias = "mykey";
+        char[] storePassword = "storepass".toCharArray();
+        String dname = "CN=Test, OU=Dev, O=TestOrg, L=TestCity, ST=TestState, C=US";
+
+        // First generate a key pair
+        service.generateKeyPair(
+                keystoreFile, "JKS", storePassword, alias, null, dname, "RSA", 2048, "SHA256withRSA", 365);
+
+        // Reset mock to verify export call
+        reset(log);
+
+        // Export the certificate in PEM format (RFC)
+        service.exportCertificate(keystoreFile, "JKS", storePassword, alias, outputFile, true);
+
+        // Verify log message
+        verify(log).info(contains("Exported certificate with alias 'mykey'"));
+
+        // Verify output file was created
+        assertTrue("Output file should exist", outputFile.exists());
+
+        // Verify PEM format (should contain BEGIN/END markers)
+        String content = new String(java.nio.file.Files.readAllBytes(outputFile.toPath()));
+        assertTrue("Should contain BEGIN marker", content.contains("-----BEGIN CERTIFICATE-----"));
+        assertTrue("Should contain END marker", content.contains("-----END CERTIFICATE-----"));
+    }
 }

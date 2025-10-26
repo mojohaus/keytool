@@ -22,15 +22,11 @@ import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
 import org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest;
-import org.codehaus.plexus.util.StringUtils;
 
 /**
- * To generate a key pair into a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -genkey} (jdk 1.5) {@code keytool -genkeypair} (jdk 1.6)
- * command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * To generate a key pair into a keystore using Java KeyStore API.
+ * See <a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html">keytool documentation</a>.
  *
  * @author tchemit
  * @since 1.2
@@ -131,58 +127,79 @@ public class GenerateKeyPairMojo
     @Parameter
     private boolean skipIfExist;
 
-    /**
-     * Default contructor.
-     */
-    public GenerateKeyPairMojo() {
-        super(KeyToolGenerateKeyPairRequest.class);
-    }
-
     /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
 
-        if (skipIfExist) {
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+            return;
+        }
 
+        if (skipIfExist) {
             // check if keystore already exist
             File keystoreFile = getKeystoreFile();
             boolean keystoreFileExists = keystoreFile.exists();
 
             if (keystoreFileExists) {
                 getLog().info("Skip execution, keystore already exists at " + keystoreFile);
-                setSkip(true);
+                return;
             }
         }
-        super.execute();
-    }
 
-    /** {@inheritDoc} */
-    @Override
-    protected KeyToolGenerateKeyPairRequest createKeytoolRequest() {
-        KeyToolGenerateKeyPairRequest request = super.createKeytoolRequest();
+        try {
+            // Get parameters
+            File keystoreFile = getKeystoreFile();
 
-        request.setKeyalg(this.keyalg);
-        request.setKeysize(this.keysize);
-        request.setKeypass(this.keypass);
-        request.setSigalg(this.sigalg);
-        request.setDname(this.dname);
-        request.setStartdate(this.startdate);
-        if (this.exts != null && !this.exts.isEmpty()) {
-            request.setExts(exts);
-        } else {
-            request.setExt(ext);
+            // Validate required parameters
+            if (getAlias() == null || getAlias().isEmpty()) {
+                throw new MojoExecutionException("Alias is required");
+            }
+
+            if (dname == null || dname.isEmpty()) {
+                throw new MojoExecutionException("Distinguished name (dname) is required");
+            }
+
+            // Get passwords as char arrays
+            char[] storePassword = (getStorepass() != null) ? getStorepass().toCharArray() : null;
+            char[] keyPassword = (keypass != null) ? keypass.toCharArray() : null;
+
+            // Parse keysize
+            int keySizeInt = 0;
+            if (keysize != null && !keysize.isEmpty()) {
+                try {
+                    keySizeInt = Integer.parseInt(keysize);
+                } catch (NumberFormatException e) {
+                    throw new MojoExecutionException("Invalid keysize: " + keysize, e);
+                }
+            }
+
+            // Parse validity
+            int validityInt = 0;
+            if (validity != null && !validity.isEmpty()) {
+                try {
+                    validityInt = Integer.parseInt(validity);
+                } catch (NumberFormatException e) {
+                    throw new MojoExecutionException("Invalid validity: " + validity, e);
+                }
+            }
+
+            // Create KeyStore service and generate key pair
+            KeyStoreService keyStoreService = new KeyStoreService(getLog());
+            keyStoreService.generateKeyPair(
+                    keystoreFile,
+                    getStoretype(),
+                    storePassword,
+                    getAlias(),
+                    keyPassword,
+                    dname,
+                    keyalg,
+                    keySizeInt,
+                    sigalg,
+                    validityInt);
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to generate key pair: " + e.getMessage(), e);
         }
-        request.setValidity(this.validity);
-        return request;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected String getCommandlineInfo(Commandline commandLine) {
-        String commandLineInfo = super.getCommandlineInfo(commandLine);
-
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
-
-        return commandLineInfo;
     }
 }

@@ -16,24 +16,48 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.codehaus.mojo.keytool.requests.KeyToolDeleteRequest;
 
 /**
- * To delete an entry alias from a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -delete} command.
+ * To delete an entry alias from a keystore using Java KeyStore API.
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
 @Mojo(name = "deleteAlias", requiresProject = true, threadSafe = true)
-public class DeleteAliasMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolDeleteRequest> {
+public class DeleteAliasMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo {
 
-    /**
-     * Default contructor.
-     */
-    public DeleteAliasMojo() {
-        super(KeyToolDeleteRequest.class);
+    /** {@inheritDoc} */
+    @Override
+    public void execute() throws MojoExecutionException {
+
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+            return;
+        }
+
+        try {
+            // Get parameters
+            File keystoreFile = getKeystoreFile();
+
+            // Validate required parameters
+            if (getAlias() == null || getAlias().isEmpty()) {
+                throw new MojoExecutionException("Alias is required");
+            }
+
+            // Get password as char array
+            char[] storePassword = (getStorepass() != null) ? getStorepass().toCharArray() : null;
+
+            // Create KeyStore service and delete entry
+            KeyStoreService keyStoreService = new KeyStoreService(getLog());
+            keyStoreService.deleteEntry(keystoreFile, getStoretype(), storePassword, getAlias());
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to delete alias: " + e.getMessage(), e);
+        }
     }
 }

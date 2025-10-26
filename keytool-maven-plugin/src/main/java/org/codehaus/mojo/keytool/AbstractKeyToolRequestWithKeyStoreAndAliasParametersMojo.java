@@ -62,4 +62,14 @@ public abstract class AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<
         request.setAlias(this.alias);
         return request;
     }
+
+    /**
+     * Get the alias name.
+     *
+     * @return the alias name
+     * @since 1.8
+     */
+    protected String getAlias() {
+        return alias;
+    }
 }
