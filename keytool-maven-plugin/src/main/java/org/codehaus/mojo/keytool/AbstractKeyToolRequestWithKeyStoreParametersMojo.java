@@ -176,4 +176,24 @@ public abstract class AbstractKeyToolRequestWithKeyStoreParametersMojo<R extends
     protected File getKeystoreFile() {
         return getFile(keystore);
     }
+
+    /**
+     * Get the keystore type.
+     *
+     * @return the keystore type
+     * @since 1.8
+     */
+    protected String getStoretype() {
+        return storetype;
+    }
+
+    /**
+     * Get the keystore password.
+     *
+     * @return the keystore password
+     * @since 1.8
+     */
+    protected String getStorepass() {
+        return storepass;
+    }
 }

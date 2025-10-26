@@ -22,16 +22,18 @@ import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.mojo.keytool.requests.KeyToolGenerateKeyPairRequest;
 
 /**
  * To generate a key pair into a keystore using Java KeyStore API.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * See <a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html">keytool documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
 @Mojo(name = "generateKeyPair", requiresProject = true, threadSafe = true)
-public class GenerateKeyPairMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo {
+public class GenerateKeyPairMojo
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateKeyPairRequest> {
 
     /**
      * Key algorithm name.

@@ -21,17 +21,19 @@ import java.io.File;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.mojo.keytool.requests.KeyToolImportCertificateRequest;
 
 /**
  * To import a certificate into a keystore using Java KeyStore API.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * See <a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html">keytool documentation</a>.
  * <strong>Since version 1.2, this mojo replace the mojo import.</strong>
  *
  * @author tchemit
  * @since 1.2
  */
 @Mojo(name = "importCertificate", requiresProject = true, threadSafe = true)
-public class ImportCertificateMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo {
+public class ImportCertificateMojo
+        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolImportCertificateRequest> {
 
     /**
      * Key password.
@@ -86,6 +88,13 @@ public class ImportCertificateMojo extends AbstractKeyToolRequestWithKeyStoreAnd
      */
     @Parameter(defaultValue = "false")
     private boolean skipIfAliasExists;
+
+    /**
+     * Constructor.
+     */
+    public ImportCertificateMojo() {
+        super(KeyToolImportCertificateRequest.class);
+    }
 
     /** {@inheritDoc} */
     @Override
