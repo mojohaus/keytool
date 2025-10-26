@@ -44,7 +44,7 @@ public class DeleteAliasMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasP
     private boolean useKeyStoreAPI;
 
     /**
-     * Default contructor.
+     * Default constructor.
      */
     public DeleteAliasMojo() {
         super(KeyToolDeleteRequest.class);

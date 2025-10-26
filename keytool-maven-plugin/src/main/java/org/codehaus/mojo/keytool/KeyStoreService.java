@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
@@ -259,9 +260,10 @@ public class KeyStoreService {
         try (FileOutputStream fos = new FileOutputStream(outputFile)) {
             if (rfc) {
                 // PEM format
-                fos.write("-----BEGIN CERTIFICATE-----\n".getBytes());
-                fos.write(java.util.Base64.getMimeEncoder(64, "\n".getBytes()).encode(certificate.getEncoded()));
-                fos.write("\n-----END CERTIFICATE-----\n".getBytes());
+                fos.write("-----BEGIN CERTIFICATE-----\n".getBytes(StandardCharsets.UTF_8));
+                fos.write(java.util.Base64.getMimeEncoder(64, "\n".getBytes(StandardCharsets.UTF_8))
+                        .encode(certificate.getEncoded()));
+                fos.write("\n-----END CERTIFICATE-----\n".getBytes(StandardCharsets.UTF_8));
             } else {
                 // Binary DER format
                 fos.write(certificate.getEncoded());

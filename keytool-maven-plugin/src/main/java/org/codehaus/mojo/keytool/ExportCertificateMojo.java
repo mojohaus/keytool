@@ -63,7 +63,7 @@ public class ExportCertificateMojo
     private boolean useKeyStoreAPI;
 
     /**
-     * Default contructor.
+     * Default constructor.
      */
     public ExportCertificateMojo() {
         super(KeyToolExportCertificateRequest.class);
