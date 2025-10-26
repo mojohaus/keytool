@@ -165,8 +165,37 @@ public class KeyStoreService {
 
         // Use default values if not specified
         String actualKeyAlg = (keyAlg != null && !keyAlg.isEmpty()) ? keyAlg : "RSA";
-        int actualKeySize = (keySize > 0) ? keySize : 2048;
-        String actualSigAlg = (sigAlg != null && !sigAlg.isEmpty()) ? sigAlg : "SHA256withRSA";
+
+        // Determine appropriate key size based on algorithm
+        int actualKeySize;
+        if (keySize > 0) {
+            actualKeySize = keySize;
+        } else {
+            // Use algorithm-specific defaults
+            if ("EC".equalsIgnoreCase(actualKeyAlg)) {
+                actualKeySize = 256; // Default EC key size
+            } else if ("DSA".equalsIgnoreCase(actualKeyAlg)) {
+                actualKeySize = 2048; // Default DSA key size
+            } else {
+                actualKeySize = 2048; // Default RSA key size
+            }
+        }
+
+        // Determine appropriate signature algorithm based on key algorithm
+        String actualSigAlg;
+        if (sigAlg != null && !sigAlg.isEmpty()) {
+            actualSigAlg = sigAlg;
+        } else {
+            // Use algorithm-specific defaults
+            if ("EC".equalsIgnoreCase(actualKeyAlg)) {
+                actualSigAlg = "SHA256withECDSA";
+            } else if ("DSA".equalsIgnoreCase(actualKeyAlg)) {
+                actualSigAlg = "SHA256withDSA";
+            } else {
+                actualSigAlg = "SHA256withRSA";
+            }
+        }
+
         int actualValidity = (validity > 0) ? validity : 365;
         char[] actualKeyPassword = (keyPassword != null) ? keyPassword : keystorePassword;
 
