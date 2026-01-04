@@ -16,62 +16,56 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.keytool.requests.KeyToolExportCertificateRequest;
 
 /**
- * To export a certificate from a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -export} command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * Export a certificate from a keystore using Java KeyStore API.
  *
  * @author tchemit
- * @since 1.2
+ * @since 2.0
  */
 @Mojo(name = "exportCertificate", requiresProject = true, threadSafe = true)
-public class ExportCertificateMojo
-        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolExportCertificateRequest> {
+public class ExportCertificateMojo extends KeyStoreWithAliasMojo {
 
     /**
-     * Output in RFC style.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
+     * Output in RFC/PEM style format.
      */
-    @Parameter
+    @Parameter(defaultValue = "false")
     private boolean rfc;
 
     /**
      * Output file name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
      */
-    @Parameter
+    @Parameter(required = true)
     private String file;
 
-    /**
-     * Default contructor.
-     */
-    public ExportCertificateMojo() {
-        super(KeyToolExportCertificateRequest.class);
-    }
-
-    /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+            return;
+        }
+
+        // Validate parameters
+        if (alias == null || alias.isEmpty()) {
+            throw new MojoExecutionException("Alias is required");
+        }
+
+        if (file == null || file.isEmpty()) {
+            throw new MojoExecutionException("Output file is required");
+        }
+
+        // Create parent directory if necessary
         createParentDirIfNecessary(file);
-        super.execute();
-    }
 
-    /** {@inheritDoc} */
-    @Override
-    protected KeyToolExportCertificateRequest createKeytoolRequest() {
-        KeyToolExportCertificateRequest request = super.createKeytoolRequest();
+        File keystoreFile = getKeystoreFile();
+        File outputFile = new File(file);
 
-        request.setFile(this.file);
-        request.setRfc(this.rfc);
-        return request;
+        KeyStoreService service = new KeyStoreService(getLog());
+        service.exportCertificate(keystoreFile, storetype, getKeystorePassword(), alias, outputFile, rfc);
     }
 }

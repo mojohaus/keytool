@@ -16,24 +16,39 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
+
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.codehaus.mojo.keytool.requests.KeyToolDeleteRequest;
 
 /**
- * To delete an entry alias from a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -delete} command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * Delete an entry alias from a keystore using Java KeyStore API.
  *
  * @author tchemit
- * @since 1.2
+ * @since 2.0
  */
 @Mojo(name = "deleteAlias", requiresProject = true, threadSafe = true)
-public class DeleteAliasMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolDeleteRequest> {
+public class DeleteAliasMojo extends KeyStoreWithAliasMojo {
 
-    /**
-     * Default contructor.
-     */
-    public DeleteAliasMojo() {
-        super(KeyToolDeleteRequest.class);
+    @Override
+    public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            getLog().info(getMessage("disabled"));
+            return;
+        }
+
+        // Validate parameters
+        if (alias == null || alias.isEmpty()) {
+            throw new MojoExecutionException("Alias is required");
+        }
+
+        File keystoreFile = getKeystoreFile();
+
+        if (!keystoreFile.exists()) {
+            throw new MojoExecutionException("Keystore does not exist: " + keystoreFile);
+        }
+
+        KeyStoreService service = new KeyStoreService(getLog());
+        service.deleteAlias(keystoreFile, storetype, getKeystorePassword(), alias);
     }
 }
