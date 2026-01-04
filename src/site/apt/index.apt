@@ -1,0 +1,45 @@
+ ------
+ Introduction
+ ------
+
+Keytool Maven Plugin
+
+  This plugin provides the capability to manipulate keys and keystores and acts as a wrapper of the keytool command.
+
+* Goals Overview
+
+  * {{{./clean-mojo.html}keytool:clean}} deletes a generated keystore file.
+
+  * <<Since 1.2>> {{{./changeAlias-mojo.html}keytool:changeAlias}} changes an entry alias into a keystore.
+
+  * <<Since 1.2>> {{{./changeKeyPassword-mojo.html}keytool:changeKeyPassword:}} changes the key password of an entry of a keystore.
+
+  * <<Since 1.2>> {{{./changeStorePassword-mojo.html}keytool:changeStorePassword}} changes the store password of a keystore.
+
+  * <<Since 1.2>> {{{./deleteAlias-mojo.html}keytool:deleteAlias}} deletes an entry alias from a keystore.
+
+  * <<Since 1.2>> {{{./exportCertificate-mojo.html}keytool:exportCertificate}} reads a certificate from a keystore and stores it in a file.
+
+  * <<Since 1.2>> {{{./generateCertificate-mojo.html}keytool:generateCertificate}} generates a certificate from a certificate request from a keystore (<<Note:>> This operation was not implemented by the keytool before jdk 1.7).
+
+  * <<Since 1.2>> {{{./generateCertificateRequest-mojo.html}keytool:generateCertificateRequest}} generates a certificate request.
+
+  * <<Since 1.2>> {{{./generateKeyPair-mojo.html}keytool:generateKeyPair}} generates a key pair.
+
+  * <<Since 1.2>> {{{./generateSecretKey-mojo.html}keytool:generateSecretKey}} generates a secret key.
+
+  * <<Since 1.2>> {{{./importCertificate-mojo.html}keytool:importCertificate}} reads a certificate from a file and stores it in a keystore.
+
+  * <<Since 1.2>> {{{./importKeystore-mojo.html}keytool:importKeystore}} imports all entries of a keystore to another keystore (<<Note:>> This operation was not implemented by the keytool before jdk 1.6).
+
+  * <<Since 1.2>> {{{./list-mojo.html}keytool:list}} lists entries in a keystore.
+
+  * <<Since 1.2>> {{{./printCertificate-mojo.html}keytool:printCertificate}} prints the content of a certificate of a keystore.
+
+  * <<Since 1.2>> {{{./printCertificateRequest-mojo.html}keytool:printCertificateRequest}} prints the content of a certificate request of a keystore. (<<Note:>> This operation was not implemented by the keytool before jdk 1.7).
+
+  * <<Since 1.2>> {{{./printCRLFile-mojo.html}keytool:printCRLFile}} prints the content of a CRL file. (<<Note:>> This operation was not implemented by the keytool before jdk 1.7).
+
+* Usage
+
+  Instructions on how to use the Keytool Plugin can be found on the {{{./usage.html}usage page}}.
