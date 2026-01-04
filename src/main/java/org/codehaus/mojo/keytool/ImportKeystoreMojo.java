@@ -16,31 +16,37 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
 import java.io.File;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolImportKeystoreRequest;
-import org.codehaus.plexus.util.StringUtils;
+import org.codehaus.mojo.keytool.services.KeyStoreManagementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * To import all entries of a keystore to another keystore.
- * Implemented as a wrapper around the SDK {@code keytool -importkeystore} command.
+ * Uses Java KeyStore API directly.
  * <strong>Note</strong> This operation was not implemented by the keytool before jdk 1.6.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "importKeystore", requiresProject = true, threadSafe = true)
-public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImportKeystoreRequest> {
+@Mojo(name = "importKeystore", threadSafe = true)
+public class ImportKeystoreMojo extends AbstractKeyToolMojo {
+
+    private static final Logger log = LoggerFactory.getLogger(ImportKeystoreMojo.class);
+
+    @Inject
+    private KeyStoreManagementService service;
 
     /**
      * Source keystore name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -49,7 +55,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Destination keystore name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -58,7 +64,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Source keystore type.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -67,7 +73,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Destination keystore type.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -76,7 +82,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Source keystore password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -85,7 +91,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Destination keystore password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -94,7 +100,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Source keystore password protected.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -103,7 +109,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Source keystore provider name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -112,7 +118,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Destination keystore provider name.
-     * See <a hresf="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a hresf="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -121,7 +127,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Source alias.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -130,7 +136,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Destination alias.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -139,7 +145,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Source key password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -148,7 +154,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Destination key password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -157,7 +163,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Do not prompt.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -166,7 +172,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Provider class name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -175,7 +181,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Provider argument.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -184,7 +190,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
 
     /**
      * Provider classpath.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -199,66 +205,40 @@ public class ImportKeystoreMojo extends AbstractKeyToolRequestMojo<KeyToolImport
     @Parameter
     private boolean skipIfExist;
 
-    /**
-     * Default contructor.
-     */
-    public ImportKeystoreMojo() {
-        super(KeyToolImportKeystoreRequest.class);
-    }
-
     /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info("Skipping execution");
+            return;
+        }
 
         if (skipIfExist) {
-
             // check if keystore already exist
             File destinationKeystoreFile = new File(destkeystore);
             boolean keystoreFileExists = destinationKeystoreFile.exists();
 
             if (keystoreFileExists) {
-                getLog().info("Skip execution, keystore already exists at " + destinationKeystoreFile);
-                setSkip(true);
+                log.info("Skip execution, keystore already exists at {}", destinationKeystoreFile);
+                return;
             }
         }
-        super.execute();
-    }
 
-    /** {@inheritDoc} */
-    @Override
-    protected KeyToolImportKeystoreRequest createKeytoolRequest() {
-        KeyToolImportKeystoreRequest request = super.createKeytoolRequest();
-
-        request.setSrckeystore(this.srckeystore);
-        request.setDestkeystore(this.destkeystore);
-        request.setSrcstoretype(this.srcstoretype);
-        request.setDeststoretype(this.deststoretype);
-        request.setSrcstorepass(this.srcstorepass);
-        request.setDeststorepass(this.deststorepass);
-        request.setSrcprotected(this.srcprotected);
-        request.setSrcprovidername(this.srcprovidername);
-        request.setDestprovidername(this.destprovidername);
-        request.setSrcalias(this.srcalias);
-        request.setDestalias(this.destalias);
-        request.setSrckeypass(this.srckeypass);
-        request.setDestkeypass(this.destkeypass);
-        request.setNoprompt(this.noprompt);
-        request.setProviderclass(this.providerclass);
-        request.setProviderarg(this.providerarg);
-        request.setProviderpath(this.providerpath);
-        return request;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected String getCommandlineInfo(Commandline commandLine) {
-        String commandLineInfo = super.getCommandlineInfo(commandLine);
-
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.srckeypass, "'*****'");
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.destkeypass, "'*****'");
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.srcstorepass, "'*****'");
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.deststorepass, "'*****'");
-
-        return commandLineInfo;
+        try {
+            // Using injected service
+            service.importKeystore(
+                    new File(srckeystore),
+                    srcstoretype,
+                    srcstorepass != null ? srcstorepass.toCharArray() : null,
+                    new File(destkeystore),
+                    deststoretype,
+                    deststorepass != null ? deststorepass.toCharArray() : null,
+                    srcalias,
+                    destalias,
+                    srckeypass != null ? srckeypass.toCharArray() : null,
+                    destkeypass != null ? destkeypass.toCharArray() : null);
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to import keystore", e);
+        }
     }
 }

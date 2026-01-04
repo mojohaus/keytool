@@ -16,174 +16,94 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
 import java.io.File;
 import java.util.List;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolGenerateKeyPairRequest;
-import org.codehaus.plexus.util.StringUtils;
+import org.codehaus.mojo.keytool.services.CertificateGenerationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * To generate a key pair into a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -genkey} (jdk 1.5) {@code keytool -genkeypair} (jdk 1.6)
- * command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * Uses Bouncy Castle for certificate generation.
  *
  * @author tchemit
- * @since 1.2
+ * @since 1.0
  */
-@Mojo(name = "generateKeyPair", requiresProject = true, threadSafe = true)
-public class GenerateKeyPairMojo
-        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolGenerateKeyPairRequest> {
+@Mojo(name = "generateKeyPair", threadSafe = true)
+public class GenerateKeyPairMojo extends AbstractKeyToolMojo {
 
-    /**
-     * Key algorithm name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
+    private static final Logger log = LoggerFactory.getLogger(GenerateKeyPairMojo.class);
+
     @Parameter
+    private File keystore;
+
+    @Parameter
+    private String storetype;
+
+    @Parameter
+    private String storepass;
+
+    @Parameter
+    private String alias;
+
+    @Parameter(defaultValue = "RSA")
     private String keyalg;
 
-    /**
-     * Key bit size.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
-    @Parameter
+    @Parameter(defaultValue = "2048")
     private String keysize;
 
-    /**
-     * Key password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
     @Parameter
     private String keypass;
 
-    /**
-     * Signature algorithm name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
     @Parameter
     private String sigalg;
 
-    /**
-     * Validity number of days.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
-    @Parameter
-    private String validity;
-
-    /**
-     * Certificate validity start date/time.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
-    @Parameter
-    private String startdate;
-
-    /**
-     * X.509 extension.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     *
-     * @deprecated Use {@link #exts instead}.
-     */
-    @Deprecated
-    @Parameter
-    private String ext;
-
-    /**
-     * X.509 extension.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.6
-     */
-    @Parameter
-    private List<String> exts;
-
-    /**
-     * Distinguished name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
     @Parameter
     private String dname;
 
-    /**
-     * If value is {@code true}, then will do nothing if keystore already exists.
-     *
-     * @since 1.3
-     */
+    @Parameter(defaultValue = "90")
+    private String validity;
+
     @Parameter
-    private boolean skipIfExist;
+    private List<String> exts;
 
-    /**
-     * Default contructor.
-     */
-    public GenerateKeyPairMojo() {
-        super(KeyToolGenerateKeyPairRequest.class);
-    }
+    @Inject
+    private CertificateGenerationService certGenService;
 
-    /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
-
-        if (skipIfExist) {
-
-            // check if keystore already exist
-            File keystoreFile = getKeystoreFile();
-            boolean keystoreFileExists = keystoreFile.exists();
-
-            if (keystoreFileExists) {
-                getLog().info("Skip execution, keystore already exists at " + keystoreFile);
-                setSkip(true);
-            }
+        if (isSkip()) {
+            log.info("Skipping execution");
+            return;
         }
-        super.execute();
-    }
 
-    /** {@inheritDoc} */
-    @Override
-    protected KeyToolGenerateKeyPairRequest createKeytoolRequest() {
-        KeyToolGenerateKeyPairRequest request = super.createKeytoolRequest();
+        try {
+            int keySizeInt = Integer.parseInt(keysize != null ? keysize : "2048");
+            int validityInt = Integer.parseInt(validity != null ? validity : "90");
 
-        request.setKeyalg(this.keyalg);
-        request.setKeysize(this.keysize);
-        request.setKeypass(this.keypass);
-        request.setSigalg(this.sigalg);
-        request.setDname(this.dname);
-        request.setStartdate(this.startdate);
-        if (this.exts != null && !this.exts.isEmpty()) {
-            request.setExts(exts);
-        } else {
-            request.setExt(ext);
+            List<String> extensions = exts != null && !exts.isEmpty() ? exts : null;
+
+            certGenService.generateKeyPair(
+                    keystore,
+                    storetype,
+                    storepass != null ? storepass.toCharArray() : null,
+                    alias,
+                    keyalg != null ? keyalg : "RSA",
+                    keySizeInt,
+                    sigalg,
+                    dname,
+                    validityInt,
+                    keypass != null ? keypass.toCharArray() : null,
+                    extensions);
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to generate key pair", e);
         }
-        request.setValidity(this.validity);
-        return request;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected String getCommandlineInfo(Commandline commandLine) {
-        String commandLineInfo = super.getCommandlineInfo(commandLine);
-
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
-
-        return commandLineInfo;
     }
 }

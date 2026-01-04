@@ -16,56 +16,77 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
+import java.io.File;
+
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolChangeStorePasswordRequest;
-import org.codehaus.plexus.util.StringUtils;
+import org.codehaus.mojo.keytool.services.KeyStoreManagementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * To change the store password of a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -storepasswd} command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * Uses Java KeyStore API directly.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keystore documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "changeStorePassword", requiresProject = true, threadSafe = true)
-public class ChangeStorePasswordMojo
-        extends AbstractKeyToolRequestWithKeyStoreParametersMojo<KeyToolChangeStorePasswordRequest> {
+@Mojo(name = "changeStorePassword", threadSafe = true)
+public class ChangeStorePasswordMojo extends AbstractKeyToolMojo {
+
+    private static final Logger log = LoggerFactory.getLogger(ChangeStorePasswordMojo.class);
+
+    @Inject
+    private KeyStoreManagementService service;
+
+    /**
+     * Keystore location.
+     */
+    @Parameter
+    private File keystore;
+
+    /**
+     * Keystore type.
+     */
+    @Parameter
+    private String storetype;
+
+    /**
+     * Keystore password.
+     */
+    @Parameter
+    private String storepass;
 
     /**
      * New password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool options</a>.
      *
      * @since 1.2
      */
     @Parameter
     private String newPassword;
 
-    /**
-     * Default contructor.
-     */
-    public ChangeStorePasswordMojo() {
-        super(KeyToolChangeStorePasswordRequest.class);
-    }
-
     /** {@inheritDoc} */
     @Override
-    protected KeyToolChangeStorePasswordRequest createKeytoolRequest() {
-        KeyToolChangeStorePasswordRequest request = super.createKeytoolRequest();
-        request.setNewPassword(this.newPassword);
-        return request;
-    }
+    public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info("Skipping execution");
+            return;
+        }
 
-    /** {@inheritDoc} */
-    @Override
-    protected String getCommandlineInfo(Commandline commandLine) {
-        String commandLineInfo = super.getCommandlineInfo(commandLine);
-
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.newPassword, "'*****'");
-
-        return commandLineInfo;
+        try {
+            // Using injected service
+            service.changeStorePassword(
+                    keystore,
+                    storetype,
+                    storepass != null ? storepass.toCharArray() : null,
+                    newPassword != null ? newPassword.toCharArray() : null);
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to change store password", e);
+        }
     }
 }

@@ -6,12 +6,14 @@
       <item name="Introduction" href="index.html"/>
       <item name="Goals" href="plugin-info.html"/>
       <item name="Usage" href="usage.html"/>
+      <item name="Examples" href="examples.html"/>
       <item name="FAQ" href="faq.html"/>
     </menu>
 
     <menu name="Links">
-      <item name="Java Security Tools" href="http://download.oracle.com/javase/6/docs/technotes/tools/index.html#security" />
-      <item name="Jar signing with Maven" href="http://maven.apache.org/plugins/maven-jarsigner-plugin/" />
+      <item name="Java Keytool Documentation" href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html" />
+      <item name="Maven Jarsigner Plugin" href="https://maven.apache.org/plugins/maven-jarsigner-plugin/" />
+      <item name="GitHub Repository" href="https://github.com/mojohaus/keytool" />
     </menu>
     <menu ref="reports"/>
   </body>

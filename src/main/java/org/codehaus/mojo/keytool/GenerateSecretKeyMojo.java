@@ -16,28 +16,54 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
+import java.io.File;
+
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolGenerateSecretKeyRequest;
-import org.codehaus.plexus.util.StringUtils;
+import org.codehaus.mojo.keytool.services.SecretKeyService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * To generate a secret key into a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -genseckey} command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * Uses Java KeyStore API directly.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keystore documentation</a>.
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "generateSecretKey", requiresProject = true, threadSafe = true)
-public class GenerateSecretKeyMojo
-        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<
-                org.codehaus.mojo.keytool.api.requests.KeyToolGenerateSecretKeyRequest> {
+@Mojo(name = "generateSecretKey", threadSafe = true)
+public class GenerateSecretKeyMojo extends AbstractKeyToolMojo {
+
+    /**
+     * Keystore location.
+     */
+    @Parameter
+    private File keystore;
+
+    /**
+     * Keystore type.
+     */
+    @Parameter
+    private String storetype;
+
+    /**
+     * Keystore password.
+     */
+    @Parameter
+    private String storepass;
+
+    /**
+     * Alias.
+     */
+    @Parameter
+    private String alias;
 
     /**
      * Key algorithm name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -46,7 +72,7 @@ public class GenerateSecretKeyMojo
 
     /**
      * Key bit size.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -55,38 +81,26 @@ public class GenerateSecretKeyMojo
 
     /**
      * Key password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
     @Parameter
     private String keypass;
 
-    /**
-     * Default contructor.
-     */
-    public GenerateSecretKeyMojo() {
-        super(KeyToolGenerateSecretKeyRequest.class);
-    }
+    private static final Logger log = LoggerFactory.getLogger(GenerateSecretKeyMojo.class);
+
+    @Inject
+    private SecretKeyService secretKeyService;
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolGenerateSecretKeyRequest createKeytoolRequest() {
-        KeyToolGenerateSecretKeyRequest request = super.createKeytoolRequest();
+    public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info("Skipping execution");
+            return;
+        }
 
-        request.setKeyalg(this.keyalg);
-        request.setKeysize(this.keysize);
-        request.setKeypass(this.keypass);
-        return request;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected String getCommandlineInfo(Commandline commandLine) {
-        String commandLineInfo = super.getCommandlineInfo(commandLine);
-
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
-
-        return commandLineInfo;
+        secretKeyService.generateSecretKey(keystore, storetype, storepass, alias, keyalg, keysize, keypass);
     }
 }

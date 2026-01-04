@@ -21,7 +21,8 @@ import java.io.File;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.keytool.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A Mojo that deletes a generated keystore file.
@@ -33,8 +34,10 @@ import org.codehaus.mojo.keytool.api.*;
 @Mojo(name = "clean", defaultPhase = LifecyclePhase.CLEAN, threadSafe = true)
 public class CleanKeyMojo extends AbstractKeyToolMojo {
 
+    private static final Logger log = LoggerFactory.getLogger(CleanKeyMojo.class);
+
     /**
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      */
     @Parameter
     private String keystore;
@@ -62,13 +65,13 @@ public class CleanKeyMojo extends AbstractKeyToolMojo {
      */
     public void execute() {
         if (isSkip()) {
-            getLog().info(getMessage("disabled", null));
+            log.info(getMessage("disabled", null));
         } else {
             File keystoreFile = new File(this.getKeystore());
             if (keystoreFile.delete()) {
-                getLog().info("Keystore file '" + keystoreFile + "' deleted successfully.");
+                log.info("Keystore file '{}' deleted successfully.", keystoreFile);
             } else {
-                getLog().warn("Keystore file '" + keystoreFile + "' doesn't exist.");
+                log.warn("Keystore file '{}' doesn't exist.", keystoreFile);
             }
         }
     }

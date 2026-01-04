@@ -16,43 +16,59 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
+import java.io.File;
+
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolListRequest;
+import org.codehaus.mojo.keytool.services.KeyStoreManagementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * To list entries in a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -list} (jdk 1.5) command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * To list entries in a keystore using Java KeyStore API.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "list", requiresProject = true, threadSafe = true)
-public class ListMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolListRequest> {
-    /**
-     * Output in RFC style.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
+@Mojo(name = "list", threadSafe = true)
+public class ListMojo extends AbstractKeyToolMojo {
+
+    private static final Logger log = LoggerFactory.getLogger(ListMojo.class);
+
+    @Inject
+    private KeyStoreManagementService service;
+
+    @Parameter(defaultValue = "${project.build.directory}/keystore", required = true)
+    private File keystore;
+
     @Parameter
-    private boolean rfc;
+    private String storetype;
 
-    /**
-     * Default contructor.
-     */
-    public ListMojo() {
-        super(KeyToolListRequest.class);
-    }
+    @Parameter
+    private String storepass;
 
-    /** {@inheritDoc} */
+    @Parameter
+    private String alias;
+
     @Override
-    protected KeyToolListRequest createKeytoolRequest() {
-        KeyToolListRequest request = super.createKeytoolRequest();
+    public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info(getMessage("disabled"));
+            return;
+        }
 
-        request.setRfc(this.rfc);
-        return request;
+        try {
+            char[] password = (storepass != null) ? storepass.toCharArray() : null;
+
+            // Using injected service
+            service.listAliases(keystore, storetype, password, alias);
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to list keystore: " + e.getMessage(), e);
+        }
     }
 }

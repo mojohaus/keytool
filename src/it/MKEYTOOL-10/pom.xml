@@ -45,6 +45,7 @@
             L=Herzele, ST=VL, o=FrankCornelis, c=BE
           </dname>
           <keyalg>ec</keyalg>
+          <keysize>256</keysize>
           <keypass>secret</keypass>
           <storepass>secret</storepass>
           <alias>alias</alias>

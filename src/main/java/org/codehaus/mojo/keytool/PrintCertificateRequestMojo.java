@@ -16,47 +16,51 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
 import java.io.File;
 
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolPrintCertificateRequestRequest;
+import org.codehaus.mojo.keytool.services.PrintService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * To print the content of a certificate request.
- * Implemented as a wrapper around the SDK {@code keytool -printcertreq} command.
+ * Uses Java Certificate API and Bouncy Castle for PKCS#10 parsing.
  * <strong>Note</strong> This operation was not implemented by the keytool before jdk 1.7.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keystore documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "printCertificateRequest", requiresProject = true, threadSafe = true)
-public class PrintCertificateRequestMojo extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequestRequest> {
+@Mojo(name = "printCertificateRequest", threadSafe = true)
+public class PrintCertificateRequestMojo extends AbstractKeyToolMojo {
+
+    private static final Logger log = LoggerFactory.getLogger(PrintCertificateRequestMojo.class);
 
     /**
      * Input file name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
     @Parameter
     private File file;
 
-    /**
-     * Default contructor.
-     */
-    public PrintCertificateRequestMojo() {
-        super(KeyToolPrintCertificateRequestRequest.class);
-    }
+    @Inject
+    private PrintService printService;
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolPrintCertificateRequestRequest createKeytoolRequest() {
-        KeyToolPrintCertificateRequestRequest request = super.createKeytoolRequest();
+    public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info("Skipping execution");
+            return;
+        }
 
-        request.setFile(this.file);
-        return request;
+        printService.printCertificateRequest(file);
     }
 }
