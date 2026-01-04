@@ -16,28 +16,60 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
+import java.io.File;
+
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.utils.cli.Commandline;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolChangeKeyPasswordRequest;
-import org.codehaus.plexus.util.StringUtils;
+import org.codehaus.mojo.keytool.services.KeyStoreManagementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * To change the key password of an entry of a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -keypasswd} command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * Uses Java KeyStore API directly.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "changeKeyPassword", requiresProject = true, threadSafe = true)
-public class ChangeKeyPasswordMojo
-        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolChangeKeyPasswordRequest> {
+@Mojo(name = "changeKeyPassword", threadSafe = true)
+public class ChangeKeyPasswordMojo extends AbstractKeyToolMojo {
+
+    private static final Logger log = LoggerFactory.getLogger(ChangeKeyPasswordMojo.class);
+
+    @Inject
+    private KeyStoreManagementService service;
+
+    /**
+     * Keystore location.
+     */
+    @Parameter
+    private File keystore;
+
+    /**
+     * Keystore type.
+     */
+    @Parameter
+    private String storetype;
+
+    /**
+     * Keystore password.
+     */
+    @Parameter
+    private String storepass;
+
+    /**
+     * Alias.
+     */
+    @Parameter
+    private String alias;
 
     /**
      * New password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool options</a>.
      *
      * @since 1.2
      */
@@ -46,37 +78,32 @@ public class ChangeKeyPasswordMojo
 
     /**
      * Key password.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
     @Parameter
     private String keypass;
 
-    /**
-     * Default contructor.
-     */
-    public ChangeKeyPasswordMojo() {
-        super(KeyToolChangeKeyPasswordRequest.class);
-    }
-
     /** {@inheritDoc} */
     @Override
-    protected KeyToolChangeKeyPasswordRequest createKeytoolRequest() {
-        KeyToolChangeKeyPasswordRequest request = super.createKeytoolRequest();
-        request.setNewPassword(this.newPassword);
-        request.setKeypass(this.keypass);
-        return request;
-    }
+    public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info("Skipping execution");
+            return;
+        }
 
-    /** {@inheritDoc} */
-    @Override
-    protected String getCommandlineInfo(Commandline commandLine) {
-        String commandLineInfo = super.getCommandlineInfo(commandLine);
-
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.keypass, "'*****'");
-        commandLineInfo = StringUtils.replace(commandLineInfo, this.newPassword, "'*****'");
-
-        return commandLineInfo;
+        try {
+            // Using injected service
+            service.changeKeyPassword(
+                    keystore,
+                    storetype,
+                    storepass != null ? storepass.toCharArray() : null,
+                    alias,
+                    keypass != null ? keypass.toCharArray() : null,
+                    newPassword != null ? newPassword.toCharArray() : null);
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to change key password", e);
+        }
     }
 }

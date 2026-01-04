@@ -16,63 +16,78 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
+import java.io.File;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolExportCertificateRequest;
+import org.codehaus.mojo.keytool.services.CertificateManagementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * To export a certificate from a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -export} command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * To export a certificate from a keystore using Java KeyStore API.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "exportCertificate", requiresProject = true, threadSafe = true)
-public class ExportCertificateMojo
-        extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolExportCertificateRequest> {
+@Mojo(name = "exportCertificate", threadSafe = true)
+public class ExportCertificateMojo extends AbstractKeyToolMojo {
 
-    /**
-     * Output in RFC style.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
-     *
-     * @since 1.2
-     */
+    private static final Logger log = LoggerFactory.getLogger(ExportCertificateMojo.class);
+
+    @Inject
+    private CertificateManagementService service;
+
+    @Parameter(defaultValue = "${project.build.directory}/keystore", required = true)
+    private File keystore;
+
     @Parameter
-    private boolean rfc;
+    private String storetype;
+
+    @Parameter
+    private String storepass;
+
+    @Parameter(required = true)
+    private String alias;
 
     /**
      * Output file name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
      *
      * @since 1.2
      */
-    @Parameter
+    @Parameter(required = true)
     private String file;
-
-    /**
-     * Default contructor.
-     */
-    public ExportCertificateMojo() {
-        super(KeyToolExportCertificateRequest.class);
-    }
 
     /** {@inheritDoc} */
     @Override
     public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info(getMessage("disabled"));
+            return;
+        }
+
         createParentDirIfNecessary(file);
-        super.execute();
-    }
 
-    /** {@inheritDoc} */
-    @Override
-    protected KeyToolExportCertificateRequest createKeytoolRequest() {
-        KeyToolExportCertificateRequest request = super.createKeytoolRequest();
+        try {
+            if (alias == null || alias.isEmpty()) {
+                throw new MojoExecutionException("Alias is required");
+            }
 
-        request.setFile(this.file);
-        request.setRfc(this.rfc);
-        return request;
+            if (file == null || file.isEmpty()) {
+                throw new MojoExecutionException("Output file is required");
+            }
+
+            char[] password = (storepass != null) ? storepass.toCharArray() : null;
+            File outputFile = new File(file);
+
+            service.exportCertificate(keystore, storetype, password, alias, outputFile);
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to export certificate: " + e.getMessage(), e);
+        }
     }
 }

@@ -16,25 +16,63 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
+import java.io.File;
+
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolDeleteRequest;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.mojo.keytool.services.CertificateManagementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * To delete an entry alias from a keystore.
- * Implemented as a wrapper around the SDK {@code keytool -delete} command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * To delete an entry alias from a keystore using Java KeyStore API.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "deleteAlias", requiresProject = true, threadSafe = true)
-public class DeleteAliasMojo extends AbstractKeyToolRequestWithKeyStoreAndAliasParametersMojo<KeyToolDeleteRequest> {
+@Mojo(name = "deleteAlias", threadSafe = true)
+public class DeleteAliasMojo extends AbstractKeyToolMojo {
 
-    /**
-     * Default contructor.
-     */
-    public DeleteAliasMojo() {
-        super(KeyToolDeleteRequest.class);
+    private static final Logger log = LoggerFactory.getLogger(DeleteAliasMojo.class);
+
+    @Inject
+    private CertificateManagementService service;
+
+    @Parameter(defaultValue = "${project.build.directory}/keystore", required = true)
+    private File keystore;
+
+    @Parameter
+    private String storetype;
+
+    @Parameter
+    private String storepass;
+
+    @Parameter(required = true)
+    private String alias;
+
+    @Override
+    public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info(getMessage("disabled"));
+            return;
+        }
+
+        try {
+            if (alias == null || alias.isEmpty()) {
+                throw new MojoExecutionException("Alias is required");
+            }
+
+            char[] password = (storepass != null) ? storepass.toCharArray() : null;
+
+            service.deleteAlias(keystore, storetype, password, alias);
+            service.deleteAlias(keystore, storetype, password, alias);
+
+        } catch (Exception e) {
+            throw new MojoExecutionException("Failed to delete alias: " + e.getMessage(), e);
+        }
     }
 }

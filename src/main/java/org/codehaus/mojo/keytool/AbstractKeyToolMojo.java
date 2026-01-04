@@ -16,6 +16,7 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -41,7 +42,7 @@ public abstract class AbstractKeyToolMojo extends AbstractMojo {
 
     /**
      * Enable verbose mode (in mojo and in keytool command).
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool options</a>.
      */
     @Parameter(defaultValue = "false")
     private boolean verbose;
@@ -128,5 +129,22 @@ public abstract class AbstractKeyToolMojo extends AbstractMojo {
      */
     protected String getMessage(final String key, final Object arg1, final Object arg2) {
         return getMessage(key, new Object[] {arg1, arg2});
+    }
+
+    /**
+     * Create the parent directory of the given file location.
+     *
+     * @param file file location to check
+     */
+    protected void createParentDirIfNecessary(final String file) {
+        if (file != null) {
+            final File fileDir = new File(file).getParentFile();
+
+            if (fileDir != null) {
+                // not a relative path
+                boolean mkdirs = fileDir.mkdirs();
+                getLog().debug("mdkirs: " + mkdirs + " " + fileDir);
+            }
+        }
     }
 }

@@ -16,27 +16,33 @@ package org.codehaus.mojo.keytool;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
+
 import java.io.File;
 
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.keytool.api.*;
-import org.codehaus.mojo.keytool.api.requests.KeyToolPrintCertificateRequest;
+import org.codehaus.mojo.keytool.services.PrintService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * To print the content of a certificate.
- * Implemented as a wrapper around the SDK {@code keytool -printcert} command.
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/keytool.html">keystore documentation</a>.
+ * Uses Java Certificate API directly.
+ * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keystore documentation</a>.
  *
  * @author tchemit
  * @since 1.2
  */
-@Mojo(name = "printCertificate", requiresProject = true, threadSafe = true)
-public class PrintCertificateMojo extends AbstractKeyToolRequestMojo<KeyToolPrintCertificateRequest> {
+@Mojo(name = "printCertificate", threadSafe = true)
+public class PrintCertificateMojo extends AbstractKeyToolMojo {
+
+    private static final Logger log = LoggerFactory.getLogger(PrintCertificateMojo.class);
 
     /**
      * Output in RFC style.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -45,7 +51,7 @@ public class PrintCertificateMojo extends AbstractKeyToolRequestMojo<KeyToolPrin
 
     /**
      * Input file name.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -54,7 +60,7 @@ public class PrintCertificateMojo extends AbstractKeyToolRequestMojo<KeyToolPrin
 
     /**
      * SSL server host and port.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
@@ -63,29 +69,24 @@ public class PrintCertificateMojo extends AbstractKeyToolRequestMojo<KeyToolPrin
 
     /**
      * Signed jar file.
-     * See <a href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/keytool.html#Commands">options</a>.
+     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
      *
      * @since 1.2
      */
     @Parameter
     private File jarfile;
 
-    /**
-     * Default contructor.
-     */
-    public PrintCertificateMojo() {
-        super(KeyToolPrintCertificateRequest.class);
-    }
+    @Inject
+    private PrintService printService;
 
     /** {@inheritDoc} */
     @Override
-    protected KeyToolPrintCertificateRequest createKeytoolRequest() {
-        KeyToolPrintCertificateRequest request = super.createKeytoolRequest();
+    public void execute() throws MojoExecutionException {
+        if (isSkip()) {
+            log.info("Skipping execution");
+            return;
+        }
 
-        request.setRfc(this.rfc);
-        request.setFile(this.file);
-        request.setSslserver(this.sslserver);
-        request.setJarfile(this.jarfile);
-        return request;
+        printService.printCertificate(file, jarfile, sslserver, rfc);
     }
 }

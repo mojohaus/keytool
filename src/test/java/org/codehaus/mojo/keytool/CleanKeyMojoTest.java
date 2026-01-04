@@ -17,9 +17,10 @@ package org.codehaus.mojo.keytool;
  */
 
 import java.io.File;
-import java.io.IOException;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit Test class that test the removal of an existing and non existing
@@ -29,7 +30,7 @@ import junit.framework.TestCase;
  * @author $Author$
  * @version $Revision$
  */
-public class CleanKeyMojoTest extends TestCase {
+class CleanKeyMojoTest {
 
     private static final String EXISTING_TEST_KEYSTORE = ".keystore";
 
@@ -37,20 +38,21 @@ public class CleanKeyMojoTest extends TestCase {
 
     private CleanKeyMojo mojo;
 
-    protected void setUp() {
+    @BeforeEach
+    void setUp() {
         mojo = new CleanKeyMojo();
     }
 
-    public void tearDown() {
+    @AfterEach
+    void tearDown() {
         mojo = null;
     }
 
     /**
      * Remove the temp keystore file created in the setup.
-     *
-     * @throws IOException
      */
-    public void testExistingRemoveKeystore() throws IOException {
+    @Test
+    void existingRemoveKeystore() throws Exception {
         String tempKeystore =
                 System.getProperty("java.io.tmpdir") + File.separator + CleanKeyMojoTest.EXISTING_TEST_KEYSTORE;
         File tempKeystoreFile = new File(tempKeystore);
@@ -63,7 +65,8 @@ public class CleanKeyMojoTest extends TestCase {
      * Remove the temp keystore file created in the setup. existent
      *
      */
-    public void testRemoveNonExistentKeystore() {
+    @Test
+    void removeNonExistentKeystore() {
         mojo.setKeystore(CleanKeyMojoTest.NON_EXISTING_TEST_KEYSTORE);
         mojo.execute();
     }
