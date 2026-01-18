@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.codehaus.mojo.keytool.it</groupId>
+  <artifactId>import-certificate-reply</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Import Certificate Reply Integration Test</name>
+  <description>Integration test for issue #135 - importing a signed certificate to replace a key pair certificate</description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>keytool-maven-plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <!-- Step 1: Generate CA key pair -->
+          <execution>
+            <id>generate-cxfca-keypair</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>clean</goal>
+              <goal>generateKeyPair</goal>
+            </goals>
+            <configuration>
+              <alias>cxfca</alias>
+              <dname>CN=cxfca, OU=eng, O=apache.org</dname>
+              <exts>
+                <ext>bc:c=ca:true,pathlen:2147483647</ext>
+                <ext>IssuerAlternativeName=DNS:NOT-FOR-PRODUCTION-USE</ext>
+              </exts>
+              <keystore>${project.build.directory}/cxfca.jks</keystore>
+              <storepass>changeit</storepass>
+            </configuration>
+          </execution>
+
+          <!-- Step 2: Export CA certificate -->
+          <execution>
+            <id>export-cxfca-certificate</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>exportCertificate</goal>
+            </goals>
+            <configuration>
+              <alias>cxfca</alias>
+              <keystore>${project.build.directory}/cxfca.jks</keystore>
+              <storepass>changeit</storepass>
+              <rfc>true</rfc>
+              <file>${project.build.directory}/cxfca.pem</file>
+            </configuration>
+          </execution>
+
+          <!-- Step 3: Generate server key pair -->
+          <execution>
+            <id>generate-server-keypair</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>clean</goal>
+              <goal>generateKeyPair</goal>
+            </goals>
+            <configuration>
+              <alias>localhost</alias>
+              <dname>CN=localhost, OU=eng, O=apache.org</dname>
+              <exts>
+                <ext>bc:c=ca:true,pathlen:2147483647</ext>
+                <ext>IssuerAlternativeName=DNS:NOT-FOR-PRODUCTION-USE</ext>
+              </exts>
+              <keystore>${project.build.directory}/truststore-server.jks</keystore>
+              <storepass>changeit</storepass>
+              <keypass>changeit</keypass>
+            </configuration>
+          </execution>
+
+          <!-- Step 4: Generate certificate request for server -->
+          <execution>
+            <id>generate-server-certificate-request</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generateCertificateRequest</goal>
+            </goals>
+            <configuration>
+              <alias>localhost</alias>
+              <keystore>${project.build.directory}/truststore-server.jks</keystore>
+              <storepass>changeit</storepass>
+              <keypass>changeit</keypass>
+              <file>${project.build.directory}/server.csr</file>
+            </configuration>
+          </execution>
+
+          <!-- Step 5: Sign the CSR with the CA -->
+          <execution>
+            <id>generate-server-certificate</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generateCertificate</goal>
+            </goals>
+            <configuration>
+              <alias>cxfca</alias>
+              <keystore>${project.build.directory}/cxfca.jks</keystore>
+              <storepass>changeit</storepass>
+              <rfc>true</rfc>
+              <infile>${project.build.directory}/server.csr</infile>
+              <outfile>${project.build.directory}/server.pem</outfile>
+            </configuration>
+          </execution>
+
+          <!-- Step 6: Import CA certificate to server keystore (as trusted cert) -->
+          <execution>
+            <id>import-cxfca-certificate-to-server</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>importCertificate</goal>
+            </goals>
+            <configuration>
+              <alias>cxfca</alias>
+              <trustcacerts>true</trustcacerts>
+              <noprompt>true</noprompt>
+              <keystore>${project.build.directory}/truststore-server.jks</keystore>
+              <storepass>changeit</storepass>
+              <file>${project.build.directory}/cxfca.pem</file>
+            </configuration>
+          </execution>
+
+          <!-- Step 7: Import signed certificate reply (THIS IS THE FIX FOR ISSUE #135) -->
+          <execution>
+            <id>import-server-certificate</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>importCertificate</goal>
+            </goals>
+            <configuration>
+              <alias>localhost</alias>
+              <trustcacerts>true</trustcacerts>
+              <noprompt>true</noprompt>
+              <keystore>${project.build.directory}/truststore-server.jks</keystore>
+              <storepass>changeit</storepass>
+              <file>${project.build.directory}/server.pem</file>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
