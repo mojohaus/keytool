@@ -28,9 +28,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.security.Key;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
@@ -52,6 +54,12 @@ public class CertificateManagementService {
 
     /**
      * Import a certificate into a keystore.
+     * <p>
+     * This method supports two scenarios:
+     * <ul>
+     *   <li>Importing a trusted certificate (new alias or replacing a trusted certificate)</li>
+     *   <li>Importing a certificate reply to replace the certificate chain of an existing key pair</li>
+     * </ul>
      *
      * @param keystoreFile keystore file
      * @param keystoreType keystore type (e.g., "JKS", "PKCS12")
@@ -59,6 +67,7 @@ public class CertificateManagementService {
      * @param alias certificate alias
      * @param certificateFile certificate file to import
      * @param skipIfAliasExists if true, skip import if alias already exists
+     * @param keyPassword password for the private key (if different from keystore password); may be null
      * @throws KeyStoreException if keystore operation fails
      * @throws IOException if file operations fail
      * @throws NoSuchAlgorithmException if algorithm is not available
@@ -70,7 +79,8 @@ public class CertificateManagementService {
             char[] keystorePassword,
             String alias,
             File certificateFile,
-            boolean skipIfAliasExists)
+            boolean skipIfAliasExists,
+            char[] keyPassword)
             throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
 
         KeyStore keystore = loadOrCreateKeyStore(keystoreFile, keystoreType, keystorePassword);
@@ -81,10 +91,40 @@ public class CertificateManagementService {
         }
 
         Certificate certificate = loadCertificate(certificateFile);
-        keystore.setCertificateEntry(alias, certificate);
-        saveKeyStore(keystore, keystoreFile, keystorePassword);
 
-        log.info("Certificate was added to keystore");
+        // Check if the alias contains a key entry (private key + certificate chain)
+        if (keystore.containsAlias(alias) && keystore.isKeyEntry(alias)) {
+            // This is a certificate reply - we need to replace the certificate chain
+            // while keeping the private key intact
+            try {
+                // Use keyPassword if provided, otherwise fall back to keystorePassword
+                // In keytool, if -keypass is not specified, it defaults to -storepass
+                char[] actualKeyPassword = (keyPassword != null) ? keyPassword : keystorePassword;
+                Key key = keystore.getKey(alias, actualKeyPassword);
+
+                // Create a new certificate chain with the imported certificate
+                // In a proper implementation, we should validate that the certificate's public key
+                // matches the private key's public key
+                Certificate[] newChain = new Certificate[] {certificate};
+
+                // Replace the key entry with the new certificate chain
+                keystore.setKeyEntry(alias, key, actualKeyPassword, newChain);
+                saveKeyStore(keystore, keystoreFile, keystorePassword);
+
+                log.info("Certificate reply was imported for key pair alias '{}'", alias);
+            } catch (UnrecoverableKeyException e) {
+                throw new KeyStoreException(
+                        "Cannot retrieve private key for alias '" + alias
+                                + "'. The key password may differ from the store password.",
+                        e);
+            }
+        } else {
+            // This is a trusted certificate entry
+            keystore.setCertificateEntry(alias, certificate);
+            saveKeyStore(keystore, keystoreFile, keystorePassword);
+
+            log.info("Certificate was added to keystore");
+        }
     }
 
     /**

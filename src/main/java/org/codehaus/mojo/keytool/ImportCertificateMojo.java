@@ -151,8 +151,9 @@ public class ImportCertificateMojo extends AbstractKeyToolMojo {
             }
 
             char[] password = (storepass != null) ? storepass.toCharArray() : null;
+            char[] keyPassword = (keypass != null) ? keypass.toCharArray() : null;
 
-            service.importCertificate(keystore, storetype, password, alias, certFile, skipIfAliasExists);
+            service.importCertificate(keystore, storetype, password, alias, certFile, skipIfAliasExists, keyPassword);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Failed to import certificate: " + e.getMessage(), e);
