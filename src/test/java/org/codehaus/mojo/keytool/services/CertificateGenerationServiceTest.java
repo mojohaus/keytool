@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.security.KeyStore;
+import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -142,6 +143,20 @@ public class CertificateGenerationServiceTest {
 
         assertTrue(ks.containsAlias("extkey"), "Key should exist");
         assertNotNull(ks.getCertificate("extkey"), "Should have certificate");
+
+        // Verify extensions are present
+        X509Certificate cert = (X509Certificate) ks.getCertificate("extkey");
+
+        // Check Basic Constraints extension (bc:c)
+        assertNotNull(cert.getBasicConstraints(), "Basic Constraints extension should be present");
+        assertTrue(cert.getCriticalExtensionOIDs().contains("2.5.29.19"), "Basic Constraints should be critical");
+
+        // Check Key Usage extension (ku:c=digitalSignature,keyEncipherment)
+        boolean[] keyUsage = cert.getKeyUsage();
+        assertNotNull(keyUsage, "Key Usage extension should be present");
+        assertTrue(cert.getCriticalExtensionOIDs().contains("2.5.29.15"), "Key Usage should be critical");
+        assertTrue(keyUsage[0], "digitalSignature should be set");
+        assertTrue(keyUsage[2], "keyEncipherment should be set");
     }
 
     @Test
