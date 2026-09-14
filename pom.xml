@@ -101,7 +101,7 @@
   </distributionManagement>
 
   <properties>
-    <bouncycastle.version>1.85</bouncycastle.version>
+    <bouncycastle.version>1.86</bouncycastle.version>
   </properties>
 
   <dependencies>
