@@ -80,7 +80,7 @@
   </contributors>
 
   <prerequisites>
-    <maven>3.9</maven>
+    <maven>3.6.3</maven>
   </prerequisites>
 
   <scm>
@@ -101,6 +101,7 @@
   </distributionManagement>
 
   <properties>
+    <mavenVersion>3.9.16</mavenVersion>
     <bouncycastle.version>1.86</bouncycastle.version>
   </properties>
 
