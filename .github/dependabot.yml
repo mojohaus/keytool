@@ -3,7 +3,11 @@ updates:
   - package-ecosystem: "maven"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
+    groups:
+      maven:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
     ignore:
       # Maven 3.9.x core exports slf4j-api 1.7.36
       - dependency-name: "org.slf4j:*"
@@ -11,4 +15,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns: ["*"]
