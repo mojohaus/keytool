@@ -8,6 +8,8 @@ image:https://github.com/mojohaus/keytool/workflows/GitHub%20CI/badge.svg?branch
 
 == Contributing
 
+Conventions for contributors and agents are in link:AGENTS.md[AGENTS.md].
+
 === Creating Issues
 
 If you find a problem please create an https://github.com/mojohaus/keytool/issues[issue in the ticket] and describe what is going wrong or what you expect to happen.
