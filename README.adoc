@@ -21,17 +21,14 @@ You should of course describe only a single issue in a single ticket and not mix
 Before you create a pull request it is necessary to create an issue in the https://github.com/mojohaus/keytool/issues[ticket system] and describe what the problem is or what kind of feature you would like to add.
 Afterwards you can create an appropriate pull request.
 
-It is required if you want to get a Pull request to be integrated into please squash your commits into a single commit which references the issue in the commit message which looks like this:
+You do not need to squash your commits. The maintainers choose how to merge, and the pull request title becomes the release note, so make it describe the change for a user. Reference the issue in the pull request description so that it is closed automatically on merge:
 
 [source,markdown]
 ----
 Fixes #Issue
-
-* Description.
 ----
 
-This makes it simpler to merge it and this will also close the appropriate issue automatically in one go.
-This make the life as maintainer a little easier.
+See link:AGENTS.md[AGENTS.md] for the repository conventions.
 
 A pull request has to fulfill only a single ticket and should never create/add/fix several issues in one, because otherwise the history is hard to read and to understand and makes the maintenance of the issues and pull request hard or to be honest impossible.
 
