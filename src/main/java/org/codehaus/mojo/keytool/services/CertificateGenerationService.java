@@ -118,7 +118,8 @@ public class CertificateGenerationService {
             // Load or create keystore and store the key pair
             KeyStore ks = loadOrCreateKeyStore(keystore, storetype, storepass);
             Certificate[] chain = new Certificate[] {cert};
-            ks.setKeyEntry(alias, keyPair.getPrivate(), keypass, chain);
+            // In keytool, if -keypass is not specified, it defaults to -storepass; JKS refuses a null password
+            ks.setKeyEntry(alias, keyPair.getPrivate(), keypass != null ? keypass : storepass, chain);
             log.info("Stored key pair with alias: {}", alias);
 
             // Save keystore
@@ -150,7 +151,7 @@ public class CertificateGenerationService {
 
             // Load keystore and retrieve key/certificate
             KeyStore ks = loadKeyStore(keystore, storetype, storepass);
-            PrivateKey privateKey = getPrivateKey(ks, alias, keypass);
+            PrivateKey privateKey = getPrivateKey(ks, alias, keypass != null ? keypass : storepass);
             Certificate cert = getCertificate(ks, alias);
             PublicKey publicKey = cert.getPublicKey();
 
@@ -199,7 +200,7 @@ public class CertificateGenerationService {
 
             // Load keystore and signing credentials
             KeyStore ks = loadKeyStore(keystore, storetype, storepass);
-            PrivateKey signingKey = getPrivateKey(ks, alias, keypass);
+            PrivateKey signingKey = getPrivateKey(ks, alias, keypass != null ? keypass : storepass);
             Certificate signerCert = getCertificate(ks, alias);
 
             // Parse CSR

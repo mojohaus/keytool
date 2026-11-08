@@ -86,6 +86,32 @@ public class CertificateGenerationServiceTest {
     }
 
     @Test
+    void generateKeyPairWithoutKeyPasswordUsesStorePassword() throws Exception {
+        // like keytool: without a key password, the key is protected with the store password; JKS refuses null
+        File keystoreFile = new File(tempFolder, "keypair-no-keypass.jks");
+        char[] password = "changeit".toCharArray();
+
+        service.generateKeyPair(
+                keystoreFile,
+                "JKS",
+                password,
+                "testkey",
+                "RSA",
+                2048,
+                "SHA256WithRSA",
+                "CN=Test,O=Test,C=US",
+                90,
+                null,
+                null);
+
+        KeyStore ks = KeyStore.getInstance("JKS");
+        try (java.io.FileInputStream fis = new java.io.FileInputStream(keystoreFile)) {
+            ks.load(fis, password);
+        }
+        assertNotNull(ks.getKey("testkey", password), "Key should be protected with the store password");
+    }
+
+    @Test
     void generateKeyPairDSA() throws Exception {
         File keystoreFile = new File(tempFolder, "keypair-dsa.jks");
         char[] password = "changeit".toCharArray();
