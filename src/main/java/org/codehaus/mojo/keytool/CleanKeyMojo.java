@@ -63,6 +63,7 @@ public class CleanKeyMojo extends AbstractKeyToolMojo {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void execute() {
         if (isSkip()) {
             log.info(getMessage("disabled", null));
