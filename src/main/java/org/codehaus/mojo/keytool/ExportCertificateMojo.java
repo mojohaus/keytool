@@ -81,7 +81,7 @@ public class ExportCertificateMojo extends AbstractKeyToolMojo {
                 throw new MojoExecutionException("Output file is required");
             }
 
-            char[] password = (storepass != null) ? storepass.toCharArray() : null;
+            char[] password = storepass != null ? storepass.toCharArray() : null;
             File outputFile = new File(file);
 
             service.exportCertificate(keystore, storetype, password, alias, outputFile);

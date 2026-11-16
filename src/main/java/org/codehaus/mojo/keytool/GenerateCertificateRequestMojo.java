@@ -63,7 +63,7 @@ public class GenerateCertificateRequestMojo extends AbstractKeyToolMojo {
         createParentDirIfNecessary(file.getPath());
 
         try {
-            List<String> extensions = (exts != null && !exts.isEmpty()) ? exts : null;
+            List<String> extensions = exts != null && !exts.isEmpty() ? exts : null;
 
             certGenService.generateCertificateRequest(
                     keystore,

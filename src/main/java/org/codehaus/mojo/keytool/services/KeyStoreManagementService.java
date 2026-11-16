@@ -225,7 +225,7 @@ public class KeyStoreManagementService {
             char[] destKeyPassword)
             throws Exception {
 
-        String targetAlias = (destAlias != null && !destAlias.isEmpty()) ? destAlias : sourceAlias;
+        String targetAlias = destAlias != null && !destAlias.isEmpty() ? destAlias : sourceAlias;
 
         if (sourceKs.isKeyEntry(sourceAlias)) {
             Key key = sourceKs.getKey(sourceAlias, sourceKeyPassword);
