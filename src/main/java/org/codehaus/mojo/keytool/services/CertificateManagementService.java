@@ -99,7 +99,7 @@ public class CertificateManagementService {
             try {
                 // Use keyPassword if provided, otherwise fall back to keystorePassword
                 // In keytool, if -keypass is not specified, it defaults to -storepass
-                char[] actualKeyPassword = (keyPassword != null) ? keyPassword : keystorePassword;
+                char[] actualKeyPassword = keyPassword != null ? keyPassword : keystorePassword;
                 Key key = keystore.getKey(alias, actualKeyPassword);
 
                 // Create a new certificate chain with the imported certificate

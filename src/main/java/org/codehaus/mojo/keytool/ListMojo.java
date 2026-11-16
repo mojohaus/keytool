@@ -62,7 +62,7 @@ public class ListMojo extends AbstractKeyToolMojo {
         }
 
         try {
-            char[] password = (storepass != null) ? storepass.toCharArray() : null;
+            char[] password = storepass != null ? storepass.toCharArray() : null;
 
             // Using injected service
             service.listAliases(keystore, storetype, password, alias);

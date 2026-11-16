@@ -150,8 +150,8 @@ public class ImportCertificateMojo extends AbstractKeyToolMojo {
                 throw new MojoExecutionException("Certificate file does not exist: " + certFile);
             }
 
-            char[] password = (storepass != null) ? storepass.toCharArray() : null;
-            char[] keyPassword = (keypass != null) ? keypass.toCharArray() : null;
+            char[] password = storepass != null ? storepass.toCharArray() : null;
+            char[] keyPassword = keypass != null ? keypass.toCharArray() : null;
 
             service.importCertificate(keystore, storetype, password, alias, certFile, skipIfAliasExists, keyPassword);
 
