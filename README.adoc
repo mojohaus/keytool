@@ -4,7 +4,7 @@ This is the MojoHaus http://www.mojohaus.org/keytool/[keytool] - keytool-maven-p
 
 image:https://img.shields.io/github/license/mojohaus/keytool.svg?label=License["Apache License, Version 2.0, January 2004",link=http://www.apache.org/licenses/]
 image:https://img.shields.io/maven-central/v/org.codehaus.mojo/keytool-maven-plugin.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/artifact/org.codehaus.mojo/keytool-maven-plugin]
-image:https://github.com/mojohaus/keytool/workflows/GitHub%20CI/badge.svg?branch=master[Build Status,link=https://github.com/mojohaus/keytool/actions/workflows/maven.yml?query=branch%3Amaster]
+image:https://github.com/mojohaus/keytool/actions/workflows/maven.yml/badge.svg[Build Status,link=https://github.com/mojohaus/keytool/actions/workflows/maven.yml?query=branch%3Amaster]
 
 == Contributing
 

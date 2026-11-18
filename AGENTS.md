@@ -54,8 +54,7 @@ through the index that `sisu-maven-plugin` generates; the mojos only collect par
 
 ## Continuous integration
 
-- `.github/workflows/maven.yml` calls the shared `maven-verify.yml@v5` workflow from
-  `apache/maven-gh-actions-shared`.
+- `.github/workflows/maven.yml` calls the shared `maven-verify.yml` workflow in `mojohaus/.github`.
 - Branches pushed to this repository build under the `push` event.
 
 ## Dependencies
