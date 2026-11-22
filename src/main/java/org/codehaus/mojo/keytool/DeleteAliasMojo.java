@@ -42,15 +42,27 @@ public class DeleteAliasMojo extends AbstractKeyToolMojo {
     @Inject
     private CertificateManagementService service;
 
+    /**
+     * Location of the keystore file. The entry is deleted in place.
+     */
     @Parameter(defaultValue = "${project.build.directory}/keystore", required = true)
     private File keystore;
 
+    /**
+     * Keystore type, for example <code>JKS</code> or <code>PKCS12</code>. Defaults to the default keystore type of the running JVM (<code>java.security.KeyStore.getDefaultType()</code>).
+     */
     @Parameter
     private String storetype;
 
+    /**
+     * Password of the keystore.
+     */
     @Parameter
     private String storepass;
 
+    /**
+     * Alias of the entry to delete. If the keystore has no such alias, a warning is logged and nothing changes.
+     */
     @Parameter(required = true)
     private String alias;
 

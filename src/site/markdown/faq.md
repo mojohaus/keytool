@@ -84,7 +84,6 @@ Yes! The plugin is designed to integrate seamlessly with Maven's build lifecycle
 <plugin>
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>keytool-maven-plugin</artifactId>
-  <version>2.0.0</version>
   <executions>
     <execution>
       <id>auto-generate-keystore</id>
@@ -107,7 +106,14 @@ Yes! The plugin is designed to integrate seamlessly with Maven's build lifecycle
 </plugin>
 ```
 
-For development environments, you can skip keystore generation when not needed:
+For development environments, you can skip keystore generation when not needed. Bind `skip` to a property of
+your own, because the parameter has no command-line property:
+
+```xml
+<configuration>
+  <skip>${keytool.skip}</skip>
+</configuration>
+```
 
 ```bash
 mvn clean install -Dkeytool.skip=true
@@ -173,7 +179,6 @@ Yes! You can configure the plugin in the parent POM and inherit in modules, or c
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>2.0.0</version>
         <configuration>
           <!-- Common configuration -->
           <keyalg>RSA</keyalg>
@@ -261,13 +266,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: '17'
-          
+
       - name: Build with Maven
         run: mvn clean install
         env:
@@ -302,16 +308,16 @@ pipeline {
 
 **Version 2.0** represents a complete architectural rewrite:
 
-|         Feature          |      Version 1.x       |          Version 2.0           |
-|--------------------------|------------------------|--------------------------------|
-| **Implementation**       | Command-line execution | Java KeyStore API              |
-| **Performance**          | Process overhead       | Direct API calls               |
-| **Thread Safety**        | No                     | Yes (parallel builds)          |
-| **Dependency Injection** | Plexus                 | JSR-330 + Sisu                 |
-| **Test Coverage**        | Limited                | Comprehensive (38 unit + 4 IT) |
-| **Bouncy Castle**        | Old version            | 1.80 (latest)                  |
-| **Documentation**        | Java 1.5 refs          | Java 17 refs                   |
-| **Deprecated Code**      | Command-line API       | Removed                        |
+|         Feature          |      Version 1.x       |           Version 2.0            |
+|--------------------------|------------------------|----------------------------------|
+| **Implementation**       | Command-line execution | Java KeyStore API                |
+| **Performance**          | Process overhead       | Direct API calls                 |
+| **Thread Safety**        | No                     | Yes (parallel builds)            |
+| **Dependency Injection** | Plexus                 | JSR-330 + Sisu                   |
+| **Test Coverage**        | Limited                | Unit tests and integration tests |
+| **Bouncy Castle**        | Old version            | Current release                  |
+| **Documentation**        | Java 1.5 refs          | Java 17 refs                     |
+| **Deprecated Code**      | Command-line API       | Removed                          |
 
 **Migration is straightforward** - the plugin configuration remains compatible, but you get better performance and reliability.
 
@@ -322,5 +328,5 @@ pipeline {
 - **Documentation**: See the [usage guide](usage.html) for comprehensive examples
 - **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/mojohaus/keytool/issues)
 - **Source Code**: [GitHub Repository](https://github.com/mojohaus/keytool)
-- **Maven Central**: [org.codehaus.mojo:keytool-maven-plugin](https://search.maven.org/artifact/org.codehaus.mojo/keytool-maven-plugin)
+- **Maven Central**: [org.codehaus.mojo:keytool-maven-plugin](https://central.sonatype.com/artifact/org.codehaus.mojo/keytool-maven-plugin)
 

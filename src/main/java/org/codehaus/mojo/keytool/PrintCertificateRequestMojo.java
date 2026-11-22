@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * To print the content of a certificate request.
- * Uses Java Certificate API and Bouncy Castle for PKCS#10 parsing.
- * <strong>Note</strong> This operation was not implemented by the keytool before jdk 1.7.
+ * Prints the size of the file, its first bytes and whether it is PEM or DER encoded; the subject and the other
+ * fields of the request are not decoded.
  * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keystore documentation</a>.
  *
  * @author tchemit

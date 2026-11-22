@@ -41,8 +41,8 @@ public abstract class AbstractKeyToolMojo extends AbstractMojo {
     private boolean skip;
 
     /**
-     * Enable verbose mode (in mojo and in keytool command).
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">keytool options</a>.
+     * Accepted for compatibility with earlier versions that ran the <code>keytool</code> command; it has
+     * no effect.
      */
     @Parameter(defaultValue = "false")
     private boolean verbose;

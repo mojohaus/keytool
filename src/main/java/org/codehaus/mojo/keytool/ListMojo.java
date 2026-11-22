@@ -42,15 +42,27 @@ public class ListMojo extends AbstractKeyToolMojo {
     @Inject
     private KeyStoreManagementService service;
 
+    /**
+     * Location of the keystore file.
+     */
     @Parameter(defaultValue = "${project.build.directory}/keystore", required = true)
     private File keystore;
 
+    /**
+     * Keystore type, for example <code>JKS</code> or <code>PKCS12</code>. Defaults to the default keystore type of the running JVM (<code>java.security.KeyStore.getDefaultType()</code>).
+     */
     @Parameter
     private String storetype;
 
+    /**
+     * Password of the keystore.
+     */
     @Parameter
     private String storepass;
 
+    /**
+     * Alias of the single entry to list. If not set, all entries are listed.
+     */
     @Parameter
     private String alias;
 

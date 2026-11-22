@@ -47,8 +47,8 @@ public class ImportCertificateMojo extends AbstractKeyToolMojo {
     private CertificateManagementService service;
 
     /**
-     * Key password.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Password of the private key, used when the certificate replaces the chain of an existing key pair. Defaults to
+     * the keystore password.
      *
      * @since 1.2
      */
@@ -56,8 +56,8 @@ public class ImportCertificateMojo extends AbstractKeyToolMojo {
     private String keypass;
 
     /**
-     * Input file name.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Certificate file to import, in DER or PEM format. If <code>alias</code> names an existing key pair,
+     * the file is treated as a certificate reply and replaces the certificate chain of that key pair.
      *
      * @since 1.2
      */
@@ -65,8 +65,7 @@ public class ImportCertificateMojo extends AbstractKeyToolMojo {
     private String file;
 
     /**
-     * Do not prompt.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Do not prompt. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */
@@ -74,8 +73,7 @@ public class ImportCertificateMojo extends AbstractKeyToolMojo {
     private boolean noprompt;
 
     /**
-     * Trust certificates from cacerts.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Trust certificates from cacerts. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */

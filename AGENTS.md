@@ -19,7 +19,7 @@ through the index that `sisu-maven-plugin` generates; the mojos only collect par
 - `spotless-maven-plugin` from mojo-parent runs during `process-sources`. Run `mvn spotless:apply`
   before committing. It formats Java with palantir-java-format, sorts the POM, and also reformats
   Markdown, including this file. `.git-blame-ignore-revs` lists the reformatting commit.
-- The plugin compiles against `mavenVersion` (3.9.16) and declares a literal Maven 3.9.0 as its
+- The plugin compiles against `mavenVersion` and declares a literal Maven 3.9.0 as its
   `<prerequisites>`. Raising `mavenVersion` must not raise the prerequisite.
 - Fields of the mojo classes are plugin parameters; renaming one changes the plugin's
   configuration API.
@@ -62,9 +62,30 @@ through the index that `sisu-maven-plugin` generates; the mojos only collect par
 - Dependabot updates are monthly and grouped. `maven-plugin-api` stays below 3.10, because the
   plugin is built for the Maven 3.9 line.
 
+## Documentation updates
+
+A change that users or contributors can notice ships with the documentation it affects, in the same pull
+request. A refactor with no visible effect needs none.
+
+- A new goal, parameter or default: the Javadoc of the mojo field, which becomes the goal page, and the goal
+  list in `src/site/markdown/index.md`. Every `@Parameter` has a description, and one that is accepted but
+  ignored says so.
+- New or changed usage: an example in `src/site/markdown/usage.md`, and `examples.md` or `faq.md` where they
+  repeat it. Only the first plugin declaration of `usage.md` carries a version, written as
+  `<version><!-- latest release --></version>`; the others leave it out, so no example goes stale.
+- The goal parameters have no command-line `property`; a page that shows `-Dname=value` must go through a
+  property of the POM.
+- A page added, removed or renamed: the menu in `src/site/site.xml`. Never rename a published page; its URL is
+  linked from elsewhere.
+- The Maven or Java requirement, or how to build and release: `README.md`, and the Requirements section of
+  `src/site/markdown/index.md`.
+- A new convention, build gate or test fixture: this file.
+
+Check the result with `mvn site` and open `target/site/index.html`.
+
 ## Pull requests
 
 - Squash, merge and rebase merges are all enabled. Release Drafter, through the shared
-  `apache/maven-gh-actions-shared` workflow, builds the release notes from pull request titles
+  release-drafter workflow, builds the release notes from pull request titles
   and labels, so the title should describe the change for a user.
 

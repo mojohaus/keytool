@@ -40,36 +40,69 @@ public class GenerateKeyPairMojo extends AbstractKeyToolMojo {
 
     private static final Logger log = LoggerFactory.getLogger(GenerateKeyPairMojo.class);
 
+    /**
+     * Location of the keystore file. It is created if it does not exist; an entry with the same alias is replaced.
+     */
     @Parameter
     private File keystore;
 
+    /**
+     * Keystore type, for example <code>JKS</code> or <code>PKCS12</code>. Defaults to the default keystore type of the running JVM (<code>java.security.KeyStore.getDefaultType()</code>).
+     */
     @Parameter
     private String storetype;
 
+    /**
+     * Password of the keystore.
+     */
     @Parameter
     private String storepass;
 
+    /**
+     * Alias under which the key pair is stored.
+     */
     @Parameter
     private String alias;
 
+    /**
+     * Key algorithm, for example <code>RSA</code>, <code>DSA</code> or <code>EC</code>.
+     */
     @Parameter(defaultValue = "RSA")
     private String keyalg;
 
+    /**
+     * Key size in bits, for example <code>2048</code> for RSA or <code>256</code> for EC.
+     */
     @Parameter(defaultValue = "2048")
     private String keysize;
 
+    /**
+     * Password of the private key. Defaults to the keystore password.
+     */
     @Parameter
     private String keypass;
 
+    /**
+     * Signature algorithm of the self-signed certificate. Defaults to <code>SHA256withECDSA</code> for <code>EC</code> keys, <code>SHA256WithDSA</code> for <code>DSA</code> keys and <code>SHA256WithRSA</code> otherwise.
+     */
     @Parameter
     private String sigalg;
 
+    /**
+     * Distinguished name of the certificate subject and issuer, for example <code>CN=localhost, O=Example</code>.
+     */
     @Parameter
     private String dname;
 
+    /**
+     * Validity of the certificate in days, counted from the time of the build.
+     */
     @Parameter(defaultValue = "90")
     private String validity;
 
+    /**
+     * Certificate extensions, one <code>&lt;ext&gt;</code> element each, for example <code>san=dns:localhost,ip:127.0.0.1</code>, <code>bc=ca:true</code> or <code>ku=digitalSignature,keyCertSign</code>. The supported types are <code>san</code> (<code>subjectAlternativeName</code>), <code>ian</code> (<code>issuerAlternativeName</code>), <code>bc</code> (basic constraints) and <code>ku</code> (<code>keyUsage</code>); other types are ignored with a warning.
+     */
     @Parameter
     private List<String> exts;
 
