@@ -12,7 +12,6 @@ The simplest way to get started - generate a self-signed certificate for develop
 <plugin>
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>keytool-maven-plugin</artifactId>
-  <version>2.0.0</version>
   <executions>
     <execution>
       <goals>
@@ -44,14 +43,13 @@ Import a CA certificate into a truststore:
     <alias>ca-cert</alias>
     <file>ca-certificate.crt</file>
     <storepass>changeit</storepass>
-    <noprompt>true</noprompt>
   </configuration>
 </execution>
 ```
 
 ### Export Certificate for Sharing
 
-Export a certificate in PEM format:
+Export a certificate to a file in DER format:
 
 ```xml
 <execution>
@@ -61,9 +59,8 @@ Export a certificate in PEM format:
   <configuration>
     <keystore>${project.build.directory}/keystore.jks</keystore>
     <alias>myapp</alias>
-    <file>${project.build.directory}/certificate.pem</file>
+    <file>${project.build.directory}/certificate.crt</file>
     <storepass>changeit</storepass>
-    <rfc>true</rfc>
   </configuration>
 </execution>
 ```
@@ -100,7 +97,6 @@ Display all entries in a keystore:
   <configuration>
     <keystore>${project.build.directory}/keystore.jks</keystore>
     <storepass>changeit</storepass>
-    <verbose>true</verbose>
   </configuration>
 </execution>
 ```
@@ -118,7 +114,7 @@ For detailed examples covering all use cases, see the complete [Usage Guide](usa
 
 ### Certificate Management
 
-- Import/export certificates (DER and PEM formats)
+- Import certificates (DER and PEM formats) and export them (DER format)
 - Print certificate details
 - Certificate chain handling
 - Trusted certificate management
@@ -126,7 +122,7 @@ For detailed examples covering all use cases, see the complete [Usage Guide](usa
 ### Certificate Requests (CSR)
 
 - Generate PKCS#10 certificate requests
-- Custom subject DNs and extensions
+- Custom subject DNs and extensions (`san`, `ian`, `bc`, `ku`)
 - Print CSR information
 - Sign CSRs to create certificates
 
@@ -155,27 +151,8 @@ For detailed examples covering all use cases, see the complete [Usage Guide](usa
 
 ## Command Line Examples
 
-You can also execute goals directly from the command line:
-
-```bash
-# Generate a key pair
-mvn keytool:generateKeyPair \
-  -Dkeystore=keystore.jks \
-  -Dalias=mykey \
-  -Ddname="CN=Test Certificate"
-
-# List keystore entries
-mvn keytool:list \
-  -Dkeystore=keystore.jks \
-  -Dstorepass=changeit
-
-# Export certificate
-mvn keytool:exportCertificate \
-  -Dkeystore=keystore.jks \
-  -Dalias=mykey \
-  -Dfile=certificate.pem \
-  -Drfc=true
-```
+The goal parameters have no command-line properties, so the configuration comes from the POM. See
+[Command Line Usage](usage.html#command-line-usage) for running a goal or a single execution with `mvn keytool:...`.
 
 ## Additional Resources
 

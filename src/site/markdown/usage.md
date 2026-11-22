@@ -23,7 +23,7 @@ Add the plugin to your `pom.xml`:
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>keytool-maven-plugin</artifactId>
-        <version>2.0.0</version>
+        <version><!-- latest release --></version>
       </plugin>
     </plugins>
   </build>
@@ -38,7 +38,6 @@ Add the plugin to your `pom.xml`:
 <plugin>
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>keytool-maven-plugin</artifactId>
-  <version>2.0.0</version>
   <executions>
     <execution>
       <id>generate-keypair</id>
@@ -147,7 +146,8 @@ Add the plugin to your `pom.xml`:
 
 ### Export Certificate to File
 
-Export in DER format:
+The certificate is written in binary DER format. The goal has no PEM option; to read it in PEM form, run
+`printCertificate` with `rfc` on the exported file.
 
 ```xml
 <execution>
@@ -160,30 +160,14 @@ Export in DER format:
     <storepass>changeit</storepass>
     <alias>myapp</alias>
     <file>${project.build.directory}/myapp.crt</file>
-    <rfc>false</rfc>
-  </configuration>
-</execution>
-```
-
-Export in PEM format:
-
-```xml
-<execution>
-  <id>export-cert-pem</id>
-  <goals>
-    <goal>exportCertificate</goal>
-  </goals>
-  <configuration>
-    <keystore>${project.build.directory}/myapp.jks</keystore>
-    <storepass>changeit</storepass>
-    <alias>myapp</alias>
-    <file>${project.build.directory}/myapp.pem</file>
-    <rfc>true</rfc>
   </configuration>
 </execution>
 ```
 
 ### Print Certificate Information
+
+`printCertificate` reads one of `file`, `jarfile` (a signed JAR) or `sslserver` (`host:port`) and logs the
+certificate. It does not read a keystore; use `list` for that.
 
 ```xml
 <execution>
@@ -192,10 +176,8 @@ Export in PEM format:
     <goal>printCertificate</goal>
   </goals>
   <configuration>
-    <keystore>${project.build.directory}/myapp.jks</keystore>
-    <storepass>changeit</storepass>
-    <alias>myapp</alias>
-    <verbose>true</verbose>
+    <file>${project.build.directory}/myapp.crt</file>
+    <rfc>true</rfc>
   </configuration>
 </execution>
 ```
@@ -271,7 +253,6 @@ Export in PEM format:
   <configuration>
     <keystore>${project.build.directory}/myapp.jks</keystore>
     <storepass>changeit</storepass>
-    <verbose>true</verbose>
   </configuration>
 </execution>
 ```
@@ -417,6 +398,37 @@ Change store password:
 </execution>
 ```
 
+### Default Key Password
+
+If `keypass` is not set, the key is protected with the keystore password, like the `keytool` command does.
+`generateCertificateRequest`, `generateCertificate` and `importCertificate` read the key the same way, so a key
+pair generated without `keypass` needs none later.
+
+### Certificate Extensions
+
+`generateKeyPair`, `generateCertificateRequest` and `generateCertificate` accept an `exts` list. Each entry is
+`type=value`. The supported types are `san` (`subjectAlternativeName`), `ian` (`issuerAlternativeName`), `bc`
+(basic constraints) and `ku` (`keyUsage`); other types are ignored with a warning.
+
+```xml
+<configuration>
+  <keystore>${project.build.directory}/server.jks</keystore>
+  <storepass>changeit</storepass>
+  <alias>server</alias>
+  <dname>CN=localhost, O=My Company</dname>
+  <exts>
+    <ext>san=dns:localhost,ip:127.0.0.1</ext>
+    <ext>bc=ca:true</ext>
+    <ext>ku=digitalSignature,keyCertSign</ext>
+  </exts>
+</configuration>
+```
+
+Names in `san` and `ian` are `dns:`, `ip:`, `email:` or `uri:` entries separated by commas. `bc` takes `ca:true` or
+`ca:false`, optionally with `pathlen:<n>`. `ku` takes a comma-separated list of `digitalSignature`,
+`nonRepudiation`, `keyEncipherment`, `dataEncipherment`, `keyAgreement`, `keyCertSign`, `cRLSign`,
+`encipherOnly` and `decipherOnly`.
+
 ### Complete Certificate Lifecycle Workflow
 
 This example shows a complete workflow for generating a key pair, creating a CSR, and managing the resulting certificate:
@@ -425,7 +437,6 @@ This example shows a complete workflow for generating a key pair, creating a CSR
 <plugin>
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>keytool-maven-plugin</artifactId>
-  <version>2.0.0</version>
   <executions>
     <!-- 1. Generate key pair -->
     <execution>
@@ -486,8 +497,7 @@ This example shows a complete workflow for generating a key pair, creating a CSR
         <keystore>${project.build.directory}/server.jks</keystore>
         <storepass>changeit</storepass>
         <alias>server</alias>
-        <file>${project.build.directory}/server.pem</file>
-        <rfc>true</rfc>
+        <file>${project.build.directory}/server.crt</file>
       </configuration>
     </execution>
   </executions>
@@ -510,7 +520,6 @@ Use Maven profiles to manage different keystores for different environments:
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>keytool-maven-plugin</artifactId>
-          <version>2.0.0</version>
           <executions>
             <execution>
               <id>dev-keystore</id>
@@ -537,7 +546,6 @@ Use Maven profiles to manage different keystores for different environments:
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>keytool-maven-plugin</artifactId>
-          <version>2.0.0</version>
           <executions>
             <execution>
               <id>prod-keystore</id>
@@ -546,6 +554,7 @@ Use Maven profiles to manage different keystores for different environments:
               </goals>
               <configuration>
                 <keystore>${project.build.directory}/prod-keystore.jks</keystore>
+                <alias>prod-cert</alias>
                 <file>${project.basedir}/config/prod-cert.crt</file>
                 <!-- Production-specific configuration -->
               </configuration>
@@ -607,7 +616,13 @@ mvn clean install -Dkeystore.password=secret -Dkey.password=secret
 1. **Bind to appropriate phases** - Generate keys early, clean late:
    - `generate-resources` for key generation
    - `clean` for keystore cleanup
-2. **Skip goals when not needed**:
+2. **Skip goals when not needed**: the `skip` parameter has no command-line property, so bind it to one of your own:
+
+```xml
+<configuration>
+  <skip>${keytool.skip}</skip>
+</configuration>
+```
 
 ```bash
 mvn package -Dkeytool.skip=true
@@ -654,39 +669,28 @@ mvn clean install -T 4
 </configuration>
 ```
 
-**Problem**: "Alias already exists"
+**Problem**: An existing entry is replaced
 
-```xml
-<!-- Solution: Delete the alias first or use a different alias -->
-<execution>
-  <id>delete-old-alias</id>
-  <phase>generate-resources</phase>
-  <goals>
-    <goal>deleteAlias</goal>
-  </goals>
-  <configuration>
-    <alias>myapp</alias>
-  </configuration>
-</execution>
-```
+`generateKeyPair` replaces an entry that has the same alias in the keystore, and `importCertificate` replaces a
+trusted certificate with the same alias. To keep an existing entry, use a different alias, or set
+`skipIfAliasExists` on `importCertificate`.
 
 ## Command Line Usage
 
-Execute goals directly from command line:
+The parameters have no command-line properties of their own, so `-Dkeystore=my.jks` does not reach a goal.
+Run a goal from the command line with its configuration in the POM, at plugin level or in an execution that you
+select by `id`:
 
 ```bash
-# Generate a key pair
-mvn keytool:generateKeyPair -Dkeystore=my.jks -Dalias=mykey -Ddname="CN=Test"
+# Run one execution by its id
+mvn keytool:generateKeyPair@generate-keypair
 
-# List keystore entries
-mvn keytool:list -Dkeystore=my.jks -Dstorepass=changeit
-
-# Export certificate
-mvn keytool:exportCertificate -Dkeystore=my.jks -Dalias=mykey -Dfile=cert.pem
-
-# Import certificate
-mvn keytool:importCertificate -Dkeystore=trust.jks -Dalias=ca -Dfile=ca.crt
+# List the keystore entries configured at plugin level
+mvn keytool:list
 ```
+
+To change a value per invocation, use a property in the POM configuration, for example
+`<alias>${key.alias}</alias>`, and run `mvn keytool:list -Dkey.alias=myapp`.
 
 ## Additional Resources
 

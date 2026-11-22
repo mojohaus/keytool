@@ -99,8 +99,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private String deststorepass;
 
     /**
-     * Source keystore password protected.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Source keystore password protected. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */
@@ -108,8 +107,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private boolean srcprotected;
 
     /**
-     * Source keystore provider name.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Source keystore provider name. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */
@@ -117,8 +115,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private String srcprovidername;
 
     /**
-     * Destination keystore provider name.
-     * See <a hresf="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Destination keystore provider name. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */
@@ -126,8 +123,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private String destprovidername;
 
     /**
-     * Source alias.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Alias of the single entry to import. If not set, all entries of the source keystore are imported.
      *
      * @since 1.2
      */
@@ -135,8 +131,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private String srcalias;
 
     /**
-     * Destination alias.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Alias of the imported entry in the destination keystore. Only used together with <code>srcalias</code>; defaults to the source alias.
      *
      * @since 1.2
      */
@@ -162,8 +157,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private String destkeypass;
 
     /**
-     * Do not prompt.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Do not prompt. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */
@@ -171,8 +165,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private boolean noprompt;
 
     /**
-     * Provider class name.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Provider class name. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */
@@ -180,8 +173,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private String providerclass;
 
     /**
-     * Provider argument.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Provider argument. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */
@@ -189,8 +181,7 @@ public class ImportKeystoreMojo extends AbstractKeyToolMojo {
     private String providerarg;
 
     /**
-     * Provider classpath.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html">options</a>.
+     * Provider classpath. Accepted for compatibility with the <code>keytool</code> command; it has no effect.
      *
      * @since 1.2
      */

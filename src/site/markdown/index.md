@@ -19,20 +19,20 @@ This plugin provides the capability to manipulate keys and keystores using the J
 
 - **[keytool:generateCertificate](generateCertificate-mojo.html)** - Generates a certificate from a certificate request
   - Creates X.509 certificates
-  - Supports custom validity periods and extensions
+  - Supports custom validity periods and extensions (`san`, `ian`, `bc`, `ku`)
 - **[keytool:generateCertificateRequest](generateCertificateRequest-mojo.html)** - Generates a certificate request (CSR)
   - PKCS#10 format
   - PEM encoding support
 - **[keytool:importCertificate](importCertificate-mojo.html)** - Imports a certificate from a file into a keystore
   - Supports DER and PEM formats
-  - Optional trust validation
+  - Replaces the certificate chain of an existing key pair when the alias names one
 - **[keytool:exportCertificate](exportCertificate-mojo.html)** - Exports a certificate from a keystore to a file
-  - DER or PEM format output
+  - DER format output
 
 ### Keystore Management
 
 - **[keytool:list](list-mojo.html)** - Lists entries in a keystore
-  - Shows aliases, creation dates, and entry types
+  - Shows aliases and entry types
 - **[keytool:importKeystore](importKeystore-mojo.html)** - Imports all entries from one keystore to another
   - Preserves entry types and attributes
 - **[keytool:changeAlias](changeAlias-mojo.html)** - Changes the alias of an entry
@@ -43,20 +43,20 @@ This plugin provides the capability to manipulate keys and keystores using the J
 ### Information & Diagnostics
 
 - **[keytool:printCertificate](printCertificate-mojo.html)** - Prints the content of a certificate
-  - Shows subject, issuer, validity, and fingerprints
-- **[keytool:printCertificateRequest](printCertificateRequest-mojo.html)** - Prints the content of a certificate request
+  - Shows subject, issuer, serial number, validity and signature algorithm
+  - Reads a certificate file, a signed JAR or an SSL server
+- **[keytool:printCertificateRequest](printCertificateRequest-mojo.html)** - Prints the size and the encoding (PEM or DER) of a certificate request
 - **[keytool:printCRLFile](printCRLFile-mojo.html)** - Prints the content of a CRL file
 
 ## Requirements
 
-- **Maven**: 3.6.3 or higher
-- **JDK**: 8 or higher (Java 17+ recommended)
+- **Maven**: 3.9.0 or higher
+- **JDK**: 8 or higher
 
 ## Usage
 
-General instructions on how to use the Keytool Plugin can be found on the [usage page](usage.html).
-
-For specific examples and use cases, see the comprehensive [usage guide](usage.html).
+The [usage guide](usage.html) has examples for every goal. Because the goal parameters have no command-line
+properties, configure them in the POM.
 
 ## Version History
 
@@ -65,10 +65,19 @@ For specific examples and use cases, see the comprehensive [usage guide](usage.h
 - Complete rewrite using Java KeyStore API instead of command-line execution
 - Migrated to JSR-330 dependency injection with Eclipse Sisu
 - Removed deprecated command-line API
-- Updated to Bouncy Castle 1.80 for certificate generation
+- Uses Bouncy Castle for certificate generation
 - All Mojos are now thread-safe
 - Comprehensive unit and integration test coverage
 - Updated documentation to Java 17
+
+### 2.1.0
+
+- `generateKeyPair` defaults the key password to the keystore password, as the `keytool` command does; before
+  this, a key without `keypass` was stored with no password, which the JKS keystore type (the default on
+  Java 8) rejects
+- Requires Maven 3.9.0 or later
+
+Later releases are listed on the [GitHub releases page](https://github.com/mojohaus/keytool/releases).
 
 ### Previous Versions
 
