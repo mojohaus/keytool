@@ -81,7 +81,6 @@ public class DeleteAliasMojo extends AbstractKeyToolMojo {
             char[] password = storepass != null ? storepass.toCharArray() : null;
 
             service.deleteAlias(keystore, storetype, password, alias);
-            service.deleteAlias(keystore, storetype, password, alias);
 
         } catch (Exception e) {
             throw new MojoExecutionException("Failed to delete alias: " + e.getMessage(), e);
