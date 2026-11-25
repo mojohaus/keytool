@@ -42,11 +42,11 @@ assert buildLog.exists(), "Build log should exist"
 def logContent = buildLog.text
 
 // First execution should add the certificate
-assert logContent.contains("Certificate was added to keystore") || logContent.contains("import-certificate-first"), 
-    "First execution should have imported the certificate"
+assert logContent.contains("Certificate was added to keystore") || logContent.contains("import-certificate-first"),
+"First execution should have imported the certificate"
 
 // Second execution should skip (when skipIfAliasExists=true)
-assert logContent.contains("already exists") || logContent.contains("import-certificate-second-skip"), 
-    "Second execution should have skipped or logged the alias exists"
+assert logContent.contains("already exists") || logContent.contains("import-certificate-second-skip"),
+"Second execution should have skipped or logged the alias exists"
 
 println "Integration test PASSED: Certificate imported successfully and skipIfAliasExists worked correctly"
